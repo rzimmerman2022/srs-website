@@ -2,8 +2,9 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: 'export', // Enable static export for GitHub Pages
   images: {
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true, // Required for static export
   },
   // Enable experimental features for better performance
   experimental: {
