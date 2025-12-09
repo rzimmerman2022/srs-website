@@ -2,6 +2,7 @@ import Hero from '@/components/sections/Hero';
 import ServiceGrid, { Service } from '@/components/sections/ServiceGrid';
 import Container from '@/components/layout/Container';
 import Button from '@/components/ui/Button';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -325,6 +326,131 @@ export default function ServicesPage() {
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Pricing Packages */}
+      <section className="section-padding bg-white">
+        <Container>
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-center mb-4">Service Packages</h2>
+            <p className="text-center text-gray-600 text-lg mb-12 max-w-3xl mx-auto">
+              Choose the package that fits your career goals. All packages include our
+              research-backed methodology and commitment to genuine ownership transfer.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Essentials Package */}
+              <div className="bg-sand-50 rounded-lg p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
+                <div className="w-full h-48 relative mb-6">
+                  <Image
+                    src="/assets/images/packages/essential.png"
+                    alt="Essentials Package"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-2xl font-serif font-semibold text-navy mb-2">
+                  Essentials
+                </h3>
+                <div className="text-3xl font-bold text-gold mb-4">$150</div>
+                <p className="text-sm text-gray-600 mb-6">
+                  Perfectly optimized resume highlighting your strengths clearly and
+                  effectively to land more interviews.
+                </p>
+                <a href="/contact" className="mt-auto">
+                  <Button variant="outline" className="w-full">
+                    Get Started
+                  </Button>
+                </a>
+              </div>
+
+              {/* Accelerator Package */}
+              <div className="bg-sand-50 rounded-lg p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow border-2 border-gold relative">
+                <div className="absolute top-4 right-4 bg-gold text-navy text-xs font-semibold px-3 py-1 rounded-full">
+                  POPULAR
+                </div>
+                <div className="w-full h-48 relative mb-6">
+                  <Image
+                    src="/assets/images/packages/accelerator.png"
+                    alt="Accelerator Package"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-2xl font-serif font-semibold text-navy mb-2">
+                  Accelerator
+                </h3>
+                <div className="text-3xl font-bold text-gold mb-4">$300</div>
+                <p className="text-sm text-gray-600 mb-6">
+                  Enhanced resume crafted with advanced ATS strategies, targeted keyword
+                  analytics, and professional narrative refinement.
+                </p>
+                <a href="/contact" className="mt-auto">
+                  <Button variant="primary" className="w-full">
+                    Get Started
+                  </Button>
+                </a>
+              </div>
+
+              {/* Career Launch Package */}
+              <div className="bg-sand-50 rounded-lg p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
+                <div className="w-full h-48 relative mb-6">
+                  <Image
+                    src="/assets/images/packages/career-launch.png"
+                    alt="Career Launch Package"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-2xl font-serif font-semibold text-navy mb-2">
+                  Career Launch
+                </h3>
+                <div className="text-3xl font-bold text-gold mb-4">$449</div>
+                <p className="text-sm text-gray-600 mb-6">
+                  Comprehensive resume rewrite, LinkedIn profile optimization, and targeted
+                  portfolio design—ideal for career changers.
+                </p>
+                <a href="/contact" className="mt-auto">
+                  <Button variant="outline" className="w-full">
+                    Get Started
+                  </Button>
+                </a>
+              </div>
+
+              {/* Custom Package */}
+              <div className="bg-sand-50 rounded-lg p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
+                <div className="w-full h-48 relative mb-6">
+                  <Image
+                    src="/assets/images/packages/custom.png"
+                    alt="Custom Solutions Package"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-2xl font-serif font-semibold text-navy mb-2">
+                  Custom Solutions
+                </h3>
+                <div className="text-3xl font-bold text-gold mb-4">$500+</div>
+                <p className="text-sm text-gray-600 mb-6">
+                  Fully customized career branding solution—executive resumes, LinkedIn
+                  overhaul, and personalized coaching.
+                </p>
+                <a href="/contact" className="mt-auto">
+                  <Button variant="outline" className="w-full">
+                    Learn More
+                  </Button>
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="text-gray-600 text-sm">
+                All packages include unlimited revisions until you genuinely own every word.
+                Contact us to discuss which package best fits your career goals.
+              </p>
             </div>
           </div>
         </Container>

@@ -52,7 +52,27 @@ export default function ContactPage() {
                   </a>
                 </div>
 
-                {/* TODO: Add phone and location if provided */}
+                {/* Phone */}
+                <div>
+                  <h3 className="text-lg font-semibold text-navy mb-2">Call Us</h3>
+                  <p className="text-gray-600 mb-2">
+                    Prefer to speak directly? Give us a call:
+                  </p>
+                  <a
+                    href="tel:+14803743418"
+                    className="text-gold hover:text-gold-600 font-medium transition-colors"
+                  >
+                    (480) 374-3418
+                  </a>
+                </div>
+
+                {/* Location */}
+                <div>
+                  <h3 className="text-lg font-semibold text-navy mb-2">Our Location</h3>
+                  <p className="text-gray-600">
+                    Based in Arizona, serving professionals nationwide.
+                  </p>
+                </div>
 
                 {/* What to Expect */}
                 <div className="bg-sand-50 p-6 rounded-lg">

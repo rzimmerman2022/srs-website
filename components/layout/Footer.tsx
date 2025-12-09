@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const footerNavigation = {
   services: [
@@ -32,8 +33,14 @@ export default function Footer() {
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-navy-600 rounded-full flex items-center justify-center border-2 border-gold">
-                <span className="text-gold font-serif font-bold text-lg">SRS</span>
+              <div className="relative w-10 h-10">
+                <Image
+                  src="/assets/logos/srs-logo.png"
+                  alt="Southwest Resume Services"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
               <div>
                 <div className="text-white font-serif font-semibold leading-tight">
@@ -105,7 +112,17 @@ export default function Footer() {
                   info@southwestresumes.com
                 </a>
               </li>
-              {/* TODO: Add phone number and location if provided */}
+              <li>
+                <a
+                  href="tel:+14803743418"
+                  className="text-sm text-sand-300 hover:text-gold transition-colors"
+                >
+                  (480) 374-3418
+                </a>
+              </li>
+              <li className="text-sm text-sand-300">
+                Based in Arizona
+              </li>
             </ul>
           </div>
         </div>

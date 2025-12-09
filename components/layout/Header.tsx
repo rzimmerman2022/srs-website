@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const navigation = [
@@ -29,8 +30,14 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-12 h-12 bg-navy rounded-full flex items-center justify-center border-2 border-gold transition-transform group-hover:scale-105">
-                <span className="text-gold font-serif font-bold text-xl">SRS</span>
+              <div className="relative w-12 h-12 transition-transform group-hover:scale-105">
+                <Image
+                  src="/assets/logos/srs-logo.png"
+                  alt="Southwest Resume Services"
+                  width={48}
+                  height={48}
+                  className="object-contain"
+                />
               </div>
               <div className="hidden sm:block">
                 <div className="text-navy font-serif font-semibold text-lg leading-tight">

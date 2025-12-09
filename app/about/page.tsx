@@ -2,6 +2,7 @@ import Hero from '@/components/sections/Hero';
 import Container from '@/components/layout/Container';
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -184,6 +185,92 @@ export default function AboutPage() {
                   You deserve to be compensated fairly for the value you actually create. We
                   help you articulate that value authentically and confidently.
                 </p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Team */}
+      <section className="section-padding bg-sand-50">
+        <Container>
+          <div className="max-w-5xl mx-auto">
+            <h2 className="mb-4 text-center">Meet Our Team</h2>
+            <p className="text-center text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+              Our team combines deep expertise in career development, research methodology,
+              and authentic communication to deliver exceptional results.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {/* Ryan Zimmerman */}
+              <div className="text-center">
+                <div className="mb-6 relative inline-block">
+                  <Image
+                    src="/assets/images/team/ryan.jpg"
+                    alt="Ryan Zimmerman, Founder & Principal Consultant"
+                    width={300}
+                    height={300}
+                    className="rounded-lg shadow-lg"
+                  />
+                </div>
+                <h3 className="text-2xl font-serif font-semibold text-navy mb-2">
+                  Ryan Zimmerman
+                </h3>
+                <p className="text-gold font-medium mb-4">
+                  Founder & Principal Consultant
+                </p>
+                <div className="text-gray-600 text-left space-y-3">
+                  <p>
+                    Ryan founded Southwest Resume Services with a singular mission: to help
+                    professionals articulate their true value without fabrication or exaggeration.
+                  </p>
+                  <p>
+                    Drawing on extensive experience in career development and research methodology,
+                    Ryan developed the Client Truth Principle and Research Authority Index that
+                    define our approach—revealing authentic professional value through rigorous
+                    investigation and psychological insight.
+                  </p>
+                  <p>
+                    Based in Arizona, Ryan brings the Southwest values of authenticity and
+                    straight talk to every client engagement.
+                  </p>
+                </div>
+              </div>
+
+              {/* Jordyn Ginsberg */}
+              <div className="text-center">
+                <div className="mb-6 relative inline-block">
+                  <Image
+                    src="/assets/images/team/jordyn.png"
+                    alt="Jordyn Ginsberg, Career Coach"
+                    width={300}
+                    height={300}
+                    className="rounded-lg shadow-lg"
+                  />
+                </div>
+                <h3 className="text-2xl font-serif font-semibold text-navy mb-2">
+                  Jordyn Ginsberg
+                </h3>
+                <p className="text-gold font-medium mb-4">
+                  Career Coach
+                </p>
+                <div className="text-gray-600 text-left space-y-3">
+                  <p>
+                    Jordyn specializes in helping clients overcome professional minimization
+                    and imposter syndrome through structured interview preparation and
+                    confidence transfer.
+                  </p>
+                  <p>
+                    With a deep understanding of the psychological barriers that prevent
+                    professionals from owning their achievements, Jordyn guides clients
+                    through the transformation from intellectual understanding to embodied
+                    confidence.
+                  </p>
+                  <p>
+                    Her approach ensures that every enhancement we uncover becomes genuinely
+                    your truth—so you can speak about your value with authentic conviction.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
