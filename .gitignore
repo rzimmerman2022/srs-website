@@ -47,3 +47,10 @@ _SRS Logo (Original).png
 000_SRS_Master_Operations_Reference_Google_Gemini_Deep_Think_2025-09-18.docx
 SRS_SOP.md
 out/
+
+# Email configuration credentials
+google-workspace-credentials.json
+google-workspace-token.json
+spaceship-token.txt
+CREDENTIALS-GUIDE.md
+find-oauth-json.ps1

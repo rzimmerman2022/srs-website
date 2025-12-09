@@ -14,12 +14,33 @@ export default function ContactForm() {
     setIsLoading(true);
     setError('');
 
-    // TODO: Implement actual form submission (e.g., to HubSpot, email service, etc.)
-    // For now, simulate a successful submission
-    setTimeout(() => {
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      // Formspree endpoint for Southwest Resume Services - Contact Form
+      const response = await fetch('https://formspree.io/f/xgvglrbr', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        setIsLoading(false);
+        setIsSuccess(true);
+      } else {
+        const data = await response.json();
+        setIsLoading(false);
+        setError(
+          data.errors?.map((e: { message: string }) => e.message).join(', ') ||
+            'Something went wrong. Please try again.'
+        );
+      }
+    } catch {
       setIsLoading(false);
-      setIsSuccess(true);
-    }, 1500);
+      setError('Failed to send message. Please email us directly at info@southwestresumes.com');
+    }
   };
 
   if (isSuccess) {
@@ -83,9 +104,26 @@ export default function ContactForm() {
         type="tel"
         name="phone"
         label="Phone Number"
-        placeholder="(555) 123-4567"
+        placeholder="(480) 374-3418"
         helpText="Optional - we'll call if you prefer phone conversations"
       />
+
+      <div>
+        <label htmlFor="resume-upload" className="block text-sm font-medium text-navy mb-2">
+          Current Resume (Optional)
+        </label>
+        <input
+          id="resume-upload"
+          type="file"
+          name="resume"
+          accept=".pdf,.doc,.docx"
+          aria-label="Upload your current resume"
+          className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-sand-50 file:text-navy hover:file:bg-sand-100 transition-colors"
+        />
+        <p className="text-xs text-gray-500 mt-1">
+          Upload your current resume (PDF or Word) - helps us provide better guidance
+        </p>
+      </div>
 
       <Input
         as="textarea"
