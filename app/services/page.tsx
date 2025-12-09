@@ -5,6 +5,7 @@ import Container from '@/components/layout/Container';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
 import type { Metadata } from 'next';
+import { withBasePath } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Career Services',
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 
 const services: Service[] = [
   {
+    id: 'resume',
     title: 'Resume Writing & Optimization',
     description:
       'Research-validated resume writing that reveals your true professional value through our Client Truth Principle. Every enhancement is grounded in authoritative sources and defensible in interviews.',
@@ -30,6 +32,7 @@ const services: Service[] = [
     cta: { text: 'Get Started', href: '/contact' },
   },
   {
+    id: 'linkedin',
     title: 'LinkedIn Profile Optimization',
     description:
       'Transform your LinkedIn presence with keyword-optimized content that attracts recruiters. Based on LinkedIn Economic Graph research and real market demand signals.',
@@ -45,6 +48,7 @@ const services: Service[] = [
     cta: { text: 'Get Started', href: '/contact' },
   },
   {
+    id: 'cover-letter',
     title: 'Cover Letter Writing',
     description:
       'Tailored cover letters that connect your experience to employer needs. Strategic positioning that complements your resume and advances your narrative.',
@@ -59,6 +63,7 @@ const services: Service[] = [
     cta: { text: 'Get Started', href: '/contact' },
   },
   {
+    id: 'strategy',
     title: 'Career Strategy Consultation',
     description:
       'Data-driven career guidance based on comprehensive market research, compensation analysis, and transferable skills assessment.',
@@ -74,6 +79,7 @@ const services: Service[] = [
     cta: { text: 'Get Started', href: '/contact' },
   },
   {
+    id: 'interview',
     title: 'Interview Preparation & Coaching',
     description:
       'Comprehensive interview mastery program based on our four-tier preparation framework. From standard polish to crisis intervention, we match preparation to your risk profile.',
@@ -90,6 +96,7 @@ const services: Service[] = [
     cta: { text: 'Get Started', href: '/contact' },
   },
   {
+    id: 'transition',
     title: 'Career Transition Package',
     description:
       'Our most comprehensive service for career changers, non-traditional backgrounds, and complex transitions requiring Level 4 enhancement.',
@@ -347,7 +354,7 @@ export default function ServicesPage() {
               <div className="bg-sand-50 rounded-lg p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
                 <div className="w-full h-48 relative mb-6">
                   <Image
-                    src="/assets/images/packages/essential.png"
+                    src={withBasePath('/assets/images/packages/essential.png')}
                     alt="Essentials Package"
                     fill
                     className="object-contain"
@@ -375,7 +382,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="w-full h-48 relative mb-6">
                   <Image
-                    src="/assets/images/packages/accelerator.png"
+                    src={withBasePath('/assets/images/packages/accelerator.png')}
                     alt="Accelerator Package"
                     fill
                     className="object-contain"
@@ -400,7 +407,7 @@ export default function ServicesPage() {
               <div className="bg-sand-50 rounded-lg p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
                 <div className="w-full h-48 relative mb-6">
                   <Image
-                    src="/assets/images/packages/career-launch.png"
+                    src={withBasePath('/assets/images/packages/career-launch.png')}
                     alt="Career Launch Package"
                     fill
                     className="object-contain"
@@ -425,7 +432,7 @@ export default function ServicesPage() {
               <div className="bg-sand-50 rounded-lg p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
                 <div className="w-full h-48 relative mb-6">
                   <Image
-                    src="/assets/images/packages/custom.png"
+                    src={withBasePath('/assets/images/packages/custom.png')}
                     alt="Custom Solutions Package"
                     fill
                     className="object-contain"

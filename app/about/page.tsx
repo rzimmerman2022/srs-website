@@ -4,6 +4,7 @@ import Card, { CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
 import Link from 'next/link';
+import { withBasePath } from '@/lib/paths';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -207,7 +208,7 @@ export default function AboutPage() {
               <div className="text-center">
                 <div className="mb-6 relative inline-block">
                   <Image
-                    src="/assets/images/team/ryan.jpg"
+                    src={withBasePath('/assets/images/team/ryan.jpg')}
                     alt="Ryan Zimmerman, Founder & Principal Consultant"
                     width={300}
                     height={300}
@@ -242,7 +243,7 @@ export default function AboutPage() {
               <div className="text-center">
                 <div className="mb-6 relative inline-block">
                   <Image
-                    src="/assets/images/team/jordyn.png"
+                    src={withBasePath('/assets/images/team/jordyn.png')}
                     alt="Jordyn Ginsberg, Career Coach"
                     width={300}
                     height={300}

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { withBasePath } from '@/lib/paths';
 
 const footerNavigation = {
   services: [
@@ -35,7 +36,7 @@ export default function Footer() {
             <div className="flex items-center space-x-3 mb-4">
               <div className="relative w-10 h-10">
                 <Image
-                  src="/assets/logos/srs-logo.png"
+                  src={withBasePath('/assets/logos/srs-logo.png')}
                   alt="Southwest Resume Services"
                   width={40}
                   height={40}

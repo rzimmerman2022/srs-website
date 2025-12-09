@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { withBasePath } from '@/lib/paths';
 
 const navigation = [
   { name: 'Services', href: '/services' },
@@ -32,7 +33,7 @@ export default function Header() {
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative w-12 h-12 transition-transform group-hover:scale-105">
                 <Image
-                  src="/assets/logos/srs-logo.png"
+                  src={withBasePath('/assets/logos/srs-logo.png')}
                   alt="Southwest Resume Services"
                   width={48}
                   height={48}
