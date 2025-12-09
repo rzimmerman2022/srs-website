@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Container from '@/components/layout/Container';
 
@@ -60,18 +61,18 @@ export default function Hero({
           {(primaryCTA || secondaryCTA) && (
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
               {primaryCTA && (
-                <a href={primaryCTA.href}>
+                <Link href={primaryCTA.href}>
                   <Button variant="primary" size="lg">
                     {primaryCTA.text}
                   </Button>
-                </a>
+                </Link>
               )}
               {secondaryCTA && (
-                <a href={secondaryCTA.href}>
+                <Link href={secondaryCTA.href}>
                   <Button variant="outline" size="lg">
                     {secondaryCTA.text}
                   </Button>
-                </a>
+                </Link>
               )}
             </div>
           )}

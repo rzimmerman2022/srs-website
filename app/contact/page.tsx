@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Hero from '@/components/sections/Hero';
 import ContactForm from '@/components/sections/ContactForm';
 import Container from '@/components/layout/Container';
@@ -49,7 +50,7 @@ export default function ContactPage() {
                     className="text-gold hover:text-gold-600 font-medium transition-colors"
                   >
                     info@southwestresumes.com
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Phone */}
@@ -63,7 +64,7 @@ export default function ContactPage() {
                     className="text-gold hover:text-gold-600 font-medium transition-colors"
                   >
                     (480) 374-3418
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Location */}
@@ -145,7 +146,7 @@ export default function ContactPage() {
                     className="inline-block bg-gold text-navy px-4 py-2 rounded-lg font-medium hover:bg-gold-600 transition-colors"
                   >
                     View FAQs
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -168,7 +169,7 @@ export default function ContactPage() {
                 <p className="text-sm text-gray-600">
                   Explore our comprehensive career services and packages.
                 </p>
-              </a>
+              </Link>
 
               <a
                 href="/process"
@@ -179,7 +180,7 @@ export default function ContactPage() {
                 <p className="text-sm text-gray-600">
                   Learn about our research-backed methodology and approach.
                 </p>
-              </a>
+              </Link>
 
               <a
                 href="/results"
@@ -190,7 +191,7 @@ export default function ContactPage() {
                 <p className="text-sm text-gray-600">
                   Read about our client success stories and outcomes.
                 </p>
-              </a>
+              </Link>
             </div>
           </div>
         </Container>

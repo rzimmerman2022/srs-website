@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Hero from '@/components/sections/Hero';
 import Container from '@/components/layout/Container';
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -272,11 +273,11 @@ export default function ResultsPage() {
               Let&apos;s uncover your professional value and build your confidence through our
               research-backed methodology.
             </p>
-            <a href="/contact">
+            <Link href="/contact">
               <Button variant="primary" size="lg">
                 Get Started Today
               </Button>
-            </a>
+            </Link>
           </div>
         </Container>
       </section>

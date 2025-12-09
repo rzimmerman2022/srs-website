@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Hero from '@/components/sections/Hero';
 import ProcessTimeline, { ProcessStep } from '@/components/sections/ProcessTimeline';
 import Container from '@/components/layout/Container';
@@ -281,11 +282,11 @@ export default function ProcessPage() {
               Our research-backed, psychologically-informed process creates career
               documents that are both powerful and authentically yours.
             </p>
-            <a href="/contact">
+            <Link href="/contact">
               <Button variant="primary" size="lg">
                 Get Started Today
               </Button>
-            </a>
+            </Link>
           </div>
         </Container>
       </section>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Hero from '@/components/sections/Hero';
 import FAQ, { FAQItem } from '@/components/sections/FAQ';
 import Container from '@/components/layout/Container';
@@ -121,11 +122,11 @@ export default function FAQPage() {
               We&apos;re here to help. Reach out and we&apos;ll provide detailed answers tailored
               to your specific situation.
             </p>
-            <a href="/contact">
+            <Link href="/contact">
               <Button variant="primary" size="lg">
                 Get in Touch
               </Button>
-            </a>
+            </Link>
           </div>
         </Container>
       </section>

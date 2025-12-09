@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Hero from '@/components/sections/Hero';
 import ServiceGrid, { Service } from '@/components/sections/ServiceGrid';
 import Container from '@/components/layout/Container';
@@ -360,11 +361,11 @@ export default function ServicesPage() {
                   Perfectly optimized resume highlighting your strengths clearly and
                   effectively to land more interviews.
                 </p>
-                <a href="/contact" className="mt-auto">
+                <Link href="/contact" className="mt-auto">
                   <Button variant="outline" className="w-full">
                     Get Started
                   </Button>
-                </a>
+                </Link>
               </div>
 
               {/* Accelerator Package */}
@@ -388,11 +389,11 @@ export default function ServicesPage() {
                   Enhanced resume crafted with advanced ATS strategies, targeted keyword
                   analytics, and professional narrative refinement.
                 </p>
-                <a href="/contact" className="mt-auto">
+                <Link href="/contact" className="mt-auto">
                   <Button variant="primary" className="w-full">
                     Get Started
                   </Button>
-                </a>
+                </Link>
               </div>
 
               {/* Career Launch Package */}
@@ -413,11 +414,11 @@ export default function ServicesPage() {
                   Comprehensive resume rewrite, LinkedIn profile optimization, and targeted
                   portfolio design—ideal for career changers.
                 </p>
-                <a href="/contact" className="mt-auto">
+                <Link href="/contact" className="mt-auto">
                   <Button variant="outline" className="w-full">
                     Get Started
                   </Button>
-                </a>
+                </Link>
               </div>
 
               {/* Custom Package */}
@@ -438,11 +439,11 @@ export default function ServicesPage() {
                   Fully customized career branding solution—executive resumes, LinkedIn
                   overhaul, and personalized coaching.
                 </p>
-                <a href="/contact" className="mt-auto">
+                <Link href="/contact" className="mt-auto">
                   <Button variant="outline" className="w-full">
                     Learn More
                   </Button>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -465,11 +466,11 @@ export default function ServicesPage() {
               Let&apos;s discuss your career goals and determine which services will best
               serve your needs.
             </p>
-            <a href="/contact">
+            <Link href="/contact">
               <Button variant="primary" size="lg">
                 Schedule a Consultation
               </Button>
-            </a>
+            </Link>
           </div>
         </Container>
       </section>

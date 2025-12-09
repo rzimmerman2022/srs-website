@@ -13,7 +13,11 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Complete SRS website implementation\n\n🚀 Built world-class marketing website for Southwest Resume Services\n\nFeatures:\n- Next.js 15 (App Router) + TypeScript + Tailwind CSS\n- Full responsive design (mobile-first)\n- WCAG 2.2 AA accessibility compliant\n- SEO optimized (metadata, sitemap, robots.txt)\n- All pages implemented (Home, Services, Process, Results, About, FAQ, Contact)\n- Research-backed content aligned with SOP\n- Brand identity: Navy/Gold color palette from logo\n- Reusable component library (Hero, ServiceGrid, FAQ, ContactForm, etc.)\n- Clean architecture with strict TypeScript\n- Performance optimized (Lighthouse 90+ target)\n\nPages:\n- Home: Value proposition, services overview, Client Truth Principle\n- Services: All 6 core services with quality standards\n- Process: 10-step client journey with research methodology\n- About: Philosophy, problem statement, Arizona connection\n- Results: Client outcomes and differentiators\n- FAQ: 16 comprehensive Q&A entries\n- Contact: Form with clear next-steps guidance\n\nDocumentation:\n- README.md: Technical setup and deployment guide\n- OWNERS_MANUAL.md: Content management for non-technical users\n- IMPLEMENTATION_PLAN.md: Detailed project architecture and phases\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git push:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npx next build)",
+      "Bash(./node_modules/.bin/next build)",
+      "Bash(npx --no-install next build)",
+      "Bash(npm exec:*)"
     ],
     "deny": [],
     "ask": []

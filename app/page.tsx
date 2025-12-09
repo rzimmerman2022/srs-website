@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Hero from '@/components/sections/Hero';
 import ServiceGrid, { Service } from '@/components/sections/ServiceGrid';
 import Container from '@/components/layout/Container';
@@ -105,11 +106,11 @@ export default function HomePage() {
           <ServiceGrid services={coreServices} columns={3} />
 
           <div className="text-center mt-12">
-            <a href="/services">
+            <Link href="/services">
               <Button variant="outline" size="lg">
                 View All Services
               </Button>
-            </a>
+            </Link>
           </div>
         </Container>
       </section>
@@ -139,9 +140,9 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="mt-8">
-                <a href="/about">
+                <Link href="/about">
                   <Button variant="outline">Learn About Our Philosophy</Button>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -252,11 +253,11 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <a href="/process">
+            <Link href="/process">
               <Button variant="primary" size="lg">
                 See Our Full Process
               </Button>
-            </a>
+            </Link>
           </div>
         </Container>
       </section>
@@ -271,16 +272,16 @@ export default function HomePage() {
               Schedule a consultation to get started.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/contact">
+              <Link href="/contact">
                 <Button variant="primary" size="lg">
                   Get Started Today
                 </Button>
-              </a>
-              <a href="/faq">
+              </Link>
+              <Link href="/faq">
                 <Button variant="outline" size="lg">
                   Have Questions?
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </Container>

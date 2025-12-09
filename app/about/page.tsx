@@ -3,6 +3,7 @@ import Container from '@/components/layout/Container';
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -286,16 +287,16 @@ export default function AboutPage() {
               Let&apos;s uncover your professional truth and help you own it completely.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/contact">
+              <Link href="/contact">
                 <Button variant="primary" size="lg">
                   Get Started
                 </Button>
-              </a>
-              <a href="/process">
+              </Link>
+              <Link href="/process">
                 <Button variant="outline" size="lg">
                   See Our Process
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </Container>
