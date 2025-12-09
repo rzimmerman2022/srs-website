@@ -50,7 +50,7 @@ export default function ContactPage() {
                     className="text-gold hover:text-gold-600 font-medium transition-colors"
                   >
                     info@southwestresumes.com
-                  </Link>
+                  </a>
                 </div>
 
                 {/* Phone */}
@@ -64,7 +64,7 @@ export default function ContactPage() {
                     className="text-gold hover:text-gold-600 font-medium transition-colors"
                   >
                     (480) 374-3418
-                  </Link>
+                  </a>
                 </div>
 
                 {/* Location */}
@@ -141,7 +141,7 @@ export default function ContactPage() {
                     Check out our FAQ page for answers to common questions about our
                     process, pricing, timelines, and more.
                   </p>
-                  <a
+                  <Link
                     href="/faq"
                     className="inline-block bg-gold text-navy px-4 py-2 rounded-lg font-medium hover:bg-gold-600 transition-colors"
                   >
@@ -160,7 +160,7 @@ export default function ContactPage() {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-center mb-12">Explore Our Services</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <a
+              <Link
                 href="/services"
                 className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-center"
               >
@@ -171,7 +171,7 @@ export default function ContactPage() {
                 </p>
               </Link>
 
-              <a
+              <Link
                 href="/process"
                 className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-center"
               >
@@ -182,7 +182,7 @@ export default function ContactPage() {
                 </p>
               </Link>
 
-              <a
+              <Link
                 href="/results"
                 className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-center"
               >
