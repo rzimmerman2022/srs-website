@@ -173,6 +173,13 @@ npm run dev
 # Server will start on http://localhost:3005 (or next available port)
 ```
 
+**IMPORTANT:** Before the last push, the dev server was killed but NOT restarted.
+The next AI model should:
+1. Start the dev server with `npm run dev`
+2. Visit `/discovery/jdeleon` to test the questionnaire
+3. Verify the sync status indicator works (should show "Synced" or "Offline" if Supabase not configured)
+4. Test that localStorage fallback is working
+
 ---
 
 ## REMAINING TODO LIST
