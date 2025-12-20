@@ -56,7 +56,7 @@ export default function MilestoneModal({ milestone, onClose }: MilestoneModalPro
   return (
     <div
       className={cn(
-        'fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300',
+        'fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 transition-all duration-300',
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       )}
     >
@@ -77,36 +77,36 @@ export default function MilestoneModal({ milestone, onClose }: MilestoneModalPro
         aria-labelledby="milestone-title"
         tabIndex={-1}
         className={cn(
-          'relative glass rounded-3xl p-8 md:p-12 max-w-md w-full text-center shadow-2xl transition-all duration-500',
+          'relative glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 max-w-md w-full text-center shadow-2xl transition-all duration-500',
           isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'
         )}
       >
         {/* Confetti animation placeholder - in production you'd use a library */}
-        <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl pointer-events-none">
           <div className="absolute top-0 left-1/4 w-2 h-2 bg-gold rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
           <div className="absolute top-0 left-1/2 w-2 h-2 bg-navy rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
           <div className="absolute top-0 left-3/4 w-2 h-2 bg-gold rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
         </div>
 
         {/* Celebration emoji */}
-        <div className="text-7xl mb-6 animate-pulse">
+        <div className="text-5xl sm:text-6xl md:text-7xl mb-4 sm:mb-6 animate-pulse">
           {milestone.celebrationEmoji}
         </div>
 
         {/* Title */}
-        <h3 id="milestone-title" className="text-3xl font-serif font-bold text-navy mb-3">
+        <h3 id="milestone-title" className="text-2xl sm:text-3xl font-serif font-bold text-navy mb-2 sm:mb-3">
           {milestone.title}
         </h3>
 
         {/* Description */}
-        <p className="text-lg text-gray-600 mb-6">
+        <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
           {milestone.description}
         </p>
 
         {/* Progress indicator */}
         <div className="flex items-center justify-center gap-2 text-gold font-semibold">
-          <span className="text-2xl">{milestone.threshold}%</span>
-          <span className="text-gray-500">complete</span>
+          <span className="text-xl sm:text-2xl">{milestone.threshold}%</span>
+          <span className="text-gray-500 text-sm sm:text-base">complete</span>
         </div>
 
         {/* Close button */}
@@ -117,7 +117,7 @@ export default function MilestoneModal({ milestone, onClose }: MilestoneModalPro
             setIsVisible(false);
             setTimeout(onClose, 300);
           }}
-          className="mt-8 px-8 py-3 bg-navy text-white font-medium rounded-xl hover:bg-navy/90 transition-colors relative z-10 cursor-pointer"
+          className="mt-6 sm:mt-8 px-6 sm:px-8 py-2.5 sm:py-3 bg-navy text-white font-medium rounded-xl hover:bg-navy/90 transition-colors relative z-10 cursor-pointer min-h-[44px] text-sm sm:text-base"
         >
           Keep Going
         </button>

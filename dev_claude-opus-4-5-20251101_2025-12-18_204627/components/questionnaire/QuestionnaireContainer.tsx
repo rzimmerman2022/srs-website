@@ -33,7 +33,7 @@ export default function QuestionnaireContainer({
     updateState: updateSyncState,
     forceSync,
   } = useQuestionnaireSync({
-    clientId: clientId || questionnaire.clientName || 'anonymous',
+    clientId: clientId || questionnaire.clientId || 'anonymous',
     questionnaireId: questionnaire.id,
     debounceMs: 2000,
   });
@@ -464,11 +464,12 @@ export default function QuestionnaireContainer({
     <div className="min-h-screen bg-gradient-to-br from-sand-50 via-white to-sand-100">
       {/* Top progress bar */}
       <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-sand-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Left: Progress info */}
-            <div className="flex items-center gap-4">
-              <ProgressRing progress={progress} size={50} strokeWidth={4} />
+            <div className="flex items-center gap-2 sm:gap-4">
+              <ProgressRing progress={progress} size={40} strokeWidth={4} className="sm:hidden" />
+              <ProgressRing progress={progress} size={50} strokeWidth={4} className="hidden sm:block" />
               <div className="hidden sm:block">
                 <div className="text-sm font-medium text-navy" aria-label={`${answeredCount} of ${allQuestions.length} questions answered`}>
                   {answeredCount} of {allQuestions.length} answered
@@ -480,37 +481,37 @@ export default function QuestionnaireContainer({
             </div>
 
             {/* Center: Current module */}
-            <div className="flex-1 text-center hidden md:block">
+            <div className="flex-1 text-center hidden lg:block">
               <span className="text-2xl mr-2" aria-hidden="true">{currentModule?.icon}</span>
               <span className="font-semibold text-navy">{currentModule?.title}</span>
             </div>
 
             {/* Right: Streak & save status */}
-            <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1 sm:gap-2 md:gap-4">
               {streak > 0 && (
                 <div className={cn(
-                  "relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-3 sm:px-4 py-2 rounded-2xl text-sm font-medium transition-all duration-300",
+                  "relative flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl text-sm font-medium transition-all duration-300",
                   "bg-gradient-to-r from-amber-100 via-orange-100 to-amber-100 border border-amber-200",
                   getStreakDisplay().pulse && "animate-progress-pulse"
                 )}>
-                  <div className="flex items-center gap-2">
-                    <span className={cn(getStreakDisplay().size, "animate-float-bounce")}>
-                      {getStreakDisplay().fire}
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <span className={cn("text-base sm:text-lg md:text-xl", "animate-float-bounce")}>
+                      🔥
                     </span>
                     <div className="flex flex-col items-start">
-                      <span className="text-base sm:text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">
+                      <span className="text-sm sm:text-base md:text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">
                         {streak}
                       </span>
-                      <span className="text-xs text-amber-700 font-semibold uppercase tracking-wide">
+                      <span className="hidden sm:inline text-xs text-amber-700 font-semibold uppercase tracking-wide">
                         streak
                       </span>
                     </div>
                   </div>
                   {/* Combo multiplier indicator */}
                   {currentMultiplier > 1 && (
-                    <div className="mt-1 sm:mt-0 px-2 py-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
+                    <div className="px-1.5 sm:px-2 py-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
                       <span className="text-white text-xs font-bold">
-                        {currentMultiplier}x COMBO
+                        {currentMultiplier}x
                       </span>
                     </div>
                   )}
@@ -558,7 +559,7 @@ export default function QuestionnaireContainer({
           </div>
 
           {/* Progress bar - enhanced with shimmer effect */}
-          <div className="mt-3 h-2.5 bg-sand-200 rounded-full overflow-hidden shadow-inner">
+          <div className="mt-2 sm:mt-3 h-2 sm:h-2.5 bg-sand-200 rounded-full overflow-hidden shadow-inner">
             <div
               className="h-full rounded-full relative overflow-hidden transition-all duration-700"
               role="progressbar"
@@ -580,11 +581,11 @@ export default function QuestionnaireContainer({
       </div>
 
       {/* Main content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar - Module nav */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          {/* Sidebar - Module nav (desktop only) */}
           <div className="hidden lg:block lg:col-span-1">
-            <div className="sticky top-32">
+            <div className="sticky top-28">
               <ModuleNav
                 modules={questionnaire.modules}
                 currentModuleIndex={currentModuleIndex}
@@ -596,17 +597,17 @@ export default function QuestionnaireContainer({
 
           {/* Main question area */}
           <div className="lg:col-span-3">
-            {/* Module header (mobile) */}
-            <div className="lg:hidden mb-6 glass rounded-xl p-4 flex items-center gap-3">
-              <span className="text-2xl">{currentModule?.icon}</span>
-              <div>
-                <h2 className="font-semibold text-navy">{currentModule?.title}</h2>
-                <p className="text-sm text-gray-700">{currentModule?.subtitle}</p>
+            {/* Module header (mobile/tablet) */}
+            <div className="lg:hidden mb-4 sm:mb-6 glass rounded-xl p-3 sm:p-4 flex items-center gap-3">
+              <span className="text-xl sm:text-2xl">{currentModule?.icon}</span>
+              <div className="flex-1 min-w-0">
+                <h2 className="font-semibold text-navy text-sm sm:text-base truncate">{currentModule?.title}</h2>
+                <p className="text-xs sm:text-sm text-gray-700 truncate">{currentModule?.subtitle}</p>
               </div>
             </div>
 
             {/* Question card */}
-            <div className="relative min-h-[400px]">
+            <div className="relative min-h-[300px] sm:min-h-[400px]">
               {currentQuestion && (
                 <QuestionCard
                   key={currentQuestion.id}
@@ -621,20 +622,20 @@ export default function QuestionnaireContainer({
             </div>
 
             {/* Navigation buttons */}
-            <div className="mt-8 flex items-center justify-between gap-3 sm:gap-4">
+            <div className="mt-6 sm:mt-8 flex items-center justify-between gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={goToPreviousQuestion}
                 disabled={currentModuleIndex === 0 && currentQuestionIndex === 0}
                 aria-label="Go to previous question"
                 className={cn(
-                  'flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl font-medium transition-all min-h-[44px] min-w-[44px]',
+                  'flex items-center justify-center gap-2 px-3 sm:px-4 md:px-6 py-3 rounded-xl font-medium transition-all min-h-[44px] min-w-[44px]',
                   currentModuleIndex === 0 && currentQuestionIndex === 0
                     ? 'opacity-50 cursor-not-allowed text-gray-400'
                     : 'text-gray-600 hover:text-navy hover:bg-sand-100'
                 )}
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                 </svg>
                 <span className="hidden sm:inline">Back</span>
@@ -646,7 +647,7 @@ export default function QuestionnaireContainer({
                     type="button"
                     onClick={skipQuestion}
                     aria-label="Skip this optional question"
-                    className="px-4 sm:px-6 py-3 text-gray-500 hover:text-gray-700 font-medium transition-colors min-h-[44px]"
+                    className="px-3 sm:px-4 md:px-6 py-3 text-gray-500 hover:text-gray-700 font-medium transition-colors min-h-[44px] text-sm sm:text-base"
                   >
                     Skip
                   </button>
@@ -658,25 +659,33 @@ export default function QuestionnaireContainer({
                   disabled={currentQuestion?.required && !isCurrentQuestionAnswered}
                   aria-label={currentModuleIndex === questionnaire.modules.length - 1 && currentQuestionIndex === currentModule?.questions.length - 1 ? 'Complete questionnaire' : 'Continue to next question'}
                   className={cn(
-                    'flex items-center gap-2 px-6 sm:px-8 py-3 rounded-xl font-semibold transition-all shadow-lg min-h-[44px] min-w-[44px]',
+                    'flex items-center justify-center gap-2 px-4 sm:px-6 md:px-8 py-3 rounded-xl font-semibold transition-all shadow-lg min-h-[44px] min-w-[44px] text-sm sm:text-base',
                     currentQuestion?.required && !isCurrentQuestionAnswered
                       ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                       : 'bg-navy text-white hover:bg-navy/90 hover:shadow-xl'
                   )}
                 >
-                  {currentModuleIndex === questionnaire.modules.length - 1 &&
-                   currentQuestionIndex === currentModule?.questions.length - 1
-                    ? 'Complete'
-                    : 'Continue'}
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <span className="hidden sm:inline">
+                    {currentModuleIndex === questionnaire.modules.length - 1 &&
+                     currentQuestionIndex === currentModule?.questions.length - 1
+                      ? 'Complete'
+                      : 'Continue'}
+                  </span>
+                  <span className="sm:hidden">
+                    {currentModuleIndex === questionnaire.modules.length - 1 &&
+                     currentQuestionIndex === currentModule?.questions.length - 1
+                      ? 'Done'
+                      : 'Next'}
+                  </span>
+                  <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </button>
               </div>
             </div>
 
-            {/* Keyboard hint */}
-            <p className="text-center text-sm text-gray-400 mt-6">
+            {/* Keyboard hint - hidden on mobile */}
+            <p className="hidden sm:block text-center text-sm text-gray-400 mt-6">
               Press <kbd className="px-2 py-1 bg-sand-100 rounded text-gray-600 font-mono text-xs">Enter</kbd> to continue
             </p>
           </div>
@@ -698,10 +707,10 @@ export default function QuestionnaireContainer({
 
       {/* Encouragement toast */}
       {showEncouragement && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-slide-up">
-          <div className="bg-navy text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border border-gold/20">
-            <span className="text-2xl">💬</span>
-            <span className="font-medium">{showEncouragement}</span>
+        <div className="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 animate-slide-up px-4 max-w-md w-full">
+          <div className="bg-navy text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-2xl flex items-center gap-2 sm:gap-3 border border-gold/20">
+            <span className="text-xl sm:text-2xl flex-shrink-0">💬</span>
+            <span className="font-medium text-sm sm:text-base">{showEncouragement}</span>
           </div>
         </div>
       )}

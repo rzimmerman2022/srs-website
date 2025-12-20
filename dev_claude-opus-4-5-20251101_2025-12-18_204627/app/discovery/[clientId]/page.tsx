@@ -56,6 +56,7 @@ export default function DiscoveryPage() {
     <ErrorBoundary>
       <QuestionnaireContainer
         questionnaire={questionnaire}
+        clientId={clientId}
         onComplete={handleComplete}
       />
     </ErrorBoundary>

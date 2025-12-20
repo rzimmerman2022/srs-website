@@ -21,13 +21,21 @@ const questionnaireRequestSchema = z.object({
   questionnaireId: z.string().min(1).max(100).optional().default('discovery'),
   // SECURITY: Constrain answers JSONB field to prevent injection attacks and excessive data
   // - Keys must be alphanumeric with hyphens/underscores only
-  // - Values must be either strings (max 1000 chars) or arrays of strings (max 50 items, 100 chars each)
-  // - This prevents arbitrary JSON injection and limits data size
+  // - Values can be:
+  //   * strings (max 1000 chars) - for text, textarea, radio, date inputs
+  //   * arrays of strings (max 50 items, 100 chars each) - for checkbox inputs
+  //   * numbers (for currency/numeric inputs)
+  //   * objects with number values (for percentage-split inputs)
+  //   * null (for unanswered questions)
+  // - This prevents arbitrary JSON injection and limits data size while supporting all question types
   answers: z.record(
     z.string().regex(/^[a-zA-Z0-9_-]+$/),
     z.union([
       z.string().max(1000),
-      z.array(z.string().max(100)).max(50)
+      z.array(z.string().max(100)).max(50),
+      z.number().min(-999999999).max(999999999),
+      z.record(z.string().regex(/^[a-zA-Z0-9_-]+$/), z.number().min(0).max(100)), // percentage-split objects
+      z.null()
     ])
   ).optional().default({}),
   currentQuestionIndex: z.number().int().min(0).optional().default(0),

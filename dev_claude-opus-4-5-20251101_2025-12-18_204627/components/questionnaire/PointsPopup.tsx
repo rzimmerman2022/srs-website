@@ -75,7 +75,7 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
   };
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center">
+    <div className="fixed inset-0 pointer-events-none z-[100] flex items-center justify-center px-4">
       <div
         className="transition-all duration-300 ease-out"
         style={getAnimationStyles()}
@@ -86,19 +86,19 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
         <div className="relative">
           {/* Glow pulse effect */}
           <div
-            className="absolute inset-0 bg-amber-400/40 blur-2xl rounded-full animate-pulse"
+            className="absolute inset-0 bg-amber-400/40 blur-xl sm:blur-2xl rounded-full animate-pulse"
             style={{ transform: 'scale(2)' }}
             aria-hidden="true"
           />
 
           {/* Main badge */}
-          <div className="relative flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-2xl shadow-2xl">
+          <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-xl sm:rounded-2xl shadow-2xl">
             {/* Inner glow */}
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-2xl" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-xl sm:rounded-2xl" aria-hidden="true" />
 
             {/* Points text */}
             <span
-              className="relative text-3xl sm:text-4xl font-black text-white"
+              className="relative text-2xl sm:text-3xl md:text-4xl font-black text-white"
               style={{
                 textShadow: '0 2px 10px rgba(0,0,0,0.3), 0 0 40px rgba(255,255,255,0.5)'
               }}
@@ -111,7 +111,7 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
 
             {/* Fire icon with bounce */}
             <span
-              className="relative text-2xl sm:text-3xl"
+              className="relative text-xl sm:text-2xl md:text-3xl"
               style={{
                 animation: 'bounce 0.3s ease-in-out infinite',
                 filter: 'drop-shadow(0 0 10px rgba(255,150,0,0.8))'
@@ -126,7 +126,7 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
           {animationPhase !== 'idle' && (
             <>
               <span
-                className="absolute -top-4 -left-4 text-2xl"
+                className="absolute -top-3 sm:-top-4 -left-3 sm:-left-4 text-xl sm:text-2xl"
                 style={{
                   animation: 'ping 0.5s ease-out forwards',
                   animationDelay: '0ms'
@@ -135,7 +135,7 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
                 ✨
               </span>
               <span
-                className="absolute -top-2 -right-6 text-xl"
+                className="absolute -top-2 -right-4 sm:-right-6 text-lg sm:text-xl"
                 style={{
                   animation: 'ping 0.5s ease-out forwards',
                   animationDelay: '100ms'
@@ -144,7 +144,7 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
                 ✨
               </span>
               <span
-                className="absolute -bottom-3 left-1/4 text-lg"
+                className="absolute -bottom-2 sm:-bottom-3 left-1/4 text-base sm:text-lg"
                 style={{
                   animation: 'ping 0.5s ease-out forwards',
                   animationDelay: '200ms'
@@ -153,7 +153,7 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
                 ✨
               </span>
               <span
-                className="absolute -bottom-2 right-1/4 text-xl"
+                className="absolute -bottom-2 right-1/4 text-lg sm:text-xl"
                 style={{
                   animation: 'ping 0.5s ease-out forwards',
                   animationDelay: '150ms'

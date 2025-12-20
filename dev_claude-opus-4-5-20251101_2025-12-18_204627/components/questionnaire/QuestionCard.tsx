@@ -36,14 +36,14 @@ function QuestionCard({
             onChange={(e) => onChange(e.target.value)}
             placeholder={question.placeholder}
             aria-label={question.question}
-            className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg"
+            className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-lg sm:rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-base sm:text-lg min-h-[44px]"
           />
         );
 
       case 'currency':
         return (
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 text-lg" id={`${question.id}-currency-symbol`} aria-hidden="true">$</span>
+            <span className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-gray-600 text-base sm:text-lg" id={`${question.id}-currency-symbol`} aria-hidden="true">$</span>
             <input
               type="number"
               value={isNumberValue(value) ? value : ''}
@@ -51,7 +51,7 @@ function QuestionCard({
               placeholder={question.placeholder}
               aria-label={question.question}
               aria-describedby={`${question.id}-currency-symbol`}
-              className="w-full pl-8 pr-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg"
+              className="w-full pl-7 sm:pl-8 pr-3 sm:pr-4 py-3 sm:py-3.5 rounded-lg sm:rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-base sm:text-lg min-h-[44px]"
             />
           </div>
         );
@@ -66,7 +66,7 @@ function QuestionCard({
             min={question.min}
             max={question.max}
             aria-label={question.question}
-            className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg"
+            className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-lg sm:rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-base sm:text-lg min-h-[44px]"
           />
         );
 
@@ -78,7 +78,7 @@ function QuestionCard({
             placeholder={question.placeholder}
             rows={4}
             aria-label={question.question}
-            className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg resize-none"
+            className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-lg sm:rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-base sm:text-lg resize-none"
           />
         );
 
@@ -86,12 +86,12 @@ function QuestionCard({
         return (
           <fieldset>
             <legend className="sr-only">{question.question}</legend>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {question.options?.map((option) => (
                 <label
                   key={option.value}
                   className={cn(
-                    'flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 group',
+                    'flex items-start p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all duration-200 group min-h-[44px]',
                     value === option.value
                       ? 'border-gold bg-gold/10 shadow-md'
                       : 'border-sand-200 bg-white/80 hover:border-gold/50 hover:bg-gold/5'
@@ -106,22 +106,22 @@ function QuestionCard({
                     className="sr-only"
                   />
                   <div className={cn(
-                    'w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 mr-4 flex items-center justify-center transition-colors',
+                    'w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex-shrink-0 mt-0.5 mr-3 sm:mr-4 flex items-center justify-center transition-colors',
                     value === option.value ? 'border-gold bg-gold' : 'border-gray-300 group-hover:border-gold/50'
                   )}>
                     {value === option.value && (
-                      <div className="w-2 h-2 rounded-full bg-white" />
+                      <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white" />
                     )}
                   </div>
                   <div className="flex-1">
                     <span className={cn(
-                      'font-medium block',
+                      'font-medium block text-sm sm:text-base',
                       value === option.value ? 'text-navy' : 'text-gray-700'
                     )}>
                       {option.label}
                     </span>
                     {option.description && (
-                      <span className="text-sm text-gray-600 mt-1 block">
+                      <span className="text-xs sm:text-sm text-gray-600 mt-1 block">
                         {option.description}
                       </span>
                     )}
@@ -137,14 +137,14 @@ function QuestionCard({
         return (
           <fieldset>
             <legend className="sr-only">{question.question}</legend>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {question.options?.map((option) => {
                 const isSelected = selectedValues.includes(option.value);
                 return (
                   <label
                     key={option.value}
                     className={cn(
-                      'flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 group',
+                      'flex items-start p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all duration-200 group min-h-[44px]',
                       isSelected
                         ? 'border-gold bg-gold/10 shadow-md'
                         : 'border-sand-200 bg-white/80 hover:border-gold/50 hover:bg-gold/5'
@@ -164,24 +164,24 @@ function QuestionCard({
                       className="sr-only"
                     />
                     <div className={cn(
-                      'w-5 h-5 rounded-md border-2 flex-shrink-0 mt-0.5 mr-4 flex items-center justify-center transition-colors',
+                      'w-5 h-5 sm:w-6 sm:h-6 rounded-md border-2 flex-shrink-0 mt-0.5 mr-3 sm:mr-4 flex items-center justify-center transition-colors',
                       isSelected ? 'border-gold bg-gold' : 'border-gray-300 group-hover:border-gold/50'
                     )}>
                       {isSelected && (
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                       )}
                     </div>
                     <div className="flex-1">
                       <span className={cn(
-                        'font-medium block',
+                        'font-medium block text-sm sm:text-base',
                         isSelected ? 'text-navy' : 'text-gray-700'
                       )}>
                         {option.label}
                       </span>
                       {option.description && (
-                        <span className="text-sm text-gray-600 mt-1 block">
+                        <span className="text-xs sm:text-sm text-gray-600 mt-1 block">
                           {option.description}
                         </span>
                       )}
@@ -198,13 +198,13 @@ function QuestionCard({
         const total = Object.values(percentages).reduce((a, b) => a + b, 0);
         const isInvalid = total !== 100 && total > 0;
         return (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {question.options?.map((option) => (
-              <div key={option.value} className="flex items-center gap-4">
+              <div key={option.value} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-2 sm:p-0">
                 <div className="flex-1">
-                  <span className="font-medium text-gray-700">{option.label}</span>
+                  <span className="font-medium text-gray-700 text-sm sm:text-base">{option.label}</span>
                   {option.description && (
-                    <span className="text-sm text-gray-600 block">{option.description}</span>
+                    <span className="text-xs sm:text-sm text-gray-600 block">{option.description}</span>
                   )}
                 </div>
                 <div className="flex items-center gap-2">
@@ -220,9 +220,9 @@ function QuestionCard({
                     aria-label={`${option.label} percentage`}
                     aria-invalid={isInvalid}
                     aria-describedby={isInvalid ? `${question.id}-error` : undefined}
-                    className="w-20 px-3 py-2 rounded-lg border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all text-center"
+                    className="w-20 sm:w-24 px-3 py-2.5 rounded-lg border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all text-center min-h-[44px] text-base"
                   />
-                  <span className="text-gray-600">%</span>
+                  <span className="text-gray-600 text-sm sm:text-base">%</span>
                 </div>
               </div>
             ))}
@@ -230,7 +230,7 @@ function QuestionCard({
               <span
                 id={`${question.id}-error`}
                 className={cn(
-                  'font-semibold',
+                  'font-semibold text-sm sm:text-base',
                   total === 100 ? 'text-green-600' : 'text-amber-600'
                 )}
                 role={isInvalid ? 'alert' : undefined}
@@ -249,7 +249,7 @@ function QuestionCard({
             onChange={(e) => onChange(e.target.value)}
             placeholder={question.placeholder}
             aria-label={question.question}
-            className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg"
+            className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-lg sm:rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-base sm:text-lg min-h-[44px]"
           />
         );
     }
@@ -258,14 +258,14 @@ function QuestionCard({
   return (
     <div
       className={cn(
-        'glass rounded-2xl p-8 md:p-10 shadow-premium transition-all duration-500',
+        'glass rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 shadow-premium transition-all duration-500',
         isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none absolute'
       )}
     >
       {/* Question header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-sm font-medium text-gray-600 uppercase tracking-wider">
+      <div className="mb-4 sm:mb-6">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+          <span className="text-xs sm:text-sm font-medium text-gray-600 uppercase tracking-wider">
             Question {questionNumber} of {totalQuestions}
           </span>
           {question.critical && (
@@ -285,19 +285,19 @@ function QuestionCard({
           )}
         </div>
 
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-navy mb-2">
+        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif font-bold text-navy mb-2">
           {question.question}
         </h2>
 
         {question.subtitle && (
-          <p className="text-lg text-gray-600 mb-4">{question.subtitle}</p>
+          <p className="text-base sm:text-lg text-gray-600 mb-3 sm:mb-4">{question.subtitle}</p>
         )}
 
         {question.whyAsking && (
-          <div className="mb-4">
+          <div className="mb-3 sm:mb-4">
             <button
               onClick={() => setShowWhyAsking(!showWhyAsking)}
-              className="text-sm text-gold font-medium flex items-center gap-2 hover:text-gold/80 transition-colors"
+              className="text-xs sm:text-sm text-gold font-medium flex items-center gap-2 hover:text-gold/80 transition-colors min-h-[44px]"
             >
               <span className="w-5 h-5 rounded-full bg-gold/20 flex items-center justify-center text-xs">?</span>
               Why are we asking this?
@@ -311,7 +311,7 @@ function QuestionCard({
               </svg>
             </button>
             {showWhyAsking && (
-              <div className="mt-3 p-4 bg-gold/10 rounded-xl border border-gold/20 text-sm text-gray-700">
+              <div className="mt-2 sm:mt-3 p-3 sm:p-4 bg-gold/10 rounded-xl border border-gold/20 text-xs sm:text-sm text-gray-700">
                 {question.whyAsking}
               </div>
             )}
@@ -320,17 +320,17 @@ function QuestionCard({
       </div>
 
       {/* Question input */}
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         {renderInput()}
       </div>
 
       {/* Help text */}
       {question.helpText && (
-        <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-xl border border-blue-100">
+        <div className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 bg-blue-50 rounded-xl border border-blue-100">
           <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p className="text-sm text-blue-700">{question.helpText}</p>
+          <p className="text-xs sm:text-sm text-blue-700">{question.helpText}</p>
         </div>
       )}
     </div>
