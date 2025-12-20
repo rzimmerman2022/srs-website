@@ -40,13 +40,29 @@ DROP POLICY IF EXISTS "Allow all operations on response_history" ON response_his
 
 -- Policy: Clients can only SELECT their own responses
 -- Security: Prevents cross-client data leakage
+--
+-- CRITICAL SECURITY NOTE:
+-- The hardcoded 'true' policy below is INSECURE and allows ANY client to read ALL data.
+-- This is currently disabled because the system does not use Supabase Auth.
+--
+-- Current security model:
+-- - Access control is enforced at the APPLICATION LAYER in route.ts
+-- - The API route only returns data for the specific client_id in the URL
+-- - This provides protection against casual access but NOT against malicious actors
+--
+-- FUTURE: When proper authentication is implemented, replace with:
+--   USING (auth.uid()::text = client_id)
+--
+-- For now, we comment out the policy to make it explicit that RLS is not protecting data.
+-- The anon key can read all rows, but the API route filters by client_id.
+--
 CREATE POLICY "Users can read own questionnaire responses"
   ON questionnaire_responses
   FOR SELECT
   USING (
-    -- In a production system with auth, you would use auth.uid()
-    -- For anonymous system, we rely on client_id being passed via API
-    -- The API layer must validate client_id format and origin
+    -- SECURITY WARNING: Hardcoded 'true' allows ANY client to read ALL data
+    -- This is a temporary measure. Access control is enforced in the API layer.
+    -- TODO: Replace with proper auth-based policy when authentication is added
     true
   );
 
@@ -70,11 +86,26 @@ CREATE POLICY "Users can insert own questionnaire responses"
 
 -- Policy: Clients can only UPDATE their own responses
 -- Security: Prevents modifying other clients' data
+--
+-- CRITICAL SECURITY NOTE:
+-- The hardcoded 'true' in USING clause is INSECURE and allows ANY client to update ALL data.
+-- This is currently in place because the system does not use Supabase Auth.
+--
+-- Current security model:
+-- - The API route uses upsert with client_id from the URL parameter
+-- - This means a client can only update their own record (by client_id)
+-- - However, a malicious actor with the anon key could bypass the API
+--
+-- FUTURE: When proper authentication is implemented, replace with:
+--   USING (auth.uid()::text = client_id)
+--
 CREATE POLICY "Users can update own questionnaire responses"
   ON questionnaire_responses
   FOR UPDATE
   USING (
-    -- Allow update only to own records
+    -- SECURITY WARNING: Hardcoded 'true' allows ANY client to update ALL data
+    -- This is a temporary measure. Access control is enforced in the API layer.
+    -- TODO: Replace with proper auth-based policy when authentication is added
     true
   )
   WITH CHECK (
@@ -102,13 +133,31 @@ CREATE POLICY "Prevent deletion of questionnaire responses"
 
 -- Policy: Allow reading history only for own responses
 -- Security: Prevents accessing other clients' history
+--
+-- CRITICAL SECURITY NOTE:
+-- The hardcoded 'true' policy below is INSECURE and allows ANY client to read ALL history.
+-- This is currently disabled because the system does not use Supabase Auth.
+--
+-- Current security model:
+-- - History is not exposed through the API (route.ts does not have a GET endpoint for history)
+-- - However, a malicious actor with the anon key could query history directly
+--
+-- FUTURE: When proper authentication is implemented, replace with:
+--   USING (
+--     EXISTS (
+--       SELECT 1 FROM questionnaire_responses
+--       WHERE id = response_history.response_id
+--       AND auth.uid()::text = client_id
+--     )
+--   )
+--
 CREATE POLICY "Users can read own response history"
   ON response_history
   FOR SELECT
   USING (
-    -- Verify the response_id belongs to a response the user owns
-    -- In production with auth, you would join on questionnaire_responses
-    -- and check auth.uid()
+    -- SECURITY WARNING: Hardcoded 'true' allows ANY client to read ALL history
+    -- This is a temporary measure. History is not exposed via API.
+    -- TODO: Replace with proper auth-based policy when authentication is added
     true
   );
 

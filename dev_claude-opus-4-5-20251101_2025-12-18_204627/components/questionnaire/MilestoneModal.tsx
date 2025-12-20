@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Milestone } from '@/lib/questionnaire/types';
 import { cn } from '@/lib/utils';
 
@@ -11,14 +11,41 @@ interface MilestoneModalProps {
 
 export default function MilestoneModal({ milestone, onClose }: MilestoneModalProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
+  // Handle Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsVisible(false);
+        setTimeout(onClose, 300);
+      }
+    };
+    if (milestone) {
+      document.addEventListener('keydown', handleEscape);
+    }
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [milestone, onClose]);
+
+  // Focus management
   useEffect(() => {
     if (milestone) {
       setIsVisible(true);
+      // Store current focus and move focus to modal
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      setTimeout(() => {
+        modalRef.current?.focus();
+      }, 100);
+
       // Auto-close after 3 seconds
       const timer = setTimeout(() => {
         setIsVisible(false);
-        setTimeout(onClose, 300);
+        setTimeout(() => {
+          onClose();
+          // Return focus to previous element
+          previousFocusRef.current?.focus();
+        }, 300);
       }, 3000);
       return () => clearTimeout(timer);
     }
@@ -44,6 +71,11 @@ export default function MilestoneModal({ milestone, onClose }: MilestoneModalPro
 
       {/* Modal content */}
       <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="milestone-title"
+        tabIndex={-1}
         className={cn(
           'relative glass rounded-3xl p-8 md:p-12 max-w-md w-full text-center shadow-2xl transition-all duration-500',
           isVisible ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'
@@ -62,7 +94,7 @@ export default function MilestoneModal({ milestone, onClose }: MilestoneModalPro
         </div>
 
         {/* Title */}
-        <h3 className="text-3xl font-serif font-bold text-navy mb-3">
+        <h3 id="milestone-title" className="text-3xl font-serif font-bold text-navy mb-3">
           {milestone.title}
         </h3>
 

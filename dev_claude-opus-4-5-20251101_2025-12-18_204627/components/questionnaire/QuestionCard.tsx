@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Question } from '@/lib/questionnaire/types';
 import { cn } from '@/lib/utils';
 import { isStringValue, isNumberValue, isStringArray, isPercentageRecord } from '@/lib/questionnaire/type-guards';
@@ -14,7 +14,8 @@ interface QuestionCardProps {
   totalQuestions: number;
 }
 
-export default function QuestionCard({
+// Performance: Memoize component to prevent re-renders on parent state changes
+function QuestionCard({
   question,
   value,
   onChange,
@@ -42,7 +43,7 @@ export default function QuestionCard({
       case 'currency':
         return (
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" id={`${question.id}-currency-symbol`} aria-hidden="true">$</span>
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 text-lg" id={`${question.id}-currency-symbol`} aria-hidden="true">$</span>
             <input
               type="number"
               value={isNumberValue(value) ? value : ''}
@@ -83,107 +84,113 @@ export default function QuestionCard({
 
       case 'radio':
         return (
-          <div className="space-y-3">
-            {question.options?.map((option) => (
-              <label
-                key={option.value}
-                className={cn(
-                  'flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 group',
-                  value === option.value
-                    ? 'border-gold bg-gold/10 shadow-md'
-                    : 'border-sand-200 bg-white/80 hover:border-gold/50 hover:bg-gold/5'
-                )}
-              >
-                <input
-                  type="radio"
-                  name={question.id}
-                  value={option.value}
-                  checked={value === option.value}
-                  onChange={() => onChange(option.value)}
-                  className="sr-only"
-                />
-                <div className={cn(
-                  'w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 mr-4 flex items-center justify-center transition-colors',
-                  value === option.value ? 'border-gold bg-gold' : 'border-gray-300 group-hover:border-gold/50'
-                )}>
-                  {value === option.value && (
-                    <div className="w-2 h-2 rounded-full bg-white" />
-                  )}
-                </div>
-                <div className="flex-1">
-                  <span className={cn(
-                    'font-medium block',
-                    value === option.value ? 'text-navy' : 'text-gray-700'
-                  )}>
-                    {option.label}
-                  </span>
-                  {option.description && (
-                    <span className="text-sm text-gray-500 mt-1 block">
-                      {option.description}
-                    </span>
-                  )}
-                </div>
-              </label>
-            ))}
-          </div>
-        );
-
-      case 'checkbox':
-        const selectedValues = isStringArray(value) ? value : [];
-        return (
-          <div className="space-y-3">
-            {question.options?.map((option) => {
-              const isSelected = selectedValues.includes(option.value);
-              return (
+          <fieldset>
+            <legend className="sr-only">{question.question}</legend>
+            <div className="space-y-3">
+              {question.options?.map((option) => (
                 <label
                   key={option.value}
                   className={cn(
                     'flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 group',
-                    isSelected
+                    value === option.value
                       ? 'border-gold bg-gold/10 shadow-md'
                       : 'border-sand-200 bg-white/80 hover:border-gold/50 hover:bg-gold/5'
                   )}
                 >
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name={question.id}
                     value={option.value}
-                    checked={isSelected}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        onChange([...selectedValues, option.value]);
-                      } else {
-                        onChange(selectedValues.filter((v) => v !== option.value));
-                      }
-                    }}
+                    checked={value === option.value}
+                    onChange={() => onChange(option.value)}
                     className="sr-only"
                   />
                   <div className={cn(
-                    'w-5 h-5 rounded-md border-2 flex-shrink-0 mt-0.5 mr-4 flex items-center justify-center transition-colors',
-                    isSelected ? 'border-gold bg-gold' : 'border-gray-300 group-hover:border-gold/50'
+                    'w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 mr-4 flex items-center justify-center transition-colors',
+                    value === option.value ? 'border-gold bg-gold' : 'border-gray-300 group-hover:border-gold/50'
                   )}>
-                    {isSelected && (
-                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
+                    {value === option.value && (
+                      <div className="w-2 h-2 rounded-full bg-white" />
                     )}
                   </div>
                   <div className="flex-1">
                     <span className={cn(
                       'font-medium block',
-                      isSelected ? 'text-navy' : 'text-gray-700'
+                      value === option.value ? 'text-navy' : 'text-gray-700'
                     )}>
                       {option.label}
                     </span>
                     {option.description && (
-                      <span className="text-sm text-gray-500 mt-1 block">
+                      <span className="text-sm text-gray-600 mt-1 block">
                         {option.description}
                       </span>
                     )}
                   </div>
                 </label>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          </fieldset>
+        );
+
+      case 'checkbox':
+        const selectedValues = isStringArray(value) ? value : [];
+        return (
+          <fieldset>
+            <legend className="sr-only">{question.question}</legend>
+            <div className="space-y-3">
+              {question.options?.map((option) => {
+                const isSelected = selectedValues.includes(option.value);
+                return (
+                  <label
+                    key={option.value}
+                    className={cn(
+                      'flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 group',
+                      isSelected
+                        ? 'border-gold bg-gold/10 shadow-md'
+                        : 'border-sand-200 bg-white/80 hover:border-gold/50 hover:bg-gold/5'
+                    )}
+                  >
+                    <input
+                      type="checkbox"
+                      value={option.value}
+                      checked={isSelected}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          onChange([...selectedValues, option.value]);
+                        } else {
+                          onChange(selectedValues.filter((v) => v !== option.value));
+                        }
+                      }}
+                      className="sr-only"
+                    />
+                    <div className={cn(
+                      'w-5 h-5 rounded-md border-2 flex-shrink-0 mt-0.5 mr-4 flex items-center justify-center transition-colors',
+                      isSelected ? 'border-gold bg-gold' : 'border-gray-300 group-hover:border-gold/50'
+                    )}>
+                      {isSelected && (
+                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <span className={cn(
+                        'font-medium block',
+                        isSelected ? 'text-navy' : 'text-gray-700'
+                      )}>
+                        {option.label}
+                      </span>
+                      {option.description && (
+                        <span className="text-sm text-gray-600 mt-1 block">
+                          {option.description}
+                        </span>
+                      )}
+                    </div>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
         );
 
       case 'percentage-split':
@@ -197,7 +204,7 @@ export default function QuestionCard({
                 <div className="flex-1">
                   <span className="font-medium text-gray-700">{option.label}</span>
                   {option.description && (
-                    <span className="text-sm text-gray-500 block">{option.description}</span>
+                    <span className="text-sm text-gray-600 block">{option.description}</span>
                   )}
                 </div>
                 <div className="flex items-center gap-2">
@@ -215,7 +222,7 @@ export default function QuestionCard({
                     aria-describedby={isInvalid ? `${question.id}-error` : undefined}
                     className="w-20 px-3 py-2 rounded-lg border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all text-center"
                   />
-                  <span className="text-gray-500">%</span>
+                  <span className="text-gray-600">%</span>
                 </div>
               </div>
             ))}
@@ -258,7 +265,7 @@ export default function QuestionCard({
       {/* Question header */}
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-4">
-          <span className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+          <span className="text-sm font-medium text-gray-600 uppercase tracking-wider">
             Question {questionNumber} of {totalQuestions}
           </span>
           {question.critical && (
@@ -329,3 +336,5 @@ export default function QuestionCard({
     </div>
   );
 }
+
+export default memo(QuestionCard);

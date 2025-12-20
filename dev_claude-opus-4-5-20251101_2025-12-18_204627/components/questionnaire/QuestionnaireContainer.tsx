@@ -60,6 +60,10 @@ export default function QuestionnaireContainer({
   const comboTimeWindow = 15000; // 15 seconds to maintain combo
 
   // Initialize from sync state when it loads
+  // TODO: Consider refactoring to useReducer for atomic state updates
+  // Multiple setState calls here could cause race conditions under heavy load or rapid state changes
+  // useReducer would ensure all state updates happen atomically in a single render cycle
+  // See: https://react.dev/reference/react/useReducer
   useEffect(() => {
     if (syncState && !isDataLoaded) {
       setResponses(syncState.answers as Record<string, unknown> || {});
@@ -113,12 +117,18 @@ export default function QuestionnaireContainer({
   }, [allQuestions, responses]);
 
   const progress = useMemo(() => {
-    return Math.round((answeredCount / allQuestions.length) * 100);
+    // Guard against division by zero if questionnaire has no questions
+    return allQuestions.length > 0
+      ? Math.round((answeredCount / allQuestions.length) * 100)
+      : 0;
   }, [answeredCount, allQuestions.length]);
 
   const requiredProgress = useMemo(() => {
     const answered = requiredQuestions.filter(q => isValidAnswer(responses[q.id])).length;
-    return Math.round((answered / requiredQuestions.length) * 100);
+    // Guard against division by zero if there are no required questions
+    return requiredQuestions.length > 0
+      ? Math.round((answered / requiredQuestions.length) * 100)
+      : 0;
   }, [requiredQuestions, responses]);
 
   // Estimated time remaining
@@ -509,32 +519,32 @@ export default function QuestionnaireContainer({
               {/* Mobile sync status - icon only */}
               <div className="sm:hidden flex items-center">
                 {isSyncing && (
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" title="Syncing..." />
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" title="Syncing..." aria-label="Syncing..." />
                 )}
                 {!isOnline && (
-                  <div className="w-2 h-2 bg-amber-500 rounded-full" title="Offline" />
+                  <div className="w-2 h-2 bg-amber-500 rounded-full" title="Offline" aria-label="Offline" />
                 )}
                 {lastSyncedAt && isOnline && !isSyncing && (
-                  <div className="w-2 h-2 bg-green-500 rounded-full" title="Synced" />
+                  <div className="w-2 h-2 bg-green-500 rounded-full" title="Synced" aria-label="Synced to cloud" />
                 )}
               </div>
               {/* Desktop sync status - with text */}
               <div className="hidden sm:flex items-center gap-2">
                 {isSyncing && (
                   <div className="flex items-center gap-1 text-xs text-blue-500">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" aria-label="Syncing..." />
                     Syncing...
                   </div>
                 )}
                 {!isOnline && (
                   <div className="flex items-center gap-1 text-xs text-amber-500">
-                    <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                    <div className="w-2 h-2 bg-amber-500 rounded-full" aria-label="Offline" />
                     Offline
                   </div>
                 )}
                 {lastSyncedAt && isOnline && !isSyncing && (
                   <div className="flex items-center gap-1 text-xs text-green-600">
-                    <div className="w-2 h-2 bg-green-500 rounded-full" />
+                    <div className="w-2 h-2 bg-green-500 rounded-full" aria-label="Synced to cloud" />
                     Synced
                   </div>
                 )}

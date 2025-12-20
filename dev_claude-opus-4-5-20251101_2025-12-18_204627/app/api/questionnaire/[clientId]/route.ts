@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 
+// Type guard for validating response data structure
+function isValidResponseData(data: unknown): data is { id: string } {
+  return typeof data === 'object' && data !== null && 'id' in data && typeof (data as { id: string }).id === 'string';
+}
+
 // Validation schemas
 const clientIdSchema = z
   .string()
@@ -14,7 +19,17 @@ const clientIdSchema = z
 
 const questionnaireRequestSchema = z.object({
   questionnaireId: z.string().min(1).max(100).optional().default('discovery'),
-  answers: z.record(z.string(), z.any()).optional().default({}),
+  // SECURITY: Constrain answers JSONB field to prevent injection attacks and excessive data
+  // - Keys must be alphanumeric with hyphens/underscores only
+  // - Values must be either strings (max 1000 chars) or arrays of strings (max 50 items, 100 chars each)
+  // - This prevents arbitrary JSON injection and limits data size
+  answers: z.record(
+    z.string().regex(/^[a-zA-Z0-9_-]+$/),
+    z.union([
+      z.string().max(1000),
+      z.array(z.string().max(100)).max(50)
+    ])
+  ).optional().default({}),
   currentQuestionIndex: z.number().int().min(0).optional().default(0),
   currentModuleIndex: z.number().int().min(0).optional().default(0),
   points: z.number().int().min(0).optional().default(0),
@@ -38,7 +53,11 @@ const getSafeErrorMessage = (error: unknown): string => {
 // Create server-side Supabase client (untyped for flexibility)
 const getSupabaseClient = () => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  // SECURITY: Use ONLY the anon key, never the service role key
+  // The service role key bypasses RLS policies and should NEVER be exposed to API routes
+  // that handle user input. The anon key respects RLS policies and is safe for client-facing APIs.
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
     return null;
@@ -110,9 +129,54 @@ export async function GET(
 }
 
 // POST - Create or update questionnaire response
-// NOTE: Rate limiting should be implemented here using Vercel Edge Config + Upstash Redis
-// Example: Limit to 100 requests per client per hour to prevent abuse
-// See: https://vercel.com/docs/edge-network/rate-limiting
+//
+// TODO: IMPLEMENT RATE LIMITING - CRITICAL SECURITY REQUIREMENT
+//
+// Without rate limiting, this endpoint is vulnerable to:
+// - DoS attacks (flooding with requests)
+// - Data pollution (creating excessive records)
+// - Resource exhaustion (database/API quota abuse)
+//
+// Recommended implementation using Vercel Edge Config + Upstash Redis:
+//
+// 1. Install dependencies:
+//    npm install @upstash/redis @vercel/edge-config
+//
+// 2. Set up Upstash Redis:
+//    - Create account at https://upstash.com/
+//    - Create Redis database
+//    - Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN to .env
+//
+// 3. Implement rate limiting logic:
+//    import { Redis } from '@upstash/redis'
+//    const redis = new Redis({
+//      url: process.env.UPSTASH_REDIS_REST_URL,
+//      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+//    })
+//
+// 4. Add rate limit check at the top of POST function:
+//    const rateLimitKey = `ratelimit:questionnaire:${clientId}`
+//    const requests = await redis.incr(rateLimitKey)
+//    if (requests === 1) {
+//      await redis.expire(rateLimitKey, 3600) // 1 hour window
+//    }
+//    if (requests > 100) { // Max 100 requests per hour
+//      return NextResponse.json(
+//        { error: 'Rate limit exceeded. Please try again later.' },
+//        { status: 429 }
+//      )
+//    }
+//
+// 5. Consider additional limits:
+//    - Per-IP rate limiting (using request headers)
+//    - Per-questionnaire rate limiting
+//    - Exponential backoff for repeated violations
+//
+// References:
+// - Upstash Redis: https://upstash.com/docs/redis/overall/getstarted
+// - Vercel Rate Limiting: https://vercel.com/docs/edge-network/rate-limiting
+// - Rate Limiting Patterns: https://blog.cloudflare.com/counting-things-a-lot-of-different-things/
+//
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ clientId: string }> }
@@ -191,11 +255,12 @@ export async function POST(
     }
 
     // Save to history for audit trail (async, don't wait)
-    if (data) {
+    // Using type guard to safely access response ID
+    if (data && isValidResponseData(data)) {
       supabase
         .from('response_history')
         .insert({
-          response_id: (data as { id: string }).id,
+          response_id: data.id,
           snapshot: {
             answers: validatedData.answers,
             currentQuestionIndex: validatedData.currentQuestionIndex,
@@ -213,6 +278,9 @@ export async function POST(
             console.warn('History save warning:', historyError);
           }
         });
+    } else if (data) {
+      // Handle case where data doesn't have expected structure
+      console.warn('Response data missing id field, skipping history save');
     }
 
     return NextResponse.json({ data, success: true });

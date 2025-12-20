@@ -65,6 +65,10 @@ export function useQuestionnaireSync({
   const consecutiveFailuresRef = useRef(0);
   const isInitializedRef = useRef(false);
 
+  // Performance: Use refs to prevent event listener re-registration
+  const stateRef = useRef(state);
+  const syncToServerRef = useRef<((data: QuestionnaireState, retryCount?: number) => Promise<boolean>) | null>(null);
+
   const localStorageKey = `questionnaire_${questionnaireId}_${clientId}`;
 
   // Load from localStorage
@@ -192,6 +196,15 @@ export function useQuestionnaireSync({
     }
   }, [clientId, questionnaireId, fetchWithTimeout]);
 
+  // Performance: Keep refs updated for event listeners
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
+
+  useEffect(() => {
+    syncToServerRef.current = syncToServer;
+  }, [syncToServer]);
+
   // Debounced sync
   const debouncedSync = useCallback((data: QuestionnaireState) => {
     if (syncTimeoutRef.current) {
@@ -314,11 +327,13 @@ export function useQuestionnaireSync({
   }, []);
 
   // Online/offline detection
+  // Performance: Use refs to prevent re-registering listeners on every state change
   useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true);
-      if (state) {
-        syncToServer(state);
+      // Use refs to access latest values without re-creating listeners
+      if (stateRef.current && syncToServerRef.current) {
+        syncToServerRef.current(stateRef.current);
       }
     };
 
@@ -333,7 +348,7 @@ export function useQuestionnaireSync({
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, [state, syncToServer]);
+  }, []); // Empty deps - listeners only registered once
 
   // Sync before page unload
   useEffect(() => {
