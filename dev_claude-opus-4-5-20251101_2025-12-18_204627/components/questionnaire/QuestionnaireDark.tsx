@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Questionnaire, Question, Milestone, DEFAULT_MILESTONES } from '@/lib/questionnaire/types';
 import { cn } from '@/lib/utils';
+import { isStringValue, isStringArray, isPercentageRecord } from '@/lib/questionnaire/type-guards';
+import { isValidAnswer } from '@/lib/questionnaire/utils';
 import QuestionnaireHeader from './QuestionnaireHeader';
 import MilestoneModal from './MilestoneModal';
 
@@ -32,13 +34,7 @@ export default function QuestionnaireDark({
 
   // Calculate progress
   const answeredCount = useMemo(() => {
-    return allQuestions.filter(q => {
-      const response = responses[q.id];
-      if (response === undefined || response === null || response === '') return false;
-      if (Array.isArray(response) && response.length === 0) return false;
-      if (typeof response === 'object' && Object.keys(response as object).length === 0) return false;
-      return true;
-    }).length;
+    return allQuestions.filter(q => isValidAnswer(responses[q.id])).length;
   }, [allQuestions, responses]);
 
   const progress = useMemo(() => {
@@ -121,13 +117,7 @@ export default function QuestionnaireDark({
 
   // Submit assessment
   const handleSubmit = useCallback(() => {
-    const unansweredRequired = allQuestions.filter(q => {
-      if (!q.required) return false;
-      const response = responses[q.id];
-      if (response === undefined || response === null || response === '') return true;
-      if (Array.isArray(response) && response.length === 0) return true;
-      return false;
-    });
+    const unansweredRequired = allQuestions.filter(q => q.required && !isValidAnswer(responses[q.id]));
 
     if (unansweredRequired.length > 0) {
       alert(`Please complete all required questions. ${unansweredRequired.length} required questions remaining.`);
@@ -147,7 +137,7 @@ export default function QuestionnaireDark({
         return (
           <input
             type="text"
-            value={(value as string) || ''}
+            value={isStringValue(value) ? value : ''}
             onChange={(e) => handleResponseChange(question.id, e.target.value)}
             placeholder={question.placeholder}
             className="w-full px-4 py-3 rounded-lg bg-[#1a2a4a] border border-[#2a3a5a] text-white placeholder-gray-500 focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all"
@@ -160,7 +150,7 @@ export default function QuestionnaireDark({
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
             <input
               type="text"
-              value={(value as string) || ''}
+              value={isStringValue(value) ? value : ''}
               onChange={(e) => handleResponseChange(question.id, e.target.value)}
               placeholder={question.placeholder}
               className="w-full pl-8 pr-4 py-3 rounded-lg bg-[#1a2a4a] border border-[#2a3a5a] text-white placeholder-gray-500 focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all"
@@ -171,7 +161,7 @@ export default function QuestionnaireDark({
       case 'textarea':
         return (
           <textarea
-            value={(value as string) || ''}
+            value={isStringValue(value) ? value : ''}
             onChange={(e) => handleResponseChange(question.id, e.target.value)}
             placeholder={question.placeholder}
             rows={4}
@@ -211,7 +201,7 @@ export default function QuestionnaireDark({
                 <div className="flex-1">
                   <span className="font-medium text-white block">{option.label}</span>
                   {option.description && (
-                    <span className="text-sm text-gray-400 mt-1 block">{option.description}</span>
+                    <span className="text-sm text-gray-300 mt-1 block">{option.description}</span>
                   )}
                 </div>
               </label>
@@ -220,7 +210,7 @@ export default function QuestionnaireDark({
         );
 
       case 'checkbox':
-        const selectedValues = (value as string[]) || [];
+        const selectedValues = isStringArray(value) ? value : [];
         return (
           <div className="space-y-3">
             {question.options?.map((option) => {
@@ -261,7 +251,7 @@ export default function QuestionnaireDark({
                   <div className="flex-1">
                     <span className="font-medium text-white block">{option.label}</span>
                     {option.description && (
-                      <span className="text-sm text-gray-400 mt-1 block">{option.description}</span>
+                      <span className="text-sm text-gray-300 mt-1 block">{option.description}</span>
                     )}
                   </div>
                 </label>
@@ -271,7 +261,7 @@ export default function QuestionnaireDark({
         );
 
       case 'percentage-split':
-        const percentages = (value as Record<string, number>) || {};
+        const percentages = isPercentageRecord(value) ? value : {};
         return (
           <div className="space-y-4">
             {question.options?.map((option) => (
@@ -313,7 +303,7 @@ export default function QuestionnaireDark({
         return (
           <input
             type="text"
-            value={(value as string) || ''}
+            value={isStringValue(value) ? value : ''}
             onChange={(e) => handleResponseChange(question.id, e.target.value)}
             placeholder={question.placeholder}
             className="w-full px-4 py-3 rounded-lg bg-[#1a2a4a] border border-[#2a3a5a] text-white placeholder-gray-500 focus:border-gold focus:ring-1 focus:ring-gold/50 transition-all"
@@ -364,8 +354,9 @@ export default function QuestionnaireDark({
             </div>
 
             <button
+              type="button"
               onClick={() => setShowIntro(false)}
-              className="mt-8 w-full py-4 bg-gradient-to-r from-gold to-gold/80 text-[#0a1628] font-bold rounded-xl hover:from-gold/90 hover:to-gold/70 transition-all text-lg shadow-lg"
+              className="mt-8 w-full py-4 bg-gradient-to-r from-gold to-gold/80 text-[#0a1628] font-bold rounded-xl hover:from-gold/90 hover:to-gold/70 transition-all text-base sm:text-lg shadow-lg min-h-[44px]"
             >
               Begin Assessment
             </button>
@@ -392,7 +383,7 @@ export default function QuestionnaireDark({
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="flex justify-between text-sm">
+          <div className="flex flex-col sm:flex-row justify-between gap-1 sm:gap-0 text-sm">
             <span className="text-gold font-medium">{progress}% Complete</span>
             <span className="text-gray-400">{answeredCount} of {allQuestions.length} Questions</span>
           </div>
@@ -404,12 +395,12 @@ export default function QuestionnaireDark({
         {questionnaire.modules.map((module, moduleIndex) => (
           <div key={module.id} className="mb-12">
             {/* Module Header */}
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-12 bg-gold/20 border border-gold/40 rounded-lg flex items-center justify-center text-gold font-bold text-xl">
+            <div className="flex items-center gap-3 sm:gap-4 mb-8">
+              <span className="w-10 h-10 sm:w-12 sm:h-12 bg-gold/20 border border-gold/40 rounded-lg flex items-center justify-center text-gold font-bold text-lg sm:text-xl flex-shrink-0">
                 {moduleIndex + 1}
               </span>
-              <div>
-                <h2 className="text-2xl font-serif text-gold uppercase tracking-wide">
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl sm:text-2xl font-serif text-gold uppercase tracking-wide">
                   {module.title}
                 </h2>
                 {module.subtitle && (
@@ -425,11 +416,11 @@ export default function QuestionnaireDark({
 
             {/* Module Description */}
             {module.description && (
-              <p className="text-gray-400 mb-8 pl-16">{module.description}</p>
+              <p className="text-gray-400 mb-8 pl-0 sm:pl-16">{module.description}</p>
             )}
 
             {/* Questions */}
-            <div className="space-y-8 pl-16">
+            <div className="space-y-8 pl-0 sm:pl-16">
               {module.questions.map((question, questionIndex) => {
                 // Calculate global question number
                 let globalIndex = 0;
@@ -445,11 +436,11 @@ export default function QuestionnaireDark({
                   >
                     {/* Question Header */}
                     <div className="flex items-start gap-3 mb-4">
-                      <span className="text-gold font-bold text-sm uppercase tracking-wider">
+                      <span className="text-gold font-bold text-xs sm:text-sm uppercase tracking-wider flex-shrink-0">
                         Question {globalIndex}:
                       </span>
-                      <div className="flex-1">
-                        <h3 className="text-white font-semibold text-lg">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-white font-semibold text-base sm:text-lg">
                           {question.question}
                           {question.required && <span className="text-red-400 ml-1">*</span>}
                         </h3>
@@ -463,14 +454,14 @@ export default function QuestionnaireDark({
 
                     {/* Subtitle / Helper Text */}
                     {question.subtitle && (
-                      <p className="text-gray-400 italic text-sm mb-4 ml-[85px]">
+                      <p className="text-gray-400 italic text-sm mb-4 ml-0 sm:ml-[85px]">
                         {question.subtitle}
                       </p>
                     )}
 
                     {/* Why Asking */}
                     {question.whyAsking && (
-                      <details className="mb-4 ml-[85px]">
+                      <details className="mb-4 ml-0 sm:ml-[85px]">
                         <summary className="text-gold/80 text-sm cursor-pointer hover:text-gold transition-colors">
                           Why are we asking this?
                         </summary>
@@ -481,13 +472,13 @@ export default function QuestionnaireDark({
                     )}
 
                     {/* Input */}
-                    <div className="ml-[85px]">
+                    <div className="ml-0 sm:ml-[85px]">
                       {renderQuestionInput(question)}
                     </div>
 
                     {/* Help Text */}
                     {question.helpText && (
-                      <p className="mt-4 text-gray-500 text-sm italic ml-[85px]">
+                      <p className="mt-4 text-gray-500 text-sm italic ml-0 sm:ml-[85px]">
                         💡 {question.helpText}
                       </p>
                     )}
@@ -523,18 +514,20 @@ export default function QuestionnaireDark({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
+              type="button"
               onClick={handleSaveProgress}
               disabled={isSaving}
-              className="flex-1 py-4 px-6 bg-[#1a2a4a] border border-[#2a3a5a] text-white font-medium rounded-xl hover:bg-[#1a3a5a] transition-all flex items-center justify-center gap-2"
+              className="flex-1 py-4 px-6 bg-[#1a2a4a] border border-[#2a3a5a] text-white font-medium rounded-xl hover:bg-[#1a3a5a] transition-all flex items-center justify-center gap-2 min-h-[44px]"
             >
               <span>💾</span>
               {isSaving ? 'Saving...' : 'Save Progress'}
             </button>
             <button
+              type="button"
               onClick={handleSubmit}
-              className="flex-1 py-4 px-6 bg-gradient-to-r from-gold to-gold/80 text-[#0a1628] font-bold rounded-xl hover:from-gold/90 hover:to-gold/70 transition-all flex items-center justify-center gap-2"
+              className="flex-1 py-4 px-6 bg-gradient-to-r from-gold to-gold/80 text-[#0a1628] font-bold rounded-xl hover:from-gold/90 hover:to-gold/70 transition-all flex items-center justify-center gap-2 min-h-[44px]"
             >
               <span>🚀</span>
               Submit Assessment

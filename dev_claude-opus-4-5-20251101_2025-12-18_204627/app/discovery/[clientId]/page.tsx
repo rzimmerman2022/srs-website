@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { QuestionnaireContainer } from '@/components/questionnaire';
+import ErrorBoundary from '@/components/questionnaire/ErrorBoundary';
 import { jackieDeleonQuestionnaire } from '@/lib/questionnaire';
 import Container from '@/components/layout/Container';
 import Link from 'next/link';
@@ -43,16 +44,20 @@ export default function DiscoveryPage() {
 
   const handleComplete = (responses: Record<string, unknown>) => {
     // In production, you'd send this to your backend
-    console.log('Questionnaire completed:', responses);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Questionnaire completed:', responses);
+    }
 
     // For now, just show an alert
     alert('Thank you! Your responses have been saved. We will begin the next phase of your career transformation.');
   };
 
   return (
-    <QuestionnaireContainer
-      questionnaire={questionnaire}
-      onComplete={handleComplete}
-    />
+    <ErrorBoundary>
+      <QuestionnaireContainer
+        questionnaire={questionnaire}
+        onComplete={handleComplete}
+      />
+    </ErrorBoundary>
   );
 }

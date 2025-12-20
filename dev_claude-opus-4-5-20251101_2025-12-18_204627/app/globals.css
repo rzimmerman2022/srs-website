@@ -27,9 +27,10 @@
     @apply bg-white text-charcoal font-sans antialiased leading-relaxed;
   }
 
-  /* Focus styles for accessibility */
+  /* Focus styles for accessibility - WCAG 2.1 AA compliant */
   *:focus-visible {
-    @apply outline-none ring-2 ring-gold-600 ring-offset-2;
+    outline: 2px solid #d4af37;
+    outline-offset: 2px;
   }
 
   /* Headings - Optimized for readability */
@@ -358,4 +359,14 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-navy/50;
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

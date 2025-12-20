@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Question } from '@/lib/questionnaire/types';
 import { cn } from '@/lib/utils';
+import { isStringValue, isNumberValue, isStringArray, isPercentageRecord } from '@/lib/questionnaire/type-guards';
 
 interface QuestionCardProps {
   question: Question;
@@ -30,9 +31,10 @@ export default function QuestionCard({
         return (
           <input
             type={question.type === 'date' ? 'text' : 'text'}
-            value={(value as string) || ''}
+            value={isStringValue(value) ? value : ''}
             onChange={(e) => onChange(e.target.value)}
             placeholder={question.placeholder}
+            aria-label={question.question}
             className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg"
           />
         );
@@ -40,12 +42,14 @@ export default function QuestionCard({
       case 'currency':
         return (
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">$</span>
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" id={`${question.id}-currency-symbol`} aria-hidden="true">$</span>
             <input
               type="number"
-              value={(value as number) || ''}
+              value={isNumberValue(value) ? value : ''}
               onChange={(e) => onChange(e.target.value ? Number(e.target.value) : '')}
               placeholder={question.placeholder}
+              aria-label={question.question}
+              aria-describedby={`${question.id}-currency-symbol`}
               className="w-full pl-8 pr-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg"
             />
           </div>
@@ -55,11 +59,12 @@ export default function QuestionCard({
         return (
           <input
             type="number"
-            value={(value as number) || ''}
+            value={isNumberValue(value) ? value : ''}
             onChange={(e) => onChange(e.target.value ? Number(e.target.value) : '')}
             placeholder={question.placeholder}
             min={question.min}
             max={question.max}
+            aria-label={question.question}
             className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg"
           />
         );
@@ -67,10 +72,11 @@ export default function QuestionCard({
       case 'textarea':
         return (
           <textarea
-            value={(value as string) || ''}
+            value={isStringValue(value) ? value : ''}
             onChange={(e) => onChange(e.target.value)}
             placeholder={question.placeholder}
             rows={4}
+            aria-label={question.question}
             className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg resize-none"
           />
         );
@@ -123,7 +129,7 @@ export default function QuestionCard({
         );
 
       case 'checkbox':
-        const selectedValues = (value as string[]) || [];
+        const selectedValues = isStringArray(value) ? value : [];
         return (
           <div className="space-y-3">
             {question.options?.map((option) => {
@@ -181,7 +187,9 @@ export default function QuestionCard({
         );
 
       case 'percentage-split':
-        const percentages = (value as Record<string, number>) || {};
+        const percentages = isPercentageRecord(value) ? value : {};
+        const total = Object.values(percentages).reduce((a, b) => a + b, 0);
+        const isInvalid = total !== 100 && total > 0;
         return (
           <div className="space-y-4">
             {question.options?.map((option) => (
@@ -202,6 +210,9 @@ export default function QuestionCard({
                       const newVal = e.target.value ? Number(e.target.value) : 0;
                       onChange({ ...percentages, [option.value]: newVal });
                     }}
+                    aria-label={`${option.label} percentage`}
+                    aria-invalid={isInvalid}
+                    aria-describedby={isInvalid ? `${question.id}-error` : undefined}
                     className="w-20 px-3 py-2 rounded-lg border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all text-center"
                   />
                   <span className="text-gray-500">%</span>
@@ -209,11 +220,15 @@ export default function QuestionCard({
               </div>
             ))}
             <div className="flex justify-end pt-2 border-t border-sand-200">
-              <span className={cn(
-                'font-semibold',
-                Object.values(percentages).reduce((a, b) => a + b, 0) === 100 ? 'text-green-600' : 'text-amber-600'
-              )}>
-                Total: {Object.values(percentages).reduce((a, b) => a + b, 0)}%
+              <span
+                id={`${question.id}-error`}
+                className={cn(
+                  'font-semibold',
+                  total === 100 ? 'text-green-600' : 'text-amber-600'
+                )}
+                role={isInvalid ? 'alert' : undefined}
+              >
+                Total: {total}% {isInvalid && '(must equal 100%)'}
               </span>
             </div>
           </div>
@@ -223,9 +238,10 @@ export default function QuestionCard({
         return (
           <input
             type="text"
-            value={(value as string) || ''}
+            value={isStringValue(value) ? value : ''}
             onChange={(e) => onChange(e.target.value)}
             placeholder={question.placeholder}
+            aria-label={question.question}
             className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all duration-200 bg-white/80 backdrop-blur-sm text-lg"
           />
         );
@@ -262,7 +278,7 @@ export default function QuestionCard({
           )}
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-serif font-bold text-navy mb-2">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-navy mb-2">
           {question.question}
         </h2>
 

@@ -37,6 +37,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Southwest Resume Services' }],
   creator: 'Southwest Resume Services',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',

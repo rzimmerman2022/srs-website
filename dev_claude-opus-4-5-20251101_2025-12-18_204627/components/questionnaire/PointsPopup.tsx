@@ -17,6 +17,14 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
   }, [onComplete]);
 
   useEffect(() => {
+    if (!show) {
+      // Reset when show becomes false
+      setAnimationPhase('idle');
+      setIsVisible(false);
+      return;
+    }
+
+    // Only start animation if we're idle and show is true
     if (show && animationPhase === 'idle') {
       setIsVisible(true);
       setAnimationPhase('pop');
@@ -37,7 +45,7 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
         clearTimeout(timer3);
       };
     }
-  }, [show, animationPhase, handleComplete]);
+  }, [show, handleComplete]); // Removed animationPhase from deps to prevent blocking
 
   if (!isVisible) return null;
 
@@ -71,22 +79,26 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
       <div
         className="transition-all duration-300 ease-out"
         style={getAnimationStyles()}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
       >
         <div className="relative">
           {/* Glow pulse effect */}
           <div
             className="absolute inset-0 bg-amber-400/40 blur-2xl rounded-full animate-pulse"
             style={{ transform: 'scale(2)' }}
+            aria-hidden="true"
           />
 
           {/* Main badge */}
-          <div className="relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-2xl shadow-2xl">
+          <div className="relative flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-2xl shadow-2xl">
             {/* Inner glow */}
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-2xl" />
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-2xl" aria-hidden="true" />
 
             {/* Points text */}
             <span
-              className="relative text-4xl font-black text-white"
+              className="relative text-3xl sm:text-4xl font-black text-white"
               style={{
                 textShadow: '0 2px 10px rgba(0,0,0,0.3), 0 0 40px rgba(255,255,255,0.5)'
               }}
@@ -94,13 +106,17 @@ export default function PointsPopup({ points, show, onComplete }: PointsPopupPro
               +{points}
             </span>
 
+            {/* Screen reader text */}
+            <span className="sr-only">You earned {points} points</span>
+
             {/* Fire icon with bounce */}
             <span
-              className="relative text-3xl"
+              className="relative text-2xl sm:text-3xl"
               style={{
                 animation: 'bounce 0.3s ease-in-out infinite',
                 filter: 'drop-shadow(0 0 10px rgba(255,150,0,0.8))'
               }}
+              aria-hidden="true"
             >
               🔥
             </span>

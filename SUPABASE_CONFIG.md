@@ -1,0 +1,50 @@
+# Supabase Configuration - SRS Website
+
+**CONFIDENTIAL - DO NOT COMMIT CREDENTIALS TO PUBLIC REPOS**
+
+## Project Details
+
+| Field | Value |
+|-------|-------|
+| **Organization** | SparkData Analytics |
+| **Organization Slug** | nqozkugvlahsrjxkfpgl |
+| **Project Name** | SRS-Questionnaire |
+| **Region** | AWS us-west-2 (Oregon) |
+| **Plan** | Free (Nano) |
+
+## API Credentials
+
+| Key | Value |
+|-----|-------|
+| **Project URL** | `https://aougseszcvzgxwniossn.supabase.co` |
+| **Publishable API Key (anon)** | `sb_publishable_G_woN2OIIfim7XUVYCs8XA_fpLW4uFg` |
+
+## Database Password
+
+**Stored securely - see password manager or contact Ryan Zimmerman**
+
+Password hint: `wNf4-****-****` (16 chars, special chars included)
+
+## For AI Models / Developers
+
+To configure the questionnaire app:
+
+1. Create `.env.local` in the dev folder with:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://aougseszcvzgxwniossn.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_G_woN2OIIfim7XUVYCs8XA_fpLW4uFg
+   ```
+
+2. Run the schema SQL in Supabase SQL Editor:
+   - File location: `dev_claude-opus-4-5-20251101_2025-12-18_204627/lib/supabase/schema.sql`
+
+## Dashboard Access
+
+- **URL**: https://supabase.com/dashboard/project/aougseszcvzgxwniossn
+- **Login**: Use rzimmerman2022 credentials
+
+## Created
+
+- **Date**: December 19, 2025
+- **Created By**: Claude Opus 4.5 (AI assistant)
+- **Purpose**: Questionnaire data persistence for SRS client discovery forms

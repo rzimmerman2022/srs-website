@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Questionnaire, Question, Milestone, DEFAULT_MILESTONES } from '@/lib/questionnaire/types';
 import { cn } from '@/lib/utils';
-import { isValidAnswer } from '@/lib/questionnaire/utils';
 import { useQuestionnaireSync } from '@/hooks/useQuestionnaireSync';
 import ProgressRing from './ProgressRing';
 import QuestionCard from './QuestionCard';
@@ -90,7 +89,7 @@ export default function QuestionnaireContainer({
       completed: false,
     });
     setLastSaved(new Date());
-  }, [responses, currentQuestionIndex, currentModuleIndex, streak, combo, shownMilestones, isDataLoaded, updateSyncState]);
+  }, [responses, currentQuestionIndex, currentModuleIndex, streak, combo, shownMilestones, isDataLoaded]);
 
   // Derived state
   const currentModule = questionnaire.modules[currentModuleIndex];
@@ -109,7 +108,13 @@ export default function QuestionnaireContainer({
 
   // Calculate progress
   const answeredCount = useMemo(() => {
-    return allQuestions.filter(q => isValidAnswer(responses[q.id])).length;
+    return allQuestions.filter(q => {
+      const response = responses[q.id];
+      if (response === undefined || response === null || response === '') return false;
+      if (Array.isArray(response) && response.length === 0) return false;
+      if (typeof response === 'object' && Object.keys(response).length === 0) return false;
+      return true;
+    }).length;
   }, [allQuestions, responses]);
 
   const progress = useMemo(() => {
@@ -117,7 +122,12 @@ export default function QuestionnaireContainer({
   }, [answeredCount, allQuestions.length]);
 
   const requiredProgress = useMemo(() => {
-    const answered = requiredQuestions.filter(q => isValidAnswer(responses[q.id])).length;
+    const answered = requiredQuestions.filter(q => {
+      const response = responses[q.id];
+      if (response === undefined || response === null || response === '') return false;
+      if (Array.isArray(response) && response.length === 0) return false;
+      return true;
+    }).length;
     return Math.round((answered / requiredQuestions.length) * 100);
   }, [requiredQuestions, responses]);
 
@@ -158,6 +168,14 @@ export default function QuestionnaireContainer({
 
   // Note: localStorage load/save is now handled by useQuestionnaireSync hook
   // which provides automatic local + server sync with offline support
+
+  // Helper to check if a value is a valid answer
+  const isValidAnswer = useCallback((value: unknown): boolean => {
+    if (value === undefined || value === null || value === '') return false;
+    if (Array.isArray(value) && value.length === 0) return false;
+    if (typeof value === 'object' && Object.keys(value as object).length === 0) return false;
+    return true;
+  }, []);
 
   // Get encouragement message based on progress
   const getEncouragementMessage = useCallback(() => {
@@ -248,13 +266,23 @@ export default function QuestionnaireContainer({
   // Check if current question is answered
   const isCurrentQuestionAnswered = useMemo(() => {
     if (!currentQuestion) return false;
-    return isValidAnswer(responses[currentQuestion.id]);
+    const response = responses[currentQuestion.id];
+    if (response === undefined || response === null || response === '') return false;
+    if (Array.isArray(response) && response.length === 0) return false;
+    if (typeof response === 'object' && Object.keys(response).length === 0) return false;
+    return true;
   }, [currentQuestion, responses]);
 
   // Check if current module is complete
   const isCurrentModuleComplete = useMemo(() => {
     if (!currentModule) return false;
-    return currentModule.questions.every(q => !q.required || isValidAnswer(responses[q.id]));
+    return currentModule.questions.every(q => {
+      if (!q.required) return true;
+      const response = responses[q.id];
+      if (response === undefined || response === null || response === '') return false;
+      if (Array.isArray(response) && response.length === 0) return false;
+      return true;
+    });
   }, [currentModule, responses]);
 
   // Navigation
@@ -364,7 +392,7 @@ export default function QuestionnaireContainer({
         <div className="glass rounded-3xl p-12 shadow-premium text-center">
           <div className="animate-spin w-12 h-12 border-4 border-gold border-t-transparent rounded-full mx-auto mb-6" role="status" aria-label="Loading your progress" />
           <h2 className="text-xl font-semibold text-navy mb-2">Loading your progress...</h2>
-          <p className="text-gray-700">Syncing with cloud storage</p>
+          <p className="text-gray-500">Syncing with cloud storage</p>
         </div>
       </div>
     );
@@ -591,7 +619,7 @@ export default function QuestionnaireContainer({
               <span className="text-2xl">{currentModule?.icon}</span>
               <div>
                 <h2 className="font-semibold text-navy">{currentModule?.title}</h2>
-                <p className="text-sm text-gray-700">{currentModule?.subtitle}</p>
+                <p className="text-sm text-gray-500">{currentModule?.subtitle}</p>
               </div>
             </div>
 
