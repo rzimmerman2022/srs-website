@@ -293,6 +293,9 @@ export default function QuestionnaireContainer({
       }
       onComplete?.(responses);
     }
+
+    // Scroll to top when navigating to next question
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentModule, currentModuleIndex, currentQuestionIndex, questionnaire.modules.length, completedModules, responses, onComplete, isCurrentQuestionAnswered]);
 
   const goToPreviousQuestion = useCallback(() => {
@@ -303,11 +306,17 @@ export default function QuestionnaireContainer({
       setCurrentModuleIndex(prev => prev - 1);
       setCurrentQuestionIndex(prevModule.questions.length - 1);
     }
+
+    // Scroll to top when navigating to previous question
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentQuestionIndex, currentModuleIndex, questionnaire.modules]);
 
   const handleModuleSelect = useCallback((index: number) => {
     setCurrentModuleIndex(index);
     setCurrentQuestionIndex(0);
+
+    // Scroll to top when selecting a module
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   // Skip question (for optional questions)
@@ -441,7 +450,10 @@ export default function QuestionnaireContainer({
             {/* CTA */}
             <button
               type="button"
-              onClick={() => setShowIntro(false)}
+              onClick={() => {
+                setShowIntro(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="w-full py-4 bg-navy text-white font-semibold rounded-xl hover:bg-navy/90 transition-colors text-lg shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
             >
               Begin Questionnaire
