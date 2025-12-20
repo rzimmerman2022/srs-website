@@ -3,7 +3,31 @@
 This file provides context for AI assistants (Claude, GPT, Gemini, etc.) working on this project.
 Read this file first before making changes.
 
-## Project Overview
+---
+
+## IMPORTANT: Development Folder
+
+**This folder (`dev_claude-opus-4-5-20251101_2025-12-18_204627/`) contains the Strategic Placement Diagnostic Questionnaire system - a gamified client intake form.**
+
+### Quick Start
+
+```bash
+npm run dev -- -p 3005
+# Visit: http://localhost:3005/discovery/test-client
+```
+
+### Key Documentation
+
+- **[AI-PASSDOWN.md](./AI-PASSDOWN.md)** - Complete project status, todos, session history
+- **[AUDIT-REPORT.md](./AUDIT-REPORT.md)** - Security, accessibility, performance audit findings
+
+### Current Priority
+
+**DO NOT DEPLOY TO PRODUCTION** until critical security issues are fixed. See AI-PASSDOWN.md for the master todo list.
+
+---
+
+## Main Website Overview
 
 - **Site**: Southwest Resume Services (professional resume writing)
 - **Framework**: Next.js 15.1.2, React 19, TypeScript, Tailwind CSS

@@ -43,8 +43,23 @@ To configure the questionnaire app:
 - **URL**: https://supabase.com/dashboard/project/aougseszcvzgxwniossn
 - **Login**: Use rzimmerman2022 credentials
 
+## Database Tables
+
+| Table | Purpose | Status |
+|-------|---------|--------|
+| `questionnaire_responses` | Main storage for client answers | ✅ Created |
+| `response_history` | Audit trail of changes | ✅ Created |
+
+## Security Status
+
+**WARNING:** RLS policies need to be fixed before production. See audit report:
+`dev_claude-opus-4-5-20251101_2025-12-18_204627/AUDIT-REPORT.md`
+
+Current RLS policies use hardcoded `true` which allows any client to read all data.
+
 ## Created
 
 - **Date**: December 19, 2025
 - **Created By**: Claude Opus 4.5 (AI assistant)
 - **Purpose**: Questionnaire data persistence for SRS client discovery forms
+- **Last Updated**: December 19, 2025 (Session 3)
