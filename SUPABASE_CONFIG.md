@@ -36,7 +36,7 @@ To configure the questionnaire app:
    ```
 
 2. Run the schema SQL in Supabase SQL Editor:
-   - File location: `dev_claude-opus-4-5-20251101_2025-12-18_204627/lib/supabase/schema.sql`
+   - File location: `staging/lib/supabase/schema.sql`
 
 ## Dashboard Access
 
@@ -53,7 +53,7 @@ To configure the questionnaire app:
 ## Security Status
 
 **WARNING:** RLS policies need to be fixed before production. See audit report:
-`dev_claude-opus-4-5-20251101_2025-12-18_204627/AUDIT-REPORT.md`
+`staging/AUDIT-REPORT.md`
 
 Current RLS policies use hardcoded `true` which allows any client to read all data.
 

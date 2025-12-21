@@ -202,6 +202,249 @@ Target metrics (Lighthouse):
 - Mobile Safari (iOS 14+)
 - Chrome Mobile (Android)
 
+## Discovery Questionnaire System
+
+The Strategic Placement Diagnostic Questionnaire is a secure client intake system built with Supabase. This section explains how to view and export the questionnaire data that clients enter.
+
+### Client Access
+
+Clients access their personalized questionnaire at:
+```
+https://southwestresumes.com/discovery/{clientId}
+```
+
+Example: `/discovery/jdeleon` for Jackie DeLeon's questionnaire.
+
+### Step 1: Access the Supabase Dashboard
+
+1. Go to https://supabase.com/dashboard
+2. Log in with your account credentials
+3. Select the "SRS-Questionnaire" project
+4. You'll see the project dashboard
+
+### Step 2: Navigate to the Table Editor
+
+1. In the left sidebar, click **"Table Editor"**
+2. You'll see two tables:
+   - `questionnaire_responses` - Current data from clients
+   - `response_history` - Audit trail of all changes
+
+### Understanding the Data Structure
+
+#### Table: `questionnaire_responses`
+
+This table contains the current state of each client's questionnaire. One row per client per questionnaire.
+
+| Column Name | What It Means | Example Value |
+|-------------|---------------|---------------|
+| `id` | Unique record identifier | `550e8400-e29b-41d4-a716-446655440000` |
+| `client_id` | Client identifier from URL | `jdeleon` or `test-client` |
+| `questionnaire_id` | Which questionnaire | `discovery` |
+| `answers` | Client's responses in JSON format | See below |
+| `current_question_index` | Where they stopped | `15` (they're on question 16) |
+| `current_module_index` | Which section they're in | `2` (they're in Module 3) |
+| `points` | Gamification score | `75` |
+| `completed` | Finished or still working? | `false` (in progress) or `true` (done) |
+| `created_at` | When they first started | `2025-12-19 14:30:00` |
+| `updated_at` | Last time they saved an answer | `2025-12-19 15:45:00` |
+
+#### Understanding the `answers` Field
+
+The `answers` column stores client responses in JSON format:
+
+```json
+{
+  "q1-salary-floor": "55000",
+  "q2-salary-target": "70000",
+  "q3-remote-tolerance": "remote-preferred",
+  "q4-primary-lane": "ur-um",
+  "q5-criteria-tools": ["interqual", "mcg"]
+}
+```
+
+### SQL Queries (Copy & Paste Ready)
+
+Click **"SQL Editor"** in the left sidebar to run these queries.
+
+#### 1. View All Questionnaire Responses
+
+```sql
+SELECT
+  client_id,
+  questionnaire_id,
+  completed,
+  current_module_index,
+  current_question_index,
+  points,
+  created_at,
+  updated_at
+FROM questionnaire_responses
+ORDER BY updated_at DESC;
+```
+
+#### 2. View Responses for a Specific Client
+
+```sql
+SELECT
+  client_id,
+  questionnaire_id,
+  answers,
+  completed,
+  created_at,
+  updated_at
+FROM questionnaire_responses
+WHERE client_id = 'jdeleon';
+```
+
+#### 3. See Completed vs In-Progress Questionnaires
+
+```sql
+SELECT
+  completed,
+  COUNT(*) as count
+FROM questionnaire_responses
+GROUP BY completed;
+```
+
+#### 4. View Most Recent Activity
+
+```sql
+SELECT
+  client_id,
+  questionnaire_id,
+  completed,
+  updated_at
+FROM questionnaire_responses
+ORDER BY updated_at DESC
+LIMIT 10;
+```
+
+#### 5. Extract Specific Answer Fields
+
+```sql
+SELECT
+  client_id,
+  answers->>'q1-salary-floor' as salary_floor,
+  answers->>'q2-salary-target' as salary_target,
+  answers->>'q3-remote-tolerance' as remote_preference,
+  completed
+FROM questionnaire_responses
+ORDER BY updated_at DESC;
+```
+
+#### 6. View Complete Answer History for a Client
+
+```sql
+SELECT
+  rh.created_at,
+  rh.snapshot
+FROM response_history rh
+JOIN questionnaire_responses qr ON rh.response_id = qr.id
+WHERE qr.client_id = 'jdeleon'
+ORDER BY rh.created_at DESC;
+```
+
+### How to Export Data
+
+#### Method 1: Export from Table Editor (Simple)
+
+1. Click "Table Editor" in the left sidebar
+2. Select the `questionnaire_responses` table
+3. Click the **"Export"** button (top right)
+4. Choose format:
+   - **CSV** - Opens in Excel/Google Sheets
+   - **JSON** - Raw data format
+
+#### Method 2: Export from SQL Editor (Custom)
+
+1. Run any SQL query (see examples above)
+2. After the results appear, click **"Download CSV"** button below the results
+3. This exports only the columns in your query, making it cleaner
+
+#### Method 3: Export All Data with Readable Answers
+
+Run this query, then download as CSV:
+
+```sql
+SELECT
+  client_id,
+  questionnaire_id,
+  answers->>'q1-salary-floor' as "Minimum Salary",
+  answers->>'q2-salary-target' as "Target Salary",
+  answers->>'q3-remote-tolerance' as "Remote Preference",
+  completed as "Completed?",
+  created_at as "Started At",
+  updated_at as "Last Updated"
+FROM questionnaire_responses
+ORDER BY updated_at DESC;
+```
+
+### Common Tasks
+
+#### "How do I see what a client answered for salary requirements?"
+
+```sql
+SELECT
+  client_id,
+  answers->>'q1-salary-floor' as minimum_salary,
+  answers->>'q2-salary-target' as target_salary,
+  updated_at
+FROM questionnaire_responses
+WHERE client_id = 'jdeleon';
+```
+
+#### "How do I see all completed questionnaires this week?"
+
+```sql
+SELECT
+  client_id,
+  completed,
+  updated_at
+FROM questionnaire_responses
+WHERE completed = true
+  AND updated_at >= NOW() - INTERVAL '7 days'
+ORDER BY updated_at DESC;
+```
+
+#### "How do I recover data if a client accidentally resets their answers?"
+
+```sql
+SELECT
+  created_at,
+  snapshot
+FROM response_history rh
+JOIN questionnaire_responses qr ON rh.response_id = qr.id
+WHERE qr.client_id = 'jdeleon'
+ORDER BY created_at DESC
+LIMIT 10;
+```
+
+The `snapshot` field contains their complete answers at that point in time.
+
+### Data Protection
+
+- **Dual-layer persistence:** localStorage (immediate) + Supabase (permanent)
+- **Auto-save:** Every answer syncs within 2 seconds
+- **Offline support:** Answers saved locally, synced when online
+- **No data loss:** Multiple redundancy layers protect client work
+- **SSL encryption:** All database connections are encrypted
+- **Row Level Security:** RLS policies enabled on all tables
+
+### Environment Variables Required
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+### Adding New Clients
+
+1. Create questionnaire data in `lib/questionnaire/`
+2. Add client ID mapping in `app/discovery/[clientId]/page.tsx`
+3. Share URL: `/discovery/{newClientId}`
+
+---
+
 ## Content Management
 
 See [OWNERS_MANUAL.md](./OWNERS_MANUAL.md) for detailed instructions on:
