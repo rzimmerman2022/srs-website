@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, TextareaHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, TextareaHTMLAttributes, forwardRef, useId } from 'react';
 
 interface BaseInputProps {
   label?: string;
@@ -18,16 +18,18 @@ type Props = InputProps | TextareaProps;
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
   ({ label, error, helpText, required, className = '', ...props }, ref) => {
+    // Use React's useId hook for deterministic ID generation (prevents hydration mismatch)
+    const generatedId = useId();
+    const inputId = props.id || generatedId;
+
     const baseStyles =
-      'w-full px-4 py-3 border rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed';
+      'w-full px-4 py-3 border rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed';
 
     const errorStyles = error
       ? 'border-red-500 focus:ring-red-500'
       : 'border-gray-300 hover:border-gray-400';
 
     const combinedStyles = `${baseStyles} ${errorStyles} ${className}`;
-
-    const inputId = props.id || `input-${Math.random().toString(36).substr(2, 9)}`;
 
     return (
       <div className="w-full">

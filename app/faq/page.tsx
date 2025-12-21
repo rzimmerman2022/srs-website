@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Script from 'next/script';
 import Hero from '@/components/sections/Hero';
 import FAQ, { FAQItem } from '@/components/sections/FAQ';
 import Container from '@/components/layout/Container';
@@ -20,7 +21,7 @@ const faqItems: FAQItem[] = [
   {
     question: 'What is the Client Truth Principle?',
     answer:
-      '"Whether it is factual or not, if it\'s not the client\'s truth, then it\'s all for nothing." This foundational principle means we don\'t just create technically accurate documents. We ensure every enhancement feels authentically true to you and that you can defend it confidently when it matters most—in an interview. Authenticity trumps articulation when the two conflict.',
+      '"A resume you can\'t own performs like fiction when it matters most." This foundational principle means we don\'t just create technically accurate documents. We ensure every enhancement feels authentically true to you and that you can defend it confidently when it matters most—in an interview. Our role is straightforward: we bring outside perspective and research methodology. You bring lived experience. Together, we build a narrative you genuinely own.',
   },
   {
     question: 'How long does the process take?',
@@ -35,7 +36,7 @@ const faqItems: FAQItem[] = [
   {
     question: 'Do you guarantee interview results or job placements?',
     answer:
-      'We cannot ethically guarantee interviews or job placements, as these outcomes depend on many factors beyond our control (market conditions, competition, employer decisions, interview performance). What we do guarantee is rigorous research methodology, authentic enhancement grounded in your real experience, and comprehensive ownership transfer so you can confidently present yourself.',
+      'We cannot ethically guarantee interviews or job placements, as these outcomes depend on many factors beyond our control (market conditions, competition, employer decisions, interview performance). What we commit to providing is rigorous research methodology, authentic enhancement grounded in your real experience, and comprehensive ownership transfer so you can confidently present yourself.',
   },
   {
     question: 'What is the Research Authority Index (RAI)?',
@@ -60,7 +61,7 @@ const faqItems: FAQItem[] = [
   {
     question: 'Are your resumes ATS-compatible?',
     answer:
-      'Yes, 100%. ATS parseability is one of our Ten-Dimensional Quality Framework requirements. We ensure proper formatting, keyword optimization (targeting 80%+ match rate for must-have terms), and test against multiple ATS platforms. We also ensure human readability—documents must work for both systems and humans.',
+      'Yes. ATS parseability is a core requirement of our Ten-Dimensional Quality Framework. We optimize formatting, keyword density (targeting 80%+ match rate for must-have terms), and structure for maximum parseability across major ATS platforms. We also ensure human readability—documents must work for both systems and humans.',
   },
   {
     question: 'Do you write federal resumes?',
@@ -75,7 +76,12 @@ const faqItems: FAQItem[] = [
   {
     question: 'How many revisions do I get?',
     answer:
-      'Unlimited revisions until you genuinely own every word. Our goal isn\'t just a polished document—it\'s complete ownership. If you can\'t pass our four ownership tests (Explanation, Example, Comfort, Stress) for any enhancement, we revise it. The document is only complete when you can confidently defend it.',
+      'Unlimited revisions within project scope until you genuinely own every word. Our goal isn\'t just a polished document—it\'s complete ownership. If you can\'t pass our four ownership tests (Explanation, Example, Comfort, Stress) for any enhancement, we revise it. The document is only complete when you can confidently defend it.',
+  },
+  {
+    question: 'What does "within project scope" mean for revisions?',
+    answer:
+      'Revisions within project scope means changes to the original project deliverables—your target role, industry, and career level. If you decide to pivot to an entirely different career direction or add multiple roles, that constitutes a new project. We\'re generous with revisions; we just want to be upfront about boundaries. Most clients never hit them.',
   },
   {
     question: 'Do you work with all industries and career levels?',
@@ -95,14 +101,34 @@ const faqItems: FAQItem[] = [
 ];
 
 export default function FAQPage() {
+  // Generate FAQ schema for AI/LLM discoverability
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
+      {/* FAQ Schema for GEO/SEO */}
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <Hero
         title="Frequently Asked Questions"
         subtitle="Get Answers"
         description="Common questions about our services, process, and approach. Don't see your question? Contact us directly."
         primaryCTA={{ text: 'Contact Us', href: '/contact' }}
-        gradient={false}
       />
 
       <section className="section-padding bg-white">
@@ -118,7 +144,7 @@ export default function FAQPage() {
         <Container>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="mb-4">Still Have Questions?</h2>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-gray-700 mb-8">
               We&apos;re here to help. Reach out and we&apos;ll provide detailed answers tailored
               to your specific situation.
             </p>

@@ -1,7 +1,16 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt for Southwest Resume Services
+# https://www.robotstxt.org/
+
+# Allow all crawlers for public pages
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /_next/
 
+# Block all discovery/questionnaire pages - private client content
+Disallow: /discovery/
+Disallow: /discovery
+
+# Block API routes from indexing
+Disallow: /api/
+
+# Sitemap location
 Sitemap: https://southwestresumes.com/sitemap.xml

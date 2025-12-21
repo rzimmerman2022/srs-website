@@ -3,22 +3,77 @@
 import { FormEvent, useState } from 'react';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
+import { trackFormSubmission } from '@/lib/analytics';
+
+// W-SEC-05: XSS Prevention - Sanitize user-controlled error messages
+function sanitizeErrorMessage(message: string): string {
+  return message
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+}
+
+// W-SEC-06: File upload size limit (5MB)
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
 
 export default function ContactForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  // W-A11Y-04: Field-specific validation errors
+  const [fieldErrors, setFieldErrors] = useState<{
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    message?: string;
+    resume?: string;
+  }>({});
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+    setFieldErrors({});
 
     const formData = new FormData(e.currentTarget);
 
+    // W-SEC-06: Validate file upload size
+    const resumeFile = formData.get('resume') as File;
+    if (resumeFile && resumeFile.size > 0) {
+      if (resumeFile.size > MAX_FILE_SIZE) {
+        setIsLoading(false);
+        setFieldErrors({ resume: 'File size must be less than 5MB' });
+        setError('Please check the errors below and try again.');
+        return;
+      }
+    }
+
+    // W-A11Y-04: Client-side validation for required fields
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+
+    const errors: typeof fieldErrors = {};
+    if (!firstName?.trim()) errors.firstName = 'First name is required';
+    if (!lastName?.trim()) errors.lastName = 'Last name is required';
+    if (!email?.trim()) errors.email = 'Email address is required';
+    if (!message?.trim()) errors.message = 'Message is required';
+
+    if (Object.keys(errors).length > 0) {
+      setIsLoading(false);
+      setFieldErrors(errors);
+      setError('Please check the errors below and try again.');
+      return;
+    }
+
     try {
-      // Formspree endpoint for Southwest Resume Services - Contact Form
-      const response = await fetch('https://formspree.io/f/xgvglrbr', {
+      // W-CQ-06: Use environment variable for Formspree URL with fallback
+      const formspreeUrl = process.env.NEXT_PUBLIC_FORMSPREE_URL || 'https://formspree.io/f/xgvglrbr';
+
+      const response = await fetch(formspreeUrl, {
         method: 'POST',
         body: formData,
         headers: {
@@ -29,13 +84,15 @@ export default function ContactForm() {
       if (response.ok) {
         setIsLoading(false);
         setIsSuccess(true);
+        // Track successful form submission in GA4
+        trackFormSubmission('Contact Form');
       } else {
         const data = await response.json();
         setIsLoading(false);
-        setError(
-          data.errors?.map((e: { message: string }) => e.message).join(', ') ||
-            'Something went wrong. Please try again.'
-        );
+        // W-SEC-05: Sanitize error messages from external API
+        const errorMessage = data.errors?.map((e: { message: string }) => sanitizeErrorMessage(e.message)).join(', ') ||
+          'Something went wrong. Please try again.';
+        setError(errorMessage);
       }
     } catch {
       setIsLoading(false);
@@ -82,6 +139,7 @@ export default function ContactForm() {
           label="First Name"
           placeholder="John"
           required
+          error={fieldErrors.firstName}
         />
         <Input
           type="text"
@@ -89,6 +147,7 @@ export default function ContactForm() {
           label="Last Name"
           placeholder="Doe"
           required
+          error={fieldErrors.lastName}
         />
       </div>
 
@@ -98,6 +157,7 @@ export default function ContactForm() {
         label="Email Address"
         placeholder="john.doe@example.com"
         required
+        error={fieldErrors.email}
       />
 
       <Input
@@ -118,11 +178,21 @@ export default function ContactForm() {
           name="resume"
           accept=".pdf,.doc,.docx"
           aria-label="Upload your current resume"
-          className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-sand-50 file:text-navy hover:file:bg-sand-100 transition-colors"
+          aria-invalid={!!fieldErrors.resume}
+          aria-describedby={fieldErrors.resume ? 'resume-upload-error' : 'resume-upload-help'}
+          className={`block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-sand-50 file:text-navy hover:file:bg-sand-100 transition-colors ${
+            fieldErrors.resume ? 'border border-red-500 rounded-lg' : ''
+          }`}
         />
-        <p className="text-xs text-gray-500 mt-1">
-          Upload your current resume (PDF or Word) - helps us provide better guidance
-        </p>
+        {fieldErrors.resume ? (
+          <p id="resume-upload-error" className="mt-2 text-sm text-red-600" role="alert">
+            {fieldErrors.resume}
+          </p>
+        ) : (
+          <p id="resume-upload-help" className="text-xs text-gray-500 mt-1">
+            Upload your current resume (PDF or Word, max 5MB) - helps us provide better guidance
+          </p>
+        )}
       </div>
 
       <Input
@@ -132,10 +202,11 @@ export default function ContactForm() {
         placeholder="Tell us about your career goals and what you're looking for..."
         rows={6}
         required
+        error={fieldErrors.message}
       />
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700" role="alert">
           {error}
         </div>
       )}

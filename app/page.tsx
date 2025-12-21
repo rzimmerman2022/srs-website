@@ -1,27 +1,76 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import Script from 'next/script';
 import Hero from '@/components/sections/Hero';
+import TrustSection from '@/components/sections/TrustSection';
 import { Service } from '@/components/sections/ServiceGrid';
 import Container from '@/components/layout/Container';
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import { withBasePath } from '@/lib/paths';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Southwest Resume Services | Your Career, Elevated.',
+  title: 'Phoenix Resume Writing Services | Arizona Career Coach | Southwest Resume Services',
   description:
-    'Premium career services and resume optimization based in Arizona. Research-backed, authentically crafted career documents that help you own your professional story.',
+    'Professional resume writing services in Phoenix, AZ. Expert career coaching serving Scottsdale, Mesa, Tempe, and the Phoenix metro area. Research-backed career documents that help you own your professional story.',
 };
 
-const coreServices: Service[] = [
+// SVG Icons for crisp rendering
+const IconDocument = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+  </svg>
+);
+
+const IconBriefcase = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0" />
+  </svg>
+);
+
+const IconTarget = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+  </svg>
+);
+
+const IconBeaker = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+  </svg>
+);
+
+const IconSparkles = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+  </svg>
+);
+
+const IconRocket = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+  </svg>
+);
+
+const IconBolt = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+  </svg>
+);
+
+const coreServices: (Service & { iconComponent: React.ReactNode })[] = [
   {
     title: 'Resume Writing & Optimization',
     description:
       'Research-validated resume writing that reveals your true professional value through the Client Truth Principle.',
-    icon: '📄',
+    icon: '',
+    iconComponent: <IconDocument />,
     features: [
       'In-depth discovery and market research',
       'O*NET and industry-validated language',
-      'ATS-optimized formatting',
+      'ATS-compatible formatting for major systems',
       'Authentic, defensible enhancements',
     ],
     cta: { text: 'Learn More', href: '/services#resume' },
@@ -30,7 +79,8 @@ const coreServices: Service[] = [
     title: 'LinkedIn Optimization',
     description:
       'Transform your LinkedIn presence with research-backed optimization that attracts recruiters and opportunities.',
-    icon: '💼',
+    icon: '',
+    iconComponent: <IconBriefcase />,
     features: [
       'Keyword-optimized profile',
       'Compelling headline and about section',
@@ -43,7 +93,8 @@ const coreServices: Service[] = [
     title: 'Interview Coaching',
     description:
       'Build confidence and master your interview narrative with our comprehensive preparation framework.',
-    icon: '🎯',
+    icon: '',
+    iconComponent: <IconTarget />,
     features: [
       'STAR+ story development',
       'Mock interview sessions',
@@ -54,66 +105,135 @@ const coreServices: Service[] = [
   },
 ];
 
-const whySRS = [
+const whySRS: { title: string; description: string; iconComponent: React.ReactNode; features: string[] }[] = [
   {
     title: 'Research-Backed Methodology',
     description:
       'Every claim is validated through authoritative sources including O*NET, Bureau of Labor Statistics, and leading market intelligence platforms.',
-    icon: '🔬',
+    iconComponent: <IconBeaker />,
     features: ['O*NET Validation', 'BLS Data Integration', 'Market Intelligence'],
   },
   {
     title: 'Client Truth Principle',
     description:
       'We don\'t just write resumes—we help you own your story. Every enhancement is grounded in your authentic experience and defensible in interviews.',
-    icon: '✨',
+    iconComponent: <IconSparkles />,
     features: ['Authenticity Focus', 'Defensible Claims', 'Confidence Building'],
   },
   {
     title: 'Comprehensive Process',
     description:
       'From deep discovery and market research to ownership transfer and interview mastery, we guide you through every step of your career elevation.',
-    icon: '🚀',
+    iconComponent: <IconRocket />,
     features: ['Deep Discovery', 'Ownership Transfer', 'Interview Mastery'],
   },
   {
     title: 'Quality Obsessed',
     description:
       'Ten-dimensional quality framework ensures ATS compatibility, WCAG accessibility, and DEI-friendly language in every document.',
-    icon: '⚡',
-    features: ['ATS Compatible', 'WCAG Accessible', 'DEI Friendly'],
+    iconComponent: <IconBolt />,
+    features: ['ATS-Compatible*', 'WCAG Accessible', 'DEI Friendly'],
   },
 ];
 
 export default function HomePage() {
+  // LocalBusiness Schema for GEO/SEO
+  const businessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Southwest Resume Services',
+    description: 'Research-backed resume writing and career services based in Arizona',
+    url: 'https://southwestresumes.com',
+    telephone: '+1-480-374-3418',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '1111 N Mission Park Blvd #2016',
+      addressLocality: 'Chandler',
+      addressRegion: 'AZ',
+      postalCode: '85224',
+      addressCountry: 'US',
+    },
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Phoenix',
+      },
+      {
+        '@type': 'City',
+        name: 'Scottsdale',
+      },
+      {
+        '@type': 'City',
+        name: 'Mesa',
+      },
+      {
+        '@type': 'City',
+        name: 'Tempe',
+      },
+      {
+        '@type': 'City',
+        name: 'Chandler',
+      },
+      {
+        '@type': 'State',
+        name: 'Arizona',
+      },
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: '3',
+      bestRating: '5',
+      worstRating: '5',
+    },
+    priceRange: '$150-$500+',
+    founder: {
+      '@type': 'Person',
+      name: 'Ryan Zimmerman',
+      jobTitle: 'Founder & Principal Consultant',
+    },
+    sameAs: [
+      'https://www.google.com/search?q=Southwest+Resume+Services',
+    ],
+  };
+
   return (
     <>
+      {/* LocalBusiness Schema for GEO/SEO */}
+      <Script
+        id="business-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+      />
+
       <Hero
         title="Your Career, Elevated."
-        subtitle="Southwest Resume Services"
-        description="Premium career services and resume optimization that reveal your true professional value. Research-backed. Authentically crafted. Genuinely defensible."
+        subtitle="Southwest Resume Services - Phoenix, Arizona"
+        description="Professional resume writing and career coaching serving Phoenix, Scottsdale, Mesa, and the greater Arizona area. Research-backed career documents that reveal your true professional value."
         primaryCTA={{ text: 'Get Started', href: '/contact' }}
         secondaryCTA={{ text: 'Our Process', href: '/process' }}
       />
+
+      {/* Trust Indicators Section */}
+      <TrustSection />
 
       {/* Verified Proof Section */}
       <section className="section-padding bg-sand-50 border-b border-sand-200">
         <Container>
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="mb-4">Verified Proof</h2>
-            <p className="text-xl text-gray-600 text-balance">
+            <p className="text-xl text-gray-700 text-balance mb-6">
               A premium promise requires defensible evidence. Here is what we can show, without hype.
+            </p>
+            <p className="text-xs text-gray-500 max-w-2xl mx-auto">
+              Reviews are excerpts from public Google reviews. Client details are anonymized. We only publish outcomes beyond deliverables when documented and permitted.
             </p>
           </div>
 
           {/* Subsection 1: Google Reviews */}
           <div className="mb-20">
             <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-              <div>
-                <h3 className="text-2xl font-serif font-semibold text-navy mb-2">Verified Google Reviews</h3>
-                <p className="text-sm text-gray-500">Excerpts from publicly posted Google reviews. Shortened for clarity.</p>
-                <p className="text-xs text-gray-400 mt-1">We use initials by default to respect privacy. Full names are only used with written permission.</p>
-              </div>
+              <h3 className="text-2xl font-serif font-semibold text-navy">Client Reviews</h3>
               <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-sand-200">
                 <span className="text-gold text-lg">★★★★★</span>
                 <span className="font-semibold text-navy">5.0 on Google</span>
@@ -125,7 +245,7 @@ export default function HomePage() {
               {/* Card 1 */}
               <div className="bg-white p-8 rounded-xl shadow-sm border border-sand-100 flex flex-col h-full">
                 <div className="text-gold text-xl mb-4">★★★★★</div>
-                <blockquote className="text-gray-600 italic mb-6 flex-grow leading-relaxed">
+                <blockquote className="text-gray-700 italic mb-6 flex-grow leading-relaxed">
                   &quot;I was very impressed with the time and effort Ryan at Southwest Resume Services took to revise my current resume. His initial questionnaire helped provide a foundation...&quot;
                 </blockquote>
                 <div className="mt-auto">
@@ -137,7 +257,7 @@ export default function HomePage() {
               {/* Card 2 */}
               <div className="bg-white p-8 rounded-xl shadow-sm border border-sand-100 flex flex-col h-full">
                 <div className="text-gold text-xl mb-4">★★★★★</div>
-                <blockquote className="text-gray-600 italic mb-6 flex-grow leading-relaxed">
+                <blockquote className="text-gray-700 italic mb-6 flex-grow leading-relaxed">
                   &quot;I am so thankful I found Ryan. He was very helpful and made this process easy for me. He knows the questions to ask and I felt that I was in great hands...&quot;
                 </blockquote>
                 <div className="mt-auto">
@@ -158,26 +278,31 @@ export default function HomePage() {
                     href="https://www.google.com/search?q=Southwest+Resume+Services"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white hover:text-gold transition-colors text-sm font-medium flex items-center gap-2"
+                    className="text-white hover:text-gold transition-colors text-sm font-medium flex items-center gap-1 group"
                   >
-                    Read all reviews on Google <span>→</span>
+                    Read all reviews on Google
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                   </a>
                 </div>
               </div>
             </div>
 
-            <div className="text-center">
-              <p className="text-xs text-gray-400 max-w-2xl mx-auto">
-                Reviews are shown as excerpts and may be shortened. We do not publish outcomes beyond deliverables unless documented and permitted.
-              </p>
-            </div>
           </div>
 
           {/* Subsection 2: Recent Wins */}
           <div>
             <div className="mb-8">
-              <h3 className="text-2xl font-serif font-semibold text-navy mb-2">Recent Wins</h3>
-              <p className="text-sm text-gray-500">Details are anonymized for privacy. Metrics are shown as ranges when needed.</p>
+              <h3 className="text-2xl font-serif font-semibold text-navy">Client Transformations</h3>
+              <p className="text-gray-600 mt-3 max-w-3xl mb-4">
+                Real clients closing the gap between their expertise and how they express it—turning hidden value into clear, defensible positioning.
+              </p>
+              <div className="bg-white p-6 rounded-xl border border-gold/20 max-w-3xl">
+                <p className="text-gray-700 leading-relaxed">
+                  <strong className="text-navy">What is the Truth Gap?</strong> The distance between your expertise and how you express it. When you&apos;re close to your work, patterns of excellence become invisible—that&apos;s not a flaw, it&apos;s perspective. Our work helps you see what you&apos;ve stopped noticing.
+                </p>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -192,20 +317,23 @@ export default function HomePage() {
                   <div className="space-y-4 mb-6 flex-grow">
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Challenge</span>
-                      <p className="text-sm text-gray-600">30+ years of real scope, but no resume and no language for it.</p>
+                      <p className="text-sm text-gray-700">30+ years of real scope, but no resume and no language for it.</p>
                     </div>
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">What we did</span>
-                      <p className="text-sm text-gray-600">Truth inventory → standards-aligned translation → ownership transfer.</p>
+                      <p className="text-sm text-gray-700">Truth inventory → standards-aligned translation → ownership transfer.</p>
                     </div>
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Outcome</span>
-                      <p className="text-sm text-gray-600">A defensible positioning narrative and interview-ready proof stack, built to compete without exaggeration.</p>
+                      <p className="text-sm text-gray-700">A defensible positioning narrative and interview-ready proof stack, built to compete without exaggeration.</p>
                     </div>
                   </div>
 
-                  <Link href="/results#case-study-1" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-2 mt-auto">
-                    Read the case study <span>→</span>
+                  <Link href="/results#case-study-1" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
+                    Read the full story
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                   </Link>
                 </div>
               </div>
@@ -221,20 +349,23 @@ export default function HomePage() {
                   <div className="space-y-4 mb-6 flex-grow">
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Challenge</span>
-                      <p className="text-sm text-gray-600">A task-based resume hid what hiring teams actually screen for: accuracy, throughput controls, and calm execution under pressure. Role ended in an agency-wide workforce reduction, not performance.</p>
+                      <p className="text-sm text-gray-700">A task-based resume hid what hiring teams actually screen for: accuracy, throughput controls, and calm execution under pressure. Role ended in an agency-wide workforce reduction, not performance.</p>
                     </div>
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">What we did</span>
-                      <p className="text-sm text-gray-600">Truth inventory → standards-aligned translation → ownership transfer.</p>
+                      <p className="text-sm text-gray-700">Truth inventory → standards-aligned translation → ownership transfer.</p>
                     </div>
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Outcome</span>
-                      <p className="text-sm text-gray-600">A compliance-forward, metrics-backed narrative and interview script — built to de-risk the hire decision without exaggeration.</p>
+                      <p className="text-sm text-gray-700">A compliance-forward, metrics-backed narrative and interview script — built to support risk-conscious hiring teams without exaggeration.</p>
                     </div>
                   </div>
 
-                  <Link href="/results#case-study-2" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-2 mt-auto">
-                    Read the case study <span>→</span>
+                  <Link href="/results#case-study-2" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
+                    Read the full story
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                   </Link>
                 </div>
               </div>
@@ -250,31 +381,28 @@ export default function HomePage() {
                   <div className="space-y-4 mb-6 flex-grow">
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Challenge</span>
-                      <p className="text-sm text-gray-600">Entrepreneurial success was real, but the resume read like responsibilities instead of scalable operating systems.</p>
+                      <p className="text-sm text-gray-700">Entrepreneurial success was real, but the resume read like responsibilities instead of scalable operating systems.</p>
                     </div>
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">What we did</span>
-                      <p className="text-sm text-gray-600">Truth inventory → standards-aligned translation → ownership transfer.</p>
+                      <p className="text-sm text-gray-700">Truth inventory → standards-aligned translation → ownership transfer.</p>
                     </div>
                     <div>
                       <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Outcome</span>
-                      <p className="text-sm text-gray-600">Executive-ready positioning built on proof points, not promises.</p>
+                      <p className="text-sm text-gray-700">Executive-ready positioning built on proof points, not promises.</p>
                     </div>
                   </div>
 
-                  <Link href="/results#case-study-3" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-2 mt-auto">
-                    Read the case study <span>→</span>
+                  <Link href="/results#case-study-3" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
+                    Read the full story
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                   </Link>
                 </div>
               </div>
             </div>
 
-            <div className="text-center border-t border-sand-200 pt-8">
-              <p className="text-xs text-gray-400 font-medium uppercase tracking-widest mb-2">Proof Standard</p>
-              <p className="text-xs text-gray-500 max-w-2xl mx-auto">
-                We publish outcomes beyond deliverables only when documented and permitted. Otherwise, we report what we deliver: defensible positioning, verified proof points, and interview-ready ownership.
-              </p>
-            </div>
           </div>
         </Container>
       </section>
@@ -290,19 +418,19 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6 text-white text-4xl md:text-5xl">Career Services That Transform</h2>
             <p className="text-xl text-sand-100 text-balance">
-              We specialize in uncovering and articulating the professional value you
-              cannot see in yourself, then helping you own it completely.
+              We specialize in uncovering and articulating the professional value
+              you&apos;ve been too close to recognize, then helping you own it completely.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {coreServices.map((service, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-2xl transform transition-all duration-300 hover:-translate-y-2 hover:shadow-gold/20 border border-white/10 flex flex-col h-full">
-                <div className="w-16 h-16 bg-navy text-gold rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-lg">
-                  {service.icon}
+            {coreServices.map((service) => (
+              <div key={service.title} className="bg-white rounded-2xl p-8 shadow-2xl transform transition-all duration-300 hover:-translate-y-2 hover:shadow-gold/20 border border-white/10 flex flex-col h-full">
+                <div className="w-16 h-16 bg-navy text-gold rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  {service.iconComponent}
                 </div>
                 <h3 className="text-2xl font-serif font-bold text-navy mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-8 flex-grow text-lg leading-relaxed">{service.description}</p>
+                <p className="text-gray-700 mb-8 flex-grow text-lg leading-relaxed">{service.description}</p>
 
                 <Link href={service.cta?.href || '#'}>
                   <Button variant="outline" className="w-full border-navy text-navy hover:bg-navy hover:text-white">
@@ -328,7 +456,7 @@ export default function HomePage() {
         <Container>
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6">Transparent Investment</h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-700">
               Professional career documents are an investment in your future earning potential.
             </p>
           </div>
@@ -336,9 +464,18 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Essentials */}
             <div className="bg-white p-8 rounded-2xl shadow-premium border border-sand-100 flex flex-col text-center hover:shadow-premium-hover transition-all duration-300">
+              <div className="w-24 h-24 mx-auto mb-4 relative">
+                <Image
+                  src={withBasePath('/assets/images/packages/essential.png')}
+                  alt="Essentials Package"
+                  width={96}
+                  height={96}
+                  className="object-contain"
+                />
+              </div>
               <h3 className="text-xl font-serif font-bold text-navy mb-2">Essentials</h3>
               <div className="text-3xl font-bold text-gold mb-4">$150</div>
-              <p className="text-gray-600 mb-6 flex-grow">
+              <p className="text-gray-700 mb-6 flex-grow">
                 Perfectly optimized resume highlighting your strengths clearly and effectively.
               </p>
               <Link href="/contact">
@@ -350,6 +487,15 @@ export default function HomePage() {
             <div className="bg-navy p-8 rounded-2xl shadow-2xl border border-navy flex flex-col text-center transform scale-105 z-10 relative">
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gold text-navy text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
                 Most Popular
+              </div>
+              <div className="w-24 h-24 mx-auto mb-4 relative">
+                <Image
+                  src={withBasePath('/assets/images/packages/accelerator.png')}
+                  alt="Accelerator Package"
+                  width={96}
+                  height={96}
+                  className="object-contain"
+                />
               </div>
               <h3 className="text-xl font-serif font-bold text-white mb-2">Accelerator</h3>
               <div className="text-3xl font-bold text-gold mb-4">$300</div>
@@ -363,9 +509,18 @@ export default function HomePage() {
 
             {/* Career Launch */}
             <div className="bg-white p-8 rounded-2xl shadow-premium border border-sand-100 flex flex-col text-center hover:shadow-premium-hover transition-all duration-300">
+              <div className="w-24 h-24 mx-auto mb-4 relative">
+                <Image
+                  src={withBasePath('/assets/images/packages/career-launch.png')}
+                  alt="Career Launch Package"
+                  width={96}
+                  height={96}
+                  className="object-contain"
+                />
+              </div>
               <h3 className="text-xl font-serif font-bold text-navy mb-2">Career Launch</h3>
               <div className="text-3xl font-bold text-gold mb-4">$449</div>
-              <p className="text-gray-600 mb-6 flex-grow">
+              <p className="text-gray-700 mb-6 flex-grow">
                 Comprehensive resume rewrite, LinkedIn optimization, and portfolio design.
               </p>
               <Link href="/contact">
@@ -393,18 +548,21 @@ export default function HomePage() {
               <h2 className="mb-8 text-white">The Client Truth Principle</h2>
               <div className="space-y-6 text-sand-100 leading-relaxed text-lg">
                 <p className="font-serif text-2xl text-gold italic">
-                  &quot;Whether it is factual or not, if it&apos;s not the client&apos;s truth,
-                  then it&apos;s all for nothing.&quot;
+                  &quot;A resume you can&apos;t own performs like fiction when it matters most.&quot;
                 </p>
                 <p>
-                  This foundational principle guides everything we do. We understand that a technically accurate statement that
-                  doesn&apos;t feel true to you will perform like a lie when it matters
-                  most—in an interview.
+                  This is the Client Truth Principle—the foundation of everything we create.
+                  In interviews, only genuine ownership translates to confident delivery.
                 </p>
                 <p>
-                  Our role isn&apos;t to fabricate. It&apos;s to uncover genuine
-                  value, articulate it in professional language, and transfer ownership so
-                  completely that it becomes your authentic truth.
+                  Our role is straightforward: we bring outside perspective, research methodology
+                  grounded in O*NET and market intelligence, and professional language expertise.
+                  You bring lived experience and genuine achievements. Together, we build a narrative
+                  you can defend with authentic confidence.
+                </p>
+                <p>
+                  Nothing fabricated. Nothing exaggerated. Just your professional story,
+                  finally articulated the way it deserves.
                 </p>
               </div>
               <div className="mt-10">
@@ -416,20 +574,29 @@ export default function HomePage() {
 
             <div className="glass-dark p-8 rounded-2xl shadow-2xl border border-white/10">
               <h3 className="text-2xl font-serif font-semibold text-white mb-8 border-b border-white/10 pb-4">
-                The Three Pillars of Ethical Enhancement
+                Our Research-Backed Process
               </h3>
               <div className="space-y-8">
-                <div className="flex items-center gap-6">
+                <div className="flex items-start gap-6">
                   <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold text-2xl font-bold flex-shrink-0">1</div>
-                  <h4 className="text-xl font-semibold text-white">Investigation</h4>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">Collaborative Discovery</h4>
+                    <p className="text-sand-200 text-sm mt-1">Deep dive into your experience and achievements</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-6">
+                <div className="flex items-start gap-6">
                   <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold text-2xl font-bold flex-shrink-0">2</div>
-                  <h4 className="text-xl font-semibold text-white">Translation</h4>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">Research-Validated Translation</h4>
+                    <p className="text-sand-200 text-sm mt-1">Grounded in O*NET, BLS, and market intelligence</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-6">
+                <div className="flex items-start gap-6">
                   <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold text-2xl font-bold flex-shrink-0">3</div>
-                  <h4 className="text-xl font-semibold text-white">Transformation</h4>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">Ownership Transfer</h4>
+                    <p className="text-sand-200 text-sm mt-1">You own every word with authentic confidence</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -442,18 +609,18 @@ export default function HomePage() {
         <Container>
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6">Why Southwest Resume Services</h2>
-            <p className="text-xl text-gray-600 text-balance">
+            <p className="text-xl text-gray-700 text-balance">
               We combine rigorous research methodology with deep psychological insight
               to create career documents that are both powerful and authentically yours.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {whySRS.map((item, index) => (
-              <Card key={index} className="h-full">
+            {whySRS.map((item) => (
+              <Card key={item.title} className="h-full">
                 <CardHeader>
                   <div className="w-14 h-14 bg-navy text-gold rounded-xl flex items-center justify-center mb-6 shadow-lg">
-                    <span className="text-3xl">{item.icon}</span>
+                    {item.iconComponent}
                   </div>
                   <CardTitle as="h3" className="text-2xl mb-4">
                     {item.title}
@@ -461,8 +628,8 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
-                    {item.features.map((feature, fIndex) => (
-                      <li key={fIndex} className="flex items-center text-base text-navy font-medium">
+                    {item.features.map((feature) => (
+                      <li key={feature} className="flex items-center text-base text-navy font-medium">
                         <span className="w-2 h-2 bg-gold rounded-full mr-3"></span>
                         {feature}
                       </li>
@@ -472,6 +639,13 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
+
+          {/* ATS Footnote */}
+          <div className="mt-8 text-center">
+            <p className="text-sm text-gray-600">
+              *ATS-compatible with major systems including Workday, Taleo, Greenhouse, and iCIMS
+            </p>
+          </div>
         </Container>
       </section>
 
@@ -480,7 +654,7 @@ export default function HomePage() {
         <Container>
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6">Our Process</h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-700">
               A systematic, research-driven approach to career transformation.
             </p>
           </div>
@@ -511,15 +685,15 @@ export default function HomePage() {
                   title: 'Ownership',
                   description: 'Interview mastery',
                 },
-              ].map((item, index) => (
-                <div key={index} className="bg-white p-6 rounded-xl border border-sand-100 shadow-premium text-center relative group hover:-translate-y-2 transition-transform duration-300">
+              ].map((item) => (
+                <div key={item.step} className="bg-white p-6 rounded-xl border border-sand-100 shadow-premium text-center relative group hover:-translate-y-2 transition-transform duration-300">
                   <div className="w-12 h-12 mx-auto bg-navy text-gold rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-lg group-hover:scale-110 transition-transform">
                     {item.step}
                   </div>
                   <h3 className="text-xl font-serif font-semibold text-navy mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600">{item.description}</p>
+                  <p className="text-gray-700">{item.description}</p>
                 </div>
               ))}
             </div>

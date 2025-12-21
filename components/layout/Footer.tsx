@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { withBasePath } from '@/lib/paths';
+import { trackEmailClick, trackPhoneClick } from '@/lib/analytics';
 
 const footerNavigation = {
   services: [
@@ -12,6 +15,7 @@ const footerNavigation = {
   company: [
     { name: 'About Us', href: '/about' },
     { name: 'Our Process', href: '/process' },
+    { name: 'Methodology', href: '/methodology' },
     { name: 'Results', href: '/results' },
     { name: 'FAQ', href: '/faq' },
   ],
@@ -21,8 +25,10 @@ const footerNavigation = {
   ],
 };
 
+// Static year to prevent hydration mismatch (server/client time difference)
+const CURRENT_YEAR = 2025;
+
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-navy text-sand" aria-labelledby="footer-heading">
@@ -53,9 +59,9 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-sand-300 max-w-xs">
-              Premium career services and resume optimization based in Arizona.
-              Research-backed, authentically crafted career documents that elevate
-              your professional journey.
+              Professional resume writing and career coaching based in Chandler, Arizona.
+              Serving Phoenix, Scottsdale, Mesa, Tempe, and the greater Arizona area with
+              research-backed career documents.
             </p>
           </div>
 
@@ -67,7 +73,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-sm text-sand-300 hover:text-gold transition-colors"
+                    className="text-sm text-sand-300 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
                   >
                     {item.name}
                   </Link>
@@ -84,7 +90,7 @@ export default function Footer() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-sm text-sand-300 hover:text-gold transition-colors"
+                    className="text-sm text-sand-300 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
                   >
                     {item.name}
                   </Link>
@@ -100,7 +106,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="text-sm text-sand-300 hover:text-gold transition-colors"
+                  className="text-sm text-sand-300 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
                 >
                   Contact Us
                 </Link>
@@ -108,7 +114,8 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:info@southwestresumes.com"
-                  className="text-sm text-sand-300 hover:text-gold transition-colors"
+                  onClick={trackEmailClick}
+                  className="text-sm text-sand-300 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
                 >
                   info@southwestresumes.com
                 </a>
@@ -116,30 +123,56 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:+14803743418"
-                  className="text-sm text-sand-300 hover:text-gold transition-colors"
+                  onClick={trackPhoneClick}
+                  className="text-sm text-sand-300 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
                 >
                   (480) 374-3418
                 </a>
               </li>
               <li className="text-sm text-sand-300">
-                Based in Arizona
+                1111 N Mission Park Blvd #2016
+                <br />
+                Chandler, AZ 85224
               </li>
             </ul>
           </div>
         </div>
 
+        {/* Trust Badges Row */}
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-10 py-6 border-t border-navy-600">
+          <span className="inline-flex items-center gap-2 text-sm text-sand-300">
+            <svg className="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            5.0 Google Rating
+          </span>
+          <span className="inline-flex items-center gap-2 text-sm text-sand-300">
+            <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Research Validated
+          </span>
+          <span className="inline-flex items-center gap-2 text-sm text-sand-300">
+            <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Arizona Local
+          </span>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-navy-600">
+        <div className="pt-6 border-t border-navy-600">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-sand-400">
-              &copy; {currentYear} Southwest Resume Services, LLC. All rights reserved.
+              &copy; {CURRENT_YEAR} Southwest Resume Services, LLC. All rights reserved.
             </p>
             <div className="flex space-x-6">
               {footerNavigation.legal.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-sm text-sand-400 hover:text-gold transition-colors"
+                  className="text-sm text-sand-400 hover:text-gold transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-navy rounded"
                 >
                   {item.name}
                 </Link>

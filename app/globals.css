@@ -2,10 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * MERGED REDESIGN: claude-opus-4-5-20251101
+ * Date: 2025-12-18
+ * Gold Standard Website CSS with Neuroscience-Based Design Principles
+ */
+
 @layer base {
   :root {
     --font-inter: 'Inter', system-ui, sans-serif;
     --font-playfair: 'Playfair Display', Georgia, serif;
+
+    /* Improved color contrast for accessibility */
+    --gold-accessible: #b8982a;
+    --navy-primary: #1a2332;
+    --sand-bg: #faf6f0;
   }
 
   html {
@@ -16,43 +27,187 @@
     @apply bg-white text-charcoal font-sans antialiased leading-relaxed;
   }
 
-  /* Focus styles for accessibility */
+  /* Focus styles for accessibility - WCAG 2.1 AA compliant */
   *:focus-visible {
-    @apply outline-none ring-2 ring-gold ring-offset-2;
+    outline: 2px solid #d4af37;
+    outline-offset: 2px;
   }
 
-  /* Headings */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  /* Headings - Optimized for readability */
+  h1, h2, h3, h4, h5, h6 {
     @apply font-serif font-semibold text-navy;
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply text-2xl md:text-3xl lg:text-4xl leading-tight;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl lg:text-4xl;
+    @apply text-xl md:text-2xl leading-snug;
   }
 
   h4 {
-    @apply text-xl md:text-2xl;
-  }
-
-  h5 {
     @apply text-lg md:text-xl;
   }
 
-  h6 {
+  h5 {
     @apply text-base md:text-lg;
+  }
+
+  h6 {
+    @apply text-sm md:text-base;
+  }
+}
+
+@layer components {
+  /* Button base styles with micro-interactions */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium
+           transition-all duration-300 ease-out
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transform hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-primary {
+    @apply bg-gold text-navy hover:bg-gold-600 focus-visible:ring-gold
+           shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply bg-navy text-white hover:bg-navy-600 focus-visible:ring-navy
+           shadow-lg hover:shadow-xl;
+  }
+
+  .btn-outline {
+    @apply border-2 border-gold-600 text-navy hover:bg-gold hover:text-navy focus-visible:ring-gold;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Card with hover lift effect */
+  .card {
+    @apply bg-white border border-gray-200 rounded-xl p-6
+           shadow-sm hover:shadow-lg transition-all duration-300
+           hover:-translate-y-1;
+  }
+
+  /* Feature card with icon */
+  .feature-card {
+    @apply bg-white rounded-2xl p-8 text-center
+           border border-gray-100 shadow-sm
+           hover:shadow-xl hover:border-gold/30 transition-all duration-300
+           hover:-translate-y-2;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .section-padding-sm {
+    @apply py-12 md:py-16;
+  }
+
+  /* Gradient text effect */
+  .gradient-text {
+    @apply bg-gradient-to-r from-navy via-gold-700 to-navy bg-clip-text text-transparent;
+  }
+
+  /* Stat card for social proof */
+  .stat-card {
+    @apply text-center p-6 rounded-2xl bg-gradient-to-br from-navy to-navy-800
+           text-white shadow-xl;
+  }
+
+  .stat-number {
+    @apply text-4xl md:text-5xl font-bold text-gold mb-2;
+  }
+
+  .stat-label {
+    @apply text-sm text-sand-300 uppercase tracking-wider;
+  }
+
+  /* Testimonial card */
+  .testimonial-card {
+    @apply bg-white rounded-2xl p-8 shadow-lg border-l-4 border-gold
+           relative overflow-hidden;
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    @apply absolute -top-4 -left-2 text-8xl text-gold/20 font-serif leading-none;
+  }
+
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+           bg-gold/10 text-gold-700;
+  }
+
+  .badge-popular {
+    @apply bg-gold text-navy;
+  }
+
+  /* Icon wrapper */
+  .icon-wrapper {
+    @apply w-14 h-14 rounded-xl flex items-center justify-center
+           bg-gradient-to-br from-gold/20 to-gold/5
+           shadow-inner;
+  }
+
+  .icon-wrapper-lg {
+    @apply w-20 h-20 rounded-2xl;
+  }
+
+  /* Divider with icon */
+  .divider-icon {
+    @apply flex items-center gap-4 my-8;
+  }
+
+  .divider-icon::before,
+  .divider-icon::after {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent;
+  }
+
+  /* Pricing card */
+  .pricing-card {
+    @apply bg-white rounded-2xl p-8 shadow-lg border border-gray-100
+           flex flex-col h-full
+           hover:shadow-2xl hover:border-gold/50 transition-all duration-300;
+  }
+
+  .pricing-card-featured {
+    @apply border-2 border-gold relative scale-105;
+  }
+
+  /* Process step */
+  .process-step {
+    @apply relative pl-16 pb-12;
+  }
+
+  .process-step::before {
+    content: '';
+    @apply absolute left-6 top-14 bottom-0 w-0.5 bg-gradient-to-b from-gold to-gold/20;
+  }
+
+  .process-step:last-child::before {
+    @apply hidden;
+  }
+
+  .process-number {
+    @apply absolute left-0 top-0 w-12 h-12 rounded-full
+           bg-gradient-to-br from-gold to-gold-600 text-navy
+           flex items-center justify-center font-bold text-lg
+           shadow-lg;
   }
 }
 
@@ -61,6 +216,7 @@
     text-wrap: balance;
   }
 
+  /* Glass effects (from current) */
   .glass {
     @apply bg-white bg-opacity-70 backdrop-blur-lg border border-white/20;
   }
@@ -69,6 +225,7 @@
     @apply bg-navy bg-opacity-90 backdrop-blur-lg border border-white/10;
   }
 
+  /* Premium shadows (from current) */
   .shadow-premium {
     box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.02);
   }
@@ -76,39 +233,246 @@
   .shadow-premium-hover {
     box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.02);
   }
+
+  /* Fade in animation */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-delay-1 {
+    animation: fadeIn 0.6s ease-out 0.1s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-2 {
+    animation: fadeIn 0.6s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-3 {
+    animation: fadeIn 0.6s ease-out 0.3s forwards;
+    opacity: 0;
+  }
+
+  /* Subtle float animation for decorative elements */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delay {
+    animation: float 6s ease-in-out 2s infinite;
+  }
+
+  /* Pulse glow for CTAs */
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  /* Gradient shift animation */
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  /* Underline grow effect */
+  .underline-grow {
+    @apply relative;
+  }
+
+  .underline-grow::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300;
+  }
+
+  .underline-grow:hover::after {
+    @apply w-full;
+  }
+
+  /* Questionnaire-specific animations - Design System SOP compliant */
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-progress-pulse {
+    animation: progress-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-float-bounce {
+    animation: float-bounce 1.5s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out forwards;
+  }
+
+  /* ===== RESPONSIVE DESIGN FRAMEWORK ===== */
+  /* Design System SOP v1.1 - Section 6 */
+
+  /* Responsive Grid Patterns */
+  .grid-responsive-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+  }
+
+  .grid-responsive-3 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  }
+
+  .grid-responsive-4 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+  }
+
+  /* Responsive Card Padding */
+  .card-padding {
+    @apply p-4 sm:p-6 md:p-8;
+  }
+
+  /* Button Group (flex row on tablet+) */
+  .button-group {
+    @apply flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6;
+  }
+
+  /* Container variants */
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-wide {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Responsive section padding */
+  .section-responsive {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  /* Touch target compliance */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
 }
 
-@layer components {
-
-  /* Button base styles */
-  .btn {
-    @apply inline-flex items-center justify-center px-8 py-4 rounded-lg font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5;
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-
-  .btn-primary {
-    @apply bg-gold text-navy hover:bg-gold-600 focus-visible:ring-gold shadow-lg hover:shadow-gold/50;
+  to {
+    opacity: 1;
   }
+}
 
-  .btn-secondary {
-    @apply bg-navy text-white hover:bg-navy-600 focus-visible:ring-navy shadow-lg hover:shadow-navy/50;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  .btn-outline {
-    @apply border-2 border-gold text-gold hover:bg-gold hover:text-navy focus-visible:ring-gold;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  /* Container */
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
   }
-
-  /* Card */
-  .card {
-    @apply bg-white rounded-xl p-8 shadow-premium hover:shadow-premium-hover transition-all duration-300 border border-gray-100;
+  50% {
+    transform: translateY(-20px);
   }
+}
 
-  /* Section padding */
-  .section-padding {
-    @apply py-24 md:py-40;
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Shimmer effect for progress bars - Design System SOP compliant (300ms duration) */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: -200% 50%;
+  }
+}
+
+/* Progress pulse for streak indicator */
+@keyframes progress-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+/* Float bounce for emoji/icon animations */
+@keyframes float-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Slide up for toast notifications */
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-sand-50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-navy/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-navy/50;
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

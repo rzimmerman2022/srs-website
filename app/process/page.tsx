@@ -1,12 +1,20 @@
+/**
+ * GEMINI GLASS MODERN: Interactive Process Page with ScrollSpy
+ * Features: Glass morphism, sticky navigation, IntersectionObserver
+ * Date: 2025-12-18
+ */
+
 import Link from 'next/link';
+import Script from 'next/script';
 import Hero from '@/components/sections/Hero';
-import ProcessTimeline, { ProcessStep } from '@/components/sections/ProcessTimeline';
+import ProcessScrollSpy from '@/components/sections/ProcessScrollSpy';
+import { ProcessStep } from '@/components/sections/ProcessTimeline';
 import Container from '@/components/layout/Container';
 import Button from '@/components/ui/Button';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Our Process',
+  title: 'Our Process | Southwest Resume Services',
   description:
     'A systematic, research-driven approach to career transformation. From deep discovery to interview mastery, we guide you through every step.',
 };
@@ -136,115 +144,192 @@ const processSteps: ProcessStep[] = [
 ];
 
 export default function ProcessPage() {
+  /**
+   * HowTo Schema for SEO
+   * Schema.org HowTo type for the 10-phase process
+   * Follows Google Rich Results guidelines for HowTo markup
+   */
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How Southwest Resume Services Transforms Your Career Documents',
+    description: 'A systematic, research-driven 10-phase approach to career transformation. From deep discovery and market research to ownership transfer and interview mastery.',
+    image: 'https://southwestresumes.com/og-image.jpg',
+    estimatedCost: {
+      '@type': 'MonetaryAmount',
+      currency: 'USD',
+      value: '150-500',
+    },
+    totalTime: 'P5D',
+    step: processSteps.map((step) => ({
+      '@type': 'HowToStep',
+      position: step.number,
+      name: step.title,
+      text: step.description,
+      itemListElement: step.details?.map((detail, index) => ({
+        '@type': 'HowToDirection',
+        position: index + 1,
+        text: detail,
+      })) || [],
+    })),
+    tool: [
+      {
+        '@type': 'HowToTool',
+        name: 'O*NET Database',
+      },
+      {
+        '@type': 'HowToTool',
+        name: 'Bureau of Labor Statistics (BLS)',
+      },
+      {
+        '@type': 'HowToTool',
+        name: 'Lightcast Market Intelligence',
+      },
+      {
+        '@type': 'HowToTool',
+        name: 'LinkedIn Career Insights',
+      },
+    ],
+  };
+
   return (
     <>
+      {/* HowTo Schema for SEO - 10-phase process */}
+      <Script
+        id="howto-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+
       <Hero
         title="Our Process"
         subtitle="How We Work"
         description="A systematic, research-driven approach to career transformation. From deep discovery and market research to ownership transfer and interview mastery."
         primaryCTA={{ text: 'Get Started', href: '/contact' }}
-        gradient={false}
       />
 
-      {/* Process Timeline */}
-      <section className="section-padding bg-white">
+      {/* Process Timeline with ScrollSpy */}
+      <section className="section-padding bg-gradient-to-br from-sand-50 via-white to-sand-100">
         <Container>
-          <ProcessTimeline steps={processSteps} />
+          <ProcessScrollSpy steps={processSteps} />
         </Container>
       </section>
 
-      {/* Key Differentiators */}
-      <section className="section-padding bg-sand-50">
-        <Container>
+      {/* Key Differentiators - Glass Cards */}
+      <section className="section-padding bg-navy relative overflow-hidden">
+        {/* Decorative Background */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold rounded-full blur-[100px] transform translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500 rounded-full blur-[80px] transform -translate-x-1/2 translate-y-1/2"></div>
+        </div>
+
+        <Container className="relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-center mb-12">What Sets Our Process Apart</h2>
+            <h2 className="text-center mb-12 text-white">What Sets Our Process Apart</h2>
 
             <div className="space-y-8">
-              <div className="bg-white p-8 rounded-lg shadow-lg border-l-4 border-gold">
-                <h3 className="text-xl font-serif font-semibold text-navy mb-3">
-                  Research Authority Index (RAI)
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  Every enhancement undergoes rigorous validation using a weighted scoring
-                  system:
-                </p>
-                <div className="bg-sand-50 p-4 rounded font-mono text-sm">
-                  RAI = (Primary Source × 0.5) + (Industry Validation × 0.3) + (Compliance
-                  × 0.2)
-                </div>
-                <p className="text-sm text-gray-600 mt-4">
-                  We require RAI ≥ 7.0 for Level 3 enhancements and RAI ≥ 8.0 for Level 4
-                  (transformative reframing).
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-lg shadow-lg border-l-4 border-gold">
-                <h3 className="text-xl font-serif font-semibold text-navy mb-3">
-                  Mathematical Risk Assessment
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  We use a composite risk scoring system to ensure every enhancement is
-                  both powerful and defensible:
-                </p>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>
-                    <strong>Integrity Score (0-10):</strong> Factual accuracy of the
-                    enhancement
-                  </li>
-                  <li>
-                    <strong>Ownership Score (0-10):</strong> Your ability to defend the
-                    claim
-                  </li>
-                  <li>
-                    <strong>Impact Weight (1-4):</strong> Importance to your candidacy
-                  </li>
-                  <li>
-                    <strong>Composite Risk:</strong> Calculated to ensure Document Risk
-                    Index (DRI) remains safe (&lt;40)
-                  </li>
-                </ul>
-              </div>
-
-              <div className="bg-white p-8 rounded-lg shadow-lg border-l-4 border-gold">
-                <h3 className="text-xl font-serif font-semibold text-navy mb-3">
+              {/* Truth Bridge Protocol - Always Visible */}
+              <div className="glass-dark p-8 rounded-2xl border border-white/10">
+                <h3 className="text-xl font-serif font-semibold text-gold mb-3">
                   The Truth Bridge Protocol
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-sand-200 mb-4">
                   Our five-phase ownership transfer system ensures you genuinely believe and
                   can defend every word:
                 </p>
-                <ol className="space-y-2 text-sm text-gray-600 list-decimal list-inside">
-                  <li>
-                    <strong>Truth Discovery:</strong> Deep investigation into what you
-                    actually did
+                <ol className="space-y-2 text-sm text-sand-200">
+                  <li className="flex items-start">
+                    <span className="text-gold font-bold mr-3">1.</span>
+                    <span><strong className="text-white">Truth Discovery:</strong> Deep investigation into what you actually did</span>
                   </li>
-                  <li>
-                    <strong>Truth Articulation:</strong> Translation into professional
-                    language
+                  <li className="flex items-start">
+                    <span className="text-gold font-bold mr-3">2.</span>
+                    <span><strong className="text-white">Truth Articulation:</strong> Translation into professional language</span>
                   </li>
-                  <li>
-                    <strong>Truth Validation:</strong> Evidence bridge using research
-                    sources
+                  <li className="flex items-start">
+                    <span className="text-gold font-bold mr-3">3.</span>
+                    <span><strong className="text-white">Truth Validation:</strong> Evidence bridge using research sources</span>
                   </li>
-                  <li>
-                    <strong>Truth Integration:</strong> Practice and internalization
+                  <li className="flex items-start">
+                    <span className="text-gold font-bold mr-3">4.</span>
+                    <span><strong className="text-white">Truth Integration:</strong> Practice and internalization</span>
                   </li>
-                  <li>
-                    <strong>Truth Ownership:</strong> Genuine belief and confident defense
+                  <li className="flex items-start">
+                    <span className="text-gold font-bold mr-3">5.</span>
+                    <span><strong className="text-white">Truth Ownership:</strong> Genuine belief and confident defense</span>
                   </li>
                 </ol>
               </div>
+
+              {/* Collapsible Technical Details */}
+              <details className="glass-dark rounded-2xl border border-white/10 group">
+                <summary className="p-8 cursor-pointer list-none flex items-center justify-between">
+                  <h3 className="text-xl font-serif font-semibold text-gold">
+                    Technical Methodology Details
+                  </h3>
+                  <span className="text-gold text-sm font-medium group-open:hidden">Show details ▼</span>
+                  <span className="text-gold text-sm font-medium hidden group-open:inline">Hide details ▲</span>
+                </summary>
+                <div className="px-8 pb-8 space-y-8 border-t border-white/10 pt-6">
+                  {/* RAI */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-white mb-3">
+                      Research Authority Index (RAI)
+                    </h4>
+                    <p className="text-sand-200 mb-4 text-sm">
+                      Every enhancement undergoes rigorous validation using a weighted scoring
+                      system:
+                    </p>
+                    <div className="bg-navy-800/50 p-4 rounded-lg font-mono text-sm text-gold border border-gold/20">
+                      RAI = (Primary Source × 0.5) + (Industry Validation × 0.3) + (Compliance × 0.2)
+                    </div>
+                    <p className="text-sm text-sand-300 mt-4">
+                      We require RAI ≥ 7.0 for Level 3 enhancements and RAI ≥ 8.0 for Level 4
+                      (transformative reframing).
+                    </p>
+                  </div>
+
+                  {/* DRI */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-white mb-3">
+                      Mathematical Risk Assessment
+                    </h4>
+                    <p className="text-sand-200 mb-4 text-sm">
+                      We use a composite risk scoring system to ensure every enhancement is
+                      both powerful and defensible:
+                    </p>
+                    <ul className="space-y-2 text-sm text-sand-200">
+                      <li className="flex items-start">
+                        <span className="text-gold mr-2">•</span>
+                        <span><strong className="text-white">Integrity Score (0-10):</strong> Factual accuracy of the enhancement</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-gold mr-2">•</span>
+                        <span><strong className="text-white">Ownership Score (0-10):</strong> Your ability to defend the claim</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-gold mr-2">•</span>
+                        <span><strong className="text-white">Impact Weight (1-4):</strong> Importance to your candidacy</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-gold mr-2">•</span>
+                        <span><strong className="text-white">Composite Risk:</strong> Document Risk Index (DRI) remains safe (&lt;40)</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </details>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Sources */}
+      {/* Sources - Glass Cards */}
       <section className="section-padding bg-white">
         <Container>
           <div className="max-w-4xl mx-auto">
             <h2 className="text-center mb-8">Research Sources We Use</h2>
-            <p className="text-center text-gray-600 mb-12">
+            <p className="text-center text-gray-700 mb-12">
               Every enhancement is validated against authoritative, government, and
               industry sources:
             </p>
@@ -262,10 +347,10 @@ export default function ProcessPage() {
               ].map((source, index) => (
                 <div
                   key={index}
-                  className="text-center p-4 bg-sand-50 rounded-lg hover:bg-sand-100 transition-colors"
+                  className="glass text-center p-4 rounded-xl hover:shadow-premium-hover transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="font-semibold text-navy mb-1">{source.name}</div>
-                  <div className="text-xs text-gray-600">{source.description}</div>
+                  <div className="text-xs text-gray-700">{source.description}</div>
                 </div>
               ))}
             </div>
@@ -274,19 +359,23 @@ export default function ProcessPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-navy text-white">
+      <section className="section-padding bg-gradient-to-br from-navy via-navy-700 to-navy-800 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-gold to-transparent"></div>
+        </div>
         <Container>
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto text-center relative z-10">
             <h2 className="text-white mb-4">Experience the Difference</h2>
             <p className="text-lg text-sand-200 mb-8">
               Our research-backed, psychologically-informed process creates career
               documents that are both powerful and authentically yours.
             </p>
-            <Link href="/contact">
-              <Button variant="primary" size="lg">
-                Get Started Today
-              </Button>
-            </Link>
+            <Button href="/contact" variant="primary" size="lg" className="group">
+              Get Started Today
+              <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </Button>
           </div>
         </Container>
       </section>

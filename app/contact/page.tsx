@@ -2,12 +2,13 @@ import Link from 'next/link';
 import Hero from '@/components/sections/Hero';
 import ContactForm from '@/components/sections/ContactForm';
 import Container from '@/components/layout/Container';
+import ContactLink from '@/components/ui/ContactLink';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
+  title: 'Contact Us | Phoenix Resume Writing Services | Arizona Career Coach',
   description:
-    'Get in touch with Southwest Resume Services to discuss your career goals. Schedule a consultation and start your career elevation journey.',
+    'Contact Southwest Resume Services in Phoenix, AZ. Schedule a consultation with our expert resume writers and career coaches serving Scottsdale, Mesa, Tempe, and the Phoenix metro area.',
 };
 
 export default function ContactPage() {
@@ -17,7 +18,6 @@ export default function ContactPage() {
         title="Get in Touch"
         subtitle="Contact Us"
         description="Ready to elevate your career? Let's discuss your goals and how we can help you reveal your true professional value."
-        gradient={false}
       />
 
       <section className="section-padding bg-white">
@@ -26,7 +26,7 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div>
               <h2 className="mb-6">Send Us a Message</h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-700 mb-8">
                 Fill out the form below and we&apos;ll get back to you within 1-2 business
                 days. The more details you provide about your background and goals, the
                 better we can serve you.
@@ -42,36 +42,43 @@ export default function ContactPage() {
                 {/* Email */}
                 <div>
                   <h3 className="text-lg font-semibold text-navy mb-2">Email Us</h3>
-                  <p className="text-gray-600 mb-2">
+                  <p className="text-gray-700 mb-2">
                     For general inquiries and to start a conversation:
                   </p>
-                  <a
+                  <ContactLink
+                    type="email"
                     href="mailto:info@southwestresumes.com"
                     className="text-gold hover:text-gold-600 font-medium transition-colors"
                   >
                     info@southwestresumes.com
-                  </a>
+                  </ContactLink>
                 </div>
 
                 {/* Phone */}
                 <div>
                   <h3 className="text-lg font-semibold text-navy mb-2">Call Us</h3>
-                  <p className="text-gray-600 mb-2">
+                  <p className="text-gray-700 mb-2">
                     Prefer to speak directly? Give us a call:
                   </p>
-                  <a
+                  <ContactLink
+                    type="phone"
                     href="tel:+14803743418"
                     className="text-gold hover:text-gold-600 font-medium transition-colors"
                   >
                     (480) 374-3418
-                  </a>
+                  </ContactLink>
                 </div>
 
                 {/* Location */}
                 <div>
                   <h3 className="text-lg font-semibold text-navy mb-2">Our Location</h3>
-                  <p className="text-gray-600">
-                    Based in Arizona, serving professionals nationwide.
+                  <address className="text-gray-700 not-italic">
+                    <span className="font-medium">Southwest Resume Services</span><br />
+                    1111 N Mission Park Blvd #2016<br />
+                    Chandler, AZ 85224
+                  </address>
+                  <p className="text-gray-600 text-sm mt-2">
+                    Serving Phoenix, Scottsdale, Mesa, Tempe, and the greater Arizona area.
                   </p>
                 </div>
 
@@ -87,7 +94,7 @@ export default function ContactPage() {
                       </span>
                       <div>
                         <strong className="text-navy">Initial Review</strong>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-700">
                           We&apos;ll review your inquiry and background within 1-2 business
                           days.
                         </p>
@@ -99,7 +106,7 @@ export default function ContactPage() {
                       </span>
                       <div>
                         <strong className="text-navy">Detailed Response</strong>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-700">
                           You&apos;ll receive a comprehensive email outlining how we can help
                           and recommended services.
                         </p>
@@ -111,7 +118,7 @@ export default function ContactPage() {
                       </span>
                       <div>
                         <strong className="text-navy">Consultation Call</strong>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-700">
                           If appropriate, we&apos;ll schedule a consultation to discuss your
                           goals in depth.
                         </p>
@@ -123,7 +130,7 @@ export default function ContactPage() {
                       </span>
                       <div>
                         <strong className="text-navy">Begin Your Journey</strong>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-700">
                           Once we agree on the scope, we&apos;ll begin the discovery process and
                           start elevating your career.
                         </p>
@@ -166,7 +173,7 @@ export default function ContactPage() {
               >
                 <div className="text-4xl mb-3">📄</div>
                 <h3 className="text-lg font-semibold text-navy mb-2">View Services</h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-700">
                   Explore our comprehensive career services and packages.
                 </p>
               </Link>
@@ -177,7 +184,7 @@ export default function ContactPage() {
               >
                 <div className="text-4xl mb-3">🔬</div>
                 <h3 className="text-lg font-semibold text-navy mb-2">Our Process</h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-700">
                   Learn about our research-backed methodology and approach.
                 </p>
               </Link>
@@ -188,7 +195,7 @@ export default function ContactPage() {
               >
                 <div className="text-4xl mb-3">⭐</div>
                 <h3 className="text-lg font-semibold text-navy mb-2">See Results</h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-700">
                   Read about our client success stories and outcomes.
                 </p>
               </Link>

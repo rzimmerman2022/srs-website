@@ -11,6 +11,15 @@ interface FAQProps {
   items: FAQItem[];
 }
 
+// Generate stable ID from question text
+function generateStableId(question: string): string {
+  return question
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .substring(0, 50);
+}
+
 export default function FAQ({ items }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -19,52 +28,70 @@ export default function FAQ({ items }: FAQProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
-        const itemId = `faq-item-${index}`;
+        const stableKey = generateStableId(item.question);
+        const itemId = `faq-${stableKey}`;
 
         return (
           <div
-            key={index}
-            className="border border-gray-200 rounded-lg overflow-hidden"
+            key={stableKey}
+            className={`border rounded-xl overflow-hidden transition-all duration-300 ease-in-out ${
+              isOpen
+                ? 'border-gold bg-white shadow-md'
+                : 'border-gray-200 bg-white hover:border-gray-300'
+            }`}
           >
+            {/* Header/Question Button */}
             <button
+              type="button"
               id={`${itemId}-button`}
-              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-sand-50 transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-inset"
+              className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 rounded-xl"
               onClick={() => toggleItem(index)}
-              aria-expanded={isOpen}
+              aria-expanded={isOpen ? 'true' : 'false'}
               aria-controls={`${itemId}-content`}
             >
-              <span className="font-semibold text-navy pr-4">{item.question}</span>
-              <svg
-                className={`w-5 h-5 text-gold flex-shrink-0 transition-transform duration-200 ${
-                  isOpen ? 'transform rotate-180' : ''
+              <span className="font-semibold text-navy text-base leading-relaxed">
+                {item.question}
+              </span>
+              <span
+                className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                  isOpen
+                    ? 'bg-gold text-white rotate-180'
+                    : 'bg-sand-100 text-gold'
                 }`}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
                 aria-hidden="true"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
             </button>
 
+            {/* Content/Answer Panel */}
             <div
               id={`${itemId}-content`}
               role="region"
               aria-labelledby={`${itemId}-button`}
-              className={`overflow-hidden transition-all duration-200 ${
-                isOpen ? 'max-h-96' : 'max-h-0'
+              className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
               }`}
             >
-              <div className="px-6 pb-4 text-gray-600 leading-relaxed">
-                {item.answer}
+              <div className="overflow-hidden">
+                <div className="px-6 pt-2 pb-6 text-gray-700 leading-relaxed text-base border-t border-gray-100">
+                  {item.answer}
+                </div>
               </div>
             </div>
           </div>

@@ -1,16 +1,31 @@
-import { ReactNode } from 'react';
+import { ReactNode, HTMLAttributes } from 'react';
 
-interface CardProps {
+interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
   children: ReactNode;
   className?: string;
   hover?: boolean;
+  interactive?: boolean;
 }
 
-export default function Card({ children, className = '', hover = true }: CardProps) {
+export default function Card({
+  children,
+  className = '',
+  hover = true,
+  interactive = false,
+  ...props
+}: CardProps) {
   const hoverStyles = hover ? 'hover:shadow-md' : '';
+  const interactiveStyles = interactive
+    ? 'focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:outline-none cursor-pointer'
+    : '';
 
   return (
-    <div className={`card ${hoverStyles} ${className}`}>
+    <div
+      className={`card ${hoverStyles} ${interactiveStyles} ${className}`}
+      tabIndex={interactive ? 0 : undefined}
+      role={interactive ? 'button' : undefined}
+      {...props}
+    >
       {children}
     </div>
   );

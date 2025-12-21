@@ -15,7 +15,6 @@ interface HeroProps {
     text: string;
     href: string;
   };
-  gradient?: boolean;
   children?: ReactNode;
 }
 
@@ -25,13 +24,12 @@ export default function Hero({
   description,
   primaryCTA,
   secondaryCTA,
-  gradient: _gradient = true, // Kept for compatibility
   children,
 }: HeroProps) {
   return (
     <section className="relative bg-navy overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {/* Top Right Gold Glow */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gold/10 rounded-full blur-[120px] transform translate-x-1/3 -translate-y-1/3 opacity-60" />
         {/* Bottom Left Blue Glow */}
