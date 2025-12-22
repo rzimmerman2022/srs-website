@@ -48,6 +48,12 @@ const IconSparkles = () => (
   </svg>
 );
 
+const IconRocket = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+  </svg>
+);
+
 const IconBolt = () => (
   <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
@@ -113,6 +119,13 @@ const whySRS: { title: string; description: string; iconComponent: React.ReactNo
       'We don\'t just write resumes—we help you own your story. Every enhancement is grounded in your authentic experience and defensible in interviews.',
     iconComponent: <IconSparkles />,
     features: ['Authenticity Focus', 'Defensible Claims', 'Confidence Building'],
+  },
+  {
+    title: 'Comprehensive Process',
+    description:
+      'From deep discovery and market research to ownership transfer and interview mastery, we guide you through every step of your career elevation.',
+    iconComponent: <IconRocket />,
+    features: ['Deep Discovery', 'Ownership Transfer', 'Interview Mastery'],
   },
   {
     title: 'Quality Obsessed',
@@ -204,93 +217,8 @@ export default function HomePage() {
       {/* Trust Indicators Section */}
       <TrustSection />
 
-
-      {/* Problem Statement Section - bg-sand-50 per SOP: warm, empathetic tone */}
+      {/* Verified Proof Section */}
       <section className="section-padding bg-sand-50 border-b border-sand-200">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="mb-6 text-navy">The Real Challenge</h2>
-            <p className="text-xl text-charcoal/80 leading-relaxed">
-              You have the expertise. The problem isn&apos;t what you&apos;ve done—it&apos;s how you express it.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Pain Point 1 */}
-            <div className="group flex items-start gap-6 p-6 rounded-xl bg-white hover:bg-sand-50 transition-all duration-300 border border-sand-100 shadow-sm">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-navy mb-2">Your resume lists tasks, not impact</h3>
-                <p className="text-charcoal/80 leading-relaxed">
-                  The gap between what you did and how you describe it. Responsibilities don&apos;t reveal value—outcomes do.
-                </p>
-              </div>
-            </div>
-
-            {/* Pain Point 2 */}
-            <div className="group flex items-start gap-6 p-6 rounded-xl bg-white hover:bg-sand-50 transition-all duration-300 border border-sand-100 shadow-sm">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-navy mb-2">You&apos;ve outgrown your story</h3>
-                <p className="text-charcoal/80 leading-relaxed">
-                  Expertise becomes invisible when you&apos;re too close to it. What feels routine to you is exceptional to others.
-                </p>
-              </div>
-            </div>
-
-            {/* Pain Point 3 */}
-            <div className="group flex items-start gap-6 p-6 rounded-xl bg-white hover:bg-sand-50 transition-all duration-300 border border-sand-100 shadow-sm">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-navy mb-2">Interview anxiety despite qualifications</h3>
-                <p className="text-charcoal/80 leading-relaxed">
-                  You have the experience, but can&apos;t articulate what makes you valuable when it matters most.
-                </p>
-              </div>
-            </div>
-
-            {/* Pain Point 4 */}
-            <div className="group flex items-start gap-6 p-6 rounded-xl bg-white hover:bg-sand-50 transition-all duration-300 border border-sand-100 shadow-sm">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-navy mb-2">Generic templates don&apos;t capture you</h3>
-                <p className="text-charcoal/80 leading-relaxed">
-                  Cookie-cutter approaches miss what makes you unique. Your career deserves more than a fill-in-the-blank formula.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Transition statement */}
-          <div className="mt-12 text-center max-w-2xl mx-auto">
-            <p className="text-lg text-charcoal/70 italic">
-              These gaps aren&apos;t a reflection of your ability—they&apos;re a matter of perspective.
-              That&apos;s where we come in.
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* Verified Proof Section - bg-white per SOP: alternates with sand-50 above */}
-      <section className="section-padding bg-white border-b border-sand-200">
         <Container>
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="mb-4">Verified Proof</h2>
@@ -353,7 +281,7 @@ export default function HomePage() {
                     className="text-white hover:text-gold transition-colors text-sm font-medium flex items-center gap-1 group"
                   >
                     Read all reviews on Google
-                    <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
                   </a>
@@ -401,9 +329,9 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <Link href="/results#case-study-1" className="text-charcoal/80 hover:text-navy text-xs transition-colors flex items-center gap-1 mt-auto">
-                    Read more
-                    <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <Link href="/results#case-study-1" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
+                    Read the full story
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
                   </Link>
@@ -433,9 +361,9 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <Link href="/results#case-study-2" className="text-charcoal/80 hover:text-navy text-xs transition-colors flex items-center gap-1 mt-auto">
-                    Read more
-                    <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <Link href="/results#case-study-2" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
+                    Read the full story
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
                   </Link>
@@ -465,9 +393,9 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <Link href="/results#case-study-3" className="text-charcoal/80 hover:text-navy text-xs transition-colors flex items-center gap-1 mt-auto">
-                    Read more
-                    <svg className="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <Link href="/results#case-study-3" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
+                    Read the full story
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
                   </Link>
@@ -504,6 +432,11 @@ export default function HomePage() {
                 <h3 className="text-2xl font-serif font-bold text-navy mb-4">{service.title}</h3>
                 <p className="text-gray-700 mb-8 flex-grow text-lg leading-relaxed">{service.description}</p>
 
+                <Link href={service.cta?.href || '#'}>
+                  <Button variant="outline" className="w-full border-navy text-navy hover:bg-navy hover:text-white">
+                    {service.cta?.text}
+                  </Button>
+                </Link>
               </div>
             ))}
           </div>
@@ -574,6 +507,9 @@ export default function HomePage() {
                 </div>
               </div>
 
+              <Link href="/contact">
+                <Button variant="outline" className="w-full">Get Started</Button>
+              </Link>
             </div>
 
             {/* Accelerator */}
@@ -643,25 +579,28 @@ export default function HomePage() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-center gap-2 text-left">
                     <div className="w-8 h-8 bg-navy/10 text-navy rounded-lg flex items-center justify-center flex-shrink-0">
-                      <IconDocument className="w-5 h-5" />
+                      <IconDocument />
                     </div>
                     <span className="text-sm text-navy font-medium">Resume Writing & Optimization</span>
                   </div>
                   <div className="flex items-center justify-center gap-2 text-left">
                     <div className="w-8 h-8 bg-navy/10 text-navy rounded-lg flex items-center justify-center flex-shrink-0">
-                      <IconBriefcase className="w-5 h-5" />
+                      <IconBriefcase />
                     </div>
                     <span className="text-sm text-navy font-medium">LinkedIn Optimization</span>
                   </div>
                   <div className="flex items-center justify-center gap-2 text-left">
                     <div className="w-8 h-8 bg-navy/10 text-navy rounded-lg flex items-center justify-center flex-shrink-0">
-                      <IconTarget className="w-5 h-5" />
+                      <IconTarget />
                     </div>
                     <span className="text-sm text-navy font-medium">Interview Coaching</span>
                   </div>
                 </div>
               </div>
 
+              <Link href="/contact">
+                <Button variant="outline" className="w-full">Get Started</Button>
+              </Link>
             </div>
           </div>
         </Container>
@@ -676,8 +615,8 @@ export default function HomePage() {
         </div>
 
         <Container>
-          <div className="max-w-4xl mx-auto relative z-10">
-            <div className="text-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div>
               <div className="inline-block px-4 py-1 rounded-full bg-gold/10 text-gold text-sm font-semibold mb-6 border border-gold/20">
                 Our Core Philosophy
               </div>
@@ -701,8 +640,41 @@ export default function HomePage() {
                   finally articulated the way it deserves.
                 </p>
               </div>
+              <div className="mt-10">
+                <Link href="/about">
+                  <Button variant="primary">Learn About Our Philosophy</Button>
+                </Link>
+              </div>
             </div>
 
+            <div className="glass-dark p-8 rounded-2xl shadow-2xl border border-white/10">
+              <h3 className="text-2xl font-serif font-semibold text-white mb-8 border-b border-white/10 pb-4">
+                Our Research-Backed Process
+              </h3>
+              <div className="space-y-8">
+                <div className="flex items-start gap-6">
+                  <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold text-2xl font-bold flex-shrink-0">1</div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">Collaborative Discovery</h4>
+                    <p className="text-sand-200 text-sm mt-1">Deep dive into your experience and achievements</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-6">
+                  <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold text-2xl font-bold flex-shrink-0">2</div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">Research-Validated Translation</h4>
+                    <p className="text-sand-200 text-sm mt-1">Grounded in O*NET, BLS, and market intelligence</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-6">
+                  <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold text-2xl font-bold flex-shrink-0">3</div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">Ownership Transfer</h4>
+                    <p className="text-sand-200 text-sm mt-1">You own every word with authentic confidence</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
@@ -718,7 +690,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {whySRS.map((item) => (
               <Card key={item.title} className="h-full">
                 <CardHeader>

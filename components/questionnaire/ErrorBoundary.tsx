@@ -73,7 +73,7 @@ export default class ErrorBoundary extends Component<Props, State> {
                 Contact Support
               </a>
             </div>
-            <p className="text-sm text-gray-500 mt-6">
+            <p className="text-sm text-charcoal/70 mt-6">
               If this problem persists, please contact us with the details above.
             </p>
           </div>

@@ -171,7 +171,7 @@ export default function ResultsPage() {
         <Container>
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-4">Types of Transformations</h2>
-            <p className="text-xl text-gray-700">
+            <p className="text-xl text-charcoal/80">
               Our methodology adapts to your unique situation and career goals.
             </p>
           </div>
@@ -188,7 +188,7 @@ export default function ResultsPage() {
                 <h3 className="text-xl font-serif font-semibold text-navy mb-3">
                   {category.title}
                 </h3>
-                <p className="text-gray-700 text-sm leading-relaxed">
+                <p className="text-charcoal/80 text-sm leading-relaxed">
                   {category.description}
                 </p>
               </div>
@@ -203,7 +203,7 @@ export default function ResultsPage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="mb-4">What Clients Value Most</h2>
-              <p className="text-gray-700 max-w-2xl mx-auto">
+              <p className="text-charcoal/80 max-w-2xl mx-auto">
                 Common themes clients report after completing the SRS process.
               </p>
             </div>
@@ -215,7 +215,7 @@ export default function ResultsPage() {
                   className="glass p-6 rounded-xl border-l-4 border-gold hover:shadow-premium-hover transition-all duration-300"
                 >
                   <h3 className="font-semibold text-navy mb-2">{value.title}</h3>
-                  <p className="text-gray-700 text-sm leading-relaxed">
+                  <p className="text-charcoal/80 text-sm leading-relaxed">
                     {value.description}
                   </p>
                 </div>
@@ -286,7 +286,7 @@ export default function ResultsPage() {
         <Container>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="mb-4">Client Transformations</h2>
-            <p className="text-gray-700">
+            <p className="text-charcoal/80">
               Client names and identifying details protected per our privacy standards.
             </p>
           </div>
@@ -301,7 +301,7 @@ export default function ResultsPage() {
             <a href="#case-study-1" className="group glass p-6 rounded-2xl border border-sand-200 hover:border-gold hover:shadow-premium-hover transition-all duration-300">
               <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Senior Financial Operations</div>
               <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">The Truth Gap, Closed</h3>
-              <p className="text-gray-600 text-sm mb-4">30+ years of real scope, but no resume and no language for it.</p>
+              <p className="text-charcoal/80 text-sm mb-4">30+ years of real scope, but no resume and no language for it.</p>
               <span className="text-gold font-semibold text-sm flex items-center">
                 Read the full story
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -314,7 +314,7 @@ export default function ResultsPage() {
             <a href="#case-study-2" className="group glass p-6 rounded-2xl border border-sand-200 hover:border-gold hover:shadow-premium-hover transition-all duration-300">
               <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Public Benefits Specialist</div>
               <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">Evidence-First Compliance</h3>
-              <p className="text-gray-600 text-sm mb-4">Top-tier performance with a workforce reduction that needed a defensible narrative.</p>
+              <p className="text-charcoal/80 text-sm mb-4">Top-tier performance with a workforce reduction that needed a defensible narrative.</p>
               <span className="text-gold font-semibold text-sm flex items-center">
                 Read the full story
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -327,7 +327,7 @@ export default function ResultsPage() {
             <a href="#case-study-3" className="group glass p-6 rounded-2xl border border-sand-200 hover:border-gold hover:shadow-premium-hover transition-all duration-300">
               <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Hospitality Executive</div>
               <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">Owner-Operator to Systems Leader</h3>
-              <p className="text-gray-600 text-sm mb-4">From responsibilities to systems and controls that drove $2M+ revenue growth.</p>
+              <p className="text-charcoal/80 text-sm mb-4">From responsibilities to systems and controls that drove $2M+ revenue growth.</p>
               <span className="text-gold font-semibold text-sm flex items-center">
                 Read the full story
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -352,7 +352,7 @@ export default function ResultsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="glass p-6 rounded-2xl border border-sand-200">
                   <h3 className="text-lg font-bold text-navy mb-3">The Truth Gap</h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-charcoal/80 leading-relaxed">
                     After decades of running the accounting backbone of a multi-site operation, the client had no resume and minimized their contribution as routine work.
                   </p>
                 </div>
@@ -371,15 +371,15 @@ export default function ResultsPage() {
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700">Conducted a structured truth inventory to isolate only defensible claims</span>
+                    <span className="text-charcoal/80">Conducted a structured truth inventory to isolate only defensible claims</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700">Translated operational work into market language aligned to role standards</span>
+                    <span className="text-charcoal/80">Translated operational work into market language aligned to role standards</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700">Applied ownership testing so the client could explain and defend every claim</span>
+                    <span className="text-charcoal/80">Applied ownership testing so the client could explain and defend every claim</span>
                   </li>
                 </ul>
               </div>
@@ -387,11 +387,11 @@ export default function ResultsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="glass p-6 rounded-xl">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Deliverables</h3>
-                  <p className="text-gray-700">Dual-track positioning (operations plus accounting) with a proof stack and interview narrative.</p>
+                  <p className="text-charcoal/80">Dual-track positioning (operations plus accounting) with a proof stack and interview narrative.</p>
                 </div>
                 <div className="glass p-6 rounded-xl border-l-4 border-gold">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Transformation</h3>
-                  <p className="text-gray-700">Client equipped to compete for target roles with defensible positioning and interview-ready ownership transfer.</p>
+                  <p className="text-charcoal/80">Client equipped to compete for target roles with defensible positioning and interview-ready ownership transfer.</p>
                 </div>
               </div>
             </div>
@@ -422,10 +422,10 @@ export default function ResultsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 mb-8">
                 <div className="glass p-6 rounded-2xl">
                   <h3 className="text-lg font-bold text-navy mb-3">The Truth Gap</h3>
-                  <p className="text-gray-700 leading-relaxed mb-3">
+                  <p className="text-charcoal/80 leading-relaxed mb-3">
                     This client delivered strong performance in a high-stakes eligibility environment, but their resume read like a duties list.
                   </p>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-charcoal/80 leading-relaxed">
                     The role ended in an agency-wide workforce reduction—not performance—and the client needed a narrative that would stand up to skeptical screening.
                   </p>
                 </div>
@@ -456,19 +456,19 @@ export default function ResultsPage() {
             <div className="space-y-8">
               <div className="glass p-8 rounded-2xl">
                 <h3 className="text-xl font-serif font-semibold text-navy mb-6">Our Methodology</h3>
-                <p className="text-gray-700 mb-6">We reframed the story around what employers actually evaluate in regulated environments:</p>
+                <p className="text-charcoal/80 mb-6">We reframed the story around what employers actually evaluate in regulated environments:</p>
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700"><strong>Risk containment:</strong> accuracy, compliance, and clean documentation</span>
+                    <span className="text-charcoal/80"><strong>Risk containment:</strong> accuracy, compliance, and clean documentation</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700"><strong>Throughput controls:</strong> meeting targets without sacrificing quality</span>
+                    <span className="text-charcoal/80"><strong>Throughput controls:</strong> meeting targets without sacrificing quality</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700"><strong>Human mechanism:</strong> empathy as a tool for complete disclosures</span>
+                    <span className="text-charcoal/80"><strong>Human mechanism:</strong> empathy as a tool for complete disclosures</span>
                   </li>
                 </ul>
               </div>
@@ -476,7 +476,7 @@ export default function ResultsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="glass p-6 rounded-xl">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Deliverables</h3>
-                  <ul className="space-y-2 text-gray-700 text-sm">
+                  <ul className="space-y-2 text-charcoal/80 text-sm">
                     <li>• Metrics-backed resume with compliance-forward positioning</li>
                     <li>• Factual workforce-reduction script</li>
                     <li>• Interview-ready talking points built on proof</li>
@@ -484,7 +484,7 @@ export default function ResultsPage() {
                 </div>
                 <div className="glass p-6 rounded-xl border-l-4 border-gold">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Transformation</h3>
-                  <p className="text-gray-700 text-sm">Defensible positioning and interview-ready ownership transfer. We do not claim interviews or offers without documented permission.</p>
+                  <p className="text-charcoal/80 text-sm">Defensible positioning and interview-ready ownership transfer. We do not claim interviews or offers without documented permission.</p>
                 </div>
               </div>
             </div>
@@ -515,7 +515,7 @@ export default function ResultsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="glass p-6 rounded-2xl border border-sand-200">
                   <h3 className="text-lg font-bold text-navy mb-3">The Truth Gap</h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-charcoal/80 leading-relaxed">
                     The client&apos;s resume described responsibilities, not the systems and controls that drove measurable outcomes.
                   </p>
                 </div>
@@ -534,15 +534,15 @@ export default function ResultsPage() {
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700">Mapped entrepreneurial work into corporate evaluation language (systems, controls, cadence)</span>
+                    <span className="text-charcoal/80">Mapped entrepreneurial work into corporate evaluation language (systems, controls, cadence)</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700">Converted outcomes into defensible proof points tied to mechanisms</span>
+                    <span className="text-charcoal/80">Converted outcomes into defensible proof points tied to mechanisms</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-gray-700">Removed any claim that could not be defended under scrutiny</span>
+                    <span className="text-charcoal/80">Removed any claim that could not be defended under scrutiny</span>
                   </li>
                 </ul>
               </div>
@@ -550,11 +550,11 @@ export default function ResultsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="glass p-6 rounded-xl">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Deliverables</h3>
-                  <p className="text-gray-700">Executive positioning narrative with interview-ready proof points and ATS-ready structure.</p>
+                  <p className="text-charcoal/80">Executive positioning narrative with interview-ready proof points and ATS-ready structure.</p>
                 </div>
                 <div className="glass p-6 rounded-xl border-l-4 border-gold">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Transformation</h3>
-                  <p className="text-gray-700">Client equipped to compete for VP and COO roles with proof points, not promises.</p>
+                  <p className="text-charcoal/80">Client equipped to compete for VP and COO roles with proof points, not promises.</p>
                 </div>
               </div>
             </div>

@@ -20,7 +20,7 @@ export default function TermsPage() {
         <Container>
           <div className="max-w-3xl mx-auto">
             <div className="glass p-8 md:p-12 rounded-2xl">
-              <p className="text-sm text-gray-500 mb-8">Last updated: December 2024</p>
+              <p className="text-sm text-charcoal/70 mb-8">Last updated: December 2024</p>
 
               <div className="space-y-8">
                 <div>

@@ -83,7 +83,9 @@
       "Bash(md5:*)",
       "Bash(python3:*)",
       "Bash(tee:*)",
-      "Bash([ -d .next ])"
+      "Bash([ -d .next ])",
+      "Bash(npm run lint:*)",
+      "Bash(kill:*)"
     ],
     "deny": [],
     "ask": []

@@ -61,7 +61,7 @@ export default function DiscoveryIndexPage() {
                     placeholder="Enter your client ID"
                     className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all"
                   />
-                  <p className="mt-2 text-sm text-gray-500">
+                  <p className="mt-2 text-sm text-charcoal/70">
                     Your client ID was provided in your welcome email.
                   </p>
                 </div>
@@ -75,7 +75,7 @@ export default function DiscoveryIndexPage() {
               </form>
 
               <div className="mt-8 pt-6 border-t border-sand-200 text-center">
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm text-charcoal/70 mb-4">
                   Don&apos;t have a client ID yet?
                 </p>
                 <Link
@@ -89,7 +89,7 @@ export default function DiscoveryIndexPage() {
 
             {/* Demo Link */}
             <div className="mt-8 text-center">
-              <p className="text-sm text-gray-500 mb-2">Demo access:</p>
+              <p className="text-sm text-charcoal/70 mb-2">Demo access:</p>
               <Link
                 href="/discovery/jdeleon"
                 className="text-navy font-medium hover:text-gold transition-colors"

@@ -119,7 +119,7 @@ export default function ContactForm() {
         <h3 className="text-2xl font-serif font-semibold text-navy mb-2">
           Thank You!
         </h3>
-        <p className="text-gray-600 mb-4">
+        <p className="text-charcoal/80 mb-4">
           We&apos;ve received your message and will get back to you within 1-2 business
           days.
         </p>
@@ -180,7 +180,7 @@ export default function ContactForm() {
           aria-label="Upload your current resume"
           aria-invalid={!!fieldErrors.resume}
           aria-describedby={fieldErrors.resume ? 'resume-upload-error' : 'resume-upload-help'}
-          className={`block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-sand-50 file:text-navy hover:file:bg-sand-100 transition-colors ${
+          className={`block w-full text-sm text-charcoal/80 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-sand-50 file:text-navy hover:file:bg-sand-100 transition-colors ${
             fieldErrors.resume ? 'border border-red-500 rounded-lg' : ''
           }`}
         />
@@ -189,7 +189,7 @@ export default function ContactForm() {
             {fieldErrors.resume}
           </p>
         ) : (
-          <p id="resume-upload-help" className="text-xs text-gray-500 mt-1">
+          <p id="resume-upload-help" className="text-xs text-charcoal/70 mt-1">
             Upload your current resume (PDF or Word, max 5MB) - helps us provide better guidance
           </p>
         )}
@@ -211,7 +211,7 @@ export default function ContactForm() {
         </div>
       )}
 
-      <div className="bg-sand-50 border border-sand-200 rounded-lg p-4 text-sm text-gray-600">
+      <div className="bg-sand-50 border border-sand-200 rounded-lg p-4 text-sm text-charcoal/80">
         <p className="mb-2">
           <strong>What happens next?</strong>
         </p>

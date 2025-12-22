@@ -577,7 +577,7 @@ export default function ServicesPage() {
         <Container>
           <div className="text-center mb-12">
             <h2 className="mb-4">What We Offer</h2>
-            <p className="text-charcoal/70 max-w-2xl mx-auto">
+            <p className="text-charcoal/80 max-w-2xl mx-auto">
               Every service is built on our Client Truth Principle &mdash; authentic enhancement you can defend.
             </p>
           </div>
@@ -593,7 +593,7 @@ export default function ServicesPage() {
                   {service.icon}
                 </div>
                 <h3 className="text-lg font-semibold text-navy mb-2">{service.title}</h3>
-                <p className="text-sm text-charcoal/60 mb-4">{service.tagline}</p>
+                <p className="text-sm text-charcoal/80 mb-4">{service.tagline}</p>
                 <ul className="space-y-2">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2 text-sm text-charcoal/70">
@@ -617,7 +617,7 @@ export default function ServicesPage() {
                 Find Your Fit
               </p>
               <h2 className="mb-4">Which Package Is Right for You?</h2>
-              <p className="text-charcoal/70 max-w-2xl mx-auto">
+              <p className="text-charcoal/80 max-w-2xl mx-auto">
                 Choose based on where you are in your career journey. Every package is designed to help you own your professional story with confidence.
               </p>
             </div>
@@ -654,7 +654,7 @@ export default function ServicesPage() {
                     You need a resume that passes ATS and looks professional
                   </li>
                 </ul>
-                <p className="text-xs text-charcoal/60 italic">
+                <p className="text-xs text-charcoal/80 italic">
                   Best for: Individual contributors, lateral moves, straightforward career progression
                 </p>
               </div>
@@ -696,7 +696,7 @@ export default function ServicesPage() {
                     You&apos;re ready to leverage LinkedIn to attract recruiters
                   </li>
                 </ul>
-                <p className="text-xs text-charcoal/60 italic">
+                <p className="text-xs text-charcoal/80 italic">
                   Best for: Mid-level professionals, competitive industries (tech, healthcare, finance), salary increases
                 </p>
               </div>
@@ -732,7 +732,7 @@ export default function ServicesPage() {
                     You need comprehensive support including interview confidence
                   </li>
                 </ul>
-                <p className="text-xs text-charcoal/60 italic">
+                <p className="text-xs text-charcoal/80 italic">
                   Best for: Career changers, returners to workforce, non-traditional backgrounds, stretch roles
                 </p>
               </div>
@@ -768,14 +768,14 @@ export default function ServicesPage() {
                     You want white-glove service with direct founder access
                   </li>
                 </ul>
-                <p className="text-xs text-charcoal/60 italic">
+                <p className="text-xs text-charcoal/80 italic">
                   Best for: Senior leaders, board positions, complex executive transitions, six-figure+ roles
                 </p>
               </div>
             </div>
 
             <div className="text-center mt-8 p-6 bg-sand-50 rounded-xl border border-gold/20">
-              <p className="text-sm text-charcoal/70">
+              <p className="text-sm text-charcoal/80">
                 <span className="font-semibold text-navy">Still not sure?</span> That&apos;s completely normal. We&apos;ll help you identify the right fit during your free consultation.
               </p>
               <Link href="/contact" className="inline-flex items-center gap-2 text-gold font-medium hover:underline mt-2 text-sm">
@@ -795,7 +795,7 @@ export default function ServicesPage() {
               Pricing
             </p>
             <h2 className="mb-4">Choose Your Package</h2>
-            <p className="text-charcoal/70 max-w-2xl mx-auto mb-8">
+            <p className="text-charcoal/80 max-w-2xl mx-auto mb-8">
               All packages include our research-backed methodology and unlimited revisions within scope until you own every word.
             </p>
 
@@ -805,18 +805,18 @@ export default function ServicesPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="text-center p-3 bg-sand-50 rounded-lg">
                   <div className="text-2xl font-bold text-gold mb-1">200+</div>
-                  <div className="text-charcoal/70">Job postings analyzed per engagement</div>
+                  <div className="text-charcoal/80">Job postings analyzed per engagement</div>
                 </div>
                 <div className="text-center p-3 bg-sand-50 rounded-lg">
                   <div className="text-2xl font-bold text-gold mb-1">O*NET</div>
-                  <div className="text-charcoal/70">Occupation validation & competency mapping</div>
+                  <div className="text-charcoal/80">Occupation validation & competency mapping</div>
                 </div>
                 <div className="text-center p-3 bg-sand-50 rounded-lg">
                   <div className="text-2xl font-bold text-gold mb-1">BLS</div>
-                  <div className="text-charcoal/70">Salary benchmarking & market intelligence</div>
+                  <div className="text-charcoal/80">Salary benchmarking & market intelligence</div>
                 </div>
               </div>
-              <p className="text-xs text-charcoal/60 mt-4 italic">
+              <p className="text-xs text-charcoal/80 mt-4 italic">
                 ROI Perspective: Our Accelerator package ($300) represents just 0.3% of a $100k salary — an investment that pays for itself with even a modest salary increase.
               </p>
             </div>
@@ -848,7 +848,7 @@ export default function ServicesPage() {
                   </div>
                   <h3 className="text-xl font-serif font-semibold text-navy mb-2">{pkg.name}</h3>
                   <div className="text-4xl font-bold text-gold mb-2">{pkg.price}</div>
-                  <p className="text-sm text-charcoal/60">{pkg.description}</p>
+                  <p className="text-sm text-charcoal/80">{pkg.description}</p>
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-grow">
@@ -873,7 +873,7 @@ export default function ServicesPage() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-sm text-charcoal/60">
+            <p className="text-sm text-charcoal/80">
               Not sure which package is right for you?{' '}
               <Link href="/contact" className="text-gold font-medium hover:underline">
                 Schedule a free consultation
@@ -904,14 +904,14 @@ export default function ServicesPage() {
               ].map((item) => (
                 <div key={item.label} className="text-center p-4 bg-sand-50 rounded-xl">
                   <div className="text-2xl font-bold text-gold mb-1">{item.metric}</div>
-                  <div className="text-xs text-charcoal/60">{item.label}</div>
+                  <div className="text-xs text-charcoal/80">{item.label}</div>
                 </div>
               ))}
             </div>
 
             {/* ATS Footnote */}
             <div className="mt-6 text-center">
-              <p className="text-sm text-charcoal/60">
+              <p className="text-sm text-charcoal/80">
                 *Compatible with major ATS platforms including Workday, Taleo, Greenhouse, and iCIMS
               </p>
             </div>

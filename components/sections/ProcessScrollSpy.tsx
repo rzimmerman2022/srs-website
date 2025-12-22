@@ -53,11 +53,11 @@ export default function ProcessScrollSpy({ steps }: ProcessScrollSpyProps) {
                 aria-live="polite"
                 aria-label={`Currently viewing step ${activeStep} of ${totalSteps}`}
             >
-                <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">Current Step</span>
+                <span className="text-sm font-bold text-charcoal/80 uppercase tracking-wider">Current Step</span>
                 <div className="flex items-center">
                     <span className="text-2xl font-bold text-navy">{activeStep}</span>
-                    <span className="text-gray-400 mx-1" aria-hidden="true">/</span>
-                    <span className="text-gray-400">{totalSteps}</span>
+                    <span className="text-charcoal/70 mx-1" aria-hidden="true">/</span>
+                    <span className="text-charcoal/70">{totalSteps}</span>
                 </div>
             </div>
 
@@ -76,7 +76,7 @@ export default function ProcessScrollSpy({ steps }: ProcessScrollSpyProps) {
                                         'w-full text-left px-6 py-4 rounded-lg transition-all duration-300 flex items-center group focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2',
                                         activeStep === step.number
                                             ? 'bg-navy text-white shadow-lg transform scale-105'
-                                            : 'hover:bg-sand-50 text-gray-600 hover:text-navy'
+                                            : 'hover:bg-sand-50 text-charcoal/80 hover:text-navy'
                                     )}
                                     aria-current={activeStep === step.number ? 'step' : undefined}
                                     aria-label={`Go to step ${step.number} of ${totalSteps}: ${step.title}`}
@@ -86,7 +86,7 @@ export default function ProcessScrollSpy({ steps }: ProcessScrollSpyProps) {
                                             'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-4 transition-colors',
                                             activeStep === step.number
                                                 ? 'bg-gold text-navy'
-                                                : 'bg-gray-200 text-gray-500 group-hover:bg-gold/20 group-hover:text-navy'
+                                                : 'bg-gray-200 text-charcoal/80 group-hover:bg-gold/20 group-hover:text-navy'
                                         )}
                                         aria-hidden="true"
                                     >
@@ -132,7 +132,7 @@ export default function ProcessScrollSpy({ steps }: ProcessScrollSpyProps) {
                                     </h3>
                                 </div>
 
-                                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                                <p className="text-xl text-charcoal/80 mb-8 leading-relaxed">
                                     {step.description}
                                 </p>
 

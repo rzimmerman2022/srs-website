@@ -76,7 +76,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
         )}
 
         {helpText && !error && (
-          <p id={`${inputId}-help`} className="mt-2 text-sm text-gray-500">
+          <p id={`${inputId}-help`} className="mt-2 text-sm text-charcoal/70">
             {helpText}
           </p>
         )}

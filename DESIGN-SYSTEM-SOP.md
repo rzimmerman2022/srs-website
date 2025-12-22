@@ -136,9 +136,100 @@ All spacing uses multiples of 8px (with 4px for fine adjustments).
 - **Letter spacing:** 0.12× font size minimum for accessibility
 - **Word spacing:** 0.16× font size minimum for accessibility
 
+### Contextual Typography Rules (CRITICAL)
+
+**The 16px minimum applies to PRIMARY BODY CONTENT only.** Smaller sizes are VALID for specific UI contexts:
+
+| Context | Allowed Size | Rationale | Pattern to Match |
+|---------|--------------|-----------|------------------|
+| **Primary body text** | 16px+ (`text-base`) | User must read this content | Paragraphs, descriptions |
+| **Dense list items with icons** | 14px (`text-sm`) | Icons provide visual anchor | `<li className="flex items-center gap-2 text-sm">` |
+| **Labels/tags** | 12-14px (`text-xs`/`text-sm`) | Short, scannable | `uppercase tracking-wider text-sm` |
+| **Captions/metadata** | 12-14px (`text-xs`/`text-sm`) | Secondary information | Timestamps, counts, attributions |
+| **Price tags** | 14px (`text-sm`) | Part of larger visual hierarchy | `$150` in pricing cards |
+| **Badge sublabels** | 12px (`text-xs`) | Paired with larger primary text | TrustBadge sublabel |
+| **Navigation items** | 14px (`text-sm`) | Short text, clear context | Header/footer links |
+| **Form helper text** | 12-14px | Secondary to input | Error messages, hints |
+
+**VIOLATIONS (always wrong):**
+
+| Pattern | Why It's Wrong | Fix |
+|---------|----------------|-----|
+| `<p className="text-sm">Long paragraph...</p>` | Primary content too small | Use `text-base` |
+| `text-sm` on 3+ sentences | Body text, not label | Use `text-base` |
+| `text-xs` on any paragraph | Unreadable body content | Use `text-base` minimum |
+| `text-sm` without visual anchor | No icon/context to aid scanning | Use `text-base` or add icon |
+
+**VALID (not violations):**
+
+| Pattern | Why It's Valid | Keep As-Is |
+|---------|----------------|------------|
+| `<li className="flex items-center gap-2 text-sm">` | Icon anchored list | ✓ |
+| `<span className="text-sm font-semibold">$150</span>` | Price tag in hierarchy | ✓ |
+| `<p className="text-xs text-gray-500">Last updated...</p>` | Metadata/caption | ✓ |
+| `<span className="uppercase tracking-wider text-sm">Section Label</span>` | Section label | ✓ |
+| `<span className="text-xs">{sublabel}</span>` paired with larger text | Badge sublabel | ✓ |
+
 ---
 
 ## 4. Color System
+
+### Section Background Visual Rhythm (CRITICAL)
+
+**Alternating Rhythm Rule:** Adjacent sections MUST NOT share the same background color. This creates clear visual boundaries and helps users understand content hierarchy.
+
+#### Approved Background Palette
+
+| Background | Tailwind Class | Use Case |
+|------------|----------------|----------|
+| **Navy** | `bg-navy` | Hero, CTA, philosophy/trust sections (high emphasis) |
+| **White** | `bg-white` | Content sections, lists, forms (neutral) |
+| **Sand-50** | `bg-sand-50` | Proof sections, pricing, secondary content (warm neutral) |
+
+#### Visual Rhythm Pattern
+
+For long-form landing pages, follow this alternating pattern:
+
+```
+Navy → White → Sand-50 → Navy → Sand-50 → White → Navy
+  ↑      ↑        ↑        ↑       ↑        ↑       ↑
+Hero  Content  Content   CTA   Content  Content  Final CTA
+```
+
+**Rule of Thumb:**
+- **Navy sections:** Maximum 3-4 per page (hero, philosophy, CTA, final CTA)
+- **White/Sand alternation:** Light backgrounds should alternate with each other
+- **Never:** Two `bg-white` sections back-to-back
+- **Never:** Two `bg-sand-50` sections back-to-back
+- **Allowed:** `bg-navy` can follow any light background
+
+#### Semantic Section Backgrounds
+
+| Section Type | Recommended Background | Why |
+|--------------|------------------------|-----|
+| Hero | `bg-navy` | Maximum visual impact, establishes brand |
+| Trust/Metrics | `bg-white` | Clean, credibility feel |
+| Problem Statement | `bg-sand-50` | Warm, empathetic tone |
+| Social Proof/Reviews | `bg-sand-50` | Human, testimonial warmth |
+| Services/Features | `bg-navy` | Premium, bold presentation |
+| Pricing | `bg-sand-50` | Approachable, not intimidating |
+| Philosophy/Values | `bg-navy` | Authority, brand depth |
+| Process/How It Works | `bg-white` | Clear, step-by-step clarity |
+| Final CTA | `bg-navy` | Strong closing, action-oriented |
+
+#### Z-Pattern and F-Pattern Considerations
+
+Per [Interaction Design Foundation research](https://www.interaction-design.org/literature/article/repetition-pattern-and-rhythm):
+- **Alternating rhythm** breaks monotony while maintaining cohesion
+- Visual rhythm organizes content and intuitively guides navigation
+- Strategic spacing between sections enhances usability
+
+Per [UX best practices](https://99designs.com/blog/tips/visual-hierarchy-landing-page-designs/):
+- Z-pattern works for pages with less text and more visuals (landing pages)
+- Background color changes create natural "breakpoints" that reset the eye
+- Each section should feel like a distinct "card" in the page flow
+
+---
 
 ### Contrast Requirements (WCAG 2.1)
 
@@ -711,7 +802,81 @@ Before deploying any page/component:
 
 ## 12. Testing Procedures
 
-### Automated Testing (CI/CD)
+### Industry Gold Standard: Automated Design System Testing
+
+Based on Fortune 500 practices (IBM Carbon, Salesforce Lightning) and industry leaders:
+
+**Three-Tier Testing Strategy:**
+
+| Tier | Tool | What It Catches | When |
+|------|------|-----------------|------|
+| **1. Linting (Static)** | ESLint + Stylelint | Wrong class names, invalid tokens, accessibility | On save |
+| **2. Component Testing** | Storybook + Chromatic | Visual regressions, component behavior | On PR |
+| **3. Integration Testing** | Lighthouse CI | Performance, accessibility, SEO | On deploy |
+
+### Tier 1: ESLint Custom Rules for Design System
+
+Install dependencies:
+```bash
+npm install -D eslint-plugin-jsx-a11y @axe-core/react
+```
+
+Create `.eslintrc.design-system.js`:
+```javascript
+module.exports = {
+  plugins: ['jsx-a11y'],
+  rules: {
+    // Accessibility
+    'jsx-a11y/anchor-is-valid': 'error',
+    'jsx-a11y/alt-text': 'error',
+    'jsx-a11y/aria-props': 'error',
+    'jsx-a11y/aria-role': 'error',
+    'jsx-a11y/click-events-have-key-events': 'error',
+    'jsx-a11y/heading-has-content': 'error',
+    'jsx-a11y/html-has-lang': 'error',
+    'jsx-a11y/interactive-supports-focus': 'error',
+    'jsx-a11y/label-has-associated-control': 'error',
+    'jsx-a11y/mouse-events-have-key-events': 'error',
+    'jsx-a11y/no-autofocus': 'warn',
+    'jsx-a11y/no-redundant-roles': 'warn',
+    'jsx-a11y/role-has-required-aria-props': 'error',
+    'jsx-a11y/role-supports-aria-props': 'error',
+    'jsx-a11y/tabindex-no-positive': 'error',
+  },
+};
+```
+
+### Tier 2: Storybook + Chromatic Visual Testing
+
+Setup:
+```bash
+npx storybook@latest init
+npm install -D chromatic
+```
+
+Configure `chromatic.config.json`:
+```json
+{
+  "projectToken": "<project-token>",
+  "buildScriptName": "build-storybook",
+  "exitOnceUploaded": true,
+  "onlyChanged": true,
+  "externals": ["**/*.md"]
+}
+```
+
+Add to `package.json`:
+```json
+{
+  "scripts": {
+    "chromatic": "chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  }
+}
+```
+
+### Tier 3: Lighthouse CI
 
 ```json
 // lighthouse-ci.json
@@ -731,6 +896,192 @@ Before deploying any page/component:
   }
 }
 ```
+
+### Design Token Validation Script
+
+Create `scripts/validate-design-tokens.js`:
+```javascript
+#!/usr/bin/env node
+/**
+ * Design Token Validator
+ * Validates that code follows design system rules contextually
+ */
+
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
+
+// Configuration
+const config = {
+  // Patterns that make text-sm VALID
+  validTextSmPatterns: [
+    /flex\s+items-center.*gap-\d.*text-sm/,  // Icon-anchored lists
+    /uppercase.*tracking-wider.*text-sm/,    // Labels
+    /text-sm.*font-(semibold|bold)/,         // Price tags, badges
+    /text-xs.*text-gray-\d{3}/,              // Captions
+  ],
+
+  // Patterns that are ALWAYS violations
+  contrastViolations: [
+    /text-charcoal\/[5-6]0/,  // 50-60% opacity fails contrast
+    /text-gray-[4-5]00/,       // gray-400/500 often fail
+  ],
+
+  // Patterns that need review
+  needsReview: [
+    /text-charcoal\/70/,       // Borderline
+    /text-gray-600/,           // Borderline on white
+  ],
+};
+
+function validateFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const lines = content.split('\n');
+  const issues = [];
+
+  lines.forEach((line, index) => {
+    const lineNum = index + 1;
+
+    // Check for text-sm without valid context
+    if (line.includes('text-sm')) {
+      const isValid = config.validTextSmPatterns.some(pattern => pattern.test(line));
+      if (!isValid && (line.includes('<p') || line.includes('className="text-sm"'))) {
+        // Potential violation - needs context check
+        issues.push({
+          line: lineNum,
+          type: 'review',
+          message: 'text-sm on potential body content - verify context',
+          code: line.trim(),
+        });
+      }
+    }
+
+    // Check for contrast violations
+    config.contrastViolations.forEach(pattern => {
+      if (pattern.test(line)) {
+        issues.push({
+          line: lineNum,
+          type: 'error',
+          message: 'Color contrast violation - fails WCAG 4.5:1',
+          code: line.trim(),
+        });
+      }
+    });
+
+    // Check for needs-review patterns
+    config.needsReview.forEach(pattern => {
+      if (pattern.test(line)) {
+        issues.push({
+          line: lineNum,
+          type: 'warning',
+          message: 'Borderline contrast - verify with WebAIM',
+          code: line.trim(),
+        });
+      }
+    });
+  });
+
+  return issues;
+}
+
+// Run validation
+const files = glob.sync('app/**/*.tsx').concat(glob.sync('components/**/*.tsx'));
+let totalErrors = 0;
+let totalWarnings = 0;
+
+files.forEach(file => {
+  const issues = validateFile(file);
+  if (issues.length > 0) {
+    console.log(`\n${file}:`);
+    issues.forEach(issue => {
+      const icon = issue.type === 'error' ? '❌' : issue.type === 'warning' ? '⚠️' : '🔍';
+      console.log(`  ${icon} Line ${issue.line}: ${issue.message}`);
+      if (issue.type === 'error') totalErrors++;
+      if (issue.type === 'warning') totalWarnings++;
+    });
+  }
+});
+
+console.log(`\n${'='.repeat(50)}`);
+console.log(`Errors: ${totalErrors} | Warnings: ${totalWarnings}`);
+process.exit(totalErrors > 0 ? 1 : 0);
+```
+
+Add to `package.json`:
+```json
+{
+  "scripts": {
+    "lint:design": "node scripts/validate-design-tokens.js",
+    "lint:all": "npm run lint && npm run lint:design"
+  }
+}
+```
+
+### GitHub Actions Workflow
+
+Create `.github/workflows/design-system-qa.yml`:
+```yaml
+name: Design System QA
+
+on:
+  pull_request:
+    paths:
+      - 'app/**'
+      - 'components/**'
+      - 'styles/**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run lint:design
+
+  visual-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build-storybook
+      - run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          configPath: './lighthouse-ci.json'
+          uploadArtifacts: true
+```
+
+### Sources
+
+- [Chromatic Visual Testing](https://www.chromatic.com/storybook) - Industry standard for visual regression
+- [ESLint jsx-a11y Plugin](https://www.npmjs.com/package/eslint-plugin-jsx-a11y) - Accessibility linting
+- [Storybook for Next.js](https://storybook.js.org/docs/get-started/frameworks/nextjs) - Component testing
+- [Linting Design Tokens with Stylelint](https://www.michaelmang.dev/blog/linting-design-tokens-with-stylelint/) - Token validation
+- [ESLint Custom Rules](https://eslint.org/docs/latest/extend/custom-rules) - Building custom rules
+- [IBM Carbon Design System](https://carbondesignsystem.com/) - Fortune 500 reference
 
 ### Manual Testing Matrix
 

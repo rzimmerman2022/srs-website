@@ -77,7 +77,7 @@ export default function ContactPage() {
                     1111 N Mission Park Blvd #2016<br />
                     Chandler, AZ 85224
                   </address>
-                  <p className="text-gray-600 text-sm mt-2">
+                  <p className="text-charcoal/70 text-sm mt-2">
                     Serving Phoenix, Scottsdale, Mesa, Tempe, and the greater Arizona area.
                   </p>
                 </div>

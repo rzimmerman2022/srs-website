@@ -178,7 +178,7 @@ export default function MethodologyPage() {
                   Transformative Reframe: Score 8.0+
                 </div>
               </div>
-              <p className="text-sm text-charcoal/60">
+              <p className="text-sm text-charcoal/80">
                 This ensures your resume is both compelling and completely defensible.
               </p>
             </div>
@@ -228,7 +228,7 @@ export default function MethodologyPage() {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-                  <span className="text-charcoal/60">Level 1-2: Minimal enhancement</span>
+                  <span className="text-charcoal/80">Level 1-2: Minimal enhancement</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-gold"></div>
@@ -236,7 +236,7 @@ export default function MethodologyPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                  <span className="text-charcoal/60">Level 5: Prohibited (fabrication)</span>
+                  <span className="text-charcoal/80">Level 5: Prohibited (fabrication)</span>
                 </div>
               </div>
             </div>
@@ -270,7 +270,7 @@ export default function MethodologyPage() {
                     <p className="text-charcoal/70 mb-3">
                       Your exact words, minimally formatted. Baseline truth with no strategic positioning.
                     </p>
-                    <div className="bg-white p-3 rounded border border-gray-200 text-sm text-charcoal/60 italic">
+                    <div className="bg-white p-3 rounded border border-gray-200 text-sm text-charcoal/80 italic">
                       Example: &quot;Answered customer emails and processed orders&quot;
                     </div>
                   </div>
@@ -288,7 +288,7 @@ export default function MethodologyPage() {
                     <p className="text-charcoal/70 mb-3">
                       Industry-standard language with basic quantification. Still conservative positioning.
                     </p>
-                    <div className="bg-white p-3 rounded border border-blue-200 text-sm text-charcoal/60 italic">
+                    <div className="bg-white p-3 rounded border border-blue-200 text-sm text-charcoal/80 italic">
                       Example: &quot;Managed customer communications and order fulfillment (20+ daily interactions)&quot;
                     </div>
                   </div>
@@ -309,10 +309,10 @@ export default function MethodologyPage() {
                     <p className="text-charcoal/70 mb-3">
                       Research-validated expansion that reveals true scope and impact. Requires evidence bridge.
                     </p>
-                    <div className="bg-white p-3 rounded border border-gold text-sm text-charcoal/60 italic mb-2">
+                    <div className="bg-white p-3 rounded border border-gold text-sm text-charcoal/80 italic mb-2">
                       Example: &quot;Orchestrated customer experience touchpoints across email, chat, and order management systems, maintaining 95% satisfaction rating&quot;
                     </div>
-                    <p className="text-sm text-charcoal/60">
+                    <p className="text-sm text-charcoal/80">
                       Requires Research Authority Index (RAI) 7.0+ for validation.
                     </p>
                   </div>
@@ -333,10 +333,10 @@ export default function MethodologyPage() {
                     <p className="text-charcoal/70 mb-3">
                       Pattern recognition that reveals broader implications and system-level thinking. Requires strong evidence.
                     </p>
-                    <div className="bg-white p-3 rounded border border-gold text-sm text-charcoal/60 italic mb-2">
+                    <div className="bg-white p-3 rounded border border-gold text-sm text-charcoal/80 italic mb-2">
                       Example: &quot;Designed and implemented customer retention protocol that reduced churn by 23% through proactive engagement strategy&quot;
                     </div>
-                    <p className="text-sm text-charcoal/60">
+                    <p className="text-sm text-charcoal/80">
                       Requires Research Authority Index (RAI) 8.0+ and strong ownership transfer.
                     </p>
                   </div>
@@ -575,7 +575,7 @@ export default function MethodologyPage() {
                     <IconDatabase />
                   </div>
                   <div className="font-semibold text-navy mb-1">{source.name}</div>
-                  <div className="text-xs text-charcoal/60 mb-2">{source.description}</div>
+                  <div className="text-xs text-charcoal/80 mb-2">{source.description}</div>
                   <div className="text-xs font-mono text-gold">{source.score}</div>
                 </div>
               ))}
