@@ -85,7 +85,9 @@
       "Bash(tee:*)",
       "Bash([ -d .next ])",
       "Bash(npm run lint:*)",
-      "Bash(kill:*)"
+      "Bash(kill:*)",
+      "Bash(tree:*)",
+      "Bash(npm test:*)"
     ],
     "deny": [],
     "ask": []
