@@ -211,7 +211,7 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="mb-6 text-navy">The Real Challenge</h2>
             <p className="text-xl text-charcoal/80 leading-relaxed">
-              You have the expertise. The problem isn&apos;t what you&apos;ve done—it&apos;s how you express it.
+              You have the expertise. The problem isn&apos;t what you&apos;ve done. It&apos;s how you express it.
             </p>
           </div>
 
