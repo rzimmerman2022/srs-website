@@ -1,0 +1,73 @@
+-- Migration: Questionnaire Access Tokens
+-- Description: Adds secure token-based authentication for questionnaire access
+-- Date: 2025-12-21
+-- Author: Agent 2
+
+-- Create questionnaire_access_tokens table
+CREATE TABLE IF NOT EXISTS questionnaire_access_tokens (
+  -- Primary key
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+
+  -- Client and questionnaire identifiers
+  client_id TEXT NOT NULL,
+  questionnaire_id TEXT NOT NULL,
+
+  -- Secure token (32 characters)
+  token TEXT NOT NULL UNIQUE,
+
+  -- Timestamps
+  created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+  expires_at TIMESTAMPTZ NOT NULL,
+  accessed_at TIMESTAMPTZ,
+
+  -- Access tracking
+  access_count INTEGER DEFAULT 0 NOT NULL,
+
+  -- Revocation flag
+  revoked BOOLEAN DEFAULT FALSE NOT NULL,
+
+  -- Metadata (optional, for future extensions)
+  metadata JSONB DEFAULT '{}'
+);
+
+-- Indexes for fast lookups
+CREATE INDEX IF NOT EXISTS idx_questionnaire_access_tokens_token
+  ON questionnaire_access_tokens(token);
+
+CREATE INDEX IF NOT EXISTS idx_questionnaire_access_tokens_client_id
+  ON questionnaire_access_tokens(client_id);
+
+CREATE INDEX IF NOT EXISTS idx_questionnaire_access_tokens_questionnaire_id
+  ON questionnaire_access_tokens(questionnaire_id);
+
+-- Index for finding active (non-revoked, non-expired) tokens
+CREATE INDEX IF NOT EXISTS idx_questionnaire_access_tokens_active
+  ON questionnaire_access_tokens(token)
+  WHERE NOT revoked AND expires_at > NOW();
+
+-- Composite index for client + questionnaire lookups
+CREATE INDEX IF NOT EXISTS idx_questionnaire_access_tokens_client_questionnaire
+  ON questionnaire_access_tokens(client_id, questionnaire_id);
+
+-- Enable Row Level Security
+ALTER TABLE questionnaire_access_tokens ENABLE ROW LEVEL SECURITY;
+
+-- Policy: Allow all operations for now (can be restricted later with auth)
+-- For anonymous access (using anon key)
+CREATE POLICY "Allow all operations on questionnaire_access_tokens"
+  ON questionnaire_access_tokens
+  FOR ALL
+  USING (true)
+  WITH CHECK (true);
+
+-- Grant permissions to anon role (used by public Supabase client)
+GRANT ALL ON questionnaire_access_tokens TO anon;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon;
+
+-- Comments for documentation
+COMMENT ON TABLE questionnaire_access_tokens IS 'Secure token-based authentication for questionnaire access. Tokens are 32-character cryptographically random strings that expire after 30 days.';
+COMMENT ON COLUMN questionnaire_access_tokens.token IS 'Cryptographically secure 32-character token for questionnaire access';
+COMMENT ON COLUMN questionnaire_access_tokens.access_count IS 'Number of times this token has been used to access the questionnaire';
+COMMENT ON COLUMN questionnaire_access_tokens.revoked IS 'Whether this token has been manually revoked';
+COMMENT ON COLUMN questionnaire_access_tokens.expires_at IS 'Expiration timestamp (typically 30 days from creation)';
+COMMENT ON COLUMN questionnaire_access_tokens.accessed_at IS 'Last access timestamp';
