@@ -172,78 +172,36 @@ export default function HomePage() {
       {/* 4. Verified Proof (2 cards, manual scroll, excludes hero) */}
       <VerifiedProof excludeHeroId="jerome" />
 
-      {/* 5. Client Transformations */}
-      <section className="py-20 md:py-28 bg-sand-50">
+      {/* 5. Real Results - Single compelling before/after */}
+      <section className="py-16 md:py-24 bg-white">
         <Container>
-          {/* Section Header */}
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">Real Results</h2>
-            <p className="text-lg text-charcoal/70">
-              What changes when you work with us
-            </p>
-          </div>
+          <div className="max-w-4xl mx-auto">
 
-          {/* Simple Before/After Cards */}
-          <div className="max-w-4xl mx-auto space-y-8">
+            {/* Single powerful transformation */}
+            <div className="text-center">
+              {/* Before state - faded, smaller */}
+              <p className="text-lg md:text-xl text-charcoal/40 line-through decoration-charcoal/20 mb-6">
+                &ldquo;I have 30 years of experience but no way to explain it.&rdquo;
+              </p>
 
-            {/* Card 1 */}
-            <div className="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200">
-              <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-                <div className="flex-1 text-center md:text-left">
-                  <p className="text-charcoal/50 text-sm font-medium mb-2">Before</p>
-                  <p className="text-xl md:text-2xl text-charcoal/70">&ldquo;I don&apos;t have a resume&rdquo;</p>
-                </div>
-                <div className="text-gold text-3xl font-light">→</div>
-                <div className="flex-1 text-center md:text-left">
-                  <p className="text-navy/50 text-sm font-medium mb-2">After</p>
-                  <p className="text-xl md:text-2xl text-navy font-semibold">&ldquo;I can defend every line&rdquo;</p>
-                </div>
+              {/* Arrow */}
+              <div className="flex justify-center mb-6">
+                <svg className="w-8 h-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
               </div>
-              <p className="text-center text-sm text-charcoal/50 mt-6">— Senior Finance Leader, 30+ years experience</p>
+
+              {/* After state - bold, prominent */}
+              <p className="text-2xl md:text-4xl font-bold text-navy mb-8 leading-tight">
+                &ldquo;Now I can defend every line.&rdquo;
+              </p>
+
+              {/* Attribution */}
+              <p className="text-charcoal/50">
+                — Douglas H., Senior Finance Leader
+              </p>
             </div>
 
-            {/* Card 2 */}
-            <div className="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200">
-              <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-                <div className="flex-1 text-center md:text-left">
-                  <p className="text-charcoal/50 text-sm font-medium mb-2">Before</p>
-                  <p className="text-xl md:text-2xl text-charcoal/70">&ldquo;My resume sounds generic&rdquo;</p>
-                </div>
-                <div className="text-gold text-3xl font-light">→</div>
-                <div className="flex-1 text-center md:text-left">
-                  <p className="text-navy/50 text-sm font-medium mb-2">After</p>
-                  <p className="text-xl md:text-2xl text-navy font-semibold">&ldquo;This actually sounds like me&rdquo;</p>
-                </div>
-              </div>
-              <p className="text-center text-sm text-charcoal/50 mt-6">— Public Sector Specialist, career pivot</p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200">
-              <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-                <div className="flex-1 text-center md:text-left">
-                  <p className="text-charcoal/50 text-sm font-medium mb-2">Before</p>
-                  <p className="text-xl md:text-2xl text-charcoal/70">&ldquo;I ran everything myself&rdquo;</p>
-                </div>
-                <div className="text-gold text-3xl font-light">→</div>
-                <div className="flex-1 text-center md:text-left">
-                  <p className="text-navy/50 text-sm font-medium mb-2">After</p>
-                  <p className="text-xl md:text-2xl text-navy font-semibold">&ldquo;I built systems that scale&rdquo;</p>
-                </div>
-              </div>
-              <p className="text-center text-sm text-charcoal/50 mt-6">— Hospitality Executive, multi-unit operations</p>
-            </div>
-
-          </div>
-
-          {/* CTA */}
-          <div className="text-center mt-12">
-            <Link href="/results" className="inline-flex items-center gap-2 text-navy font-semibold hover:text-gold transition-colors">
-              See more results
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </Link>
           </div>
         </Container>
       </section>
