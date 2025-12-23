@@ -173,111 +173,134 @@ export default function HomePage() {
       <VerifiedProof excludeHeroId="jerome" />
 
       {/* 5. Client Transformations */}
-      <section className="section-padding bg-sand-50 border-b border-sand-200">
+      <section className="py-20 md:py-28 bg-sand-50">
         <Container>
-          <div className="max-w-4xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4 text-center">Client Transformations</h2>
-            <p className="text-lg text-charcoal/70 text-center max-w-3xl mx-auto">
-              Real clients closing the gap between their expertise and how they express it—turning hidden value into clear, defensible positioning.
+          {/* Section Header */}
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">Client Transformations</h2>
+            <p className="text-lg text-charcoal/70">
+              From hidden expertise to clear, defensible positioning
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {/* Case Study 1 */}
-            <div className="group bg-white rounded-xl overflow-hidden shadow-sm border border-sand-100 hover:shadow-md transition-all duration-300 flex flex-col h-full">
-              <div className="p-8 flex flex-col h-full">
-                <div className="mb-4">
-                  <h3 className="text-lg font-bold text-navy mb-1">The Truth Gap, Closed</h3>
-                  <p className="text-xs text-charcoal/60 uppercase tracking-wide">Senior Financial Operations | Retail</p>
+          {/* Transformation Cards - Simplified, scannable design */}
+          <div className="max-w-5xl mx-auto space-y-6">
+
+            {/* Card 1 */}
+            <div className="group bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200 hover:shadow-md transition-all duration-300">
+              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+                {/* Left: Title & Role */}
+                <div className="md:w-1/3">
+                  <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-xs font-semibold rounded-full mb-3">
+                    Financial Operations
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-bold text-navy mb-2">
+                    The Truth Gap, Closed
+                  </h3>
+                  <p className="text-sm text-charcoal/60">
+                    30+ years of expertise, finally articulated
+                  </p>
                 </div>
 
-                <div className="space-y-4 mb-6 flex-grow">
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Challenge</span>
-                    <p className="text-sm text-charcoal/80">30+ years of real scope, but no resume and no language for it.</p>
+                {/* Right: Before → After */}
+                <div className="md:w-2/3 flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  <div className="flex-1 bg-sand-50 rounded-xl p-5">
+                    <span className="text-xs font-semibold text-charcoal/40 uppercase tracking-wider block mb-2">Before</span>
+                    <p className="text-charcoal/70">No resume. No language for decades of real scope and impact.</p>
                   </div>
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">What we did</span>
-                    <p className="text-sm text-charcoal/80">Truth inventory, standards-aligned translation, ownership transfer.</p>
+                  <div className="hidden sm:flex items-center text-gold">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                   </div>
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Outcome</span>
-                    <p className="text-sm text-charcoal/80">A defensible positioning narrative and interview-ready proof stack, built to compete without exaggeration.</p>
+                  <div className="flex-1 bg-navy/5 rounded-xl p-5 border border-navy/10">
+                    <span className="text-xs font-semibold text-navy/60 uppercase tracking-wider block mb-2">After</span>
+                    <p className="text-navy font-medium">Defensible positioning narrative. Interview-ready proof stack.</p>
                   </div>
                 </div>
-
-                <Link href="/results#case-study-1" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
-                  Read the full story
-                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </Link>
               </div>
             </div>
 
-            {/* Case Study 2 */}
-            <div className="group bg-white rounded-xl overflow-hidden shadow-sm border border-sand-100 hover:shadow-md transition-all duration-300 flex flex-col h-full">
-              <div className="p-8 flex flex-col h-full">
-                <div className="mb-4">
-                  <h3 className="text-lg font-bold text-navy mb-1">Evidence-First Reframe for Regulated Work</h3>
-                  <p className="text-xs text-charcoal/60 uppercase tracking-wide">Public Benefits Specialist | 5+ Years | Regulated Programs</p>
+            {/* Card 2 */}
+            <div className="group bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200 hover:shadow-md transition-all duration-300">
+              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+                {/* Left: Title & Role */}
+                <div className="md:w-1/3">
+                  <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-xs font-semibold rounded-full mb-3">
+                    Public Sector
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-bold text-navy mb-2">
+                    Evidence-First Reframe
+                  </h3>
+                  <p className="text-sm text-charcoal/60">
+                    Regulated work, properly positioned
+                  </p>
                 </div>
 
-                <div className="space-y-4 mb-6 flex-grow">
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Challenge</span>
-                    <p className="text-sm text-charcoal/80">A task-based resume hid what hiring teams actually screen for: accuracy, throughput controls, and calm execution under pressure. Role ended in an agency-wide workforce reduction, not performance.</p>
+                {/* Right: Before → After */}
+                <div className="md:w-2/3 flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  <div className="flex-1 bg-sand-50 rounded-xl p-5">
+                    <span className="text-xs font-semibold text-charcoal/40 uppercase tracking-wider block mb-2">Before</span>
+                    <p className="text-charcoal/70">Task-based resume hiding accuracy, throughput, and composure under pressure.</p>
                   </div>
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">What we did</span>
-                    <p className="text-sm text-charcoal/80">Truth inventory, standards-aligned translation, ownership transfer.</p>
+                  <div className="hidden sm:flex items-center text-gold">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                   </div>
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Outcome</span>
-                    <p className="text-sm text-charcoal/80">A compliance-forward, metrics-backed narrative and interview script — built to support risk-conscious hiring teams without exaggeration.</p>
+                  <div className="flex-1 bg-navy/5 rounded-xl p-5 border border-navy/10">
+                    <span className="text-xs font-semibold text-navy/60 uppercase tracking-wider block mb-2">After</span>
+                    <p className="text-navy font-medium">Compliance-forward narrative. Metrics-backed interview script.</p>
                   </div>
                 </div>
-
-                <Link href="/results#case-study-2" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
-                  Read the full story
-                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </Link>
               </div>
             </div>
 
-            {/* Case Study 3 */}
-            <div className="group bg-white rounded-xl overflow-hidden shadow-sm border border-sand-100 hover:shadow-md transition-all duration-300 flex flex-col h-full">
-              <div className="p-8 flex flex-col h-full">
-                <div className="mb-4">
-                  <h3 className="text-lg font-bold text-navy mb-1">From Owner-Operator to Systems Leader</h3>
-                  <p className="text-xs text-charcoal/60 uppercase tracking-wide">Hospitality Executive | Multi-Unit</p>
+            {/* Card 3 */}
+            <div className="group bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200 hover:shadow-md transition-all duration-300">
+              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+                {/* Left: Title & Role */}
+                <div className="md:w-1/3">
+                  <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-xs font-semibold rounded-full mb-3">
+                    Hospitality Executive
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-bold text-navy mb-2">
+                    Owner to Systems Leader
+                  </h3>
+                  <p className="text-sm text-charcoal/60">
+                    Entrepreneurial success, enterprise-ready
+                  </p>
                 </div>
 
-                <div className="space-y-4 mb-6 flex-grow">
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Challenge</span>
-                    <p className="text-sm text-charcoal/80">Entrepreneurial success was real, but the resume read like responsibilities instead of scalable operating systems.</p>
+                {/* Right: Before → After */}
+                <div className="md:w-2/3 flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  <div className="flex-1 bg-sand-50 rounded-xl p-5">
+                    <span className="text-xs font-semibold text-charcoal/40 uppercase tracking-wider block mb-2">Before</span>
+                    <p className="text-charcoal/70">Resume read like responsibilities instead of scalable operating systems.</p>
                   </div>
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">What we did</span>
-                    <p className="text-sm text-charcoal/80">Truth inventory, standards-aligned translation, ownership transfer.</p>
+                  <div className="hidden sm:flex items-center text-gold">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                   </div>
-                  <div>
-                    <span className="text-xs font-semibold text-gold uppercase tracking-wider block mb-1">Outcome</span>
-                    <p className="text-sm text-charcoal/80">Executive-ready positioning built on proof points, not promises.</p>
+                  <div className="flex-1 bg-navy/5 rounded-xl p-5 border border-navy/10">
+                    <span className="text-xs font-semibold text-navy/60 uppercase tracking-wider block mb-2">After</span>
+                    <p className="text-navy font-medium">Executive-ready positioning. Proof points, not promises.</p>
                   </div>
                 </div>
-
-                <Link href="/results#case-study-3" className="text-navy font-medium text-sm group-hover:text-gold transition-colors flex items-center gap-1 mt-auto">
-                  Read the full story
-                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </Link>
               </div>
             </div>
+
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-12">
+            <Link href="/results" className="inline-flex items-center gap-2 text-navy font-semibold hover:text-gold transition-colors">
+              See more client stories
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </Link>
           </div>
         </Container>
       </section>
