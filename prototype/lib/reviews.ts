@@ -40,7 +40,7 @@ export const reviews: Review[] = [
   },
   {
     id: 'carie',
-    name: 'Carie Learn',
+    name: 'Carie L.',
     excerpt: 'He knows the questions to ask and I felt that I was in great hands.',
     eligible: true,
     useCase: 'hero',
@@ -49,14 +49,14 @@ export const reviews: Review[] = [
   // VERIFIED PROOF POOL
   {
     id: 'douglas',
-    name: 'Douglas Holden',
+    name: 'Douglas H.',
     excerpt: 'I would recommend Southwest Resume Services 10/10 times to friends and colleagues looking to build their executive profile.',
     eligible: true,
     useCase: 'proof',
   },
   {
     id: 'lisa',
-    name: 'Lisa Weaver',
+    name: 'Lisa W.',
     excerpt: 'His initial questionnaire helped provide a foundation to build a stronger resume in the medical field.',
     eligible: true,
     useCase: 'proof',
