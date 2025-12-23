@@ -9,17 +9,18 @@ on:
       - '**'
 
 env:
-  NODE_VERSION: '18.x'
+  NODE_VERSION: '20.x'
 
 jobs:
   ci:
     name: Continuous Integration
     runs-on: ubuntu-latest
 
+    # Use Node 20.x only - Vite/Vitest require ES modules which have issues on Node 18
     strategy:
       fail-fast: true
       matrix:
-        node-version: ['18.x', '20.x']
+        node-version: ['20.x']
 
     steps:
       - name: Checkout repository
@@ -65,7 +66,7 @@ jobs:
           CI: true
 
       - name: Generate test coverage
-        if: matrix.node-version == '18.x'
+        if: matrix.node-version == '20.x'
         run: npm run test:coverage
         continue-on-error: true
 
@@ -75,7 +76,7 @@ jobs:
           NODE_ENV: production
 
       - name: Cache Next.js build
-        if: matrix.node-version == '18.x'
+        if: matrix.node-version == '20.x'
         uses: actions/cache@v4
         with:
           path: |
@@ -86,7 +87,7 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Upload build artifacts
-        if: matrix.node-version == '18.x' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: matrix.node-version == '20.x' && github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: nextjs-build
