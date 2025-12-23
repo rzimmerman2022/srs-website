@@ -1,0 +1,206 @@
+{
+  "service_example": {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Resume Writing Services",
+    "description": "Professional resume writing and optimization with in-depth discovery, market research, and ATS optimization. Research-validated resumes that help you own your professional story.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Southwest Resume Services",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Phoenix",
+        "addressRegion": "AZ",
+        "addressCountry": "US"
+      },
+      "telephone": "+1-480-374-3418"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Phoenix"
+      },
+      {
+        "@type": "City",
+        "name": "Scottsdale"
+      },
+      {
+        "@type": "City",
+        "name": "Mesa"
+      },
+      {
+        "@type": "City",
+        "name": "Tempe"
+      },
+      {
+        "@type": "City",
+        "name": "Chandler"
+      },
+      {
+        "@type": "State",
+        "name": "Arizona"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "150",
+        "maxPrice": "500",
+        "priceCurrency": "USD"
+      }
+    }
+  },
+  "howto_example": {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How Southwest Resume Services Transforms Your Career Documents",
+    "description": "A systematic, research-driven 10-phase approach to career transformation. From deep discovery and market research to ownership transfer and interview mastery.",
+    "image": "https://southwestresumes.com/og-image.jpg",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "USD",
+      "value": "150-500"
+    },
+    "totalTime": "P5D",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Intake & Initial Assessment",
+        "text": "We begin with a forensic analysis of your existing materials and a deep dive into your background, goals, and constraints.",
+        "itemListElement": [
+          {
+            "@type": "HowToDirection",
+            "position": 1,
+            "text": "Comprehensive document review and pattern recognition"
+          },
+          {
+            "@type": "HowToDirection",
+            "position": 2,
+            "text": "Constraint and opportunity mapping"
+          },
+          {
+            "@type": "HowToDirection",
+            "position": 3,
+            "text": "Strategic hypothesis formation for optimal career paths"
+          },
+          {
+            "@type": "HowToDirection",
+            "position": 4,
+            "text": "Initial market positioning assessment"
+          }
+        ]
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Market Research Execution",
+        "text": "Data-driven market intelligence gathering using authoritative sources and real-time demand signals.",
+        "itemListElement": [
+          {
+            "@type": "HowToDirection",
+            "position": 1,
+            "text": "Job posting analysis (200+ postings across target markets)"
+          },
+          {
+            "@type": "HowToDirection",
+            "position": 2,
+            "text": "Compensation benchmarking and geographic optimization"
+          }
+        ]
+      }
+    ],
+    "tool": [
+      {
+        "@type": "HowToTool",
+        "name": "O*NET Database"
+      },
+      {
+        "@type": "HowToTool",
+        "name": "Bureau of Labor Statistics (BLS)"
+      },
+      {
+        "@type": "HowToTool",
+        "name": "Lightcast Market Intelligence"
+      },
+      {
+        "@type": "HowToTool",
+        "name": "LinkedIn Career Insights"
+      }
+    ]
+  },
+  "breadcrumb_example": {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://southwestresumes.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://southwestresumes.com/services"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Our Process",
+        "item": "https://southwestresumes.com/process"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "About",
+        "item": "https://southwestresumes.com/about"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Contact",
+        "item": "https://southwestresumes.com/contact"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "FAQ",
+        "item": "https://southwestresumes.com/faq"
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "name": "Privacy Policy",
+        "item": "https://southwestresumes.com/privacy"
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "name": "Terms of Service",
+        "item": "https://southwestresumes.com/terms"
+      }
+    ]
+  },
+  "validation_urls": {
+    "google_rich_results_test": "https://search.google.com/test/rich-results",
+    "schema_org_validator": "https://validator.schema.org/",
+    "google_search_console": "https://search.google.com/search-console"
+  },
+  "implementation_notes": {
+    "total_schemas_added": 8,
+    "service_schemas": 6,
+    "howto_schemas": 1,
+    "breadcrumb_schemas": 1,
+    "existing_schemas_preserved": [
+      "ProfessionalService (homepage)",
+      "ProfessionalService (layout)",
+      "FAQPage (faq page)"
+    ],
+    "no_duplicates": true,
+    "follows_2024_spec": true,
+    "google_rich_results_compliant": true
+  }
+}
