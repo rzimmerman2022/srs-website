@@ -53,7 +53,7 @@ export default function VerifiedProof({ excludeHeroId }: VerifiedProofProps) {
             Verified Proof
           </h2>
           <p className="text-lg text-charcoal/70">
-            Real clients, real results—no fabrication
+            Real clients, real results
           </p>
         </div>
 
