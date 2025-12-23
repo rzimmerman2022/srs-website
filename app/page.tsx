@@ -182,7 +182,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {/* Case Study 1 */}
             <div className="group bg-white rounded-xl overflow-hidden shadow-sm border border-sand-100 hover:shadow-md transition-all duration-300 flex flex-col h-full">
               <div className="p-8 flex flex-col h-full">
@@ -298,7 +298,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {coreServices.map((service) => (
               <div key={service.title} className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl transform transition-all duration-300 hover:-translate-y-2 hover:shadow-gold/20 border border-white/10 flex flex-col h-full">
                 <div className="w-16 h-16 bg-navy text-gold rounded-2xl flex items-center justify-center mb-6 shadow-lg">
@@ -330,7 +330,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Essentials */}
             <div className="bg-white p-8 rounded-2xl shadow-premium border border-sand-100 flex flex-col text-center hover:shadow-premium-hover transition-all duration-300">
               <div className="w-24 h-24 mx-auto mb-4 relative">
@@ -405,7 +405,7 @@ export default function HomePage() {
         <Container>
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-navy mb-12 text-center">How It Works</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center text-gold text-xl font-bold mx-auto mb-4">1</div>
                 <h3 className="text-lg font-semibold text-navy mb-2">Discovery</h3>

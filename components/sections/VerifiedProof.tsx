@@ -44,7 +44,7 @@ export default function VerifiedProof({ excludeHeroId }: VerifiedProofProps) {
   const activeReview = proofReviews[activeIndex];
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-sand-50">
+    <section className="py-16 md:py-20 lg:py-24 bg-white border-b border-sand-200">
       <div className="max-w-6xl mx-auto px-4">
 
         {/* Section Header */}
@@ -84,7 +84,7 @@ export default function VerifiedProof({ excludeHeroId }: VerifiedProofProps) {
                 <div className="flex items-center justify-center gap-4">
                   <button
                     onClick={handlePrevious}
-                    className="w-10 h-10 flex items-center justify-center rounded-full border border-sand-300 text-navy/60 hover:border-gold hover:text-gold transition-all duration-200"
+                    className="w-11 h-11 flex items-center justify-center rounded-full border border-sand-300 text-navy/60 hover:border-gold hover:text-gold transition-all duration-200"
                     aria-label="Previous review"
                   >
                     <IconChevronLeft />
@@ -96,7 +96,7 @@ export default function VerifiedProof({ excludeHeroId }: VerifiedProofProps) {
 
                   <button
                     onClick={handleNext}
-                    className="w-10 h-10 flex items-center justify-center rounded-full border border-sand-300 text-navy/60 hover:border-gold hover:text-gold transition-all duration-200"
+                    className="w-11 h-11 flex items-center justify-center rounded-full border border-sand-300 text-navy/60 hover:border-gold hover:text-gold transition-all duration-200"
                     aria-label="Next review"
                   >
                     <IconChevronRight />
