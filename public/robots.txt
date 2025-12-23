@@ -5,9 +5,17 @@
 User-agent: *
 Allow: /
 
+# Block admin dashboard - private internal system
+Disallow: /admin/
+Disallow: /admin
+
 # Block all discovery/questionnaire pages - private client content
 Disallow: /discovery/
 Disallow: /discovery
+
+# Block questionnaire token pages - private client content
+Disallow: /q/
+Disallow: /q
 
 # Block API routes from indexing
 Disallow: /api/
