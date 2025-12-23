@@ -11,6 +11,7 @@ import Link from 'next/link';
 // In production, you'd fetch this from a database/API
 const questionnaires: Record<string, typeof jackieDeleonQuestionnaire> = {
   'jdeleon': jackieDeleonQuestionnaire,
+  'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
 };
 
 export default function DiscoveryPage() {
@@ -67,7 +68,7 @@ export default function DiscoveryPage() {
     );
   }
 
-  const handleComplete = (responses: Record<string, unknown>) => {
+  const handleComplete = (_responses: Record<string, unknown>) => {
     // In production, you'd send this to your backend
     // Responses are already synced to Supabase via useQuestionnaireSync hook
 

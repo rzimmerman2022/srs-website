@@ -38,10 +38,9 @@ export default function AdminLoginPage() {
         return;
       }
 
-      // Success - redirect to admin dashboard
-      router.push('/admin');
-      router.refresh();
-    } catch (err) {
+      // Success - redirect to admin dashboard using window.location for reliable redirect
+      window.location.href = '/admin';
+    } catch {
       setError('An error occurred. Please try again.');
       setLoading(false);
     }

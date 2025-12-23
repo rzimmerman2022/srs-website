@@ -2,6 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { getAdminUser } from '@/lib/auth/admin-auth';
+import { jackieDeleonQuestionnaire } from '@/lib/questionnaire/jackie-deleon';
+import type { Questionnaire } from '@/lib/questionnaire/types';
+
+// Questionnaire definitions registry
+const QUESTIONNAIRES: Record<string, Questionnaire> = {
+  'jdeleon': jackieDeleonQuestionnaire,
+  'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
+};
 
 // ============================================================================
 // SECURITY: Rate Limiting
@@ -100,6 +108,7 @@ interface QuestionnaireInfo {
   completed: boolean;
   progress_percentage: number;
   answered_questions: number;
+  total_questions: number;
   points: number;
   created_at: string;
   updated_at: string;
@@ -128,7 +137,31 @@ interface ClientDetail {
   };
 }
 
-function computeQuestionnaireInfo(response: unknown): QuestionnaireInfo {
+/**
+ * Get total question count from questionnaire definition
+ */
+function getQuestionnaireStats(clientId: string): { totalRequired: number; totalAll: number } {
+  const questionnaire = QUESTIONNAIRES[clientId];
+  if (!questionnaire) {
+    return { totalRequired: 0, totalAll: 0 };
+  }
+
+  let totalRequired = 0;
+  let totalAll = 0;
+
+  for (const mod of questionnaire.modules) {
+    for (const question of mod.questions) {
+      totalAll++;
+      if (question.required || mod.required) {
+        totalRequired++;
+      }
+    }
+  }
+
+  return { totalRequired, totalAll };
+}
+
+function computeQuestionnaireInfo(response: unknown, clientId: string): QuestionnaireInfo {
   const r = response as {
     id: string;
     questionnaire_id: string;
@@ -144,9 +177,12 @@ function computeQuestionnaireInfo(response: unknown): QuestionnaireInfo {
     key => r.answers[key] !== null && r.answers[key] !== undefined && r.answers[key] !== ''
   ).length;
 
-  const estimatedTotal = Math.max(r.current_question_index + 1, answeredCount);
-  const progressPercentage = estimatedTotal > 0
-    ? Math.round((answeredCount / estimatedTotal) * 100)
+  // Get actual question count from questionnaire definition
+  const { totalRequired } = getQuestionnaireStats(clientId);
+  const actualTotal = totalRequired > 0 ? totalRequired : Math.max(r.current_question_index + 1, answeredCount);
+
+  const progressPercentage = actualTotal > 0
+    ? Math.min(Math.round((answeredCount / actualTotal) * 100), 100)
     : 0;
 
   return {
@@ -155,6 +191,7 @@ function computeQuestionnaireInfo(response: unknown): QuestionnaireInfo {
     completed: r.completed,
     progress_percentage: progressPercentage,
     answered_questions: answeredCount,
+    total_questions: actualTotal,
     points: r.points,
     created_at: r.created_at,
     updated_at: r.updated_at,
@@ -313,7 +350,7 @@ export async function GET(
     }
 
     // Compute questionnaire info
-    const questionnaires = responses.map(computeQuestionnaireInfo);
+    const questionnaires = responses.map(r => computeQuestionnaireInfo(r, clientId));
 
     // Build activity history
     const activityHistory = buildActivityHistory(responses, historyData || []);

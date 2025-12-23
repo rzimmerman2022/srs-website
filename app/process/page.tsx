@@ -4,7 +4,6 @@
  * Date: 2025-12-18
  */
 
-import Link from 'next/link';
 import Script from 'next/script';
 import Hero from '@/components/sections/Hero';
 import ProcessScrollSpy from '@/components/sections/ProcessScrollSpy';

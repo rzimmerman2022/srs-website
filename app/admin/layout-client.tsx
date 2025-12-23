@@ -56,8 +56,9 @@ export default function AdminClientLayout({
     }
   };
 
-  // Get initials from full name
-  const getInitials = (name: string) => {
+  // Get initials from full name (with null safety)
+  const getInitials = (name: string | undefined | null) => {
+    if (!name) return 'AD';
     return name
       .split(' ')
       .map((n) => n[0])
@@ -129,7 +130,7 @@ export default function AdminClientLayout({
                   <div className="relative" ref={userMenuRef}>
                     <div className="flex items-center space-x-3">
                       <div className="hidden sm:block text-right">
-                        <p className="text-sm font-medium text-navy">{adminUser.full_name}</p>
+                        <p className="text-sm font-medium text-navy">{adminUser.full_name || adminUser.email}</p>
                         <p className="text-xs text-gray-600 capitalize">{adminUser.role.replace('_', ' ')}</p>
                       </div>
                       <button
@@ -149,7 +150,7 @@ export default function AdminClientLayout({
                       <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-premium border border-gray-200 py-2 z-50">
                         {/* User info (mobile) */}
                         <div className="sm:hidden px-4 py-3 border-b border-gray-200">
-                          <p className="text-sm font-medium text-navy">{adminUser.full_name}</p>
+                          <p className="text-sm font-medium text-navy">{adminUser.full_name || adminUser.email}</p>
                           <p className="text-xs text-gray-600">{adminUser.email}</p>
                           <p className="text-xs text-gray-500 capitalize mt-1">{adminUser.role.replace('_', ' ')}</p>
                         </div>

@@ -29,7 +29,7 @@
 // Benefits: Improved testability, easier maintenance, better code reuse, clearer separation of concerns
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { Questionnaire, Question, Milestone, DEFAULT_MILESTONES } from '@/lib/questionnaire/types';
+import { Questionnaire, Milestone, DEFAULT_MILESTONES } from '@/lib/questionnaire/types';
 import { cn } from '@/lib/utils';
 import { isValidAnswer } from '@/lib/questionnaire/utils';
 import { useQuestionnaireSync } from '@/hooks/useQuestionnaireSync';
@@ -59,9 +59,7 @@ export default function QuestionnaireContainer({
     isOnline,
     isSyncing,
     lastSyncedAt,
-    error: syncError,
     updateState: updateSyncState,
-    forceSync,
   } = useQuestionnaireSync({
     clientId: clientId || questionnaire.clientId || 'anonymous',
     questionnaireId: questionnaire.id,
@@ -86,7 +84,6 @@ export default function QuestionnaireContainer({
   const [combo, setCombo] = useState(0); // Combo counter for consecutive answers
   const [lastAnswerTime, setLastAnswerTime] = useState<number | null>(null);
   const [showEncouragement, setShowEncouragement] = useState<string | null>(null);
-  const [sessionStartTime] = useState(Date.now());
   const comboTimeWindow = 15000; // 15 seconds to maintain combo
 
   // Initialize from sync state when it loads
@@ -150,9 +147,16 @@ export default function QuestionnaireContainer({
   }, [questionnaire.modules]);
 
   const requiredQuestions = useMemo(() => {
-    return questionnaire.modules
-      .filter(m => m.required)
-      .flatMap(m => m.questions.filter(q => q.required));
+    // Count questions that are either explicitly required OR in a required module
+    const required: typeof questionnaire.modules[0]['questions'] = [];
+    for (const mod of questionnaire.modules) {
+      for (const question of mod.questions) {
+        if (question.required || mod.required) {
+          required.push(question);
+        }
+      }
+    }
+    return required;
   }, [questionnaire.modules]);
 
   // Calculate progress
@@ -167,13 +171,14 @@ export default function QuestionnaireContainer({
       : 0;
   }, [answeredCount, allQuestions.length]);
 
-  const requiredProgress = useMemo(() => {
-    const answered = requiredQuestions.filter(q => isValidAnswer(responses[q.id])).length;
-    // Guard against division by zero if there are no required questions
-    return requiredQuestions.length > 0
-      ? Math.round((answered / requiredQuestions.length) * 100)
-      : 0;
-  }, [requiredQuestions, responses]);
+  // Required progress calculation - available for future use
+  // const requiredProgress = useMemo(() => {
+  //   const answered = requiredQuestions.filter(q => isValidAnswer(responses[q.id])).length;
+  //   // Guard against division by zero if there are no required questions
+  //   return requiredQuestions.length > 0
+  //     ? Math.round((answered / requiredQuestions.length) * 100)
+  //     : 0;
+  // }, [requiredQuestions, responses]);
 
   // Estimated time remaining
   const estimatedMinutesRemaining = useMemo(() => {
@@ -306,11 +311,11 @@ export default function QuestionnaireContainer({
     return isValidAnswer(responses[currentQuestion.id]);
   }, [currentQuestion, responses]);
 
-  // Check if current module is complete
-  const isCurrentModuleComplete = useMemo(() => {
-    if (!currentModule) return false;
-    return currentModule.questions.every(q => !q.required || isValidAnswer(responses[q.id]));
-  }, [currentModule, responses]);
+  // Module completion check - available for future use
+  // const isCurrentModuleComplete = useMemo(() => {
+  //   if (!currentModule) return false;
+  //   return currentModule.questions.every(q => !q.required || isValidAnswer(responses[q.id]));
+  // }, [currentModule, responses]);
 
   // Navigation
   const goToNextQuestion = useCallback(() => {

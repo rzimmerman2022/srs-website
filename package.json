@@ -13,11 +13,22 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:chromium": "playwright test --project=chromium",
+    "test:e2e:firefox": "playwright test --project=firefox",
+    "test:e2e:webkit": "playwright test --project=webkit",
+    "test:e2e:mobile": "playwright test --project='Mobile Chrome' --project='Mobile Safari'",
+    "test:e2e:report": "playwright show-report",
+    "playwright:install": "playwright install --with-deps"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.89.0",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "next": "^15.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -25,6 +36,7 @@
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@types/node": "^22.10.2",

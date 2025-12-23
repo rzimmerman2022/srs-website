@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimit, getClientIp, clearRateLimit } from '@/lib/security/rate-limit';
-
-// Admin password - in production this should be from environment variables
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+import { authenticateAdmin } from '@/lib/auth/admin-auth';
+import { logLoginSuccess, logLoginFailure } from '@/lib/security/audit-log';
 
 // Rate limit configuration for login attempts
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -45,14 +44,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check credentials (in production, verify against database)
-    const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@southwestresumeservices.com';
+    // Authenticate using Supabase
+    const { user, error } = await authenticateAdmin(email, password);
 
-    if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+    if (error || !user) {
+      // Log failed login attempt (non-blocking)
+      logLoginFailure({
+        user_type: 'admin',
+        ip_address: clientIp,
+        user_agent: request.headers.get('user-agent') || undefined,
+        error_message: error || 'Invalid email or password',
+        metadata: {
+          email,
+          attempts_remaining: rateLimit.remaining,
+          login_method: 'credentials',
+        },
+      }).catch((loggingError) => {
+        console.error('[AUDIT] Failed to log login failure:', loggingError);
+      });
+
       // Failed login - rate limit is already incremented
       return NextResponse.json(
         {
-          error: 'Invalid email or password',
+          error: error || 'Invalid email or password',
           attemptsRemaining: rateLimit.remaining,
         },
         {
@@ -69,22 +83,35 @@ export async function POST(request: NextRequest) {
     // Successful login - clear rate limit for this IP
     clearRateLimit(rateLimitKey);
 
-    // In a real application, you would:
-    // 1. Create a session token
-    // 2. Store it in a secure cookie
-    // 3. Return the token or set cookie
+    // Log successful login attempt (non-blocking)
+    logLoginSuccess({
+      user_id: user.id,
+      user_type: 'admin',
+      ip_address: clientIp,
+      user_agent: request.headers.get('user-agent') || undefined,
+      metadata: {
+        email: user.email,
+        role: user.role,
+        login_method: 'credentials',
+      },
+    }).catch((loggingError) => {
+      console.error('[AUDIT] Failed to log login success:', loggingError);
+    });
 
+    // authenticateAdmin() already set the Supabase session cookies
+    // (sb-access-token and sb-refresh-token)
     return NextResponse.json(
       {
         success: true,
         message: 'Login successful',
+        user: {
+          email: user.email,
+          full_name: user.full_name,
+          role: user.role,
+        },
       },
       {
         status: 200,
-        headers: {
-          // Set session cookie (example - implement proper session management)
-          'Set-Cookie': 'admin_session=authenticated; Path=/admin; HttpOnly; Secure; SameSite=Strict; Max-Age=28800',
-        },
       }
     );
   } catch (error) {
