@@ -1,123 +1,147 @@
 /**
- * Single source of truth for Google Reviews
- * All reviews are verbatim from Google Business Profile
- * NEVER edit or fabricate - these must match Google exactly
+ * Reviews - Single Source of Truth
+ *
+ * CRITICAL: Store ONLY approved excerpts (NOT full review text)
+ * This prevents accidental display of outcome claims or FTC violations
+ *
+ * All excerpts are verbatim from Google Business Profile
+ * NEVER edit, fabricate, or embellish
  */
 
 export interface Review {
   id: string;
   name: string;
-  sourceLabel: string;
-  excerpt: string;
+  title?: string; // Optional job title for context
+  excerpt: string; // APPROVED excerpt only (NOT full review)
   eligible: boolean; // Safe to display (no material connection, no outcome claims)
-  tags?: string[]; // For categorization: 'method', 'executive', 'process', etc.
+  useCase: 'hero' | 'proof' | 'never'; // Strategic placement
 }
 
 // Links
-export const GOOGLE_REVIEWS_URL = 'https://share.google/5ETFwn3c9dj1TQwve'; // Read reviews
-export const LEAVE_REVIEW_URL = 'https://g.page/r/Cd0yeUAKZcz3EAI/review'; // Leave a review
+export const GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/place/Southwest+Resume+Services/@33.4152623,-112.0408062,17z/data=!4m8!3m7!1s0x872b0708795042e1:0xf7cc65402679323d!8m2!3d33.4152623!4d-112.0382313!9m1!1b1!16s%2Fg%2F11ggz1y0qy';
+export const LEAVE_REVIEW_URL = 'https://g.page/r/Cd0yeUAKZcz3EAI/review';
 
-// Rating data
-export const RATING = '5.0';
-export const REVIEW_COUNT = 5;
+// Dynamic rating data (fetched from API)
+export const RATING = '5.0'; // Current Google rating
+export const REVIEW_COUNT = 6; // Current review count
+export const RATING_FALLBACK = '5.0'; // Used if API fails
+export const REVIEW_COUNT_FALLBACK = 6; // Conservative count for fallback
 
-// All reviews - verbatim from Google (newest first)
+// Approved reviews - Excerpts ONLY
 export const reviews: Review[] = [
+  // HERO ROTATION (Jerome + Carie only)
   {
-    id: 'andrew',
-    name: 'Andrew Beam',
-    sourceLabel: 'Google Review',
-    excerpt: 'Changing careers halfway through my life was something I never thought I\'d be doing and Southwest Resume Services helped me find a clear pathway to my goal. The attention to detail they gave my case was out of this world and their process is so straightforward. Highly recommend!',
-    eligible: false, // Material connection (intern) - FTC disclosure required
-  },
-  {
-    id: 'douglas',
-    name: 'Douglas Holden',
-    sourceLabel: 'Google Review',
-    excerpt: 'Phenomenal experience. Ryan was beyond thorough and attentive. His commitment to his clients is unmatched. I would recommend Southwest Resume services 10/10 times to friends and colleagues looking to build their executive profile. I cannot say enough about Ryan and the services provided.',
+    id: 'jerome',
+    name: 'Jerome C.',
+    title: 'CFO',
+    excerpt: 'I had no shortage of accomplishments, but my resume simply wasn\'t telling the right story.',
     eligible: true,
-    tags: ['executive', 'authority', 'quality'],
-  },
-  {
-    id: 'jordyn',
-    name: 'Jordyn G.',
-    sourceLabel: 'Google Review',
-    excerpt: 'I had an amazing experience! My resume looks flawless and Ryan utilized AI to write a letter to my employer that gave me a raise! Highly recommend.',
-    eligible: false, // Material connection (girlfriend) + outcome claim - FTC risk
+    useCase: 'hero',
   },
   {
     id: 'carie',
-    name: 'Carie L.',
-    sourceLabel: 'Google Review',
+    name: 'Carie Learn',
     excerpt: 'He knows the questions to ask and I felt that I was in great hands.',
     eligible: true,
-    tags: ['method', 'ip', 'trust'],
+    useCase: 'hero',
+  },
+
+  // VERIFIED PROOF POOL
+  {
+    id: 'douglas',
+    name: 'Douglas Holden',
+    excerpt: 'I would recommend Southwest Resume Services 10/10 times to friends and colleagues looking to build their executive profile.',
+    eligible: true,
+    useCase: 'proof',
   },
   {
     id: 'lisa',
-    name: 'Lisa W.',
-    sourceLabel: 'Google Review',
-    excerpt: 'I was very impressed with the time and effort Ryan at Southwest Resume Services took to revise my current resume.',
+    name: 'Lisa Weaver',
+    excerpt: 'His initial questionnaire helped provide a foundation to build a stronger resume in the medical field.',
     eligible: true,
-    tags: ['process', 'quality'],
+    useCase: 'proof',
+  },
+
+  // EXCLUDED (Material connections - NEVER display)
+  {
+    id: 'jordyn',
+    name: 'Jordyn Ginsberg',
+    excerpt: '', // Intentionally empty - should never be displayed
+    eligible: false,
+    useCase: 'never',
+  },
+  {
+    id: 'andrew',
+    name: 'Andrew Beam',
+    excerpt: '', // Intentionally empty - should never be displayed
+    eligible: false,
+    useCase: 'never',
   },
 ];
 
-// Get eligible reviews only
+/**
+ * Get hero reviews (manual toggle between Jerome and Carie)
+ */
+export const getHeroReviews = () => {
+  return reviews.filter(r => r.useCase === 'hero' && r.eligible);
+};
+
+/**
+ * Get proof reviews (excludes current hero selection)
+ * Returns exactly 2 reviews for Verified Proof section
+ *
+ * @param excludeId - ID of review currently shown in hero
+ */
+export const getProofReviews = (excludeId?: string) => {
+  const eligible = reviews.filter(r => r.eligible && r.id !== excludeId);
+
+  // Priority order: Always show Douglas first, then others
+  const douglas = eligible.find(r => r.id === 'douglas');
+  const others = eligible.filter(r => r.id !== 'douglas');
+
+  const proof = douglas ? [douglas, ...others] : others;
+
+  return proof.slice(0, 2); // Always return exactly 2
+};
+
+/**
+ * Get all eligible reviews (for dedicated Reviews page)
+ */
 export const getEligibleReviews = () => {
   return reviews.filter(r => r.eligible);
 };
 
-// Get featured review (rotates daily between strongest method signals only)
-export const getFeaturedReview = () => {
-  const eligible = getEligibleReviews();
-  if (eligible.length === 0) throw new Error('No eligible reviews found');
-
-  // Rotate only between Carie (method/IP) and Douglas (executive authority)
-  // Exclude Lisa from featured rotation (weaker method signal)
-  const strongSignals = eligible.filter(r => r.id === 'carie' || r.id === 'douglas');
-
-  if (strongSignals.length === 0) {
-    // Fallback to Carie if filtering fails
-    return eligible.find(r => r.id === 'carie') || eligible[0];
-  }
-
-  // Rotate based on day of year (deterministic, changes daily)
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now.getTime() - start.getTime();
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay);
-
-  const featuredIndex = dayOfYear % strongSignals.length; // 356 % 2 = 0 (Douglas today)
-  return strongSignals[featuredIndex];
-};
-
-// Get reviews for "Verified Proof" section (exclude featured, return 2)
-export const getVerifiedProofReviews = () => {
-  const featured = getFeaturedReview();
-  const eligible = getEligibleReviews();
-
-  // Return the 2 eligible reviews that are NOT the featured one
-  return eligible.filter(r => r.id !== featured.id).slice(0, 2);
-};
-
-// Guardrail: Runtime check for duplicates (dev mode)
+/**
+ * Runtime validation (development only)
+ */
 if (process.env.NODE_ENV === 'development') {
-  const featuredReview = getFeaturedReview();
-  const proofReviews = getVerifiedProofReviews();
+  const heroReviews = getHeroReviews();
+  const eligibleReviews = getEligibleReviews();
 
-  if (proofReviews.some(r => r.id === featuredReview.id)) {
-    console.error('❌ DUPLICATE REVIEW ERROR: Featured review appears in Verified Proof section');
+  if (heroReviews.length !== 2) {
+    console.error(`❌ Expected exactly 2 hero reviews (Jerome + Carie), found ${heroReviews.length}`);
   }
 
-  const eligibleCount = getEligibleReviews().length;
-  if (eligibleCount !== 3) {
-    console.warn(`⚠️  Expected exactly 3 eligible reviews (Carie, Douglas, Lisa), found ${eligibleCount}`);
+  if (eligibleReviews.length !== 4) {
+    console.warn(`⚠️  Expected exactly 4 eligible reviews, found ${eligibleReviews.length}`);
   }
 
-  const displayCount = 1 + proofReviews.length; // featured + proof reviews
-  if (displayCount !== 3) {
-    console.warn(`⚠️  Expected exactly 3 reviews visible per page load, found ${displayCount}`);
-  }
+  // Verify no outcome claims in excerpts
+  const outcomeKeywords = ['raise', 'promotion', 'hired', 'interviews scheduled', 'obtained employment'];
+  eligibleReviews.forEach(review => {
+    const hasOutcomeClaim = outcomeKeywords.some(keyword =>
+      review.excerpt.toLowerCase().includes(keyword)
+    );
+    if (hasOutcomeClaim) {
+      console.error(`❌ OUTCOME CLAIM DETECTED in ${review.id}: "${review.excerpt}"`);
+    }
+  });
+
+  // Verify excluded reviews have empty excerpts
+  const excluded = reviews.filter(r => !r.eligible);
+  excluded.forEach(review => {
+    if (review.excerpt.length > 0) {
+      console.warn(`⚠️  Excluded review ${review.id} has non-empty excerpt (should be empty string)`);
+    }
+  });
 }
