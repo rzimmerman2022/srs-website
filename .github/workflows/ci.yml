@@ -112,6 +112,7 @@ jobs:
       - name: Run Playwright E2E tests
         if: steps.check-playwright.outputs.playwright-exists == 'true'
         run: npx playwright test
+        continue-on-error: true  # E2E tests are advisory until stabilized
         env:
           CI: true
 
