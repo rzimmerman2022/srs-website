@@ -1,5 +1,5 @@
 import Container from '@/components/layout/Container';
-import { getFeaturedReview, GOOGLE_REVIEWS_URL, RATING, REVIEW_COUNT } from '@/lib/reviews';
+import { GOOGLE_REVIEWS_URL, RATING, REVIEW_COUNT } from '@/lib/reviews';
 
 const IconStar = () => (
   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -8,20 +8,18 @@ const IconStar = () => (
 );
 
 export default function TrustSection() {
-  const featuredReview = getFeaturedReview();
-
   return (
     <section className="py-16 md:py-20 bg-white border-b border-gray-100">
       <Container>
         <div className="max-w-3xl mx-auto text-center">
 
-          {/* Featured Review - Rotates daily (deterministic) */}
+          {/* Featured Review - HARDCODED to Carie (14 words) */}
           <blockquote className="mb-6">
             <p className="text-xl md:text-2xl text-navy leading-relaxed mb-4">
-              "{featuredReview.excerpt}"
+              "He knows the questions to ask and I felt that I was in great hands."
             </p>
             <cite className="text-sm text-gray-500 not-italic">
-              — {featuredReview.name}, {featuredReview.sourceLabel}
+              — Carie L., Google Review
             </cite>
           </blockquote>
 
