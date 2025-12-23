@@ -104,11 +104,7 @@
       "Bash(npm run type-check:*)",
       "Bash(npx playwright install chromium)",
       "Bash(timeout 120 npm run test:e2e:chromium)",
-      "Bash(npm run test:e2e:chromium:*)",
-      "Bash(gh api:*)",
-      "Bash(gh run list:*)",
-      "Bash(gh run view:*)",
-      "Bash(gh run watch:*)"
+      "Bash(npm run test:e2e:chromium:*)"
     ],
     "deny": [],
     "ask": []
