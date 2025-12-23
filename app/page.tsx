@@ -177,118 +177,61 @@ export default function HomePage() {
         <Container>
           {/* Section Header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">Client Transformations</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">Real Results</h2>
             <p className="text-lg text-charcoal/70">
-              From hidden expertise to clear, defensible positioning
+              What changes when you work with us
             </p>
           </div>
 
-          {/* Transformation Cards - Simplified, scannable design */}
-          <div className="max-w-5xl mx-auto space-y-6">
+          {/* Simple Before/After Cards */}
+          <div className="max-w-4xl mx-auto space-y-8">
 
             {/* Card 1 */}
-            <div className="group bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200 hover:shadow-md transition-all duration-300">
-              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-                {/* Left: Title & Role */}
-                <div className="md:w-1/3">
-                  <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-xs font-semibold rounded-full mb-3">
-                    Financial Operations
-                  </span>
-                  <h3 className="text-xl md:text-2xl font-bold text-navy mb-2">
-                    The Truth Gap, Closed
-                  </h3>
-                  <p className="text-sm text-charcoal/60">
-                    30+ years of expertise, finally articulated
-                  </p>
+            <div className="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200">
+              <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+                <div className="flex-1 text-center md:text-left">
+                  <p className="text-charcoal/50 text-sm font-medium mb-2">Before</p>
+                  <p className="text-xl md:text-2xl text-charcoal/70">&ldquo;I don&apos;t have a resume&rdquo;</p>
                 </div>
-
-                {/* Right: Before → After */}
-                <div className="md:w-2/3 flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  <div className="flex-1 bg-sand-50 rounded-xl p-5">
-                    <span className="text-xs font-semibold text-charcoal/40 uppercase tracking-wider block mb-2">Before</span>
-                    <p className="text-charcoal/70">No resume. No language for decades of real scope and impact.</p>
-                  </div>
-                  <div className="hidden sm:flex items-center text-gold">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 bg-navy/5 rounded-xl p-5 border border-navy/10">
-                    <span className="text-xs font-semibold text-navy/60 uppercase tracking-wider block mb-2">After</span>
-                    <p className="text-navy font-medium">Defensible positioning narrative. Interview-ready proof stack.</p>
-                  </div>
+                <div className="text-gold text-3xl font-light">→</div>
+                <div className="flex-1 text-center md:text-left">
+                  <p className="text-navy/50 text-sm font-medium mb-2">After</p>
+                  <p className="text-xl md:text-2xl text-navy font-semibold">&ldquo;I can defend every line&rdquo;</p>
                 </div>
               </div>
+              <p className="text-center text-sm text-charcoal/50 mt-6">— Senior Finance Leader, 30+ years experience</p>
             </div>
 
             {/* Card 2 */}
-            <div className="group bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200 hover:shadow-md transition-all duration-300">
-              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-                {/* Left: Title & Role */}
-                <div className="md:w-1/3">
-                  <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-xs font-semibold rounded-full mb-3">
-                    Public Sector
-                  </span>
-                  <h3 className="text-xl md:text-2xl font-bold text-navy mb-2">
-                    Evidence-First Reframe
-                  </h3>
-                  <p className="text-sm text-charcoal/60">
-                    Regulated work, properly positioned
-                  </p>
+            <div className="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200">
+              <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+                <div className="flex-1 text-center md:text-left">
+                  <p className="text-charcoal/50 text-sm font-medium mb-2">Before</p>
+                  <p className="text-xl md:text-2xl text-charcoal/70">&ldquo;My resume sounds generic&rdquo;</p>
                 </div>
-
-                {/* Right: Before → After */}
-                <div className="md:w-2/3 flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  <div className="flex-1 bg-sand-50 rounded-xl p-5">
-                    <span className="text-xs font-semibold text-charcoal/40 uppercase tracking-wider block mb-2">Before</span>
-                    <p className="text-charcoal/70">Task-based resume hiding accuracy, throughput, and composure under pressure.</p>
-                  </div>
-                  <div className="hidden sm:flex items-center text-gold">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 bg-navy/5 rounded-xl p-5 border border-navy/10">
-                    <span className="text-xs font-semibold text-navy/60 uppercase tracking-wider block mb-2">After</span>
-                    <p className="text-navy font-medium">Compliance-forward narrative. Metrics-backed interview script.</p>
-                  </div>
+                <div className="text-gold text-3xl font-light">→</div>
+                <div className="flex-1 text-center md:text-left">
+                  <p className="text-navy/50 text-sm font-medium mb-2">After</p>
+                  <p className="text-xl md:text-2xl text-navy font-semibold">&ldquo;This actually sounds like me&rdquo;</p>
                 </div>
               </div>
+              <p className="text-center text-sm text-charcoal/50 mt-6">— Public Sector Specialist, career pivot</p>
             </div>
 
             {/* Card 3 */}
-            <div className="group bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200 hover:shadow-md transition-all duration-300">
-              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-                {/* Left: Title & Role */}
-                <div className="md:w-1/3">
-                  <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-xs font-semibold rounded-full mb-3">
-                    Hospitality Executive
-                  </span>
-                  <h3 className="text-xl md:text-2xl font-bold text-navy mb-2">
-                    Owner to Systems Leader
-                  </h3>
-                  <p className="text-sm text-charcoal/60">
-                    Entrepreneurial success, enterprise-ready
-                  </p>
+            <div className="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-sand-200">
+              <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+                <div className="flex-1 text-center md:text-left">
+                  <p className="text-charcoal/50 text-sm font-medium mb-2">Before</p>
+                  <p className="text-xl md:text-2xl text-charcoal/70">&ldquo;I ran everything myself&rdquo;</p>
                 </div>
-
-                {/* Right: Before → After */}
-                <div className="md:w-2/3 flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  <div className="flex-1 bg-sand-50 rounded-xl p-5">
-                    <span className="text-xs font-semibold text-charcoal/40 uppercase tracking-wider block mb-2">Before</span>
-                    <p className="text-charcoal/70">Resume read like responsibilities instead of scalable operating systems.</p>
-                  </div>
-                  <div className="hidden sm:flex items-center text-gold">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 bg-navy/5 rounded-xl p-5 border border-navy/10">
-                    <span className="text-xs font-semibold text-navy/60 uppercase tracking-wider block mb-2">After</span>
-                    <p className="text-navy font-medium">Executive-ready positioning. Proof points, not promises.</p>
-                  </div>
+                <div className="text-gold text-3xl font-light">→</div>
+                <div className="flex-1 text-center md:text-left">
+                  <p className="text-navy/50 text-sm font-medium mb-2">After</p>
+                  <p className="text-xl md:text-2xl text-navy font-semibold">&ldquo;I built systems that scale&rdquo;</p>
                 </div>
               </div>
+              <p className="text-center text-sm text-charcoal/50 mt-6">— Hospitality Executive, multi-unit operations</p>
             </div>
 
           </div>
@@ -296,7 +239,7 @@ export default function HomePage() {
           {/* CTA */}
           <div className="text-center mt-12">
             <Link href="/results" className="inline-flex items-center gap-2 text-navy font-semibold hover:text-gold transition-colors">
-              See more client stories
+              See more results
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
