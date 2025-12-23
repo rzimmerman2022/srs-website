@@ -28,6 +28,9 @@
     "redesign_*",
     "variations",
     "SRS-Website-gpt-*",
-    "srs-website_*"
+    "srs-website_*",
+    "tests",
+    "prototype",
+    "staging"
   ]
 }

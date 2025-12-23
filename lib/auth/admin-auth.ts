@@ -111,6 +111,7 @@ export async function getAdminUser(): Promise<AdminUser | null> {
         id: 'test-admin-id',
         user_id: 'test-user-id',
         email: 'test@example.com',
+        full_name: 'Test Admin',
         role: 'super_admin',
         active: true,
         created_at: new Date().toISOString(),
