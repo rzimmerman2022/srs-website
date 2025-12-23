@@ -101,7 +101,7 @@ export default function TrustSectionWithToggle() {
                 <div className="flex items-center justify-center gap-4">
                   <button
                     onClick={handlePrevious}
-                    className="w-10 h-10 flex items-center justify-center rounded-full border border-sand-300 text-navy/60 hover:border-gold hover:text-gold transition-all duration-200"
+                    className="w-11 h-11 flex items-center justify-center rounded-full border border-sand-300 text-navy/60 hover:border-gold hover:text-gold transition-all duration-200"
                     aria-label="Previous review"
                   >
                     <IconChevronLeft />
@@ -113,7 +113,7 @@ export default function TrustSectionWithToggle() {
 
                   <button
                     onClick={handleNext}
-                    className="w-10 h-10 flex items-center justify-center rounded-full border border-sand-300 text-navy/60 hover:border-gold hover:text-gold transition-all duration-200"
+                    className="w-11 h-11 flex items-center justify-center rounded-full border border-sand-300 text-navy/60 hover:border-gold hover:text-gold transition-all duration-200"
                     aria-label="Next review"
                   >
                     <IconChevronRight />

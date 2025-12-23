@@ -17,7 +17,7 @@ export default function ProblemBlock() {
         </div>
 
         {/* 3-Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
           {/* Card 1 */}
           <div className="group flex flex-col p-6 rounded-xl bg-white hover:bg-sand-50 transition-all duration-300 border border-sand-100 shadow-sm">
             <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-navy flex items-center justify-center shadow-md group-hover:scale-105 transition-transform mb-4">
