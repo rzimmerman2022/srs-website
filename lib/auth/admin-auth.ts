@@ -100,27 +100,31 @@ async function createAuthClient() {
  */
 export async function getAdminUser(): Promise<AdminUser | null> {
   try {
-    // FIRST: Check for admin_session cookie (simple mode)
-    const cookieStore = await cookies();
-    const adminSession = cookieStore.get('admin_session')?.value;
+    // SECURITY: Test mode authentication only allowed in development
+    // This prevents the cookie-based bypass from working in production
+    if (process.env.NODE_ENV === 'development') {
+      const cookieStore = await cookies();
+      const adminSession = cookieStore.get('admin_session')?.value;
 
-    if (adminSession === 'authenticated') {
-      // Return mock admin user for testing
-      // This allows testing admin UI without full Supabase authentication
-      return {
-        id: 'test-admin-id',
-        user_id: 'test-user-id',
-        email: 'test@example.com',
-        full_name: 'Test Admin',
-        role: 'super_admin',
-        active: true,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        last_login_at: new Date().toISOString(),
-      } as AdminUser;
+      if (adminSession === 'authenticated') {
+        // Return mock admin user for testing
+        // This allows testing admin UI without full Supabase authentication
+        console.warn('[DEV ONLY] Using test mode authentication - disabled in production');
+        return {
+          id: 'test-admin-id',
+          user_id: 'test-user-id',
+          email: 'test@example.com',
+          full_name: 'Test Admin',
+          role: 'super_admin',
+          active: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          last_login_at: new Date().toISOString(),
+        } as AdminUser;
+      }
     }
 
-    // THEN: Fall back to Supabase token validation (production mode)
+    // Production: Supabase token validation only
     const authClient = await createAuthClient();
     if (!authClient) {
       return null;

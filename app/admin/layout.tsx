@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 import { getAdminUser } from '@/lib/auth/admin-auth';
 import AdminClientLayout from './layout-client';
 

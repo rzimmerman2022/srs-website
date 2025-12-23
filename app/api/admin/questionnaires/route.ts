@@ -3,6 +3,15 @@ import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { logRateLimitExceeded } from '@/lib/security/audit-log';
 import { getAdminUser } from '@/lib/auth/admin-auth';
+import { jackieDeleonQuestionnaire } from '@/lib/questionnaire/jackie-deleon';
+import type { Questionnaire } from '@/lib/questionnaire/types';
+
+// Questionnaire definitions registry
+// In future, this could be fetched from database
+const QUESTIONNAIRES: Record<string, Questionnaire> = {
+  'jdeleon': jackieDeleonQuestionnaire,
+  'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
+};
 
 // ============================================================================
 // SECURITY: Rate Limiting
@@ -110,6 +119,33 @@ interface QuestionnaireStats {
   last_activity: string;
 }
 
+/**
+ * Get total question count from questionnaire definition
+ * Only counts REQUIRED questions for accurate completion tracking
+ */
+function getQuestionnaireStats(clientId: string): { totalRequired: number; totalAll: number } {
+  const questionnaire = QUESTIONNAIRES[clientId];
+  if (!questionnaire) {
+    // Fallback for unknown questionnaires
+    return { totalRequired: 0, totalAll: 0 };
+  }
+
+  let totalRequired = 0;
+  let totalAll = 0;
+
+  for (const mod of questionnaire.modules) {
+    for (const question of mod.questions) {
+      totalAll++;
+      // Count required questions (either explicitly required OR in a required module)
+      if (question.required || mod.required) {
+        totalRequired++;
+      }
+    }
+  }
+
+  return { totalRequired, totalAll };
+}
+
 function computeQuestionnaireStats(response: unknown): QuestionnaireStats {
   // Type assertion with validation
   const r = response as {
@@ -128,21 +164,24 @@ function computeQuestionnaireStats(response: unknown): QuestionnaireStats {
     key => r.answers[key] !== null && r.answers[key] !== undefined && r.answers[key] !== ''
   ).length;
 
-  // Estimate total questions based on current index (rough approximation)
-  // In a real scenario, you'd fetch this from the questionnaire definition
-  const estimatedTotal = Math.max(r.current_question_index + 1, answeredCount);
+  // Get actual question count from questionnaire definition
+  const { totalRequired, totalAll } = getQuestionnaireStats(r.client_id);
 
-  const progressPercentage = estimatedTotal > 0
-    ? Math.round((answeredCount / estimatedTotal) * 100)
-    : 0;
+  // Use actual total from questionnaire definition, or fall back to answered count if unknown
+  const actualTotal = totalAll > 0 ? totalAll : Math.max(r.current_question_index + 1, answeredCount);
+
+  // Calculate progress based on required questions for accurate completion tracking
+  const progressPercentage = totalRequired > 0
+    ? Math.round((answeredCount / totalRequired) * 100)
+    : (actualTotal > 0 ? Math.round((answeredCount / actualTotal) * 100) : 0);
 
   return {
     id: r.id,
     client_id: r.client_id,
     questionnaire_id: r.questionnaire_id,
     completed: r.completed,
-    progress_percentage: progressPercentage,
-    total_questions: estimatedTotal,
+    progress_percentage: Math.min(progressPercentage, 100), // Cap at 100%
+    total_questions: totalRequired > 0 ? totalRequired : actualTotal,
     answered_questions: answeredCount,
     points: r.points,
     created_at: r.created_at,

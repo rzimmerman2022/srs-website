@@ -65,14 +65,17 @@ export function middleware(request: NextRequest) {
     }
 
     // Support dual-mode authentication:
-    // 1. admin_session cookie (simple mode for testing)
+    // 1. admin_session cookie (simple mode for testing) - DEV ONLY
     // 2. sb-access-token/sb-refresh-token (Supabase mode for production)
-    const adminSession = request.cookies.get('admin_session')?.value;
     const supabaseAccess = request.cookies.get('sb-access-token')?.value;
     const supabaseRefresh = request.cookies.get('sb-refresh-token')?.value;
 
-    // Allow access if EITHER authentication method is present
-    const isAuthenticated = adminSession === 'authenticated' || (supabaseAccess && supabaseRefresh);
+    // SECURITY: Test mode (admin_session cookie) only allowed in development
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const adminSession = isDevelopment ? request.cookies.get('admin_session')?.value : null;
+
+    // Allow access if EITHER authentication method is present (test mode only in dev)
+    const isAuthenticated = (isDevelopment && adminSession === 'authenticated') || (supabaseAccess && supabaseRefresh);
 
     if (!isAuthenticated) {
       const loginUrl = new URL('/admin/login', request.url);

@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
 import { jackieDeleonQuestionnaire } from '@/lib/questionnaire/jackie-deleon';
 import type { QuestionnaireResponse } from '@/lib/supabase/types';
-import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import Card, { CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 
 type FilterStatus = 'all' | 'completed' | 'in-progress';

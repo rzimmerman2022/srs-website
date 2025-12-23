@@ -29,7 +29,6 @@ function getSupabase() {
  * - Access tracking (timestamp, count)
  */
 
-const TOKEN_LENGTH = 32;
 const TOKEN_EXPIRATION_DAYS = 30;
 
 /**
@@ -133,7 +132,7 @@ export async function verifyQuestionnaireToken(
       .single();
 
     if (error || !data) {
-      console.error('Token not found:', error);
+      console.error('Token not found:', error?.message || 'No data returned');
       return null;
     }
 
@@ -166,7 +165,7 @@ export async function verifyQuestionnaireToken(
       .eq('token', token);
 
     if (updateError) {
-      console.error('Error updating token access tracking:', updateError);
+      console.error('Error updating token access tracking:', updateError?.message || 'Unknown error');
       // Don't fail verification just because tracking update failed
     }
 
@@ -175,7 +174,7 @@ export async function verifyQuestionnaireToken(
       questionnaireId: tokenData.questionnaire_id,
       tokenData,
     };
-  } catch (error) {
+  } catch {
     console.error('Supabase is not configured. Cannot verify token.');
     return null;
   }
@@ -200,12 +199,12 @@ export async function revokeToken(token: string): Promise<boolean> {
       .eq('token', token);
 
     if (error) {
-      console.error('Error revoking token:', error);
+      console.error('Error revoking token:', error?.message || 'Unknown error');
       return false;
     }
 
     return true;
-  } catch (error) {
+  } catch {
     console.error('Supabase is not configured. Cannot revoke token.');
     return false;
   }
@@ -253,12 +252,12 @@ export async function getClientTokens(
       .order('created_at', { ascending: false });
 
     if (error) {
-      console.error('Error fetching client tokens:', error);
+      console.error('Error fetching client tokens:', error?.message || 'Unknown error');
       return [];
     }
 
     return data as QuestionnaireAccessToken[];
-  } catch (error) {
+  } catch {
     console.error('Supabase is not configured. Cannot fetch tokens.');
     return [];
   }
@@ -285,12 +284,12 @@ export async function revokeAllClientTokens(clientId: string): Promise<number> {
       .select();
 
     if (error) {
-      console.error('Error revoking client tokens:', error);
+      console.error('Error revoking client tokens:', error?.message || 'Unknown error');
       return 0;
     }
 
     return data?.length || 0;
-  } catch (error) {
+  } catch {
     console.error('Supabase is not configured. Cannot revoke tokens.');
     return 0;
   }
