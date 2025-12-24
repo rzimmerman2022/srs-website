@@ -1,8 +1,8 @@
 # SEO, GEO & Local SEO Standard Operating Procedure
 
 **Southwest Resume Services**
-**Version:** 1.0
-**Last Updated:** 2025-12-21
+**Version:** 1.1
+**Last Updated:** 2025-12-23
 **Document Owner:** Ryan Zimmerman
 
 ---
@@ -872,12 +872,41 @@ These feed data to hundreds of downstream sites:
 
 | Schema Type | File | Line Reference |
 |-------------|------|----------------|
-| LocalBusiness | staging/app/layout.tsx | Lines 158-291 |
-| BreadcrumbList | staging/app/layout.tsx | Lines 102-155 |
-| ProfessionalService | staging/app/page.tsx | Lines 141-198 |
-| Service (6x) | staging/app/services/page.tsx | Lines 222-532 |
-| HowTo | staging/app/process/page.tsx | Added |
-| FAQPage | staging/app/faq/page.tsx | Added |
+| LocalBusiness/ProfessionalService | app/layout.tsx | Lines 158-292 |
+| BreadcrumbList | app/layout.tsx | Lines 102-155 |
+| Organization | app/about/page.tsx | Lines 44-90 |
+| Person (Ryan Zimmerman) | app/about/page.tsx | Lines 92-118 |
+| Person (Jordyn Ginsberg) | app/about/page.tsx | Lines 120-139 |
+| ContactPage | app/contact/page.tsx | Lines 42-93 |
+| Service (6x) | app/services/page.tsx | Lines 222-532 |
+| HowTo | app/process/page.tsx | Added |
+| FAQPage | app/faq/page.tsx | Added |
+
+### Appendix B.1: Geographic Meta Tags
+
+**Location:** app/layout.tsx (Lines 91-96)
+
+```typescript
+other: {
+  'geo.region': 'US-AZ',
+  'geo.placename': 'Chandler',
+  'geo.position': '33.3062;-111.8413',
+  'ICBM': '33.3062, -111.8413',
+}
+```
+
+### Appendix B.2: Page-Specific OG/Twitter Metadata
+
+All public pages now have unique Open Graph and Twitter Card metadata:
+
+| Page | File | Canonical URL |
+|------|------|---------------|
+| Homepage | app/page.tsx | https://southwestresumes.com |
+| About | app/about/page.tsx | https://southwestresumes.com/about |
+| Contact | app/contact/page.tsx | https://southwestresumes.com/contact |
+| Services | app/services/page.tsx | https://southwestresumes.com/services |
+| FAQ | app/faq/page.tsx | https://southwestresumes.com/faq |
+| Process | app/process/page.tsx | https://southwestresumes.com/process |
 
 ### Appendix C: Keyword Targeting Matrix
 
@@ -905,7 +934,7 @@ These feed data to hundreds of downstream sites:
 | Date | Change | Author |
 |------|--------|--------|
 | 2025-12-21 | Initial SOP creation | Claude |
-| | | |
+| 2025-12-23 | Phase 1 SEO Implementation: Added Organization + Person schemas to About page, ContactPage schema to Contact page, geographic meta tags to root layout, page-specific OG/Twitter metadata to all public pages. Updated version to 1.1. | Claude |
 
 ---
 
