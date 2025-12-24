@@ -168,12 +168,44 @@ Each page has unique:
 - Meta description (< 160 characters)
 - OpenGraph tags (for social sharing)
 - Twitter Card tags
+- Canonical URLs
+
+### Structured Data (Schema.org)
+
+The site includes comprehensive structured data for rich search results:
+
+| Schema Type | Location | Purpose |
+|-------------|----------|---------|
+| LocalBusiness/ProfessionalService | `app/layout.tsx` | Business info, NAP, service areas |
+| BreadcrumbList | `app/layout.tsx` | Site navigation structure |
+| Organization | `app/about/page.tsx` | Knowledge Graph presence |
+| Person (2x) | `app/about/page.tsx` | Team member profiles |
+| ContactPage | `app/contact/page.tsx` | Contact info, hours |
+| Service (6x) | `app/services/page.tsx` | Individual service definitions |
+| HowTo | `app/process/page.tsx` | Process methodology |
+| FAQPage | `app/faq/page.tsx` | FAQ rich results |
+
+### Local SEO
+
+Geographic meta tags are included site-wide:
+- `geo.region`: US-AZ
+- `geo.placename`: Chandler
+- `geo.position`: 33.3062;-111.8413
 
 ### Sitemap & Robots.txt
 
 - **Sitemap:** Automatically generated at `/sitemap.xml`
-- **Robots.txt:** Configured at `/robots.txt`
+- **Robots.txt:** Configured at `/robots.txt` (blocks /admin, /q routes)
 - Both update automatically when you add/remove pages
+
+### SEO Documentation
+
+See [SEO-GEO-LOCAL-SOP.md](./SEO-GEO-LOCAL-SOP.md) for complete SEO guidelines including:
+- NAP consistency standards
+- Schema implementation details
+- Local SEO optimization
+- GEO (Generative Engine Optimization) strategies
+- Citation building protocols
 
 ### Performance
 
