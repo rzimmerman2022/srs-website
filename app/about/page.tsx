@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import Hero from '@/components/sections/Hero';
 import Container from '@/components/layout/Container';
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -11,11 +12,157 @@ export const metadata: Metadata = {
   title: 'About Us | Phoenix Resume Writers | Southwest Resume Services',
   description:
     'Learn about Southwest Resume Services, a Phoenix-based career coaching company serving Arizona professionals. Our research-backed methodology helps Phoenix, Scottsdale, and Mesa job seekers reveal their true professional value.',
+  openGraph: {
+    title: 'About Us | Phoenix Resume Writers | Southwest Resume Services',
+    description:
+      'Meet the team behind Southwest Resume Services. Research-backed career coaching serving Phoenix, Scottsdale, Mesa, and Arizona professionals.',
+    url: 'https://southwestresumes.com/about',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Southwest Resume Services Team - Phoenix Career Coaches',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us | Phoenix Resume Writers',
+    description:
+      'Meet the team behind Southwest Resume Services. Research-backed career coaching for Arizona professionals.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://southwestresumes.com/about',
+  },
 };
 
 export default function AboutPage() {
+  // Organization schema for the company
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': 'https://southwestresumes.com/#organization',
+    name: 'Southwest Resume Services',
+    legalName: 'Southwest Resume Services, LLC',
+    url: 'https://southwestresumes.com',
+    logo: 'https://southwestresumes.com/logo.png',
+    description:
+      'Professional resume writing, career coaching, and LinkedIn optimization services in Phoenix, Arizona. Research-backed career documents for professionals across the Phoenix metro area.',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '1111 N Mission Park Blvd #2016',
+      addressLocality: 'Chandler',
+      addressRegion: 'AZ',
+      postalCode: '85224',
+      addressCountry: 'US',
+    },
+    telephone: '+1-480-374-3418',
+    email: 'info@southwestresumes.com',
+    foundingDate: '2024',
+    areaServed: [
+      { '@type': 'City', name: 'Phoenix' },
+      { '@type': 'City', name: 'Chandler' },
+      { '@type': 'City', name: 'Scottsdale' },
+      { '@type': 'City', name: 'Mesa' },
+      { '@type': 'City', name: 'Tempe' },
+      { '@type': 'City', name: 'Gilbert' },
+      { '@type': 'State', name: 'Arizona' },
+    ],
+    founder: {
+      '@type': 'Person',
+      '@id': 'https://southwestresumes.com/#ryan-zimmerman',
+      name: 'Ryan Zimmerman',
+    },
+    employee: [
+      { '@id': 'https://southwestresumes.com/#ryan-zimmerman' },
+      { '@id': 'https://southwestresumes.com/#jordyn-ginsberg' },
+    ],
+    knowsAbout: [
+      'Resume Writing',
+      'Career Coaching',
+      'LinkedIn Optimization',
+      'Interview Preparation',
+      'Career Strategy',
+    ],
+  };
+
+  // Person schema for Ryan Zimmerman
+  const ryanSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://southwestresumes.com/#ryan-zimmerman',
+    name: 'Ryan Zimmerman',
+    jobTitle: 'Founder & Principal Consultant',
+    worksFor: {
+      '@id': 'https://southwestresumes.com/#organization',
+    },
+    image: 'https://southwestresumes.com/assets/images/team/ryan.jpg',
+    description:
+      'Founder of Southwest Resume Services. Expert in research-backed resume writing and career coaching, serving professionals in Phoenix, Arizona and nationwide.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Phoenix',
+      addressRegion: 'AZ',
+      addressCountry: 'US',
+    },
+    knowsAbout: [
+      'Resume Writing',
+      'Career Development',
+      'Research Methodology',
+      'Client Truth Principle',
+      'Research Authority Index',
+    ],
+  };
+
+  // Person schema for Jordyn Ginsberg
+  const jordynSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://southwestresumes.com/#jordyn-ginsberg',
+    name: 'Jordyn Ginsberg',
+    jobTitle: 'Career Coach',
+    worksFor: {
+      '@id': 'https://southwestresumes.com/#organization',
+    },
+    image: 'https://southwestresumes.com/assets/images/team/jordyn.png',
+    description:
+      'Career Coach at Southwest Resume Services. Specializes in interview preparation, confidence transfer, and helping professionals own their authentic value.',
+    knowsAbout: [
+      'Interview Preparation',
+      'Career Coaching',
+      'Confidence Building',
+      'Professional Development',
+    ],
+  };
+
   return (
     <>
+      {/* Organization Schema */}
+      <Script
+        id="organization-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        strategy="beforeInteractive"
+      />
+
+      {/* Person Schema - Ryan Zimmerman */}
+      <Script
+        id="ryan-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ryanSchema) }}
+        strategy="beforeInteractive"
+      />
+
+      {/* Person Schema - Jordyn Ginsberg */}
+      <Script
+        id="jordyn-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jordynSchema) }}
+        strategy="beforeInteractive"
+      />
       <Hero
         title="About Southwest Resume Services"
         subtitle="Our Story & Philosophy"

@@ -16,6 +16,31 @@ export const metadata: Metadata = {
   title: 'Our Process | Southwest Resume Services',
   description:
     'A systematic, research-driven approach to career transformation. From deep discovery to interview mastery, we guide you through every step.',
+  openGraph: {
+    title: 'Our 10-Phase Process | Southwest Resume Services',
+    description:
+      'A systematic, research-driven approach to career transformation. From discovery to interview mastery.',
+    url: 'https://southwestresumes.com/process',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Southwest Resume Services - Our Research-Driven Process',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Our 10-Phase Process | Southwest Resume Services',
+    description:
+      'A systematic, research-driven approach to career transformation.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://southwestresumes.com/process',
+  },
 };
 
 const processSteps: ProcessStep[] = [

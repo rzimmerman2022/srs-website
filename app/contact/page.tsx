@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Script from 'next/script';
 import Hero from '@/components/sections/Hero';
 import ContactForm from '@/components/sections/ContactForm';
 import Container from '@/components/layout/Container';
@@ -9,11 +10,98 @@ export const metadata: Metadata = {
   title: 'Contact Us | Phoenix Resume Writing Services | Arizona Career Coach',
   description:
     'Contact Southwest Resume Services in Phoenix, AZ. Schedule a consultation with our expert resume writers and career coaches serving Scottsdale, Mesa, Tempe, and the Phoenix metro area.',
+  openGraph: {
+    title: 'Contact Us | Phoenix Resume Writing Services',
+    description:
+      'Schedule a consultation with Southwest Resume Services. Expert resume writers and career coaches serving Phoenix, Scottsdale, Mesa, and Arizona.',
+    url: 'https://southwestresumes.com/contact',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Contact Southwest Resume Services - Phoenix Career Coaches',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact Us | Phoenix Resume Writing Services',
+    description:
+      'Schedule a consultation with our expert resume writers and career coaches in Phoenix, AZ.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://southwestresumes.com/contact',
+  },
 };
 
 export default function ContactPage() {
+  // ContactPage schema for local SEO
+  const contactPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Southwest Resume Services',
+    description:
+      'Contact page for Southwest Resume Services. Schedule a consultation with expert resume writers and career coaches in Phoenix, Arizona.',
+    url: 'https://southwestresumes.com/contact',
+    mainEntity: {
+      '@type': 'ProfessionalService',
+      '@id': 'https://southwestresumes.com/#organization',
+      name: 'Southwest Resume Services',
+      telephone: '+1-480-374-3418',
+      email: 'info@southwestresumes.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '1111 N Mission Park Blvd #2016',
+        addressLocality: 'Chandler',
+        addressRegion: 'AZ',
+        postalCode: '85224',
+        addressCountry: 'US',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 33.3062,
+        longitude: -111.8413,
+      },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '09:00',
+          closes: '17:00',
+        },
+      ],
+      areaServed: [
+        { '@type': 'City', name: 'Phoenix' },
+        { '@type': 'City', name: 'Chandler' },
+        { '@type': 'City', name: 'Scottsdale' },
+        { '@type': 'City', name: 'Mesa' },
+        { '@type': 'City', name: 'Tempe' },
+        { '@type': 'City', name: 'Gilbert' },
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+1-480-374-3418',
+        contactType: 'customer service',
+        email: 'info@southwestresumes.com',
+        availableLanguage: 'English',
+        areaServed: 'US',
+      },
+    },
+  };
+
   return (
     <>
+      {/* ContactPage Schema */}
+      <Script
+        id="contact-page-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
+        strategy="beforeInteractive"
+      />
+
       <Hero
         title="Get in Touch"
         subtitle="Contact Us"

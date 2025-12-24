@@ -87,6 +87,13 @@ export const metadata: Metadata = {
     // Instructions: https://search.google.com/search-console
     // google: 'your-verification-code',
   },
+  // Geographic targeting meta tags for local SEO
+  other: {
+    'geo.region': 'US-AZ',
+    'geo.placename': 'Chandler',
+    'geo.position': '33.3062;-111.8413',
+    'ICBM': '33.3062, -111.8413',
+  },
 };
 
 export default function RootLayout({
@@ -287,9 +294,8 @@ export default function RootLayout({
       name: 'Ryan Zimmerman',
       jobTitle: 'Founder & Principal Consultant',
     },
-    sameAs: [
-      'https://www.google.com/search?q=Southwest+Resume+Services',
-    ],
+    // Note: Add social media profiles to sameAs array when accounts are created
+    // Example: sameAs: ['https://linkedin.com/company/southwest-resume-services', 'https://facebook.com/southwestresumes'],
   };
 
   return (
