@@ -15,6 +15,31 @@ export const metadata: Metadata = {
   title: 'Services & Pricing | Phoenix Resume Writing | Arizona Career Coaching',
   description:
     'Professional resume writing, LinkedIn optimization, and interview coaching in Phoenix, AZ. Serving Scottsdale, Mesa, Tempe, and the Phoenix metro area. Transparent pricing from $150-$500+.',
+  openGraph: {
+    title: 'Services & Pricing | Phoenix Resume Writing',
+    description:
+      'Resume writing, LinkedIn optimization, and interview coaching in Phoenix. Transparent pricing from $150-$500+.',
+    url: 'https://southwestresumes.com/services',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Southwest Resume Services - Professional Career Services & Pricing',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Services & Pricing | Phoenix Resume Writing',
+    description:
+      'Resume writing, LinkedIn optimization, and interview coaching. Transparent pricing from $150-$500+.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://southwestresumes.com/services',
+  },
 };
 
 // SVG Icons for crisp rendering

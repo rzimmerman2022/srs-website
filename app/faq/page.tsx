@@ -7,9 +7,34 @@ import Button from '@/components/ui/Button';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions',
+  title: 'Frequently Asked Questions | Southwest Resume Services',
   description:
     'Common questions about our career services, process, timelines, pricing, and approach. Get answers to your questions about Southwest Resume Services.',
+  openGraph: {
+    title: 'FAQ | Southwest Resume Services',
+    description:
+      'Common questions about resume writing, career coaching, timelines, pricing, and our research-backed approach.',
+    url: 'https://southwestresumes.com/faq',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Southwest Resume Services - Frequently Asked Questions',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FAQ | Southwest Resume Services',
+    description:
+      'Common questions about resume writing, career coaching, timelines, and pricing.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://southwestresumes.com/faq',
+  },
 };
 
 const faqItems: FAQItem[] = [

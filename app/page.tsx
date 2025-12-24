@@ -16,7 +16,31 @@ export const metadata: Metadata = {
   title: 'Phoenix Resume Writing Services | Arizona Career Coach | Southwest Resume Services',
   description:
     'Professional resume writing services in Phoenix, AZ. Expert career coaching serving Scottsdale, Mesa, Tempe, and the Phoenix metro area. Research-backed career documents that help you own your professional story.',
-  // Force rebuild - 2024-12-22
+  openGraph: {
+    title: 'Phoenix Resume Writing Services | Southwest Resume Services',
+    description:
+      'Professional resume writing and career coaching in Phoenix, Arizona. Research-backed career documents for Scottsdale, Mesa, Tempe, and the Phoenix metro area.',
+    url: 'https://southwestresumes.com',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Southwest Resume Services - Phoenix Resume Writing & Career Coaching',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Phoenix Resume Writing Services | Southwest Resume Services',
+    description:
+      'Professional resume writing and career coaching in Phoenix, Arizona. Research-backed career documents.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://southwestresumes.com',
+  },
 };
 
 // SVG Icons for crisp rendering
