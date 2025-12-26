@@ -83,9 +83,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Google Search Console verification code will be added after domain is verified
-    // Instructions: https://search.google.com/search-console
-    // google: 'your-verification-code',
+    google: 'd_45b3Xpuzx9WA0lKmS56bsCOyVsw5PYBa__E1qYaF0',
   },
   // Geographic targeting meta tags for local SEO
   other: {
@@ -131,30 +129,36 @@ export default function RootLayout({
       {
         '@type': 'ListItem',
         position: 4,
+        name: 'Blog',
+        item: 'https://southwestresumes.com/blog',
+      },
+      {
+        '@type': 'ListItem',
+        position: 5,
         name: 'About',
         item: 'https://southwestresumes.com/about',
       },
       {
         '@type': 'ListItem',
-        position: 5,
+        position: 6,
         name: 'Contact',
         item: 'https://southwestresumes.com/contact',
       },
       {
         '@type': 'ListItem',
-        position: 6,
+        position: 7,
         name: 'FAQ',
         item: 'https://southwestresumes.com/faq',
       },
       {
         '@type': 'ListItem',
-        position: 7,
+        position: 8,
         name: 'Privacy Policy',
         item: 'https://southwestresumes.com/privacy',
       },
       {
         '@type': 'ListItem',
-        position: 8,
+        position: 9,
         name: 'Terms of Service',
         item: 'https://southwestresumes.com/terms',
       },

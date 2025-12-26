@@ -11,6 +11,7 @@ const navigation = [
   { name: 'Process', href: '/process' },
   { name: 'Methodology', href: '/methodology' },
   { name: 'Results', href: '/results' },
+  { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Contact', href: '/contact' },
