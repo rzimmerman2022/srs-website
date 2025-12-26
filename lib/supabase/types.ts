@@ -214,3 +214,47 @@ export type QuestionnaireAccessTokenUpdate = Database['public']['Tables']['quest
 export type AdminSetting = Database['public']['Tables']['admin_settings']['Row'];
 export type AdminSettingInsert = Database['public']['Tables']['admin_settings']['Insert'];
 export type AdminSettingUpdate = Database['public']['Tables']['admin_settings']['Update'];
+
+// Client types (for CRM-style management)
+export interface Client {
+  id: string;
+  client_id: string;
+  full_name: string;
+  email: string;
+  phone: string | null;
+  package_type: 'discovery' | 'elite' | 'executive';
+  status: 'pending' | 'active' | 'completed' | 'archived';
+  questionnaire_id: string;
+  access_token_id: string | null;
+  notes: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+  onboarded_at: string | null;
+  completed_at: string | null;
+  // HubSpot integration fields
+  hubspot_contact_id?: string | null;
+  hubspot_deal_id?: string | null;
+  hubspot_synced_at?: string | null;
+}
+
+export interface ClientInsert {
+  client_id: string;
+  full_name: string;
+  email: string;
+  phone?: string | null;
+  package_type?: 'discovery' | 'elite' | 'executive';
+  status?: 'pending' | 'active' | 'completed' | 'archived';
+  questionnaire_id: string;
+  access_token_id?: string | null;
+  notes?: string | null;
+  metadata?: Record<string, unknown>;
+  onboarded_at?: string | null;
+  completed_at?: string | null;
+}
+
+export interface ClientWithLink extends Client {
+  questionnaire_link: string | null;
+  token_expires_at: string | null;
+  token_access_count: number;
+}
