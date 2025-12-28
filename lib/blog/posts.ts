@@ -12,6 +12,43 @@
  * - Mobile-first formatting
  */
 
+/**
+ * Generates a URL-friendly slug from heading text
+ */
+function generateHeadingId(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+}
+
+/**
+ * Processes blog content HTML to add IDs to headings (h2, h3)
+ * This enables deep-linking and table of contents functionality
+ */
+function addHeadingIds(content: string): string {
+  const headingCounts = new Map<string, number>();
+
+  return content.replace(/<h([23])>(.*?)<\/h\1>/g, (match, level, text) => {
+    // Extract plain text from heading (strip any nested HTML)
+    const plainText = text.replace(/<[^>]*>/g, '');
+    let id = generateHeadingId(plainText);
+
+    // Handle duplicate IDs by appending a number
+    if (headingCounts.has(id)) {
+      const count = headingCounts.get(id)! + 1;
+      headingCounts.set(id, count);
+      id = `${id}-${count}`;
+    } else {
+      headingCounts.set(id, 1);
+    }
+
+    return `<h${level} id="${id}">${text}</h${level}>`;
+  });
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -1078,7 +1115,14 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((post) => post.slug === slug);
+  const post = blogPosts.find((post) => post.slug === slug);
+  if (!post) return undefined;
+
+  // Process content to add IDs to headings for deep-linking and TOC
+  return {
+    ...post,
+    content: addHeadingIds(post.content),
+  };
 }
 
 export function getFeaturedPosts(): BlogPost[] {

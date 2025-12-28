@@ -24,14 +24,16 @@ export default function BlogTableOfContents({ contentRef }: BlogTableOfContentsP
     const headings = container.querySelectorAll('h2, h3');
     const tocItems: TocItem[] = [];
 
-    headings.forEach((heading, index) => {
-      const id = heading.id || `heading-${index}`;
+    headings.forEach((heading) => {
+      // Headings should already have IDs from server-side processing
+      // If not, skip this heading (shouldn't happen with proper content processing)
       if (!heading.id) {
-        heading.id = id;
+        console.warn('Heading without ID found:', heading.textContent);
+        return;
       }
 
       tocItems.push({
-        id,
+        id: heading.id,
         text: heading.textContent || '',
         level: heading.tagName === 'H2' ? 2 : 3,
       });
@@ -50,7 +52,7 @@ export default function BlogTableOfContents({ contentRef }: BlogTableOfContentsP
       },
       {
         rootMargin: '-80px 0px -80% 0px',
-        threshold: 1,
+        threshold: 0.5,
       }
     );
 
@@ -58,6 +60,7 @@ export default function BlogTableOfContents({ contentRef }: BlogTableOfContentsP
 
     return () => {
       headings.forEach((heading) => observer.unobserve(heading));
+      observer.disconnect();
     };
   }, [contentRef]);
 
