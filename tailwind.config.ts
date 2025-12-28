@@ -77,12 +77,46 @@ const config: Config = {
                 color: '#b8982a',
               },
             },
+            // Ensure list styles are applied
+            'ul': {
+              listStyleType: 'disc',
+              paddingLeft: '1.5em',
+            },
+            'ol': {
+              listStyleType: 'decimal',
+              paddingLeft: '1.5em',
+            },
+            'ul > li': {
+              paddingLeft: '0.5em',
+            },
+            'ol > li': {
+              paddingLeft: '0.5em',
+            },
+            'ul > li::marker': {
+              color: '#d4af37',
+            },
+            'ol > li::marker': {
+              color: '#d4af37',
+              fontWeight: '600',
+            },
+          },
+        },
+        navy: {
+          css: {
+            '--tw-prose-body': '#2d2d2d',
+            '--tw-prose-headings': '#1a2332',
+            '--tw-prose-links': '#d4af37',
+            '--tw-prose-bold': '#1a2332',
+            '--tw-prose-bullets': '#d4af37',
+            '--tw-prose-counters': '#d4af37',
           },
         },
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };
+
+export type { Config };
 
 export default config;
