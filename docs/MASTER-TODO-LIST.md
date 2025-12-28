@@ -28,6 +28,8 @@
 | Deploy QA Verification Agent with CoVe | Claude Sonnet 4.5 | 2025-12-28 | 03:15 | ✅ Complete |
 | Push all changes to origin/main | Claude Sonnet 4.5 | 2025-12-28 | 03:20 | ✅ Complete |
 | Fix ProcessScrollSpy counter stuck at 01/10 | Claude Sonnet 4.5 | 2025-12-28 | 04:15 | ✅ Complete |
+| Fix RLS on clients table (PUBLIC PII EXPOSURE) | Claude Sonnet 4.5 | 2025-12-28 | 04:30 | ✅ Complete |
+| Fix RLS on questionnaire_access_tokens table (PUBLIC TOKEN EXPOSURE) | Claude Sonnet 4.5 | 2025-12-28 | 04:30 | ✅ Complete |
 | Update OpenGraph image with clean logo | Claude Sonnet 4.5 | 2025-12-27 | 23:15 | ✅ Complete |
 | Add canonical URLs to Privacy page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
 | Add canonical URLs to Terms page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
@@ -91,8 +93,8 @@
 | Task | Priority | Estimated Time | Blocked By | Impact |
 | ---- | -------- | -------------- | ---------- | ------ |
 | ~~**#1 CRITICAL:** Fix ProcessScrollSpy counter stuck at 01/10~~ | ✅ FIXED | 20 min | None | ~~Methodology page scroll counter broken~~ FIXED: Updated rootMargin to -20% 0px -60% 0px (commit 5dd668f) |
-| **#2 CRITICAL:** Fix RLS on `clients` table | CRITICAL | 30 min | None | PUBLIC PII EXPOSURE - anyone with anon key can read all client data (full_name, email, phone) |
-| **#3 CRITICAL:** Fix RLS on `questionnaire_access_tokens` table | CRITICAL | 30 min | None | PUBLIC TOKEN EXPOSURE - anyone can read/write access tokens bypassing admin auth |
+| ~~**#2 CRITICAL:** Fix RLS on `clients` table~~ | ✅ FIXED | 30 min | None | ~~PUBLIC PII EXPOSURE~~ FIXED: Service role only policy, REVOKE anon access (commit d6db6e0) |
+| ~~**#3 CRITICAL:** Fix RLS on `questionnaire_access_tokens` table~~ | ✅ FIXED | 30 min | None | ~~PUBLIC TOKEN EXPOSURE~~ FIXED: Service role only policy, no anon access (commit d6db6e0) |
 | **#4 HIGH:** Fix HubSpot name corruption in sync-service.ts:234 | HIGH | 15 min | None | firstname/lastname updates overwrite full_name with partial data (loses last/first name) |
 | **#5 HIGH:** Fix webhook processing dropped in serverless (route.ts:123) | HIGH | 45 min | None | Async processing may be killed after response, losing HubSpot updates (needs queue) |
 | **#6 MEDIUM:** Remove hard-coded questionnaire ID (page.tsx:86) | MEDIUM | 20 min | None | All new clients default to 'jackie-deleon-dec-2025' questionnaire |
