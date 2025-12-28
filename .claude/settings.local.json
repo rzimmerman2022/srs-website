@@ -168,7 +168,10 @@
       "Bash(git branch:*)",
       "Bash(git diff-tree:*)",
       "Bash(git log:*)",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Bash(node scripts/run-migrations.js:*)",
+      "Bash(npm install)",
+      "Bash(git reset:*)"
     ],
     "deny": [],
     "ask": []

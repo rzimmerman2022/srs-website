@@ -2,8 +2,16 @@
 /**
  * Run Supabase Migrations via Service Role
  *
- * Uses the existing service role key to execute SQL migrations
- * No additional tokens or manual steps required.
+ * ⚠️  WARNING: This script is DEPRECATED and has known bugs:
+ * - exec_sql RPC function doesn't exist in Supabase by default
+ * - Error handling doesn't actually execute SQL (logs but doesn't run)
+ * - Skips ALL migrations if tables exist (incomplete migration detection)
+ *
+ * ✅ RECOMMENDED APPROACH:
+ * Run migrations manually via Supabase SQL Editor:
+ * https://supabase.com/dashboard/project/aougseszcvzgxwniossn/sql/new
+ *
+ * This script is kept for reference only.
  */
 
 const { createClient } = require('@supabase/supabase-js');

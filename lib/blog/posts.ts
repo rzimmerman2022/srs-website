@@ -27,11 +27,22 @@ function generateHeadingId(text: string): string {
 /**
  * Processes blog content HTML to add IDs to headings (h2, h3)
  * This enables deep-linking and table of contents functionality
+ *
+ * Improved to handle:
+ * - Multiline heading content
+ * - Existing attributes (preserves them)
+ * - Headings that already have an id attribute (skips them)
  */
 function addHeadingIds(content: string): string {
   const headingCounts = new Map<string, number>();
 
-  return content.replace(/<h([23])>(.*?)<\/h\1>/g, (match, level, text) => {
+  // Match headings with optional attributes, using [\s\S] to match multiline content
+  return content.replace(/<h([23])(\s[^>]*)?>(.+?)<\/h\1>/gs, (match, level, attrs, text) => {
+    // Skip if heading already has an id attribute
+    if (attrs && /\bid=/.test(attrs)) {
+      return match;
+    }
+
     // Extract plain text from heading (strip any nested HTML)
     const plainText = text.replace(/<[^>]*>/g, '');
     let id = generateHeadingId(plainText);
@@ -45,7 +56,9 @@ function addHeadingIds(content: string): string {
       headingCounts.set(id, 1);
     }
 
-    return `<h${level} id="${id}">${text}</h${level}>`;
+    // Preserve existing attributes if present
+    const existingAttrs = attrs || '';
+    return `<h${level}${existingAttrs} id="${id}">${text}</h${level}>`;
   });
 }
 
