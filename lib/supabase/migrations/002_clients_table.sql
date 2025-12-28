@@ -71,10 +71,11 @@ ALTER TABLE clients ENABLE ROW LEVEL SECURITY;
 
 -- SECURITY: Admin-only access via service role key
 -- No public (anon) access allowed - all PII is protected
+-- CRITICAL: Only service_role can access, NOT even authenticated users
 CREATE POLICY "Service role only access to clients"
   ON clients
   FOR ALL
-  TO authenticated, service_role
+  TO service_role
   USING (true)
   WITH CHECK (true);
 

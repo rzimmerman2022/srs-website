@@ -240,7 +240,7 @@ export class HubSpotSyncService {
         // This prevents partial updates that would corrupt the full_name
         try {
           const hubspotClient = getHubSpotClient();
-          const contact = await hubspotClient.crm.contacts.basicApi.getById(
+          const contact = await hubspotClient.getContact(
             hubspotContactId,
             ['firstname', 'lastname']
           );

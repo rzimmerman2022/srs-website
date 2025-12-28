@@ -11,16 +11,18 @@
 -- Drop the insecure policy
 DROP POLICY IF EXISTS "Allow all operations on clients" ON clients;
 
--- Create secure policy: Service role and authenticated users only
+-- Create secure policy: Service role ONLY (not even authenticated users)
+-- CRITICAL: Client PII should only be accessible via admin API with service role key
 CREATE POLICY "Service role only access to clients"
   ON clients
   FOR ALL
-  TO authenticated, service_role
+  TO service_role
   USING (true)
   WITH CHECK (true);
 
--- Revoke anon access
+-- Revoke anon AND authenticated access
 REVOKE ALL ON clients FROM anon;
+REVOKE ALL ON clients FROM authenticated;
 
 -- ============================================================================
 -- FIX #3 CRITICAL: questionnaire_access_tokens Table RLS
