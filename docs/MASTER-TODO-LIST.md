@@ -85,6 +85,20 @@
 
 ## Pending Tasks 📋
 
+### 🚨 CRITICAL PRODUCTION BUGS (Fix Immediately)
+
+| Task | Priority | Estimated Time | Blocked By | Impact |
+| ---- | -------- | -------------- | ---------- | ------ |
+| **#1 CRITICAL:** Fix ProcessScrollSpy counter stuck at 01/10 | CRITICAL | 20 min | None | Methodology page scroll counter broken - aggressive rootMargin (-40%) leaves only 20% viewport active zone, no fallback when steps miss detection |
+| **#2 CRITICAL:** Fix RLS on `clients` table | CRITICAL | 30 min | None | PUBLIC PII EXPOSURE - anyone with anon key can read all client data (full_name, email, phone) |
+| **#3 CRITICAL:** Fix RLS on `questionnaire_access_tokens` table | CRITICAL | 30 min | None | PUBLIC TOKEN EXPOSURE - anyone can read/write access tokens bypassing admin auth |
+| **#4 HIGH:** Fix HubSpot name corruption in sync-service.ts:234 | HIGH | 15 min | None | firstname/lastname updates overwrite full_name with partial data (loses last/first name) |
+| **#5 HIGH:** Fix webhook processing dropped in serverless (route.ts:123) | HIGH | 45 min | None | Async processing may be killed after response, losing HubSpot updates (needs queue) |
+| **#6 MEDIUM:** Remove hard-coded questionnaire ID (page.tsx:86) | MEDIUM | 20 min | None | All new clients default to 'jackie-deleon-dec-2025' questionnaire |
+| **#7 MEDIUM:** Fix migration runner (run-migrations.js:48) | MEDIUM | 30 min | None | Logs "Using direct approach" but never executes SQL statements |
+| **#8 MEDIUM:** Fix UUID extension mismatch in migrations | MEDIUM | 15 min | None | uuid-ossp vs gen_random_uuid() inconsistency can fail on clean DBs |
+| **#9 LOW:** Improve heading ID regex (posts.ts:31) | LOW | 20 min | None | Regex won't match multiline headings or preserve existing attributes |
+
 ### CRITICAL Priority (Fix Immediately - Owner Decision Not Required)
 
 | Task | Priority | Estimated Time | Blocked By | Notes |
