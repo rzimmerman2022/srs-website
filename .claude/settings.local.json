@@ -157,7 +157,13 @@
       "Bash(git rev-list:*)",
       "Bash(wait)",
       "Bash(git pull:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(xargs:*)",
+      "Bash(git log --oneline main --not staging/seo-content-drafts)",
+      "Bash(git log --oneline staging/seo-content-drafts --not main)",
+      "Bash(git log --oneline feature/hubspot-integration --not main)",
+      "Bash(git show-branch main staging/seo-content-drafts feature/hubspot-integration)",
+      "Bash(git merge-base:*)"
     ],
     "deny": [],
     "ask": []
