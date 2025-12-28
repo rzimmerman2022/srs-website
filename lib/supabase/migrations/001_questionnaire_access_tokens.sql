@@ -52,17 +52,18 @@ CREATE INDEX IF NOT EXISTS idx_questionnaire_access_tokens_client_questionnaire
 -- Enable Row Level Security
 ALTER TABLE questionnaire_access_tokens ENABLE ROW LEVEL SECURITY;
 
--- Policy: Allow all operations for now (can be restricted later with auth)
--- For anonymous access (using anon key)
-CREATE POLICY "Allow all operations on questionnaire_access_tokens"
+-- SECURITY: Service role has full admin access
+-- No anon access - token validation must be done via API endpoints
+-- that use the service role key to prevent token enumeration attacks
+CREATE POLICY "Service role full access to tokens"
   ON questionnaire_access_tokens
   FOR ALL
+  TO service_role
   USING (true)
   WITH CHECK (true);
 
--- Grant permissions to anon role (used by public Supabase client)
-GRANT ALL ON questionnaire_access_tokens TO anon;
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon;
+-- NOTE: No permissions granted to anon role (security fix: prevent public token exposure)
+-- All token operations must use service role key via API endpoints
 
 -- Comments for documentation
 COMMENT ON TABLE questionnaire_access_tokens IS 'Secure token-based authentication for questionnaire access. Tokens are 32-character cryptographically random strings that expire after 30 days.';

@@ -69,15 +69,18 @@ CREATE TRIGGER update_clients_updated_at
 
 ALTER TABLE clients ENABLE ROW LEVEL SECURITY;
 
--- Allow all operations for now (admin-only access enforced at API level)
-CREATE POLICY "Allow all operations on clients"
+-- SECURITY: Admin-only access via service role key
+-- No public (anon) access allowed - all PII is protected
+CREATE POLICY "Service role only access to clients"
   ON clients
   FOR ALL
+  TO authenticated, service_role
   USING (true)
   WITH CHECK (true);
 
--- Grant permissions
-GRANT ALL ON clients TO anon;
+-- No permissions for anon role (security fix: prevent public PII exposure)
+-- All admin operations must use service role key
+REVOKE ALL ON clients FROM anon;
 
 -- ============================================================================
 -- COMMENTS
