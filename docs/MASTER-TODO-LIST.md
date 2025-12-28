@@ -1,13 +1,45 @@
 # Master To-Do List - Southwest Resume Services Website
-**Last Updated:** 2025-12-27 16:30 PST
-**Session ID:** seo-audit-dec27
-**Branch:** `staging/seo-content-drafts`
+**Last Updated:** 2025-12-28 03:30 PST
+**Session ID:** hubspot-toc-deployment-dec28
+**Branch:** `main`
 
 ---
 
 ## Completed Tasks ✅
 
-### Session 1: Homepage Hero Optimization & Multi-Agentic Audit
+### Session 3: HubSpot Integration + TOC Fixes + Production Deployment (2025-12-28)
+
+| Task | Model | Date | Time (PST) | Status |
+|------|-------|------|------------|--------|
+| Deploy Branch Analysis Agent (Explore) | Claude Sonnet 4.5 (Haiku subagent) | 2025-12-28 | 00:15 | ✅ Complete |
+| Deploy TOC Audit Agent (General-Purpose) | Claude Sonnet 4.5 | 2025-12-28 | 00:30 | ✅ Complete |
+| Merge feature/hubspot-integration to main | Claude Sonnet 4.5 | 2025-12-28 | 02:45 | ✅ Complete |
+| Resolve .claude/settings.local.json merge conflict | Claude Sonnet 4.5 | 2025-12-28 | 02:48 | ✅ Complete |
+| Fix TOC Issue #1: Server-side heading IDs | Claude Sonnet 4.5 | 2025-12-28 | 03:00 | ✅ Complete |
+| Fix TOC Issue #2: Word count HTML miscounting | Claude Sonnet 4.5 | 2025-12-28 | 03:00 | ✅ Complete |
+| Fix TOC Issue #3: IntersectionObserver threshold | Claude Sonnet 4.5 | 2025-12-28 | 03:00 | ✅ Complete |
+| Fix TOC Issue #4: observer.disconnect() cleanup | Claude Sonnet 4.5 | 2025-12-28 | 03:00 | ✅ Complete |
+| Fix TOC Issue #5: Update Next.js 15 documentation | Claude Sonnet 4.5 | 2025-12-28 | 03:00 | ✅ Complete |
+| Commit all TOC fixes (e192ca5) | Claude Sonnet 4.5 | 2025-12-28 | 03:05 | ✅ Complete |
+| Remove Supabase temp artifacts | Claude Sonnet 4.5 | 2025-12-28 | 03:10 | ✅ Complete |
+| Add supabase/.temp/ to .gitignore | Claude Sonnet 4.5 | 2025-12-28 | 03:10 | ✅ Complete |
+| Delete feature/hubspot-integration (local) | Claude Sonnet 4.5 | 2025-12-28 | 03:12 | ✅ Complete |
+| Delete origin/gh-pages (remote) | Claude Sonnet 4.5 | 2025-12-28 | 03:12 | ✅ Complete |
+| Deploy QA Verification Agent with CoVe | Claude Sonnet 4.5 | 2025-12-28 | 03:15 | ✅ Complete |
+| Push all changes to origin/main | Claude Sonnet 4.5 | 2025-12-28 | 03:20 | ✅ Complete |
+| Update OpenGraph image with clean logo | Claude Sonnet 4.5 | 2025-12-27 | 23:15 | ✅ Complete |
+| Add canonical URLs to Privacy page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
+| Add canonical URLs to Terms page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
+
+### Session 2: SEO Deployment & Branch Merging (2025-12-27 Evening)
+
+| Task | Model | Date | Time (PST) | Status |
+|------|-------|------|------------|--------|
+| Merge staging/seo-content-drafts to main | Claude Sonnet 4.5 | 2025-12-27 | 21:00 | ✅ Complete |
+| Deploy SEO improvements to production | Claude Sonnet 4.5 | 2025-12-27 | 21:15 | ✅ Complete |
+| Fix lint warnings (location pages) | Claude Sonnet 4.5 | 2025-12-27 | 21:25 | ✅ Complete |
+
+### Session 1: Homepage Hero Optimization & Multi-Agentic Audit (2025-12-27)
 
 | Task | Model | Date | Time (PST) | Status |
 |------|-------|------|------------|--------|
@@ -45,9 +77,9 @@
 
 | Task | Assignee | Priority | Status | ETA |
 |------|----------|----------|--------|-----|
-| Create Master To-Do List | Claude Sonnet 4.5 | HIGH | 80% | 16:35 |
-| Generate Progress Report | Claude Sonnet 4.5 | HIGH | 0% | 16:45 |
-| Create Handoff Document with state serialization | Claude Sonnet 4.5 | HIGH | 0% | 17:00 |
+| Update Master To-Do List | Claude Sonnet 4.5 | HIGH | 90% | 03:35 |
+| Generate Progress Report (SDA SOP Workflow 1) | Claude Sonnet 4.5 | HIGH | 10% | 03:45 |
+| Create Handoff Document with state serialization (SDA SOP Workflow 2) | Claude Sonnet 4.5 | HIGH | 5% | 04:00 |
 
 ---
 
@@ -57,9 +89,8 @@
 
 | Task | Priority | Estimated Time | Blocked By | Notes |
 |------|----------|----------------|------------|-------|
-| Add canonical URLs to Privacy page | CRITICAL | 5 min | None | SEO issue |
-| Add canonical URLs to Terms page | CRITICAL | 5 min | None | SEO issue |
-| Test hero copy on localhost:3000 | CRITICAL | 5 min | Dev server running | Owner validation |
+| Review staging/seo-content-drafts branch status | CRITICAL | 10 min | None | 8 commits behind main, decide: delete/rebase/keep |
+| Finalize OpenGraph image with dramatic spotlight | MEDIUM | 30 min | Owner to provide original from Google Drive | Current version has subtle spotlight |
 
 ### HIGH Priority (Owner Strategic Decision Required)
 
