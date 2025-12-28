@@ -163,7 +163,12 @@
       "Bash(git log --oneline staging/seo-content-drafts --not main)",
       "Bash(git log --oneline feature/hubspot-integration --not main)",
       "Bash(git show-branch main staging/seo-content-drafts feature/hubspot-integration)",
-      "Bash(git merge-base:*)"
+      "Bash(git merge-base:*)",
+      "Bash(git rm:*)",
+      "Bash(git branch:*)",
+      "Bash(git diff-tree:*)",
+      "Bash(git log:*)",
+      "Bash(npx next:*)"
     ],
     "deny": [],
     "ask": []
