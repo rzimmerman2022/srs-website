@@ -6,7 +6,7 @@
 -- Create questionnaire_access_tokens table
 CREATE TABLE IF NOT EXISTS questionnaire_access_tokens (
   -- Primary key
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
 
   -- Client and questionnaire identifiers
   client_id TEXT NOT NULL,
