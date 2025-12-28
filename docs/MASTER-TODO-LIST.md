@@ -102,8 +102,9 @@
 ### CRITICAL Priority (Fix Immediately - Owner Decision Not Required)
 
 | Task | Priority | Estimated Time | Blocked By | Notes |
-|------|----------|----------------|------------|-------|
-| Review staging/seo-content-drafts branch status | CRITICAL | 10 min | None | 8 commits behind main, decide: delete/rebase/keep |
+| ---- | -------- | -------------- | ---------- | ----- |
+| Review staging/seo-content-drafts branch status | CRITICAL | 10 min | None | 15 commits behind main, 0 ahead - decide: delete/rebase/keep |
+| Delete origin/feature/hubspot-integration remote branch | MEDIUM | 5 min | None | Local deleted but remote still exists |
 | Finalize OpenGraph image with dramatic spotlight | MEDIUM | 30 min | Owner to provide original from Google Drive | Current version has subtle spotlight |
 
 ### HIGH Priority (Owner Strategic Decision Required)
