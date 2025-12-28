@@ -231,7 +231,45 @@ export class HubSpotSyncService {
       // Resolve conflicts and apply changes
       const updates: Record<string, unknown> = {};
 
+      // Special handling for firstname/lastname - combine them into full_name
+      const hasFirstNameChange = 'firstname' in changedProperties;
+      const hasLastNameChange = 'lastname' in changedProperties;
+
+      if (hasFirstNameChange || hasLastNameChange) {
+        // Fetch full contact from HubSpot to get both firstname and lastname
+        // This prevents partial updates that would corrupt the full_name
+        try {
+          const hubspotClient = getHubSpotClient();
+          const contact = await hubspotClient.crm.contacts.basicApi.getById(
+            hubspotContactId,
+            ['firstname', 'lastname']
+          );
+
+          const firstname = contact.properties.firstname || '';
+          const lastname = contact.properties.lastname || '';
+
+          // Combine into full_name (trim to handle empty values)
+          const fullName = [firstname, lastname].filter(Boolean).join(' ').trim();
+
+          if (fullName && SOURCE_OF_TRUTH_MAP['full_name'] === 'hubspot') {
+            updates['full_name'] = fullName;
+          }
+        } catch (error) {
+          console.error('[HubSpot Sync] Error fetching contact for name sync:', error);
+          // Fall back to what we have in changedProperties (not ideal but prevents crash)
+          const firstname = changedProperties.firstname || '';
+          const lastname = changedProperties.lastname || '';
+          const fullName = [firstname, lastname].filter(Boolean).join(' ').trim();
+          if (fullName && SOURCE_OF_TRUTH_MAP['full_name'] === 'hubspot') {
+            updates['full_name'] = fullName;
+          }
+        }
+      }
+
       for (const [property, value] of Object.entries(changedProperties)) {
+        // Skip firstname/lastname - already handled above
+        if (property === 'firstname' || property === 'lastname') continue;
+
         const supabaseField = this.mapHubSpotPropertyToSupabase(property);
         if (!supabaseField) continue;
 
