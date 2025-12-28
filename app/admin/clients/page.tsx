@@ -84,6 +84,18 @@ export default function ClientsPage() {
         </div>
 
         <div className="flex items-center gap-3">
+          {/* Create New Client Button */}
+          <Button
+            href="/admin/clients/new"
+            variant="primary"
+            size="sm"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            New Client
+          </Button>
+
           {/* View mode toggle */}
           <div className="flex rounded-lg border border-gray-200 bg-white p-1" role="group" aria-label="View mode">
             <button
@@ -213,15 +225,23 @@ export default function ClientsPage() {
         </div>
       ) : filteredClients.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-          <div className="text-6xl mb-4" aria-hidden="true">🔍</div>
+          <div className="text-6xl mb-4" aria-hidden="true">{searchQuery ? '🔍' : '👥'}</div>
           <h3 className="text-xl font-semibold text-navy mb-2">
             {searchQuery ? 'No clients found' : 'No clients yet'}
           </h3>
-          <p className="text-charcoal-600">
+          <p className="text-charcoal-600 mb-6">
             {searchQuery
               ? 'Try adjusting your search query'
-              : 'Clients will appear here once they start questionnaires'}
+              : 'Create your first client to get started'}
           </p>
+          {!searchQuery && (
+            <Button href="/admin/clients/new" variant="primary">
+              <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              Create Your First Client
+            </Button>
+          )}
         </div>
       ) : viewMode === 'grid' ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
