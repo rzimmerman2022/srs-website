@@ -5,6 +5,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Policy | Southwest Resume Services',
   description: 'Privacy Policy for Southwest Resume Services. Learn how we collect, use, and protect your personal information.',
+  alternates: {
+    canonical: 'https://southwestresumes.com/privacy',
+  },
 };
 
 export default function PrivacyPage() {
