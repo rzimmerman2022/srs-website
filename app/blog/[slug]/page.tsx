@@ -67,6 +67,16 @@ export async function generateMetadata({
   };
 }
 
+// Helper function to strip HTML tags and count words
+function getPlainTextWordCount(html: string): number {
+  // Strip HTML tags
+  const plainText = html.replace(/<[^>]*>/g, ' ');
+  // Replace multiple spaces with single space
+  const normalized = plainText.replace(/\s+/g, ' ').trim();
+  // Count words
+  return normalized.split(' ').filter(word => word.length > 0).length;
+}
+
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
@@ -76,6 +86,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const relatedPosts = getRelatedPosts(post.slug, 3);
+  const wordCount = getPlainTextWordCount(post.content);
 
   // Article Schema for SEO
   const articleSchema = {
@@ -232,14 +243,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Table of Contents (for posts 2000+ words) */}
-            {post.content.split(' ').length >= 2000 && (
+            {wordCount >= 2000 && (
               <aside className="lg:col-span-3 hidden lg:block">
                 <BlogTableOfContents />
               </aside>
             )}
 
             {/* Main Content */}
-            <div className={post.content.split(' ').length >= 2000 ? 'lg:col-span-9' : 'lg:col-span-12'}>
+            <div className={wordCount >= 2000 ? 'lg:col-span-9' : 'lg:col-span-12'}>
               <div
                 className="blog-content"
                 dangerouslySetInnerHTML={{ __html: post.content }}
