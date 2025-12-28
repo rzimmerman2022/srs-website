@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import Container from '@/components/layout/Container';
 import Button from '@/components/ui/Button';
+import BlogTableOfContents from '@/components/blog/BlogTableOfContents';
 import { getPostBySlug, getAllPosts, getRelatedPosts } from '@/lib/blog/posts';
 
 interface BlogPostPageProps {
@@ -171,7 +172,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* Article Header */}
       <section className="section-padding bg-white border-b border-sand-200">
         <Container>
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-2xl mx-auto">
             {/* Category Badge */}
             <div className="mb-6">
               <span className="inline-block px-4 py-2 bg-gold/10 border border-gold/30 rounded-full text-gold text-sm font-semibold uppercase tracking-wider">
@@ -227,12 +228,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </section>
 
       {/* Article Content */}
-      <article className="section-padding bg-sand-50">
+      <article className="py-16 md:py-24 bg-sand-50">
         <Container>
-          <div
-            className="max-w-4xl mx-auto prose prose-lg prose-navy prose-headings:font-serif prose-headings:font-bold prose-headings:text-navy prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-3 prose-p:text-charcoal/80 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-gold prose-a:no-underline hover:prose-a:underline prose-strong:text-navy prose-strong:font-semibold prose-ul:my-6 prose-ul:space-y-2 prose-li:text-charcoal/80 prose-blockquote:border-l-4 prose-blockquote:border-gold prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-charcoal/70"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {/* Table of Contents (for posts 2000+ words) */}
+            {post.content.split(' ').length >= 2000 && (
+              <aside className="lg:col-span-3 hidden lg:block">
+                <BlogTableOfContents />
+              </aside>
+            )}
+
+            {/* Main Content */}
+            <div className={post.content.split(' ').length >= 2000 ? 'lg:col-span-9' : 'lg:col-span-12'}>
+              <div
+                className="blog-content"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </div>
+          </div>
         </Container>
       </article>
 
@@ -241,10 +254,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <Container>
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-white">
-              Ready to Transform Your Career Documents?
+              Ready for Research-Backed Career Documents?
             </h2>
-            <p className="text-xl text-sand-100 mb-8">
-              At Southwest Resume Services, we don&apos;t just write resumes—we help you recognize and own your professional value completely. Let&apos;s build career documents that open doors.
+            <p className="text-xl text-sand-100 mb-6">
+              At Southwest Resume Services, we don&apos;t guess—we research. Our <strong>Client Truth Principle</strong> means every accomplishment on your resume is verified through authoritative sources and backed by our proprietary <strong>Research Authority Index (RAI)</strong>.
+            </p>
+            <p className="text-lg text-sand-200 mb-8">
+              We analyze 200+ job postings in your target market, validate your experience against O*NET and BLS data, and ensure you can confidently own every claim in interviews. Truth-driven. Evidence-based. Results-focused.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link href="/contact">
