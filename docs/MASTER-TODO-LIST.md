@@ -32,6 +32,10 @@
 | Fix RLS on questionnaire_access_tokens table (PUBLIC TOKEN EXPOSURE) | Claude Sonnet 4.5 | 2025-12-28 | 04:30 | ✅ Complete |
 | Fix HubSpot name corruption in bi-directional sync | Claude Sonnet 4.5 | 2025-12-28 | 04:45 | ✅ Complete |
 | Fix webhook processing dropped in serverless | Claude Sonnet 4.5 | 2025-12-28 | 04:50 | ✅ Complete |
+| Fix hard-coded questionnaire ID in client creation | Claude Sonnet 4.5 | 2025-12-28 | 05:00 | ✅ Complete |
+| Deprecate broken migration runner with documentation | Claude Sonnet 4.5 | 2025-12-28 | 05:10 | ✅ Complete |
+| Fix UUID extension mismatch in migrations | Claude Sonnet 4.5 | 2025-12-28 | 05:10 | ✅ Complete |
+| Improve heading ID regex for multiline content | Claude Sonnet 4.5 | 2025-12-28 | 05:10 | ✅ Complete |
 | Update OpenGraph image with clean logo | Claude Sonnet 4.5 | 2025-12-27 | 23:15 | ✅ Complete |
 | Add canonical URLs to Privacy page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
 | Add canonical URLs to Terms page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
@@ -99,10 +103,10 @@
 | ~~**#3 CRITICAL:** Fix RLS on `questionnaire_access_tokens` table~~ | ✅ FIXED | 30 min | None | ~~PUBLIC TOKEN EXPOSURE~~ FIXED: Service role only policy, no anon access (commit d6db6e0) |
 | ~~**#4 HIGH:** Fix HubSpot name corruption in sync-service.ts:234~~ | ✅ FIXED | 15 min | None | ~~firstname/lastname corruption~~ FIXED: Fetch full contact, combine names properly (commit 7aad2aa) |
 | ~~**#5 HIGH:** Fix webhook processing dropped in serverless (route.ts:123)~~ | ✅ FIXED | 45 min | None | ~~Async processing killed after response~~ FIXED: Await processing before return (commit 5772d25) |
-| **#6 MEDIUM:** Remove hard-coded questionnaire ID (page.tsx:86) | MEDIUM | 20 min | None | All new clients default to 'jackie-deleon-dec-2025' questionnaire |
-| **#7 MEDIUM:** Fix migration runner (run-migrations.js:48) | MEDIUM | 30 min | None | Logs "Using direct approach" but never executes SQL statements |
-| **#8 MEDIUM:** Fix UUID extension mismatch in migrations | MEDIUM | 15 min | None | uuid-ossp vs gen_random_uuid() inconsistency can fail on clean DBs |
-| **#9 LOW:** Improve heading ID regex (posts.ts:31) | LOW | 20 min | None | Regex won't match multiline headings or preserve existing attributes |
+| ~~**#6 MEDIUM:** Remove hard-coded questionnaire ID (page.tsx:86)~~ | ✅ FIXED | 20 min | None | ~~Hard-coded default~~ FIXED: Added dropdown selector for questionnaire templates (commit 6c665b4) |
+| ~~**#7 MEDIUM:** Fix migration runner (run-migrations.js:48)~~ | ✅ FIXED | 30 min | None | ~~Never executes SQL~~ FIXED: Documented as DEPRECATED, recommend Supabase SQL Editor (commit ff9535a) |
+| ~~**#8 MEDIUM:** Fix UUID extension mismatch in migrations~~ | ✅ FIXED | 15 min | None | ~~uuid-ossp inconsistency~~ FIXED: Changed to gen_random_uuid() (built-in PG13+) (commit ff9535a) |
+| ~~**#9 LOW:** Improve heading ID regex (posts.ts:31)~~ | ✅ FIXED | 20 min | None | ~~Multiline/attributes issues~~ FIXED: Improved regex with 's' flag, attribute preservation (commit ff9535a) |
 
 ### CRITICAL Priority (Fix Immediately - Owner Decision Not Required)
 
