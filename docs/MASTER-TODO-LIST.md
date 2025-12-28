@@ -27,6 +27,7 @@
 | Delete origin/gh-pages (remote) | Claude Sonnet 4.5 | 2025-12-28 | 03:12 | ✅ Complete |
 | Deploy QA Verification Agent with CoVe | Claude Sonnet 4.5 | 2025-12-28 | 03:15 | ✅ Complete |
 | Push all changes to origin/main | Claude Sonnet 4.5 | 2025-12-28 | 03:20 | ✅ Complete |
+| Fix ProcessScrollSpy counter stuck at 01/10 | Claude Sonnet 4.5 | 2025-12-28 | 04:15 | ✅ Complete |
 | Update OpenGraph image with clean logo | Claude Sonnet 4.5 | 2025-12-27 | 23:15 | ✅ Complete |
 | Add canonical URLs to Privacy page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
 | Add canonical URLs to Terms page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
@@ -89,7 +90,7 @@
 
 | Task | Priority | Estimated Time | Blocked By | Impact |
 | ---- | -------- | -------------- | ---------- | ------ |
-| **#1 CRITICAL:** Fix ProcessScrollSpy counter stuck at 01/10 | CRITICAL | 20 min | None | Methodology page scroll counter broken - aggressive rootMargin (-40%) leaves only 20% viewport active zone, no fallback when steps miss detection |
+| ~~**#1 CRITICAL:** Fix ProcessScrollSpy counter stuck at 01/10~~ | ✅ FIXED | 20 min | None | ~~Methodology page scroll counter broken~~ FIXED: Updated rootMargin to -20% 0px -60% 0px (commit 5dd668f) |
 | **#2 CRITICAL:** Fix RLS on `clients` table | CRITICAL | 30 min | None | PUBLIC PII EXPOSURE - anyone with anon key can read all client data (full_name, email, phone) |
 | **#3 CRITICAL:** Fix RLS on `questionnaire_access_tokens` table | CRITICAL | 30 min | None | PUBLIC TOKEN EXPOSURE - anyone can read/write access tokens bypassing admin auth |
 | **#4 HIGH:** Fix HubSpot name corruption in sync-service.ts:234 | HIGH | 15 min | None | firstname/lastname updates overwrite full_name with partial data (loses last/first name) |
