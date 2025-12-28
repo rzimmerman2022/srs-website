@@ -6,7 +6,7 @@
 -- Create admin_settings table
 CREATE TABLE IF NOT EXISTS admin_settings (
   -- Primary key
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
 
   -- Setting key (unique identifier)
   setting_key TEXT NOT NULL UNIQUE,

@@ -6,7 +6,7 @@
 -- ============================================================================
 -- This table stores all security-related events for compliance and monitoring
 CREATE TABLE IF NOT EXISTS security_audit_log (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
 
   -- Event information
   event_type TEXT NOT NULL,
