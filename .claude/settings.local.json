@@ -136,7 +136,17 @@
       "Bash(git -C \"/Users/ryanzimmerman/MACBOOK - Projects/SRS - Website\" log --oneline -20)",
       "Bash(git -C \"/Users/ryanzimmerman/MACBOOK - Projects/SRS - Website\" status)",
       "Bash(git stash push:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nDRAFT: SEO content for review - DO NOT MERGE TO MAIN\n\nThis branch contains draft content pending Ryan''s review:\n- Landing pages: Phoenix, Scottsdale, Mesa, Tempe\n- Blog infrastructure and 4 draft posts\n- Citation automation scripts\n- SEO audit documentation\n- Footer social links \\(placeholder URLs\\)\n\nDO NOT merge to main without explicit approval.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nDRAFT: SEO content for review - DO NOT MERGE TO MAIN\n\nThis branch contains draft content pending Ryan''s review:\n- Landing pages: Phoenix, Scottsdale, Mesa, Tempe\n- Blog infrastructure and 4 draft posts\n- Citation automation scripts\n- SEO audit documentation\n- Footer social links \\(placeholder URLs\\)\n\nDO NOT merge to main without explicit approval.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(open http://localhost:3001/blog/resume-writing-tips-2025-phoenix-employers)",
+      "Bash(git diff:*)",
+      "Bash(open \"http://localhost:3001/blog/how-to-work-with-professional-resume-writer\")",
+      "Bash(open \"http://localhost:3001/blog/phoenix-job-market-2025-industries-hiring\")",
+      "Bash(open \"http://localhost:3001/blog/linkedin-profile-optimization-guide-phoenix\")",
+      "Bash(git -C /Users/ryanzimmerman/MACBOOK\\\\ -\\\\ Projects/SRS\\\\ -\\\\ Website branch:*)",
+      "Bash(git -C /Users/ryanzimmerman/MACBOOK - Projects/SRS - Website status --short)",
+      "Bash(git -C /Users/ryanzimmerman/MACBOOK - Projects/SRS - Website log --oneline -5)",
+      "Bash(xargs kill -9)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd comprehensive contrarian strategic analysis report\n\nCreated exhaustive strategic intelligence document analyzing:\n- Resume services industry in AI disruption context\n- Evidence-backed contrarian views on market positioning\n- Trust/verification as competitive moat\n- Premium pricing elasticity analysis\n- Small business advantages in trust markets\n- 4 speculative future scenarios\n- Near/medium/long-term actionable recommendations\n- Reflection questions for strategic planning\n- Market research sources and methodology\n\nDocument covers: conventional wisdom challenges, risk/opportunity\nmatrices, imaginative scenarios, and SRS positioning analysis.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ],
     "deny": [],
     "ask": []
