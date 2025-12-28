@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparkData Ecosystem - Strategic Business Plan v2.2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fdfbf6; color: #1f2937; }
+        .sidebar-icon { width: 24px; height: 24px; stroke-width: 2; }
+        .nav-item { display: flex; align-items: center; padding: 0.75rem 1rem; border-radius: 0.5rem; cursor: pointer; transition: background-color 0.2s, color 0.2s; font-size: 0.875rem; }
+        .nav-item:hover, .nav-item.active { background-color: #eef2ff; color: #3a5a9a; }
+        .nav-item.active { font-weight: 600; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .kpi-card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        .tab-button { padding: 0.5rem 1rem; border-radius: 0.375rem; cursor: pointer; font-weight: 500; transition: background-color 0.2s, color 0.2s; }
+        .tab-button.active, .tab-button:hover { background-color: #3a5a9a; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        /* Platform (SDA) Theme - Blue/Slate */
+        .sda-theme { background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%); }
+        .sda-card { background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%); border-left: 4px solid #1e3a5f; }
+        /* Vertical (SRS) Theme - Green/Teal */
+        .srs-theme { background: linear-gradient(135deg, #065f46 0%, #047857 100%); }
+        .srs-card { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-left: 4px solid #065f46; }
+        /* Founder Theme - Purple/Indigo */
+        .founder-card { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-left: 4px solid #5b21b6; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <nav class="w-64 h-screen bg-white shadow-md p-5 fixed overflow-y-auto" id="sidebar">
+        <div class="mb-6">
+            <div class="flex items-center mb-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg flex items-center justify-center mr-3">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">SparkData</h2>
+                    <p class="text-xs text-gray-500">Ecosystem</p>
+                </div>
+            </div>
+            <p class="text-xs text-gray-400 mt-1">v2.2 | Restructuring Phase</p>
+        </div>
+        <ul class="space-y-1">
+            <li><a class="nav-item active" data-target="executive">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Executive Summary</a></li>
+            <li><a class="nav-item" data-target="platform">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                MDRS Platform</a></li>
+            <li><a class="nav-item" data-target="vertical">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                SRS Vertical</a></li>
+            <li><a class="nav-item" data-target="operating">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                Operating Model</a></li>
+            <li><a class="nav-item" data-target="metrics">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                Metrics & Guardrails</a></li>
+            <li><a class="nav-item" data-target="budget">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Budget Framework</a></li>
+            <li><a class="nav-item" data-target="roadmap">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                Strategic Roadmap</a></li>
+            <li><a class="nav-item" data-target="corporate">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                Corporate Structure</a></li>
+            <li><a class="nav-item" data-target="channels">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path></svg>
+                Channel Strategy</a></li>
+            <li><a class="nav-item" data-target="intelligence">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Industry Intelligence</a></li>
+            <li><a class="nav-item" data-target="founder">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Founder & Credibility</a></li>
+            <li><a class="nav-item" data-target="validation">
+                <svg class="sidebar-icon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Data Validation</a></li>
+        </ul>
+    </nav>
+
+    <main class="ml-64 flex-1 p-8 overflow-y-auto">
+
+        <!-- SECTION 1: EXECUTIVE SUMMARY -->
+        <section id="executive" class="content-section active">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">1. Executive Summary</h1>
+            <p class="text-lg text-gray-600 mb-6"><strong>Document Status: v2.2 | Restructuring & R&D Phase</strong></p>
+
+            <!-- 1.1 THE PLATFORM: SparkData Analytics -->
+            <div class="mb-8">
+                <div class="sda-theme text-white rounded-lg p-6 mb-4">
+                    <h2 class="text-2xl font-bold mb-2">1.1 The Parent Platform: SparkData Analytics (SDA)</h2>
+                    <p class="text-blue-100 text-lg italic">"To close the gap between what society knows and what it actually does."</p>
+                </div>
+
+                <div class="kpi-card sda-card mb-4">
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">The Platform Thesis</h3>
+                    <p class="text-sm text-gray-700 mb-3">Systems fail not because solutions don't exist, but because organizations can't apply their own best knowledge. This pattern repeats across every professional domain:</p>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>&#8226; <strong>Healthcare:</strong> Doctors prescribe outdated protocols while peer-reviewed research shows better methods</li>
+                        <li>&#8226; <strong>Legal:</strong> Attorneys miss relevant precedents buried in case law databases</li>
+                        <li>&#8226; <strong>Finance:</strong> Analysts overlook signals hidden in vast datasets</li>
+                        <li>&#8226; <strong>Career Services:</strong> Coaches teach strategies that fail against modern hiring systems</li>
+                    </ul>
+                </div>
+
+                <div class="kpi-card sda-card">
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">The Solution: A Horizontal AI Evidence Platform</h3>
+                    <p class="text-sm text-gray-700 mb-3">SparkData builds the <strong>research infrastructure</strong> that powers multiple professional services verticals. We operationalize evidence-based methodologies in high-stakes domains where "hallucination" is not an option.</p>
+                    <p class="text-sm text-gray-700">Core IP: Comprehensive SOP library covering research methodology (MDRS), client delivery, quality assurance, service workflows, and business operations.</p>
+                </div>
+                <div class="p-3 bg-slate-100 rounded-lg mt-3 border-l-4 border-slate-400">
+                    <p class="text-sm text-gray-700"><strong>Important:</strong> SDA is the long-term business. SRS is the first vertical application, used to validate and harden MDRS methodology and SOPs before expanding into additional professional services domains.</p>
+                </div>
+            </div>
+
+            <!-- THE BRIDGE: From Platform to Vertical -->
+            <div class="mb-8">
+                <div class="kpi-card bg-gradient-to-br from-purple-50 to-indigo-50 border-l-4 border-purple-600">
+                    <h3 class="text-lg font-bold text-purple-900 mb-3">🔗 Finding the Right Proving Ground</h3>
+                    <p class="text-sm text-gray-700 mb-3">To validate the SparkData methodology, we needed a market that clearly exemplified the <strong>"knowledge-action gap"</strong>—a domain where peer-reviewed research on what works exists, but practitioners aren't applying it.</p>
+                    <p class="text-sm text-gray-700 mb-3">Career services emerged as the <strong>ideal test case</strong>. It's a field where:</p>
+                    <ul class="text-sm text-gray-700 space-y-2 mb-3">
+                        <li>&#8226; <strong>Research exists:</strong> Harvard, MIT, and major institutions have studied hiring algorithms extensively</li>
+                        <li>&#8226; <strong>Practitioners ignore it:</strong> Most resume writers and career coaches still teach pre-2015 strategies</li>
+                        <li>&#8226; <strong>The stakes are measurable:</strong> Job seekers either get interviews or they don't—no ambiguity</li>
+                        <li>&#8226; <strong>Trust is low:</strong> A saturated market full of "gurus" and templates—perfect for proving evidence works</li>
+                    </ul>
+                    <p class="text-sm text-gray-700"><strong>Successful delivery in this high-noise environment provides strong validation for expanding MDRS into other professional services domains.</strong></p>
+                </div>
+            </div>
+
+            <!-- 1.2 THE FIRST VERTICAL: Southwest Resume Services -->
+            <div class="mb-8">
+                <div class="srs-theme text-white rounded-lg p-6 mb-4">
+                    <h2 class="text-2xl font-bold mb-2">1.2 The First Vertical: Southwest Resume Services (SRS)</h2>
+                    <p class="text-green-100 text-lg">Role: Proof-of-Concept & R&D Lab</p>
+                </div>
+
+                <!-- The SRS-Specific Problem -->
+                <div class="kpi-card bg-gradient-to-br from-red-50 to-orange-50 border-l-4 border-red-600 mb-4">
+                    <h3 class="text-lg font-bold text-red-900 mb-3">The Career Services Problem</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="text-center p-4">
+                            <p class="text-4xl font-bold text-red-600">94%</p>
+                            <p class="text-sm text-gray-700">of employers report filtering qualified middle-skill candidates</p>
+                            <p class="text-xs text-gray-500 mt-1">HBS/Accenture "Hidden Workers"</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <p class="text-4xl font-bold text-red-600">88%</p>
+                            <p class="text-sm text-gray-700">report filtering qualified high-skill candidates</p>
+                            <p class="text-xs text-gray-500 mt-1">Employer Self-Reported (2021)</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <p class="text-4xl font-bold text-red-600">7%</p>
+                            <p class="text-sm text-gray-700">success rate for "hidden workers" seeking full-time roles</p>
+                            <p class="text-xs text-gray-500 mt-1">Fuller et al., 2021</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-700 mt-4 text-center">Traditional career coaches teach <strong>"Pre-Algorithmic Wisdom"</strong>—strategies that worked in 2010 but fail against modern ATS systems running semantic analysis.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="kpi-card srs-card">
+                        <h3 class="text-lg font-bold text-green-900 mb-3">Why Resume Services?</h3>
+                        <p class="text-sm text-gray-700">A <strong>high-noise, low-trust market</strong> ideal for validating an "Evidence-Based" approach. Success here is a strong signal for expansion into other professional services verticals.</p>
+                    </div>
+                    <div class="kpi-card srs-card">
+                        <h3 class="text-lg font-bold text-green-900 mb-3">Strategic Goal</h3>
+                        <p class="text-sm text-gray-700">Perfect the <strong>MDRS Protocol and SOP Library</strong> before licensing the technology or expanding to Vertical #2 (Legal/Healthcare).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Phase -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Current Phase: Restructuring & R&D</h2>
+                <div class="kpi-card bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600">
+                    <p class="text-sm text-gray-700 mb-3">The company is in a <strong>deliberate R&D and restructuring phase</strong>:</p>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>&#8226; Client volume intentionally constrained to <strong>5-10 per month</strong></li>
+                        <li>&#8226; Allows deep methodology refinement and corporate restructuring (SparkData Analytics formation)</li>
+                        <li>&#8226; Protects quality, generates high-fidelity training data, builds foundation for scaled operations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Market Opportunity -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Market Opportunity (SRS Vertical)</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="kpi-card text-center">
+                        <p class="text-2xl font-bold text-blue-600">2.7M</p>
+                        <p class="text-xs text-gray-600">Phoenix MSA Labor Force</p>
+                    </div>
+                    <div class="kpi-card text-center">
+                        <p class="text-2xl font-bold text-green-600">~1%</p>
+                        <p class="text-xs text-gray-600">Job Growth (2025 YTD)</p>
+                    </div>
+                    <div class="kpi-card text-center">
+                        <p class="text-2xl font-bold text-purple-600">85K</p>
+                        <p class="text-xs text-gray-600">New Residents/Year</p>
+                    </div>
+                    <div class="kpi-card text-center">
+                        <p class="text-2xl font-bold text-amber-600">20%</p>
+                        <p class="text-xs text-gray-600">AI Resume Tools CAGR</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MDRS PLATFORM -->
+        <section id="platform" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">2. MDRS Platform Core</h1>
+            <p class="text-lg text-gray-600 mb-6">Multi-Model Deep Research Synthesis (SOP SDA-SRS-001, Rev 9.0)</p>
+
+            <!-- Core Innovation -->
+            <div class="kpi-card sda-card mb-6">
+                <h3 class="text-lg font-bold text-slate-900 mb-3">The Core Innovation</h3>
+                <p class="text-sm text-gray-700">MDRS treats distinct AI architectures as independent <strong>"investigators"</strong> to apply methodological triangulation to qualitative data. By orchestrating multiple model families with different training lineages, we eliminate the single-source bias and hallucination risk that plague naive AI implementations.</p>
+                <p class="text-sm text-gray-700 mt-2">The process mirrors the rigorous <strong>Search → Screen → Extract → Synthesize</strong> workflow used in Cochrane systematic reviews and GRADE evidence frameworks.</p>
+            </div>
+
+            <!-- 4-Investigator Array -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-slate-800 mb-4">The 4-Investigator Array</h2>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Investigator</th>
+                                <th class="px-4 py-2 text-left font-semibold">Role</th>
+                                <th class="px-4 py-2 text-left font-semibold">Function</th>
+                                <th class="px-4 py-2 text-left font-semibold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">A: Reasoning Backbone</td><td class="px-4 py-2">Structural Engineer</td><td class="px-4 py-2 text-xs">Builds logical skeleton, tests for fallacies, designs report schema</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Calibrated</span></td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">B: Semantic Synthesizer</td><td class="px-4 py-2">Lead Author</td><td class="px-4 py-2 text-xs">Detects nuance, tone, cultural sentiment; drafts narrative</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Calibrated</span></td></tr>
+                            <tr><td class="px-4 py-2 font-medium">C: Infinite Context Engine</td><td class="px-4 py-2">Data Lake</td><td class="px-4 py-2 text-xs">Ingests massive datasets (PDFs, reports) without data loss</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Calibrated</span></td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">D: Forensic Auditor</td><td class="px-4 py-2">Fact Checker</td><td class="px-4 py-2 text-xs">Real-time validation, negative search, bypasses knowledge cutoffs</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Calibrated</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="kpi-card bg-gradient-to-br from-red-50 to-orange-50 border-l-4 border-red-600 mt-4">
+                    <p class="text-sm text-gray-700"><strong>Critical Requirement—True Architectural Diversity:</strong> Using multiple model variants from the same provider does NOT satisfy this requirement. Models from a single vendor share training data and produce correlated errors. Valid diversity requires different creators, datasets, and failure modes (OpenAI → Anthropic → Google → Perplexity).</p>
+                </div>
+            </div>
+
+            <!-- Fluidity Doctrine -->
+            <div class="mb-6">
+                <div class="kpi-card bg-gradient-to-br from-purple-50 to-indigo-50 border-l-4 border-purple-600">
+                    <h3 class="text-lg font-bold text-purple-900 mb-3">The Fluidity Doctrine</h3>
+                    <p class="text-sm text-gray-700">The AI ecosystem evolves continuously. A model that leads benchmarks today may be surpassed tomorrow. Therefore, investigators are <strong>archetypes, not static choices</strong>.</p>
+                    <p class="text-sm text-gray-700 mt-2">Before every MDRS sprint, analysts perform <strong>Pre-Flight Calibration</strong> checking current leaderboards (LMSYS Chatbot Arena, Vectara Hallucination Index, BigCode) and selecting the current best-in-class for each role. This makes the platform <strong>model-agnostic and future-proof</strong>.</p>
+                </div>
+            </div>
+
+            <!-- Source Hierarchy -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-slate-800 mb-4">Source Hierarchy & Authority Scoring</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="kpi-card sda-card">
+                        <h3 class="text-lg font-bold text-slate-900 mb-4">Authority Scoring</h3>
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="px-3 py-2 text-left">Source Type</th>
+                                    <th class="px-3 py-2 text-left">Score</th>
+                                    <th class="px-3 py-2 text-left">Examples</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr><td class="px-3 py-2">Primary</td><td class="px-3 py-2 font-bold text-green-700">1.0</td><td class="px-3 py-2 text-xs">Peer-reviewed journals, BLS, 10-K filings</td></tr>
+                                <tr class="bg-slate-50"><td class="px-3 py-2">Secondary</td><td class="px-3 py-2 font-bold text-yellow-700">0.5</td><td class="px-3 py-2 text-xs">Meta-analyses, McKinsey/Deloitte white papers</td></tr>
+                                <tr><td class="px-3 py-2">Tertiary</td><td class="px-3 py-2 font-bold text-red-700">0.1</td><td class="px-3 py-2 text-xs">Textbooks, Wikipedia, quick reference guides</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="kpi-card sda-card">
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">Bayesian Log-Odds Calculation</h3>
+                        <p class="text-sm text-gray-700 mb-3">We replace static averaging with mathematically coherent <strong>Log-Odds updates</strong>. Each evidence unit is assessed for Authority, Consensus, Bias Risk, and Statistical Power.</p>
+                        <p class="text-xs text-gray-600">Strong confirmatory evidence (primary, high power, low bias) shifts +1.0 log-odds; moderate disconfirmatory evidence shifts -0.48. Final Confidence Index is calculated as Bayesian posterior probability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Convergence Analysis -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-slate-800 mb-4">Convergence Analysis</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="kpi-card bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-green-600">
+                        <h3 class="text-lg font-bold text-green-900 mb-2">Convergent</h3>
+                        <p class="text-sm text-gray-700">3/4 or 4/4 investigators report compatible values from Primary/Secondary sources.</p>
+                        <p class="text-xs text-green-600 mt-2 font-semibold">High confidence; included in final output.</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-50 border-l-4 border-amber-600">
+                        <h3 class="text-lg font-bold text-amber-900 mb-2">Divergent</h3>
+                        <p class="text-sm text-gray-700">&#8804;2/4 agreement or conflicting sources.</p>
+                        <p class="text-xs text-amber-600 mt-2 font-semibold">Triggers Divergence Resolution Protocol.</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-red-50 to-orange-50 border-l-4 border-red-600">
+                        <h3 class="text-lg font-bold text-red-900 mb-2">Circular Reporting</h3>
+                        <p class="text-sm text-gray-700">All investigators trace back to a single non-primary origin.</p>
+                        <p class="text-xs text-red-600 mt-2 font-semibold">Zero confidence credit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Defensibility: Alignment with Established Methods -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-slate-800 mb-4">Why MDRS Is Defensible</h2>
+                <p class="text-sm text-gray-600 mb-4">MDRS isn't invented buzzwords—it's grounded in established research traditions</p>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Established Methodology</th>
+                                <th class="px-4 py-2 text-left font-semibold">Domain</th>
+                                <th class="px-4 py-2 text-left font-semibold">MDRS Equivalent</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">Ensemble Modeling</td><td class="px-4 py-2 text-xs">Machine Learning</td><td class="px-4 py-2 text-xs">4-Investigator Array (diverse models outperform single models)</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Triangulation</td><td class="px-4 py-2 text-xs">Qualitative Research</td><td class="px-4 py-2 text-xs">Convergence analysis across independent sources</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Red Team / Blue Team</td><td class="px-4 py-2 text-xs">Cybersecurity</td><td class="px-4 py-2 text-xs">Investigator D's "Negative Search" to disprove claims</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Peer Review</td><td class="px-4 py-2 text-xs">Academic Publishing</td><td class="px-4 py-2 text-xs">Each investigator validates others' output</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Systematic Reviews</td><td class="px-4 py-2 text-xs">Medical Research (Cochrane, GRADE)</td><td class="px-4 py-2 text-xs">Search → Screen → Extract → Synthesize workflow</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Bayesian Updating</td><td class="px-4 py-2 text-xs">Statistics</td><td class="px-4 py-2 text-xs">Log-odds evidence accumulation, posterior probability</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-gray-500 mt-2"><strong>Investor note:</strong> When questioned about methodology validity, point to these established traditions. MDRS operationalizes proven techniques; it doesn't invent new ones.</p>
+            </div>
+
+            <!-- Audit Trail -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-slate-800 mb-4">Audit Trail & Documentation</h2>
+                <div class="kpi-card sda-card">
+                    <p class="text-sm text-gray-700 mb-3">Every MDRS project produces mandatory documentation artifacts:</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-3 bg-white rounded-lg">
+                            <p class="font-bold text-slate-900">The Log</p>
+                            <p class="text-xs text-gray-600">Date, analyst, models used, calibration notes</p>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-lg">
+                            <p class="font-bold text-slate-900">Raw Outputs</p>
+                            <p class="text-xs text-gray-600">Complete transcripts from all 4 investigators</p>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-lg">
+                            <p class="font-bold text-slate-900">Synthesis Matrix</p>
+                            <p class="text-xs text-gray-600">Claim-by-claim mapping with convergence status</p>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-lg">
+                            <p class="font-bold text-slate-900">Final Report</p>
+                            <p class="text-xs text-gray-600">Version-controlled deliverable</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-4"><strong>Why This Matters:</strong> When an enterprise buyer, auditor, or regulator asks "Why did your system say this?", we have a documented answer traceable to specific sources and model outputs.</p>
+                </div>
+            </div>
+
+            <!-- SOP Library -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-slate-800 mb-4">Comprehensive SOP Library</h2>
+                <p class="text-sm text-gray-600 mb-4">MDRS is one component of a comprehensive operational infrastructure</p>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Operational Domain</th>
+                                <th class="px-4 py-2 text-left font-semibold">Documentation</th>
+                                <th class="px-4 py-2 text-left font-semibold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">Research Methodology</td><td class="px-4 py-2 text-xs">SOP SDA-SRS-001 (Rev 9.0) — MDRS Protocol</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Complete</span></td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Client Operations</td><td class="px-4 py-2 text-xs">Intake, consultation, communication protocols</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Complete</span></td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Service Delivery</td><td class="px-4 py-2 text-xs">Resume methodology, LinkedIn, interview prep workflows</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Complete</span></td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Quality Assurance</td><td class="px-4 py-2 text-xs">Review processes, error detection, continuous improvement</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Complete</span></td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Business Operations</td><td class="px-4 py-2 text-xs">Pricing, referrals, review generation, operational workflows</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Complete</span></td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Training & Certification</td><td class="px-4 py-2 text-xs">Level 1-4 analyst progression frameworks</td><td class="px-4 py-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-bold">&#9654; In Progress</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-gray-500 mt-2"><strong>Investor note:</strong> This SOP library is the core IP being contributed via Section 721. It represents 200+ hours of R&D and is the foundation for scalable operations and future vertical expansion.</p>
+
+                <!-- Scalability Infrastructure: MDRS Certification Ladder -->
+                <div class="mt-8 kpi-card bg-gradient-to-br from-indigo-50 to-purple-50 border-l-4 border-indigo-600">
+                    <h3 class="text-xl font-bold text-indigo-900 mb-3">Scalability Infrastructure: The MDRS Certification Ladder</h3>
+
+                    <div class="p-3 bg-white rounded-lg mb-4">
+                        <p class="font-bold text-slate-800 text-sm mb-2">The Problem This Solves</p>
+                        <p class="text-sm text-gray-700">Most AI-enhanced services break the moment the founder steps back. Quality collapses, client outcomes become inconsistent, and the "secret sauce" turns out to be one person. <strong>MDRS solves this by turning quality into infrastructure</strong>: a gated certification system where each level unlocks specific capabilities and specific revenue capacity.</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-indigo-100">
+                                <tr>
+                                    <th class="px-3 py-2 text-left font-semibold">Level</th>
+                                    <th class="px-3 py-2 text-left font-semibold">What They Deliver</th>
+                                    <th class="px-3 py-2 text-left font-semibold">Quality Gate</th>
+                                    <th class="px-3 py-2 text-left font-semibold">Time to Certify</th>
+                                    <th class="px-3 py-2 text-left font-semibold">Capacity Unlock</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-indigo-100">
+                                <tr class="bg-white">
+                                    <td class="px-3 py-2 font-bold text-indigo-700">Level 1 – Apprentice</td>
+                                    <td class="px-3 py-2 text-xs">Source classification, evidence tagging, and audit-trail documentation under supervision</td>
+                                    <td class="px-3 py-2 text-xs">≥95% accuracy on blind source-classification test set</td>
+                                    <td class="px-3 py-2 text-xs">~2 weeks</td>
+                                    <td class="px-3 py-2 text-xs text-gray-500">Support role only (no direct client ownership)</td>
+                                </tr>
+                                <tr class="bg-indigo-50">
+                                    <td class="px-3 py-2 font-bold text-indigo-700">Level 2 – Analyst</td>
+                                    <td class="px-3 py-2 text-xs">Single-investigator reports with full citations, working within existing MDRS templates</td>
+                                    <td class="px-3 py-2 text-xs">All outputs pass Senior/Lead review with minimal edits</td>
+                                    <td class="px-3 py-2 text-xs">~4 weeks (after Level 1)</td>
+                                    <td class="px-3 py-2 text-xs font-semibold text-green-700">Can support up to ~5 clients/month in a supervised role</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <td class="px-3 py-2 font-bold text-indigo-700">Level 3 – MDRS Practitioner</td>
+                                    <td class="px-3 py-2 text-xs">End-to-end 4-Investigator MDRS execution, including convergence analysis and CI scoring</td>
+                                    <td class="px-3 py-2 text-xs">Convergence rate and CI distribution match founder baseline on test projects</td>
+                                    <td class="px-3 py-2 text-xs">~8 weeks (after Level 2)</td>
+                                    <td class="px-3 py-2 text-xs font-semibold text-green-700">Can independently manage 10+ clients/month with MDRS autonomy</td>
+                                </tr>
+                                <tr class="bg-indigo-50">
+                                    <td class="px-3 py-2 font-bold text-indigo-700">Level 4 – Lead / Calibrator</td>
+                                    <td class="px-3 py-2 text-xs">Model selection, prompt design, MDRS protocol tuning, and SOP development; trains lower levels</td>
+                                    <td class="px-3 py-2 text-xs">Successfully trains and certifies Level 1–2 analysts; maintains MDRS quality metrics across their pod</td>
+                                    <td class="px-3 py-2 text-xs">~6 months (after Level 3)</td>
+                                    <td class="px-3 py-2 text-xs font-semibold text-green-700">Unlocks multiplicative capacity by training others and adjusting protocols</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+                        <p class="text-xs text-amber-800"><strong>Investor Note:</strong> This is not a generic training program—it is <em>quality-assurance architecture</em>. Each level has objective gates that prevent premature promotion. A Level 2 analyst literally cannot access full MDRS execution until they demonstrate competence against defined benchmarks.</p>
+                        <p class="text-xs text-amber-800 mt-2">Practically, this is how SparkData can scale from "founder does everything" to a team of MDRS Practitioners without degrading output quality. It also makes ROI calculable: funding a Level 3 hire adds ~10 clients/month of MDRS-quality capacity once they clear the ladder.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SRS VERTICAL -->
+        <section id="vertical" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">3. SRS Vertical Frameworks</h1>
+            <p class="text-lg text-gray-600 mb-6">Career Services Application of MDRS Platform</p>
+
+            <div class="kpi-card srs-card mb-6">
+                <p class="text-sm text-gray-700">The MDRS protocol provides horizontal research infrastructure. The following frameworks apply that infrastructure to the <strong>career services vertical</strong>, creating the specific IP that powers Southwest Resume Services.</p>
+            </div>
+
+            <!-- RAI -->
+            <div class="mb-6">
+                <div class="kpi-card srs-card">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-green-600 rounded-lg p-2 mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-green-900">Research Authority Index (RAI)</h3>
+                            <p class="text-xs text-green-600 uppercase">Platform-Level Evidence Scoring Applied to Career Data</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3"><strong>The Problem It Solves:</strong> Career advice varies wildly in quality. Generic AI tools treat a Reddit comment and a peer-reviewed hiring study as equivalent inputs. Traditional career coaches rely on anecdotal experience.</p>
+                    <p class="text-sm text-gray-700 mb-3"><strong>How RAI Works:</strong> Every recommendation is traceable to source data with assigned authority weights using the MDRS hierarchy. If Investigator D finds disconfirmatory evidence (publication bias, p-hacking), the score is mathematically penalized.</p>
+                    <p class="text-sm text-gray-700"><strong>For Clients:</strong> Measurable before/after scores showing how resume changes improve alignment with evidence-backed hiring practices.</p>
+                </div>
+            </div>
+
+            <!-- Truth Bridge -->
+            <div class="mb-6">
+                <div class="kpi-card srs-card">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-teal-600 rounded-lg p-2 mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-teal-900">Truth Bridge Protocol</h3>
+                            <p class="text-xs text-teal-600 uppercase">Cross-Source Validation for Complex Situations</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3"><strong>The Problem It Solves:</strong> Real careers are messy. Employment gaps, discrimination experiences, industry transitions, terminations—these situations require nuanced handling that generic templates cannot provide.</p>
+                    <p class="text-sm text-gray-700 mb-3"><strong>How It Works:</strong> The 4-Investigator Array cross-references multiple data sources to identify conflicts between what a client experienced, how hiring systems interpret that experience, and what messaging strategies successfully navigate the gap.</p>
+                    <p class="text-sm text-gray-700"><strong>For Investors:</strong> Demonstrates platform capability in "messy" real-world data environments—essential for any professional services vertical.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Five-Level Scale -->
+                <div class="kpi-card srs-card">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-emerald-600 rounded-lg p-2 mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-emerald-900">Five-Level Enhancement Scale</h3>
+                            <p class="text-xs text-emerald-600 uppercase">Tiered Service Framework</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2"><strong>Problem:</strong> Resume services offer vague packages with unclear distinctions.</p>
+                    <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong> Each level corresponds to specific enhancement complexity and required MDRS depth.</p>
+                    <p class="text-sm text-gray-700"><strong>For Investors:</strong> Enables consistent service delivery at scale. New team members apply the framework consistently.</p>
+                </div>
+
+                <!-- Risk Assessment -->
+                <div class="kpi-card srs-card">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-green-700 rounded-lg p-2 mr-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-green-900">Mathematical Risk Assessment</h3>
+                            <p class="text-xs text-green-600 uppercase">Risk/Impact Scoring</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2"><strong>Problem:</strong> Resume optimization involves tradeoffs. Most career services operate on intuition.</p>
+                    <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong> MDRS Bayesian scoring applied to specific resume elements, creating a risk/impact matrix.</p>
+                    <p class="text-sm text-gray-700"><strong>Template:</strong> Risk-scoring modules for other verticals: legal exposure, medical documentation, financial recommendations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: OPERATING MODEL -->
+        <section id="operating" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">4. Operating Model & Capacity Strategy</h1>
+            <p class="text-lg text-gray-600 mb-6">Current Structure: The "Founder + AI" Lab</p>
+
+            <div class="kpi-card bg-gradient-to-br from-slate-50 to-gray-50 border-l-4 border-slate-600 mb-6">
+                <p class="text-sm text-gray-700">SRS is intentionally operated as a <strong>low-volume, high-depth boutique</strong> during the current restructuring and R&D phase. This is a <strong>strategic choice</strong>, not a scaling limitation.</p>
+            </div>
+
+            <!-- The Model -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="kpi-card bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600">
+                    <h3 class="text-lg font-bold text-blue-900 mb-3">The Model</h3>
+                    <p class="text-sm text-gray-700">A single founder augmented by a sophisticated ecosystem of AI agents operating under the MDRS protocol. This configuration allows for deep forensic analysis that traditional writers cannot match, but requires significant oversight.</p>
+                    <p class="text-sm text-gray-700 mt-2 font-semibold">The "man + machine" workflow is the product—every efficiency gained becomes intellectual property for the SparkData platform.</p>
+                </div>
+                <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-50 border-l-4 border-amber-600">
+                    <h3 class="text-lg font-bold text-amber-900 mb-3">Current Capacity</h3>
+                    <p class="text-sm text-gray-700">Approximately <strong>5-10 clients per month</strong>. This ceiling is a function of founder bandwidth and strict quality standards, not market demand.</p>
+                    <p class="text-sm text-gray-700 mt-2">We deliberately throttle volume to allow ~75% of bandwidth for Platform R&D and Corporate Restructuring.</p>
+                </div>
+            </div>
+
+            <!-- Time Allocation -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Time Allocation</h2>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Activity</th>
+                                <th class="px-4 py-2 text-left font-semibold">Allocation</th>
+                                <th class="px-4 py-2 text-left font-semibold">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">Client Delivery</td><td class="px-4 py-2 font-bold text-blue-600">~25%</td><td class="px-4 py-2 text-xs">High-touch delivery to 5-10 clients/month</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Platform R&D / MDRS Refinement</td><td class="px-4 py-2 font-bold text-purple-600">~40%</td><td class="px-4 py-2 text-xs">Protocol development, SOP documentation, methodology iteration</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Corporate Restructuring</td><td class="px-4 py-2 font-bold text-amber-600">~35%</td><td class="px-4 py-2 text-xs">LLC formation, legal, investor materials, tax planning</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Why Marketing Paused -->
+            <div class="mb-6">
+                <div class="kpi-card bg-gradient-to-br from-gray-50 to-slate-50 border-l-4 border-gray-600">
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Why Marketing is Paused</h3>
+                    <p class="text-sm text-gray-700 mb-3">All paid marketing and major website development are currently paused. This reflects <strong>capital efficiency</strong>, not resource constraints:</p>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li><strong>Negative ROI on Founder Time:</strong> Acquiring customers via paid channels when capacity is capped yields negative return on the constrained resource.</li>
+                        <li><strong>Higher-Leverage Activities:</strong> Priority is completing macro-level platform architecture and legal structure.</li>
+                        <li><strong>Preserved Bandwidth:</strong> Client acquisition remains organic/referral-only to preserve bandwidth for R&D.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Capacity as Feature -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Capacity as a Feature</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="kpi-card bg-gradient-to-br from-indigo-50 to-violet-50 border-l-4 border-indigo-600">
+                        <h3 class="text-lg font-bold text-indigo-900 mb-2">Deep R&D</h3>
+                        <p class="text-sm text-gray-700">Every client is a case study for refining the MDRS protocol and vertical frameworks.</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-fuchsia-50 to-pink-50 border-l-4 border-fuchsia-600">
+                        <h3 class="text-lg font-bold text-fuchsia-900 mb-2">Agility</h3>
+                        <p class="text-sm text-gray-700">We can pivot the protocol architecture without disrupting hundreds of active clients.</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-cyan-50 to-sky-50 border-l-4 border-cyan-600">
+                        <h3 class="text-lg font-bold text-cyan-900 mb-2">Quality Preservation</h3>
+                        <p class="text-sm text-gray-700">We maintain a perfect review record by refusing to over-sell our capacity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quality Non-Negotiable -->
+            <div class="kpi-card bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-green-600">
+                <h3 class="text-lg font-bold text-green-900 mb-3">Quality as a Non-Negotiable</h3>
+                <p class="text-sm text-gray-700">The current <strong>5-star review record</strong> is a critical asset that must be protected. We will not scale volume beyond what can be delivered at perfect quality.</p>
+                <p class="text-sm text-gray-700 mt-2">The MDRS protocol includes explicit quality gates—if the Confidence Index drops below threshold or divergence rates exceed 5%, intake pauses for recalibration.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: METRICS & GUARDRAILS -->
+        <section id="metrics" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">5. Metrics & Analytics Dashboard</h1>
+            <p class="text-lg text-gray-600 mb-6">Phase-Gated KPIs with Guardrails & Kill Switches</p>
+
+            <!-- Philosophy Statement -->
+            <div class="kpi-card bg-gradient-to-br from-slate-50 to-gray-100 border-l-4 border-slate-600 mb-8">
+                <h3 class="text-lg font-bold text-slate-900 mb-3">Metrics Philosophy: Guardrails, Not Vanity</h3>
+                <p class="text-sm text-gray-700 mb-3">Metrics are not vanity in this phase—they are guardrails. The dashboard is designed to:</p>
+                <ul class="text-sm text-gray-700 space-y-2">
+                    <li>&#8226; <strong>Protect the 100% 5-star reputation</strong> while SRS operates as a boutique R&D lab</li>
+                    <li>&#8226; <strong>Validate that the MDRS Protocol and "Founder + AI" workflow</strong> scale without breaking</li>
+                    <li>&#8226; <strong>Only then inform decisions</strong> about paid acquisition and headcount</li>
+                </ul>
+                <p class="text-sm text-gray-700 mt-3 font-semibold">Every metric has an action rule. If the metric trips, the action is non-negotiable.</p>
+            </div>
+
+            <!-- 5.1 Forensic Quality Metrics -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5.1 Forensic Quality Metrics</h2>
+                <p class="text-sm text-gray-600 mb-4">These metrics measure the integrity of our research methodology</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                    <div class="kpi-card bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600">
+                        <h3 class="text-sm font-bold text-blue-900 mb-2">Divergence Rate</h3>
+                        <p class="text-2xl font-bold text-blue-600">&lt;5%</p>
+                        <p class="text-xs text-gray-600">Claims flagged as conflicting</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-green-600">
+                        <h3 class="text-sm font-bold text-green-900 mb-2">Convergence Rate</h3>
+                        <p class="text-2xl font-bold text-green-600">&gt;90%</p>
+                        <p class="text-xs text-gray-600">3/4+ investigators agree</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-purple-50 to-pink-50 border-l-4 border-purple-600">
+                        <h3 class="text-sm font-bold text-purple-900 mb-2">Confidence Index</h3>
+                        <p class="text-2xl font-bold text-purple-600">&gt;0.7</p>
+                        <p class="text-xs text-gray-600">Bayesian posterior score</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-50 border-l-4 border-amber-600">
+                        <h3 class="text-sm font-bold text-amber-900 mb-2">Audit Completeness</h3>
+                        <p class="text-2xl font-bold text-amber-600">100%</p>
+                        <p class="text-xs text-gray-600">Full documentation</p>
+                    </div>
+                </div>
+                <div class="kpi-card bg-gradient-to-br from-red-50 to-orange-50 border-l-4 border-red-600">
+                    <p class="text-sm text-gray-700"><strong>&#9888; Escalation Ladder:</strong> Divergence &gt;5% → pause intake for analysis; Divergence &gt;15% → full methodology audit; CI &lt;0.5 → additional source triangulation required; any non-compliant deliverable → immediate halt</p>
+                </div>
+            </div>
+
+            <!-- 5.2 Reputation & Client Experience -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5.2 Reputation & Client Experience</h2>
+                <p class="text-sm text-gray-600 mb-4">The Perfect Record Protocol — Reputation is the moat</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div class="kpi-card bg-gradient-to-br from-yellow-50 to-amber-50 border-l-4 border-yellow-600">
+                        <h3 class="text-sm font-bold text-yellow-900 mb-2">Review Score</h3>
+                        <p class="text-2xl font-bold text-yellow-600">5.0&#9733;</p>
+                        <p class="text-xs text-gray-600">Target: 100% 5-star reviews</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-teal-50 to-cyan-50 border-l-4 border-teal-600">
+                        <h3 class="text-sm font-bold text-teal-900 mb-2">Net Promoter Score</h3>
+                        <p class="text-2xl font-bold text-teal-600">&gt;70</p>
+                        <p class="text-xs text-gray-600">World-class benchmark</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-rose-50 to-red-50 border-l-4 border-rose-600">
+                        <h3 class="text-sm font-bold text-rose-900 mb-2">Rework Rate</h3>
+                        <p class="text-2xl font-bold text-rose-600">&lt;10%</p>
+                        <p class="text-xs text-gray-600">Major revisions required</p>
+                    </div>
+                </div>
+                <div class="kpi-card bg-gradient-to-br from-red-50 to-orange-50 border-l-4 border-red-600">
+                    <p class="text-sm text-gray-700"><strong>&#9888; Kill Switches:</strong> Any review &lt;5★ → immediate intake pause + MDRS review; NPS &lt;50 → service model review; Rework &gt;25% → SOP audit + capacity reduction; any refund request → root cause analysis</p>
+                </div>
+            </div>
+
+            <!-- 5.3 Capacity & Operational Metrics -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5.3 Capacity & Operational Metrics</h2>
+                <p class="text-sm text-gray-600 mb-4">Current phase: Founder + AI Lab configuration</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div class="kpi-card sda-card">
+                        <h3 class="text-sm font-bold text-slate-900 mb-3">Volume Metrics</h3>
+                        <table class="min-w-full text-sm">
+                            <tbody class="divide-y divide-slate-200">
+                                <tr><td class="py-2 font-medium">Monthly Client Cap</td><td class="py-2 text-right font-bold">5-10</td></tr>
+                                <tr class="bg-slate-50"><td class="py-2 font-medium">Avg Cycle Time</td><td class="py-2 text-right font-bold">5-7 days</td></tr>
+                                <tr><td class="py-2 font-medium">Calibration Currency</td><td class="py-2 text-right font-bold">&lt;7 days</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="kpi-card sda-card">
+                        <h3 class="text-sm font-bold text-slate-900 mb-3">Current Status</h3>
+                        <table class="min-w-full text-sm">
+                            <tbody class="divide-y divide-slate-200">
+                                <tr><td class="py-2 font-medium">Google Reviews</td><td class="py-2 text-right font-bold text-green-600">5.0★ (100%)</td></tr>
+                                <tr class="bg-slate-50"><td class="py-2 font-medium">MDRS Protocol</td><td class="py-2 text-right font-bold">Rev 9.0</td></tr>
+                                <tr><td class="py-2 font-medium">Paid Marketing</td><td class="py-2 text-right font-bold text-amber-600">Paused</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-50 border-l-4 border-amber-600">
+                    <p class="text-sm text-gray-700"><strong>&#9650; Guardrails:</strong> Volume exceeds cap → automatic waitlist; median cycle time +50% → capacity warning; calibration &gt;7 days → pause new intake until pre-flight complete</p>
+                </div>
+            </div>
+
+            <!-- 5.4 Unit Economics (Future Phase) -->
+            <div class="mb-8">
+                <div class="bg-gradient-to-r from-gray-100 to-slate-100 border-l-4 border-gray-400 rounded-lg p-3 mb-4">
+                    <p class="text-sm text-gray-600"><span class="font-bold text-gray-800">&#9671; FUTURE PHASE:</span> These metrics become active in Validation/Growth phases</p>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5.4 Unit Economics Metrics</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="kpi-card bg-gray-50 border border-gray-200">
+                        <h3 class="text-sm font-bold text-gray-600 mb-2">Target CAC</h3>
+                        <p class="text-2xl font-bold text-gray-400">&lt;$150</p>
+                        <p class="text-xs text-gray-400">Blended acquisition cost</p>
+                    </div>
+                    <div class="kpi-card bg-gray-50 border border-gray-200">
+                        <h3 class="text-sm font-bold text-gray-600 mb-2">Target LTV:CAC</h3>
+                        <p class="text-2xl font-bold text-gray-400">&gt;3:1</p>
+                        <p class="text-xs text-gray-400">Minimum viable ratio</p>
+                    </div>
+                    <div class="kpi-card bg-gray-50 border border-gray-200">
+                        <h3 class="text-sm font-bold text-gray-600 mb-2">Conversion Rate</h3>
+                        <p class="text-2xl font-bold text-gray-400">25-33%</p>
+                        <p class="text-xs text-gray-400">Lead to customer</p>
+                    </div>
+                    <div class="kpi-card bg-gray-50 border border-gray-200">
+                        <h3 class="text-sm font-bold text-gray-600 mb-2">Gross Margin</h3>
+                        <p class="text-2xl font-bold text-gray-400">&gt;70%</p>
+                        <p class="text-xs text-gray-400">After AI/tool costs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5.5 R&D Learning Metrics -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5.5 R&D Learning Metrics</h2>
+                <p class="text-sm text-gray-600 mb-4">Continuous improvement signals for methodology development</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div class="kpi-card bg-gradient-to-br from-indigo-50 to-violet-50 border-l-4 border-indigo-600">
+                        <h3 class="text-sm font-bold text-indigo-900 mb-2">SOP Revision Cadence</h3>
+                        <p class="text-2xl font-bold text-indigo-600">Monthly</p>
+                        <p class="text-xs text-gray-600">Active refinement expected</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-fuchsia-50 to-pink-50 border-l-4 border-fuchsia-600">
+                        <h3 class="text-sm font-bold text-fuchsia-900 mb-2">MDRS Version</h3>
+                        <p class="text-2xl font-bold text-fuchsia-600">Rev 9.0</p>
+                        <p class="text-xs text-gray-600">Current protocol version</p>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-cyan-50 to-sky-50 border-l-4 border-cyan-600">
+                        <h3 class="text-sm font-bold text-cyan-900 mb-2">"Glass Findings"</h3>
+                        <p class="text-2xl font-bold text-cyan-600">Logged</p>
+                        <p class="text-xs text-gray-600">Documented failures & learnings</p>
+                    </div>
+                </div>
+                <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-50 border-l-4 border-amber-600">
+                    <p class="text-sm text-gray-700"><strong>&#9650; Guardrail:</strong> If SOP hasn't changed in 10+ projects → trigger formal double-loop review to assess whether methodology is stagnating or stable</p>
+                </div>
+            </div>
+
+            <!-- Phase Gating -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5.6 Phase Mapping & Gating Logic</h2>
+                <div class="kpi-card bg-white border border-gray-200">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold">Phase</th>
+                                <th class="px-4 py-3 text-left font-semibold">Status</th>
+                                <th class="px-4 py-3 text-left font-semibold">Gate Criteria</th>
+                                <th class="px-4 py-3 text-left font-semibold">Kill Switch</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="px-4 py-3 font-medium">1. R&D Lab</td>
+                                <td class="px-4 py-3"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-bold">&#9654; CURRENT</span></td>
+                                <td class="px-4 py-3 text-xs">LLC formed, SOPs 80%+, 100% review score</td>
+                                <td class="px-4 py-3 text-xs text-red-600">Review &lt;4.5 avg OR rework &gt;25%</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="px-4 py-3 font-medium">2. Validation</td>
+                                <td class="px-4 py-3"><span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold">&#9671; FUTURE</span></td>
+                                <td class="px-4 py-3 text-xs">10-15 clients/mo, MDRS stable at volume</td>
+                                <td class="px-4 py-3 text-xs text-red-600">Divergence &gt;5% OR CI &lt;0.5</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">3. Growth</td>
+                                <td class="px-4 py-3"><span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold">&#9671; FUTURE</span></td>
+                                <td class="px-4 py-3 text-xs">20+ clients/mo, first hire, funded or bootstrap</td>
+                                <td class="px-4 py-3 text-xs text-red-600">CAC &gt;$200 OR LTV:CAC &lt;2:1</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="px-4 py-3 font-medium">4. Scale</td>
+                                <td class="px-4 py-3"><span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold">&#9671; FUTURE</span></td>
+                                <td class="px-4 py-3 text-xs">50+ clients/mo, C-Corp, Vertical #2</td>
+                                <td class="px-4 py-3 text-xs text-red-600">NPS &lt;50 OR core metrics declining</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5.7 Detailed Action Rules (Kill Switches) -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5.7 Detailed Action Rules</h2>
+                <p class="text-sm text-gray-600 mb-4">Non-negotiable responses when metrics trip thresholds</p>
+                <div class="kpi-card bg-white border border-gray-200">
+                    <table class="min-w-full text-xs">
+                        <thead class="bg-red-50">
+                            <tr>
+                                <th class="px-3 py-2 text-left font-semibold text-red-900">Metric</th>
+                                <th class="px-3 py-2 text-left font-semibold text-red-900">Threshold</th>
+                                <th class="px-3 py-2 text-left font-semibold text-red-900">Mandatory Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr><td class="px-3 py-2 font-medium">Divergent Claims</td><td class="px-3 py-2">&gt;5%</td><td class="px-3 py-2">Pause MDRS automation; run internal forensic review; document cause and update SOP</td></tr>
+                            <tr class="bg-gray-50"><td class="px-3 py-2 font-medium">Confidence Index</td><td class="px-3 py-2">&gt;20% low-confidence</td><td class="px-3 py-2">Escalate to Senior review before delivery</td></tr>
+                            <tr><td class="px-3 py-2 font-medium">Any Review</td><td class="px-3 py-2">&lt;5★</td><td class="px-3 py-2">Immediate intake pause + full MDRS + process review for that engagement</td></tr>
+                            <tr class="bg-gray-50"><td class="px-3 py-2 font-medium">NPS</td><td class="px-3 py-2">Drops ≥15 pts / 3 engagements</td><td class="px-3 py-2">Temporarily lower intake; review MDRS decisions, narrative, communication patterns</td></tr>
+                            <tr><td class="px-3 py-2 font-medium">Active Load</td><td class="px-3 py-2">Exceeds capacity 2 weeks</td><td class="px-3 py-2">Automatic soft-freeze on new intakes</td></tr>
+                            <tr class="bg-gray-50"><td class="px-3 py-2 font-medium">Cycle Time</td><td class="px-3 py-2">Increases 50%+</td><td class="px-3 py-2">Capacity warning; re-evaluate MDRS automation and founder time allocation</td></tr>
+                            <tr><td class="px-3 py-2 font-medium">30-day CAC</td><td class="px-3 py-2">&gt;$200 for 2 months</td><td class="px-3 py-2">Scale back spend; revisit messaging, audiences, channel mix</td></tr>
+                            <tr class="bg-gray-50"><td class="px-3 py-2 font-medium">LTV:CAC</td><td class="px-3 py-2">&lt;3:1</td><td class="px-3 py-2">No scale beyond Scenario A; optimization required</td></tr>
+                            <tr><td class="px-3 py-2 font-medium">SOP Unchanged</td><td class="px-3 py-2">10+ projects</td><td class="px-3 py-2">Conduct formal reflection—process may be ossifying</td></tr>
+                            <tr class="bg-gray-50"><td class="px-3 py-2 font-medium">Any Refund Request</td><td class="px-3 py-2">Any</td><td class="px-3 py-2">Full root cause analysis; update SOP if process gap identified</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5.8 What's Measured When -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5.8 What's Measured When</h2>
+                <p class="text-sm text-gray-600 mb-4">Not all metrics apply at all phases—this prevents misleading comparisons</p>
+                <div class="kpi-card bg-white border border-gray-200">
+                    <table class="min-w-full text-xs">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-3 py-2 text-left font-semibold">Phase</th>
+                                <th class="px-3 py-2 text-left font-semibold">Active Metrics</th>
+                                <th class="px-3 py-2 text-left font-semibold">Not Yet Measured</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="px-3 py-2 font-medium"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-bold">1. R&D Lab (Now)</span></td>
+                                <td class="px-3 py-2">Forensic Quality, Reputation (5★), Capacity, R&D Learning</td>
+                                <td class="px-3 py-2 text-gray-400">CAC, LTV (defined but not measured—no paid acquisition)</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="px-3 py-2 font-medium"><span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">2. Validation</span></td>
+                                <td class="px-3 py-2">All above + CAC, early LTV signals, conversion rates</td>
+                                <td class="px-3 py-2 text-gray-400">Full LTV validation (needs 6-12 month cohorts)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 font-medium"><span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">3. Growth</span></td>
+                                <td class="px-3 py-2">All metrics active; unit economics validated</td>
+                                <td class="px-3 py-2 text-gray-400">None—full dashboard operational</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="px-3 py-2 font-medium"><span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">4. Scale</span></td>
+                                <td class="px-3 py-2">All metrics + team productivity, margin by service line</td>
+                                <td class="px-3 py-2 text-gray-400">None—expanded dashboard</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-gray-500 mt-2"><strong>Investor note:</strong> Asking "What's your CAC?" in R&D phase is premature. The answer is "We're not spending on acquisition yet—deliberately. We'll have CAC data when we enter Validation."</p>
+            </div>
+        </section>
+
+        <!-- SECTION 6: BUDGET FRAMEWORK -->
+        <section id="budget" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">6. Budget Framework</h1>
+            <p class="text-lg text-gray-600 mb-6">Restructuring & R&D Phase Capital Deployment</p>
+
+            <!-- Current Phase -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Current Phase: Restructuring (Nov 2025 – Q1 2026)</h2>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Parameter</th>
+                                <th class="px-4 py-2 text-left font-semibold">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">Focus</td><td class="px-4 py-2">Business infrastructure, LLC formation, MDRS protocol finalization</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Marketing Budget</td><td class="px-4 py-2 font-bold text-amber-600">$0/month (Paused)</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Client Volume</td><td class="px-4 py-2">~5-10/month (Organic/Referral only)</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Revenue</td><td class="px-4 py-2">~$2,500-$5,000/month</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Primary Investments</td><td class="px-4 py-2">Legal services, AI API costs (4-Investigator Array), platform infrastructure</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Exit Criteria</td><td class="px-4 py-2">LLC formed; SOP SDA-SRS-001 finalized; investor materials complete</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Future Scenarios -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Future Phase Scenarios</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="kpi-card bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600">
+                        <h3 class="text-lg font-bold text-blue-900 mb-3">Scenario A: Bootstrap Scaling</h3>
+                        <p class="text-xs text-blue-600 mb-3">Trigger: Restructuring complete; resume paid marketing</p>
+                        <table class="min-w-full text-sm">
+                            <tbody class="divide-y divide-blue-100">
+                                <tr><td class="py-1 font-medium">Marketing</td><td class="py-1 text-right">~$5,000-$10,000/mo</td></tr>
+                                <tr><td class="py-1 font-medium">Volume Target</td><td class="py-1 text-right">~15-25 clients/mo</td></tr>
+                                <tr><td class="py-1 font-medium">Quality Gate</td><td class="py-1 text-right text-xs">Divergence &gt;5% = pause</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="kpi-card bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-green-600">
+                        <h3 class="text-lg font-bold text-green-900 mb-3">Scenario B: Funded Growth</h3>
+                        <p class="text-xs text-green-600 mb-3">Trigger: Pre-seed closes; accelerate hiring + marketing</p>
+                        <table class="min-w-full text-sm">
+                            <tbody class="divide-y divide-green-100">
+                                <tr><td class="py-1 font-medium">Marketing</td><td class="py-1 text-right">$10,000-$25,000/mo</td></tr>
+                                <tr><td class="py-1 font-medium">Volume Target</td><td class="py-1 text-right">30-50 clients/mo with analyst team</td></tr>
+                                <tr><td class="py-1 font-medium">Exit Criteria</td><td class="py-1 text-right text-xs">LTV:CAC &gt; 4:1</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12-Month Projection -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">12-Month Projection (Realistic Range)</h2>
+                <div class="kpi-card bg-gradient-to-br from-gray-50 to-slate-50 border-l-4 border-gray-400 mb-4">
+                    <p class="text-xs text-gray-600">Note: These projections reflect capacity-constrained reality, not aspirational volume targets.</p>
+                </div>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Scenario</th>
+                                <th class="px-4 py-2 text-left font-semibold">Marketing</th>
+                                <th class="px-4 py-2 text-left font-semibold">Clients</th>
+                                <th class="px-4 py-2 text-left font-semibold">Revenue</th>
+                                <th class="px-4 py-2 text-left font-semibold">Key Assumption</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">Bootstrap</td><td class="px-4 py-2">$25K-$35K</td><td class="px-4 py-2">100-150</td><td class="px-4 py-2 font-bold text-green-600">$50K-$75K</td><td class="px-4 py-2 text-xs">Solo + MDRS to ~15/mo</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Funded</td><td class="px-4 py-2">$60K-$80K</td><td class="px-4 py-2">200-300</td><td class="px-4 py-2 font-bold text-green-600">$100K-$150K</td><td class="px-4 py-2 text-xs">Hire + scale</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: STRATEGIC ROADMAP -->
+        <section id="roadmap" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">7. Strategic Roadmap</h1>
+            <p class="text-lg text-gray-600 mb-6">Phase-Gated Execution Plan</p>
+
+            <!-- Months 1-2 -->
+            <div class="mb-6">
+                <div class="kpi-card bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-blue-900">Months 1-2: Restructuring Completion</h3>
+                            <p class="text-xs text-blue-600">(CURRENT PHASE)</p>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded text-xs font-bold">&#9654; IN PROGRESS</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-3"><strong>Primary Focus:</strong> Business infrastructure (75%) / Client delivery (25%)</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm font-bold text-blue-800 mb-2">Corporate Tasks</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>&#8226; Form SparkData Analytics, LLC (Arizona)</li>
+                                <li>&#8226; Formalize SOP SDA-SRS-001 (Rev 9.0) as core IP</li>
+                                <li>&#8226; Draft and execute Operating Agreement</li>
+                                <li>&#8226; Complete investor materials</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-blue-800 mb-2">Success Metrics</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>&#8226; LLC formed</li>
+                                <li>&#8226; MDRS SOP finalized</li>
+                                <li>&#8226; 5-star record maintained</li>
+                            </ul>
+                            <p class="text-xs text-amber-600 mt-2 font-semibold">Marketing: Paused</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Months 3-4 -->
+            <div class="mb-6">
+                <div class="kpi-card bg-gray-50 border border-gray-200">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-700">Months 3-4: Scaling Launch (Phase 2)</h3>
+                            <p class="text-xs text-gray-500">Trigger: Restructuring complete; analyst capacity established</p>
+                        </div>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded text-xs font-bold">&#9671; NEXT</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm font-bold text-gray-600 mb-2">Marketing Tasks</p>
+                            <ul class="text-xs text-gray-500 space-y-1">
+                                <li>&#8226; Resume paid marketing channels</li>
+                                <li>&#8226; Scale Google Ads (Phoenix geo)</li>
+                                <li>&#8226; LinkedIn + Meta expansion</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-gray-600 mb-2">Success Metrics</p>
+                            <ul class="text-xs text-gray-500 space-y-1">
+                                <li>&#8226; Volume Target: 15-25 clients/month</li>
+                                <li>&#8226; Maintain CAC &lt;$200</li>
+                                <li>&#8226; First analyst at Level 2+</li>
+                                <li>&#8226; 10+ total reviews</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Months 5-6 -->
+            <div class="mb-6">
+                <div class="kpi-card bg-gray-50 border border-gray-200">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-700">Months 5-6: Growth Decision Point</h3>
+                            <p class="text-xs text-gray-500">Evaluate paths based on validation results and funding status</p>
+                        </div>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded text-xs font-bold">&#9671; FUTURE</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white rounded-lg">
+                            <p class="text-sm font-bold text-green-700 mb-2">Path A: Funded</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>&#8226; Pre-seed closed</li>
+                                <li>&#8226; Hire Level 3 certified analyst</li>
+                                <li>&#8226; Scale marketing to $5K+/month</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-white rounded-lg">
+                            <p class="text-sm font-bold text-blue-700 mb-2">Path B: Bootstrap</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>&#8226; MDRS efficiency gains</li>
+                                <li>&#8226; Solo capacity to 20+/month</li>
+                                <li>&#8226; Marketing $2.5-5K/month</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3"><strong>Decision Criteria:</strong> Funding status, MDRS scalability data, quality maintenance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: CORPORATE STRUCTURE -->
+        <section id="corporate" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">8. Corporate Structure & Governance</h1>
+            <p class="text-lg text-gray-600 mb-6">Entity Architecture & Tax Strategy</p>
+
+            <!-- Entity Structure -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Entity Structure</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="kpi-card bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600">
+                        <p class="text-xs text-blue-600 uppercase font-bold mb-2">Parent Company | Formation Q1 2026</p>
+                        <h3 class="text-lg font-bold text-blue-900 mb-3">SparkData Analytics, LLC</h3>
+                        <p class="text-sm text-gray-700 mb-3">Arizona LLC | Horizontal AI Evidence Platform</p>
+                        <p class="text-sm font-bold text-slate-800 mb-2">Core Platform IP:</p>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li>&#8226; Comprehensive SOP Library (research, delivery, quality, operations)</li>
+                            <li>&#8226; Multi-Model Deep Research Synthesis (MDRS) methodology</li>
+                            <li>&#8226; 4-Investigator Array architecture and calibration protocols</li>
+                            <li>&#8226; Source hierarchy and Bayesian confidence scoring</li>
+                            <li>&#8226; Analyst certification and training frameworks</li>
+                        </ul>
+                    </div>
+                    <div class="kpi-card srs-card">
+                        <p class="text-xs text-green-600 uppercase font-bold mb-2">Subsidiary | Operating Since Jan 2024</p>
+                        <h3 class="text-lg font-bold text-green-900 mb-3">Southwest Resume Services, LLC</h3>
+                        <p class="text-sm text-gray-700 mb-3">Career Services Vertical</p>
+                        <p class="text-sm font-bold text-green-800 mb-2">Strategic Value to Platform:</p>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li><strong>Market Validation:</strong> Real revenue proving MDRS works in practice</li>
+                            <li><strong>Protocol Refinement:</strong> Every client generates data to improve thresholds</li>
+                            <li><strong>Training Ground:</strong> Validates analyst certification pathway</li>
+                            <li><strong>Liability Separation:</strong> Operations ring-fenced from parent IP</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Arizona LLC -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Why Arizona LLC Structure</h2>
+                <div class="kpi-card sda-card">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-3 bg-white rounded-lg">
+                            <p class="font-bold text-slate-900">Operational Alignment</p>
+                            <p class="text-xs text-gray-600">Arizona customers, Arizona resident</p>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-lg">
+                            <p class="font-bold text-slate-900">Cost Efficiency</p>
+                            <p class="text-xs text-gray-600">~$50 formation, no annual report</p>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-lg">
+                            <p class="font-bold text-slate-900">Pass-Through</p>
+                            <p class="text-xs text-gray-600">Losses flow during R&D phase</p>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-lg">
+                            <p class="font-bold text-slate-900">Optionality</p>
+                            <p class="text-xs text-gray-600">Convert to C-Corp when needed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tax Strategy -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Tax Optimization Strategy</h2>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Item</th>
+                                <th class="px-4 py-2 text-left font-semibold">Phase</th>
+                                <th class="px-4 py-2 text-left font-semibold">Status</th>
+                                <th class="px-4 py-2 text-left font-semibold">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">Section 721 IP Contribution</td><td class="px-4 py-2">Current (LLC)</td><td class="px-4 py-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-bold">&#9654; In Progress</span></td><td class="px-4 py-2 text-xs">Tax-free transfer of SRS assets and MDRS IP</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Pass-Through Deductions</td><td class="px-4 py-2">Current (LLC)</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Active</span></td><td class="px-4 py-2 text-xs">$60K-$70K strategic investment deductions</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">R&D Tax Credit Documentation</td><td class="px-4 py-2">Current (LLC)</td><td class="px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">&#10003; Active</span></td><td class="px-4 py-2 text-xs">Contemporaneous logging for 2026</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">QSBS Eligibility</td><td class="px-4 py-2">Future (C-Corp)</td><td class="px-4 py-2"><span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold">&#9671; Future</span></td><td class="px-4 py-2 text-xs">Up to $15M exclusion (OBBBA 2025)</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">83(b) Election</td><td class="px-4 py-2">Future (C-Corp)</td><td class="px-4 py-2"><span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold">&#9671; Future</span></td><td class="px-4 py-2 text-xs">Founder equity at conversion</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Investor Opportunity -->
+            <div class="kpi-card bg-gradient-to-br from-purple-50 to-indigo-50 border-l-4 border-purple-600">
+                <h3 class="text-lg font-bold text-purple-900 mb-3">Investor Opportunity: Platform-Scale Valuation</h3>
+                <p class="text-sm text-gray-700 mb-3">Positioned for <strong>platform multiples</strong>, not service-business valuations:</p>
+                <ul class="text-sm text-gray-700 space-y-2">
+                    <li><strong>Horizontal Platform:</strong> Defensible IP in MDRS methodology, applicable to any evidence-dependent vertical</li>
+                    <li><strong>First Vertical Proof:</strong> SRS demonstrates commercial traction and measurable ROI</li>
+                    <li><strong>Expansion Path:</strong> Launch additional verticals (legal, healthcare, financial) using same MDRS infrastructure</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 9: CHANNEL STRATEGY -->
+        <section id="channels" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">9. Channel Strategy</h1>
+            <p class="text-lg text-gray-600 mb-6">Current Status: Paused | Future Playbook</p>
+
+            <div class="bg-gradient-to-r from-gray-100 to-slate-100 border-l-4 border-gray-400 rounded-lg p-4 mb-6">
+                <p class="text-sm text-gray-700"><span class="font-bold text-gray-800">&#9671; FUTURE PLAYBOOK:</span> Marketing channels are documented for post-restructuring activation. Current acquisition is organic/referral only.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="kpi-card bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-green-600">
+                    <h3 class="text-lg font-bold text-green-900 mb-3">&#10003; Active Now</h3>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li><strong>Organic Search:</strong> SEO foundation (Google Business Profile)</li>
+                        <li><strong>Referrals:</strong> Word-of-mouth from 100% satisfied clients</li>
+                        <li><strong>Direct Outreach:</strong> Selective high-fit prospects only</li>
+                    </ul>
+                </div>
+
+                <div class="kpi-card bg-gray-50 border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-600 mb-3">&#9671; Future Channels</h3>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><strong>Google Ads:</strong> Phase 2+ (post-capacity unlock)</li>
+                        <li><strong>LinkedIn:</strong> Phase 2+ (thought leadership)</li>
+                        <li><strong>Content Marketing:</strong> Phase 2+ (evidence-based positioning)</li>
+                        <li><strong>Partnerships:</strong> Phase 3+ (career coaches, HR consultants)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="kpi-card srs-card mb-6">
+                <h3 class="text-lg font-bold text-green-900 mb-3">Why Marketing is Paused</h3>
+                <p class="text-sm text-gray-700">Acquiring customers through paid channels while capacity is capped at 5-10/month creates negative ROI on founder time. Marketing activates when:</p>
+                <ul class="text-sm text-gray-700 mt-2 space-y-1">
+                    <li>&#8226; LLC formation complete</li>
+                    <li>&#8226; Core SOPs documented (80%+ completion)</li>
+                    <li>&#8226; Capacity ready to absorb increased demand</li>
+                </ul>
+            </div>
+
+            <!-- Phase Budget Allocations -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Marketing Phase Progression</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Phase 1: COMPLETED -->
+                    <div class="kpi-card bg-gradient-to-br from-green-50 to-emerald-50 border-l-4 border-green-600">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold mr-2">&#10003; COMPLETE</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-green-900 mb-2">Phase 1: Validation</h3>
+                        <p class="text-lg font-bold text-green-600">$2,500-$5,000/mo</p>
+                        <p class="text-xs text-green-700 mt-2"><strong>Achieved:</strong> 5-10 clients/month</p>
+                        <p class="text-xs text-green-600 mt-1">Validated market demand and conversion rates</p>
+                    </div>
+                    <!-- CURRENT: Restructuring Pause -->
+                    <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-50 border-l-4 border-amber-500">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded text-xs font-bold mr-2">&#9654; CURRENT</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-amber-900 mb-2">Restructuring Pause</h3>
+                        <p class="text-lg font-bold text-amber-600">Organics Only</p>
+                        <p class="text-xs text-amber-700 mt-2"><strong>Focus:</strong> Corporate restructuring (SDA formation), SOP refinement, methodology hardening</p>
+                        <p class="text-xs text-amber-600 mt-1">Paid marketing paused; referrals + organic only</p>
+                    </div>
+                    <!-- Phase 2: Next -->
+                    <div class="kpi-card bg-gray-50 border border-gray-200">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold mr-2">NEXT</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-gray-600 mb-2">Phase 2: Scaling</h3>
+                        <p class="text-lg font-bold text-gray-400">$10,000/mo</p>
+                        <table class="min-w-full text-xs mt-2 text-gray-400">
+                            <tr><td>Google Ads</td><td class="text-right font-bold">40%</td></tr>
+                            <tr><td>LinkedIn</td><td class="text-right font-bold">25%</td></tr>
+                            <tr><td>Meta</td><td class="text-right font-bold">20%</td></tr>
+                            <tr><td>Content/Partnerships</td><td class="text-right font-bold">15%</td></tr>
+                        </table>
+                        <p class="text-xs text-gray-400 mt-2">Unlock: Restructuring complete + analyst capacity</p>
+                    </div>
+                    <!-- Phase 3: Future -->
+                    <div class="kpi-card bg-gray-50 border border-gray-200">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-bold mr-2">FUTURE</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-gray-600 mb-2">Phase 3: Growth</h3>
+                        <p class="text-lg font-bold text-gray-400">$50,000/mo</p>
+                        <table class="min-w-full text-xs mt-2 text-gray-400">
+                            <tr><td>Performance Channels</td><td class="text-right font-bold">60%</td></tr>
+                            <tr><td>Brand Building</td><td class="text-right font-bold">25%</td></tr>
+                            <tr><td>Partnerships</td><td class="text-right font-bold">15%</td></tr>
+                        </table>
+                        <p class="text-xs text-gray-400 mt-2">Unlock: LTV:CAC 3:1+, 100+/mo capacity</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scaling Guardrails -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Scaling Guardrails & Gates</h2>
+                <div class="kpi-card bg-gradient-to-br from-red-50 to-orange-50 border-l-4 border-red-600">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-red-100">
+                            <tr>
+                                <th class="px-3 py-2 text-left font-semibold text-red-900">Gate</th>
+                                <th class="px-3 py-2 text-left font-semibold text-red-900">Requirement</th>
+                                <th class="px-3 py-2 text-left font-semibold text-red-900">Unlock</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-red-100">
+                            <tr><td class="px-3 py-2 font-medium">CAC Threshold</td><td class="px-3 py-2 text-xs">30-day rolling blended CAC &lt;$200 consistently</td><td class="px-3 py-2 text-xs">Phase 2</td></tr>
+                            <tr class="bg-red-50"><td class="px-3 py-2 font-medium">Conversion Gate</td><td class="px-3 py-2 text-xs">25%+ consultation-to-client conversion</td><td class="px-3 py-2 text-xs">Phase 2</td></tr>
+                            <tr><td class="px-3 py-2 font-medium">Social Proof</td><td class="px-3 py-2 text-xs">Minimum 10 verified testimonials</td><td class="px-3 py-2 text-xs">Phase 3</td></tr>
+                            <tr class="bg-red-50"><td class="px-3 py-2 font-medium">Operational Capacity</td><td class="px-3 py-2 text-xs">Proven ability to deliver 100+/mo with 4.8+ reviews</td><td class="px-3 py-2 text-xs">Phase 3</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-xs text-red-700 mt-3 font-semibold">&#9888; Pause Trigger: Any channel with CAC &gt;$250 for 7+ consecutive days gets paused immediately</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: INDUSTRY INTELLIGENCE -->
+        <section id="intelligence" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">10. Industry Intelligence</h1>
+            <p class="text-lg text-gray-600 mb-6">Market Landscape & Competitive Positioning</p>
+
+            <!-- Market Data -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Market Data</h2>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Metric</th>
+                                <th class="px-4 py-2 text-left font-semibold">Data</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">National Market Size</td><td class="px-4 py-2">$1.5B-$2.5B (6.3-8.2% CAGR)</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">AI Resume Builder Segment</td><td class="px-4 py-2">20% CAGR ($400M → $1.8B by 2032)</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">AI in HR Adoption</td><td class="px-4 py-2">43% of orgs (up from 26% in 2024)</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Phoenix MSA Labor Force</td><td class="px-4 py-2">2.7M (Phoenix-Mesa-Chandler)</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Annual Job Growth</td><td class="px-4 py-2">~1% (2025 YTD, per BLS)</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Annual New Residents</td><td class="px-4 py-2">85,000 (Maricopa County)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="kpi-card srs-card mt-4">
+                    <h3 class="text-sm font-bold text-green-900 mb-2">Phoenix-East Valley Employer Landscape</h3>
+                    <p class="text-xs text-gray-700 mb-2">The Phoenix metro area—particularly the East Valley corridor—is experiencing rapid growth in high-skill employment sectors:</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                        <div class="p-2 bg-white rounded"><strong>Semiconductor:</strong> Intel (Chandler), TSMC (Phoenix)</div>
+                        <div class="p-2 bg-white rounded"><strong>Healthcare:</strong> Banner, HonorHealth, Mayo Clinic</div>
+                        <div class="p-2 bg-white rounded"><strong>Finance:</strong> American Express, State Farm</div>
+                        <div class="p-2 bg-white rounded"><strong>Tech:</strong> Zoom, Microchip, Rogers Corp</div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">These employers run sophisticated ATS systems where evidence-based resume optimization delivers measurable ROI.</p>
+                </div>
+            </div>
+
+            <!-- Competitive Landscape -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Competitive Landscape</h2>
+                <div class="kpi-card bg-gradient-to-br from-purple-50 to-indigo-50 border-l-4 border-purple-600">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-purple-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Tier</th>
+                                <th class="px-4 py-2 text-left font-semibold">Examples</th>
+                                <th class="px-4 py-2 text-left font-semibold">Characteristics</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-purple-100">
+                            <tr><td class="px-4 py-2 font-medium">Volume Leaders</td><td class="px-4 py-2">TopResume, ZipJob</td><td class="px-4 py-2 text-xs">Brand recognition, $139-699 pricing, limited AI</td></tr>
+                            <tr class="bg-purple-50"><td class="px-4 py-2 font-medium">AI Disruptors</td><td class="px-4 py-2">Rezi, Teal</td><td class="px-4 py-2 text-xs">Freemium models, single-model AI, no evidence validation</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">High-Touch Boutiques</td><td class="px-4 py-2">$1,000+ services</td><td class="px-4 py-2 text-xs">Personalized but no systematic methodology</td></tr>
+                            <tr class="bg-purple-50"><td class="px-4 py-2 font-medium text-purple-700">SRS Position</td><td class="px-4 py-2 text-purple-700">Evidence-Based Premium</td><td class="px-4 py-2 text-xs text-purple-700">AI-powered + human QC + documented methodology + auditable outputs</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-gray-600 mt-2"><strong>No competitor has published a systematic research protocol comparable to MDRS.</strong></p>
+            </div>
+
+            <!-- AI Compliance -->
+            <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-50 border-l-4 border-amber-600">
+                <h3 class="text-lg font-bold text-amber-900 mb-3">AI Compliance & Trust</h3>
+                <p class="text-sm text-gray-700 mb-3">The SEC and FTC are aggressively prosecuting exaggerated AI claims. Recent enforcement includes Amazon "Just Walk Out" ($2.5B FTC settlement, Sept 2025) and Global Predictions, Inc. ($400K SEC settlement, March 2024).</p>
+                <p class="text-sm font-bold text-amber-800 mb-2">SRS Compliance Leadership:</p>
+                <ul class="text-xs text-gray-700 space-y-1">
+                    <li><strong>Documented Methodology:</strong> MDRS SOP provides auditable evidence for all AI-assisted claims</li>
+                    <li><strong>Measurable Outputs:</strong> RAI scores provide quantifiable before/after metrics</li>
+                    <li><strong>Transparent Process:</strong> Clients understand exactly how AI enhances the process</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 11: EXECUTION CREDIBILITY — WHY THIS FOUNDER -->
+        <section id="founder" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">11. Execution Credibility</h1>
+            <p class="text-lg text-gray-600 mb-6">Why This Founder</p>
+
+            <!-- Intro -->
+            <div class="kpi-card bg-gradient-to-br from-purple-50 to-indigo-50 border-l-4 border-purple-600 mb-8">
+                <p class="text-sm text-gray-700">MDRS didn't emerge from a whiteboard. It emerged from fifteen years of cross-industry experience, a catalytic technical achievement, and formal methodological training.</p>
+            </div>
+
+            <!-- 1. Practitioner Pattern Recognition -->
+            <div class="mb-8">
+                <div class="kpi-card founder-card">
+                    <h3 class="text-xl font-bold text-purple-900 mb-4">1. Practitioner Pattern Recognition <span class="text-sm font-normal text-gray-600">(Where It Started)</span></h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-white rounded-lg border-l-4 border-blue-500">
+                            <p class="font-bold text-slate-900">SPX Transformer Solutions</p>
+                            <p class="text-sm text-gray-700">Million-dollar equipment failures traced to engineering knowledge that production teams couldn't access. Became the departmental knowledge-transfer resource—translating abstract specs into floor-level procedures. This was the first time the "knowledge-action gap" pattern became visible.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-lg border-l-4 border-red-500">
+                            <p class="font-bold text-slate-900">Personal Stakes</p>
+                            <p class="text-sm text-gray-700">After navigating complex medical challenges where standard protocols fell short, experienced firsthand the cost of systems that fail to apply their own research. This experience drove the decision to pursue formal training in research methodology—not as career advancement, but as survival skill.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. The Catalyst (Science Care) -->
+            <div class="mb-8">
+                <div class="kpi-card founder-card">
+                    <h3 class="text-xl font-bold text-purple-900 mb-4">2. The Catalyst <span class="text-sm font-normal text-gray-600">(Science Care)</span></h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <p class="font-bold text-red-800 mb-2">The Problem</p>
+                            <p class="text-sm text-gray-700">A well-funded internal team spent nearly two years trying to build an integrated analytics platform. They saw data silos; they could not see integration patterns.</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <p class="font-bold text-blue-800 mb-2">The Breakthrough</p>
+                            <p class="text-sm text-gray-700">Using the same fragmented data, built the SQRCT platform solo in roughly three months—early-generation AI orchestration applied where others relied on manual processes.</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <p class="font-bold text-green-800 mb-2">The Result</p>
+                            <ul class="text-sm text-gray-700 space-y-1 mt-2">
+                                <li>&#8226; <strong>~480× productivity improvement</strong> (40-hour workflows reduced to minutes)</li>
+                                <li>&#8226; <strong>1M+ records</strong> processed annually with zero data loss</li>
+                                <li>&#8226; <strong>2,000+ FDA 510(k) summaries</strong> analyzed for predictive demand models</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-amber-50 rounded-lg border-l-4 border-amber-500">
+                            <p class="font-bold text-amber-800 mb-2">The Realization</p>
+                            <p class="text-sm text-gray-700">This wasn't just a win. It was proof that practitioner intuition combined with AI orchestration could outperform well-resourced teams by orders of magnitude. That insight became the foundation for MDRS.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. The Framework (Academic Rigor) -->
+            <div class="mb-8">
+                <div class="kpi-card founder-card">
+                    <h3 class="text-xl font-bold text-purple-900 mb-4">3. The Framework <span class="text-sm font-normal text-gray-600">(Academic Rigor)</span></h3>
+                    <div class="p-4 bg-white rounded-lg border border-slate-200 mb-4">
+                        <p class="font-bold text-slate-900">Arizona State University — Biomedical Informatics</p>
+                        <p class="text-2xl font-bold text-green-600 mt-1 mb-2">4.0 GPA</p>
+                        <p class="text-sm text-gray-700">Science Care proved the combination worked. Biomedical Informatics provided the framework to systematize it: research methodology, statistical analysis, evidence evaluation, bias detection. This training transformed practitioner intuition into auditable protocol.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-lg">
+                        <p class="text-sm text-gray-700"><strong>The result:</strong> RAI, Truth Bridge, and MDRS aren't marketing terms. They're rigorous frameworks built on academic foundations—designed to detect p-hacking, publication bias, and statistical noise in ways that pure AI implementations cannot.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. THE SYNTHESIS -->
+            <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-100 border-l-4 border-amber-500">
+                <h3 class="text-xl font-bold text-amber-900 mb-4">4. The Synthesis</h3>
+                <p class="text-sm text-gray-700 mb-4">Each of these elements is individually learnable. Pattern recognition develops with experience. AI tools are accessible to anyone. Research methodology can be studied.</p>
+                <div class="p-4 bg-white rounded-lg mb-4">
+                    <p class="text-sm text-gray-700">But the <strong>intersection</strong>—someone who developed cross-industry pattern recognition, proved AI orchestration works through solo execution, and then formalized it with academic rigor—is rare. <strong>That intersection is the moat.</strong></p>
+                </div>
+                <p class="text-sm text-gray-700">You cannot hire for it or train for it—it had to be assembled over fifteen years across industries. <strong>MDRS is the methodology that emerged.</strong></p>
+            </div>
+        </section>
+
+        <!-- SECTION 12: DATA VALIDATION -->
+        <section id="validation" class="content-section">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">12. Data Validation & References</h1>
+            <p class="text-lg text-gray-600 mb-6">Forensic Integrity Standards</p>
+
+            <!-- Verification Philosophy -->
+            <div class="kpi-card bg-gradient-to-br from-slate-50 to-gray-100 border-l-4 border-slate-600 mb-8">
+                <h3 class="text-lg font-bold text-slate-900 mb-3">Data Integrity Philosophy</h3>
+                <p class="text-sm text-gray-700 mb-3">Every claim in this document has been categorized by verification status. We distinguish between externally verifiable facts, internal targets requiring future validation, and competitive claims that cannot be independently confirmed. This transparency is essential for investor due diligence.</p>
+                <div class="flex flex-wrap gap-4 mt-4 text-xs">
+                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full font-semibold">✓ VERIFIED = External source confirmed</span>
+                    <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full font-semibold">⚠ TARGET = Internal projection requiring validation</span>
+                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full font-semibold">✗ UNVERIFIABLE = Cannot independently confirm</span>
+                </div>
+            </div>
+
+            <!-- Comprehensive Claim-by-Claim Verification -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Claim-by-Claim Verification</h2>
+
+                <!-- Market & Industry Claims -->
+                <div class="kpi-card sda-card mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Market & Industry Claims</h3>
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Claim</th>
+                                <th class="px-4 py-2 text-center font-semibold">Status</th>
+                                <th class="px-4 py-2 text-left font-semibold">Verification Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2">94% employer-reported ATS filtering (middle-skill)</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">HBS/Accenture "Hidden Workers" (Fuller et al., 2021) - employer self-reporting</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">2.7M Phoenix MSA labor force</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">BLS Phoenix-Mesa-Chandler MSA data (2024)</td></tr>
+                            <tr><td class="px-4 py-2">~1% Phoenix job growth (2025 YTD)</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">BLS Current Employment Statistics (0.3-1.5% range YTD)</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">43% of HR using AI tools</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">SHRM 2025 State of the Workplace Report</td></tr>
+                            <tr><td class="px-4 py-2">$4.3B resume services market</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">IBISWorld Industry Report (2024)</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">20% CAGR AI resume builder segment</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">Market research reports (segment-specific, not overall market)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Financial Projections -->
+                <div class="kpi-card sda-card mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Financial & Business Projections</h3>
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Claim</th>
+                                <th class="px-4 py-2 text-center font-semibold">Status</th>
+                                <th class="px-4 py-2 text-left font-semibold">Verification Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2">LTV $1,200-1,500 per client</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-amber-100 text-amber-800 rounded text-xs font-semibold">⚠ TARGET</span></td><td class="px-4 py-2 text-xs">Internal projection based on service pricing model; requires 6-month validation</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">CAC &lt;$200 target</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-amber-100 text-amber-800 rounded text-xs font-semibold">⚠ TARGET</span></td><td class="px-4 py-2 text-xs">Benchmark target; Phase 1 validated demand; CAC optimization ongoing in Phase 2</td></tr>
+                            <tr><td class="px-4 py-2">$500K ARR Year 1 target</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-amber-100 text-amber-800 rounded text-xs font-semibold">⚠ TARGET</span></td><td class="px-4 py-2 text-xs">Conservative projection; Phase 1 complete; scaling execution in progress</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">2-hour RAI delivery time</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-amber-100 text-amber-800 rounded text-xs font-semibold">⚠ TARGET</span></td><td class="px-4 py-2 text-xs">Process target; actual times to be tracked and reported</td></tr>
+                            <tr><td class="px-4 py-2">90% AI accuracy target</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-amber-100 text-amber-800 rounded text-xs font-semibold">⚠ TARGET</span></td><td class="px-4 py-2 text-xs">Quality KPI; requires human review validation metrics</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">40% interview rate improvement</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-amber-100 text-amber-800 rounded text-xs font-semibold">⚠ TARGET</span></td><td class="px-4 py-2 text-xs">Outcome target; requires client follow-up tracking system</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tax & Legal Claims -->
+                <div class="kpi-card sda-card mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Tax & Legal Structure</h3>
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Claim</th>
+                                <th class="px-4 py-2 text-center font-semibold">Status</th>
+                                <th class="px-4 py-2 text-left font-semibold">Verification Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2">QSBS 100% exclusion at $15M cap</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">One Big Beautiful Bill Act (July 2025) - IRC §1202</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">Section 721 tax-deferred contribution</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">Standard IRC provision for LLC contributions</td></tr>
+                            <tr><td class="px-4 py-2">Arizona $0 state income tax</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">Arizona 2.5% flat tax applies; QSBS still beneficial at federal level</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">Series LLC structure flexibility</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">Delaware Series LLC provisions - DLLCA Title 6, Chapter 18</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Competitive Claims -->
+                <div class="kpi-card sda-card mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Competitive Intelligence</h3>
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Claim</th>
+                                <th class="px-4 py-2 text-center font-semibold">Status</th>
+                                <th class="px-4 py-2 text-left font-semibold">Verification Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2">Rezi $2.5M ARR claim</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-semibold">✗ UNVERIFIABLE</span></td><td class="px-4 py-2 text-xs">Private company; no public financial disclosures available</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">Teal $19M funding</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-semibold">✗ UNVERIFIABLE</span></td><td class="px-4 py-2 text-xs">Crunchbase data; funding details often incomplete/outdated</td></tr>
+                            <tr><td class="px-4 py-2">Jobscan market position</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-semibold">✗ UNVERIFIABLE</span></td><td class="px-4 py-2 text-xs">Private company; market share claims cannot be confirmed</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">TopResume pricing ($149-$349)</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">Public pricing on TopResume website (Nov 2025)</td></tr>
+                            <tr><td class="px-4 py-2">LinkedIn Premium Job pricing</td><td class="px-4 py-2 text-center"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-semibold">✓ VERIFIED</span></td><td class="px-4 py-2 text-xs">Public pricing on LinkedIn website</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MDRS Methodology References -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">MDRS Methodology References</h2>
+                <div class="kpi-card sda-card">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Methodology</th>
+                                <th class="px-4 py-2 text-left font-semibold">Reference</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2">Ensemble Modeling</td><td class="px-4 py-2 text-xs">Dietterich, T.G. (2000). Ensemble Methods in Machine Learning</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">Triangulation</td><td class="px-4 py-2 text-xs">Denzin, N.K. (1978). The Research Act</td></tr>
+                            <tr><td class="px-4 py-2">Systematic Reviews</td><td class="px-4 py-2 text-xs">Cochrane Handbook for Systematic Reviews of Interventions</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">Bayesian Epistemology</td><td class="px-4 py-2 text-xs">Howson & Urbach (2006). Scientific Reasoning: The Bayesian Approach</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Industry References -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Industry References</h2>
+                <div class="kpi-card sda-card">
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>Fuller, J.B., et al. (2021). <em>Hidden Workers: Untapped Talent.</em> Harvard Business School.</li>
+                        <li>Greater Phoenix Economic Council. (2024-2025). Phoenix economic data.</li>
+                        <li>SHRM. (2025). <em>2025 State of the Workplace.</em></li>
+                        <li>IBISWorld. (2024). <em>Resume Writing Services in the US.</em></li>
+                        <li>Grand View Research. (2024). <em>Career & Technical Education Market Report.</em></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Governance Framework -->
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Governance Framework</h2>
+                <p class="text-sm text-gray-600 mb-4">Structures ensuring accountability, transparency, and rigorous oversight</p>
+
+                <!-- Professional Advisory Team -->
+                <div class="kpi-card sda-card mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Professional Advisory Team</h3>
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Role</th>
+                                <th class="px-4 py-2 text-left font-semibold">Responsibility</th>
+                                <th class="px-4 py-2 text-left font-semibold">Engagement Model</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">CPA / Tax Advisor</td><td class="px-4 py-2 text-xs">QSBS compliance, entity structuring, tax optimization</td><td class="px-4 py-2 text-xs">Quarterly review + major decisions</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Business Attorney</td><td class="px-4 py-2 text-xs">Operating agreements, IP protection, investor documentation</td><td class="px-4 py-2 text-xs">As-needed + annual review</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Industry Mentor</td><td class="px-4 py-2 text-xs">Career services market expertise, strategic guidance</td><td class="px-4 py-2 text-xs">Monthly advisory calls</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Technical Advisor</td><td class="px-4 py-2 text-xs">AI/ML architecture, platform scaling decisions</td><td class="px-4 py-2 text-xs">Quarterly technical reviews</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Conservative Financial Modeling Philosophy -->
+                <div class="kpi-card sda-card mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Conservative Financial Modeling Philosophy</h3>
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Principle</th>
+                                <th class="px-4 py-2 text-left font-semibold">Implementation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2 font-medium">Revenue Recognition</td><td class="px-4 py-2 text-xs">Only count revenue when payment received; no "committed" or "pipeline" counting</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">Cost Assumptions</td><td class="px-4 py-2 text-xs">Assume costs will be 15-20% higher than projected; build contingency buffers</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Growth Projections</td><td class="px-4 py-2 text-xs">Use 50th percentile scenarios as baseline; hockey-stick projections require explicit justification</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2 font-medium">CAC/LTV Validation</td><td class="px-4 py-2 text-xs">All unit economics labeled as TARGET until validated with 30+ customer cohort</td></tr>
+                            <tr><td class="px-4 py-2 font-medium">Sensitivity Analysis</td><td class="px-4 py-2 text-xs">All projections include bear/base/bull scenarios with explicit assumptions</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Data Source Transparency -->
+                <div class="kpi-card sda-card mb-4">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Data Source Transparency</h3>
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-semibold">Data Category</th>
+                                <th class="px-4 py-2 text-left font-semibold">Source Type</th>
+                                <th class="px-4 py-2 text-left font-semibold">Refresh Cadence</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr><td class="px-4 py-2">Market Size / TAM</td><td class="px-4 py-2 text-xs">Industry reports (IBISWorld, Grand View Research)</td><td class="px-4 py-2 text-xs">Annual review</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">Regional Economics</td><td class="px-4 py-2 text-xs">Government sources (BLS, GPEC, W.P. Carey)</td><td class="px-4 py-2 text-xs">Quarterly</td></tr>
+                            <tr><td class="px-4 py-2">Competitive Pricing</td><td class="px-4 py-2 text-xs">Direct website scraping + dated screenshots</td><td class="px-4 py-2 text-xs">Monthly</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">AI/HR Trends</td><td class="px-4 py-2 text-xs">SHRM, Gartner, peer-reviewed research</td><td class="px-4 py-2 text-xs">Quarterly</td></tr>
+                            <tr><td class="px-4 py-2">Tax/Legal Framework</td><td class="px-4 py-2 text-xs">IRC code + professional advisor confirmation</td><td class="px-4 py-2 text-xs">At each major tax law change</td></tr>
+                            <tr class="bg-slate-50"><td class="px-4 py-2">Internal Metrics</td><td class="px-4 py-2 text-xs">Stripe, Google Analytics, CRM exports</td><td class="px-4 py-2 text-xs">Weekly dashboard updates</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Decision Documentation -->
+                <div class="kpi-card bg-gradient-to-br from-slate-50 to-gray-100 border-l-4 border-slate-600">
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">Decision Documentation Protocol</h3>
+                    <p class="text-sm text-gray-700 mb-3">All significant business decisions are documented with:</p>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• <strong>Context:</strong> What situation prompted the decision</li>
+                        <li>• <strong>Options Considered:</strong> Alternatives evaluated with pros/cons</li>
+                        <li>• <strong>Rationale:</strong> Why this option was selected</li>
+                        <li>• <strong>Expected Outcome:</strong> Success criteria and timeline</li>
+                        <li>• <strong>Reversal Conditions:</strong> What would trigger reconsidering this decision</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Projections Disclaimer -->
+            <div class="kpi-card bg-gradient-to-br from-amber-50 to-yellow-50 border-l-4 border-amber-600">
+                <h3 class="text-lg font-bold text-amber-900 mb-3">Projections Disclaimer</h3>
+                <p class="text-sm text-gray-700">Forward-looking statements in this document are clearly marked as projections. All financial projections are scenario-based with explicit assumptions documented. Actual results may vary based on market conditions, execution, and external factors.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Navigation handling
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+                const target = this.getAttribute('data-target');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
