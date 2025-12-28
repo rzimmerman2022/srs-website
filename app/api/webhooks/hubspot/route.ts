@@ -120,17 +120,34 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Process events asynchronously (respond quickly to HubSpot)
-  // In production, you'd want to queue these for background processing
-  processEventsAsync(events).catch((error) => {
-    console.error('[HubSpot Webhook] Async processing error:', error);
-  });
+  // Process events synchronously to prevent data loss in serverless environment
+  // IMPORTANT: Vercel serverless functions may freeze/kill execution after response
+  // We MUST await processing before returning, otherwise updates may be lost
+  //
+  // TODO: For high-volume webhooks, implement proper queue system:
+  // - Vercel Queue (https://vercel.com/docs/storage/vercel-queue)
+  // - Inngest (https://www.inngest.com/)
+  // - Or custom queue with Redis/BullMQ
+  try {
+    await processEventsAsync(events);
 
-  // Respond immediately to HubSpot
-  return NextResponse.json({
-    received: true,
-    eventCount: events.length,
-  });
+    return NextResponse.json({
+      received: true,
+      processed: true,
+      eventCount: events.length,
+    });
+  } catch (error) {
+    console.error('[HubSpot Webhook] Processing error:', error);
+
+    // Still return 200 to HubSpot so they don't retry
+    // Log error for investigation
+    return NextResponse.json({
+      received: true,
+      processed: false,
+      error: 'Processing failed - check logs',
+      eventCount: events.length,
+    });
+  }
 }
 
 // ============================================================================
