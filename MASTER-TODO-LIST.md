@@ -1,6 +1,6 @@
 # MASTER TODO LIST - Southwest Resume Services
 
-**Last Updated:** 2025-12-21
+**Last Updated:** 2025-12-27
 **Status:** Active
 **Purpose:** Single source of truth for all project tasks
 **Development Approach:** SDA SOP Multi-Agentic Workflow with Claude Code
@@ -20,7 +20,44 @@
 | Design Consistency (Session 6 Audit) | 0 | 47 | 47 |
 | **Design Consistency (Session 9 Audit)** | **0** | **260+** | **260+** |
 | Marketing Website Fixes (Session 4 Audit) | 0 | 52 | 52 |
-| **TOTAL** | **67** | **458+** | **525+** |
+| **Blog Typography (Session 2025-12-27)** | **8** | **2** | **10** |
+| **TOTAL** | **75** | **460+** | **535+** |
+
+### Session 2025-12-27: Blog Typography Fix (COMPLETE)
+
+**Model:** claude-opus-4-5-20251101
+**Branch:** staging/seo-content-drafts
+**QA Verification:** COVE - ALL CLAIMS VERIFIED
+**Handoff:** [HANDOFF_2025-12-27_18-41-02_Opus-4.5_blog-typography.md](docs/handoffs/HANDOFF_2025-12-27_18-41-02_Opus-4.5_blog-typography.md)
+
+#### Completed Tasks
+
+| ID | Task | Status | Completed By | Timestamp |
+|----|------|--------|--------------|-----------|
+| BLOG-01 | Install @tailwindcss/typography | DONE | opus-4.5/2025-12-27 | 2025-12-27T16:30 |
+| BLOG-02 | Create .blog-content CSS class | DONE | opus-4.5/2025-12-27 | 2025-12-27T17:00 |
+| BLOG-03 | Fix list bullet visibility | DONE | opus-4.5/2025-12-27 | 2025-12-27T17:15 |
+| BLOG-04 | Implement gold list markers | DONE | opus-4.5/2025-12-27 | 2025-12-27T17:20 |
+| BLOG-05 | Set 680px content width | DONE | opus-4.5/2025-12-27 | 2025-12-27T17:25 |
+| BLOG-06 | Add heading hierarchy styles | DONE | opus-4.5/2025-12-27 | 2025-12-27T17:30 |
+| BLOG-07 | Style callout/CTA boxes | DONE | opus-4.5/2025-12-27 | 2025-12-27T17:35 |
+| BLOG-08 | Add BlogTableOfContents component | DONE | opus-4.5/2025-12-27 | 2025-12-27T17:45 |
+
+#### Pending Tasks
+
+| ID | Task | Priority | Owner | Notes |
+|----|------|----------|-------|-------|
+| BLOG-09 | Add images to blog posts | HIGH | Ryan | See docs/BLOG-IMAGE-SOURCING-GUIDE.md |
+| BLOG-10 | Reading progress indicator | LOW | Future | Optional enhancement |
+
+#### Root Cause Analysis
+
+Blog posts appeared as "wall of text" because:
+1. **@tailwindcss/typography NOT installed** - All prose-* classes were no-ops
+2. **List bullets hidden** - Tailwind reset removed defaults, no explicit list-style
+3. **Content width too wide** - max-w-4xl (896px) exceeded 50-75 char/line optimal
+
+---
 
 ### ⚠️ Session 9 Design Audit - REVISED FINDINGS
 
