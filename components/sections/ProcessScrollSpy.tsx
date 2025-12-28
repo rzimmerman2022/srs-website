@@ -24,7 +24,7 @@ export default function ProcessScrollSpy({ steps }: ProcessScrollSpyProps) {
                             setActiveStep(step.number);
                         }
                     },
-                    { threshold: 0.5, rootMargin: '-40% 0px -40% 0px' }
+                    { threshold: 0.5, rootMargin: '-20% 0px -60% 0px' }
                 );
                 observer.observe(element);
                 observers.push(observer);
