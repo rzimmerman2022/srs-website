@@ -178,7 +178,7 @@ export default function AboutPage() {
               <h2 className="mb-6 text-center">Our Philosophy</h2>
               <div className="prose prose-lg max-w-none text-gray-700">
                 <p className="text-xl text-center font-semibold text-navy mb-8">
-                  &quot;A resume you can&apos;t own performs like fiction when it matters most.&quot;
+                  &quot;A resume you can&apos;t own performs like friction when it matters most.&quot;
                 </p>
                 <p>
                   This Client Truth Principle is the foundation of everything we do at
