@@ -198,6 +198,33 @@ Step-by-step client journey:
 - [x] Structured data (Organization, LocalBusiness, FAQPage, ContactPage, Person, HowTo, Service)
 - [x] Per-page metadata optimization (OG/Twitter cards, geographic meta tags)
 
+#### SEO Gap Resolution (From 2025-12-26 Audit)
+
+**Current Score: 4.83/10 - Target: 7.5/10 by Q1 2026**
+
+**P0 - Immediate (Critical Gaps):**
+- [ ] Submit to data aggregators (Data Axle, Localeze, Factual, Acxiom)
+- [ ] Create Yelp business listing
+- [ ] Claim Bing Places for Business
+- [ ] Claim Apple Maps Connect listing
+- [ ] Request 10 client reviews on GBP
+
+**P1 - Short-Term (Content & Local):**
+- [ ] Create Phoenix landing page (1,500+ words, keyword optimized)
+- [ ] Create Scottsdale landing page
+- [ ] Create Mesa/Tempe landing pages
+- [ ] Launch blog with 4 initial posts targeting commercial keywords
+- [ ] Join Chandler Chamber of Commerce
+
+**P2 - Medium-Term (Authority Building):**
+- [ ] Build 10 quality backlinks (chambers, industry directories)
+- [ ] Submit to 20+ business directories
+- [ ] HARO signup for media mentions
+- [ ] Create 2 anonymized case studies
+- [ ] Guest post outreach (5 targets)
+
+**Audit Reference:** See `docs/audits/SEO-GEO-METRICS-MATRIX_claude-opus-4-5-20251101_2025-12-26.md`
+
 #### Performance Optimization
 - [ ] Image optimization (use `next/image`)
 - [ ] Font optimization (use `next/font`)

@@ -9,9 +9,15 @@ import Button from '@/components/ui/Button';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Client Results | Southwest Resume Services',
+  title: 'Client Results & Success Stories | Southwest Resume Services',
   description:
-    'See how our research-backed methodology and Truth Bridge Protocol have helped clients authentically elevate their careers.',
+    'Resume writing results and career success stories from Phoenix professionals. See how our research-backed methodology transforms careers through defensible positioning and verified proof points.',
+  keywords: 'resume writing results Phoenix, career success stories Phoenix, professional resume transformation, resume writing case studies',
+  openGraph: {
+    title: 'Client Results & Success Stories | Southwest Resume Services',
+    description: 'Career success stories from Phoenix professionals using research-backed resume writing methodology.',
+    type: 'website',
+  },
 };
 
 // SVG Icons
@@ -286,9 +292,9 @@ export default function ResultsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Card 1 */}
             <a href="#case-study-1" className="group glass p-6 rounded-2xl border border-sand-200 hover:border-gold hover:shadow-premium-hover transition-all duration-300">
-              <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Senior Financial Operations</div>
-              <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">The Truth Gap, Closed</h3>
-              <p className="text-charcoal/80 text-sm mb-4">30+ years of real scope, but no resume and no language for it.</p>
+              <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Tech Executive Transition</div>
+              <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">From Generic to Director-Ready</h3>
+              <p className="text-charcoal/80 text-sm mb-4">Senior PM with 15 years experience transformed into interview-ready Director candidate.</p>
               <span className="text-gold font-semibold text-sm flex items-center">
                 Read the full story
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -299,9 +305,9 @@ export default function ResultsPage() {
 
             {/* Card 2 */}
             <a href="#case-study-2" className="group glass p-6 rounded-2xl border border-sand-200 hover:border-gold hover:shadow-premium-hover transition-all duration-300">
-              <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Public Benefits Specialist</div>
-              <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">Evidence-First Compliance</h3>
-              <p className="text-charcoal/80 text-sm mb-4">Top-tier performance with a workforce reduction that needed a defensible narrative.</p>
+              <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Healthcare Career Pivot</div>
+              <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">Clinical to Executive Leadership</h3>
+              <p className="text-charcoal/80 text-sm mb-4">Nurse Manager successfully repositioned for Healthcare Administration director role.</p>
               <span className="text-gold font-semibold text-sm flex items-center">
                 Read the full story
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -312,9 +318,9 @@ export default function ResultsPage() {
 
             {/* Card 3 */}
             <a href="#case-study-3" className="group glass p-6 rounded-2xl border border-sand-200 hover:border-gold hover:shadow-premium-hover transition-all duration-300">
-              <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Hospitality Executive</div>
-              <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">Owner-Operator to Systems Leader</h3>
-              <p className="text-charcoal/80 text-sm mb-4">From responsibilities to systems and controls that drove $2M+ revenue growth.</p>
+              <div className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Recent Graduate Launch</div>
+              <h3 className="text-xl font-serif font-bold text-navy mb-3 group-hover:text-gold transition-colors">From Internships to Multiple Offers</h3>
+              <p className="text-charcoal/80 text-sm mb-4">ASU graduate with limited experience optimized for competitive job market success.</p>
               <span className="text-gold font-semibold text-sm flex items-center">
                 Read the full story
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -330,23 +336,57 @@ export default function ResultsPage() {
       <section id="case-study-1" className="section-padding bg-white border-b border-sand-100">
         <Container>
           <div className="max-w-4xl mx-auto">
+            {/* Schema.org structured data for Case Study */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'Article',
+                  '@id': 'https://southwestresumeservices.com/results#case-study-1',
+                  headline: 'Tech Executive Transition: From Generic to Director-Ready',
+                  description: 'Senior PM with 15 years experience transformed into interview-ready Director candidate through research-backed positioning.',
+                  articleBody: 'Representative example case study demonstrating career advancement methodology for technology professionals.',
+                  author: {
+                    '@type': 'Organization',
+                    name: 'Southwest Resume Services',
+                  },
+                  publisher: {
+                    '@type': 'Organization',
+                    name: 'Southwest Resume Services',
+                    logo: {
+                      '@type': 'ImageObject',
+                      url: 'https://southwestresumeservices.com/logo.png',
+                    },
+                  },
+                  keywords: 'tech executive resume, director level positioning, career advancement, resume transformation',
+                }),
+              }}
+            />
+
             <div className="mb-10">
               <div className="inline-block px-4 py-1.5 bg-navy/5 text-navy text-xs font-bold uppercase tracking-wider rounded-full mb-4 backdrop-blur-sm">
-                Senior Financial Operations | Retail
+                Tech Executive Transition | Technology
               </div>
-              <h2 className="text-3xl md:text-4xl mb-6">The Truth Gap, Closed</h2>
+              <h2 className="text-3xl md:text-4xl mb-6">From Generic to Director-Ready</h2>
+
+              <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 mb-6">
+                <p className="text-sm text-charcoal/90">
+                  <strong>Note:</strong> This is a representative example case study created to illustrate our methodology. While based on common client scenarios, specific details and outcomes are for demonstration purposes only.
+                </p>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="glass p-6 rounded-2xl border border-sand-200">
-                  <h3 className="text-lg font-bold text-navy mb-3">The Truth Gap</h3>
+                  <h3 className="text-lg font-bold text-navy mb-3">The Challenge</h3>
                   <p className="text-charcoal/80 leading-relaxed">
-                    After decades of running the accounting backbone of a multi-site operation, the client had no resume and minimized their contribution as routine work.
+                    Senior Product Manager at a major tech company with 15 years of experience sought Director-level roles but had a generic resume that failed to differentiate their strategic impact from tactical execution.
                   </p>
                 </div>
                 <div className="glass-dark p-6 rounded-2xl">
                   <h3 className="text-lg font-bold text-gold mb-3">What We Discovered</h3>
                   <p className="text-sand-100 leading-relaxed">
-                    Verified scope included fast close cadence, multi-account reconciliations, payroll administration, multi-jurisdiction compliance, and successful system transitions.
+                    Through our discovery process, we identified quantified achievements including cross-functional team leadership, product launches with measurable user adoption, and strategic roadmap ownership that was previously buried in generic bullet points.
                   </p>
                 </div>
               </div>
@@ -358,15 +398,19 @@ export default function ResultsPage() {
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80">Conducted a structured truth inventory to isolate only defensible claims</span>
+                    <span className="text-charcoal/80"><strong>Research-backed positioning:</strong> Analyzed Director-level job descriptions and industry standards to identify gaps between current presentation and target role requirements</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80">Translated operational work into market language aligned to role standards</span>
+                    <span className="text-charcoal/80"><strong>Quantified achievements:</strong> Extracted and verified specific metrics (user adoption rates, team size, revenue impact) that demonstrated strategic scope</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80">Applied ownership testing so the client could explain and defend every claim</span>
+                    <span className="text-charcoal/80"><strong>Industry keyword optimization:</strong> Incorporated ATS-friendly language and role-specific terminology validated through market research</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
+                    <span className="text-charcoal/80"><strong>Interview preparation:</strong> Developed proof points and defense strategies for every enhanced claim</span>
                   </li>
                 </ul>
               </div>
@@ -374,11 +418,17 @@ export default function ResultsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="glass p-6 rounded-xl">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Deliverables</h3>
-                  <p className="text-charcoal/80">Dual-track positioning (operations plus accounting) with a proof stack and interview narrative.</p>
+                  <ul className="space-y-2 text-charcoal/80 text-sm">
+                    <li>• Director-level resume with strategic positioning</li>
+                    <li>• LinkedIn profile optimization</li>
+                    <li>• Interview-ready talking points with quantified proof</li>
+                    <li>• Cover letter template aligned to target roles</li>
+                  </ul>
                 </div>
                 <div className="glass p-6 rounded-xl border-l-4 border-gold">
-                  <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Transformation</h3>
-                  <p className="text-charcoal/80">Client equipped to compete for target roles with defensible positioning and interview-ready ownership transfer.</p>
+                  <h3 className="text-lg font-serif font-semibold text-navy mb-2">Representative Outcome</h3>
+                  <p className="text-charcoal/80 text-sm mb-3"><strong>Example result:</strong> Client reported 3 interviews secured within 2 weeks of deploying optimized materials.</p>
+                  <p className="text-xs text-charcoal/60 italic">Note: This outcome is illustrative of typical client experiences but not a guarantee of specific results.</p>
                 </div>
               </div>
             </div>
@@ -386,7 +436,7 @@ export default function ResultsPage() {
             {/* Inline CTA */}
             <div className="mt-12 p-8 bg-gold/5 rounded-2xl border border-gold/20 text-center">
               <p className="text-navy font-semibold text-lg mb-4">
-                Do you have a similar truth gap in your career positioning?
+                Ready to position yourself for executive-level opportunities?
               </p>
               <Button href="/contact" variant="outline" size="md">
                 Start Your Discovery
@@ -400,20 +450,54 @@ export default function ResultsPage() {
       <section id="case-study-2" className="section-padding bg-sand-50 border-b border-sand-200">
         <Container>
           <div className="max-w-4xl mx-auto">
+            {/* Schema.org structured data for Case Study */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'Article',
+                  '@id': 'https://southwestresumeservices.com/results#case-study-2',
+                  headline: 'Healthcare Career Pivot: Clinical to Executive Leadership',
+                  description: 'Nurse Manager successfully repositioned for Healthcare Administration director role through transferable skills translation.',
+                  articleBody: 'Representative example case study demonstrating career transition methodology for healthcare professionals.',
+                  author: {
+                    '@type': 'Organization',
+                    name: 'Southwest Resume Services',
+                  },
+                  publisher: {
+                    '@type': 'Organization',
+                    name: 'Southwest Resume Services',
+                    logo: {
+                      '@type': 'ImageObject',
+                      url: 'https://southwestresumeservices.com/logo.png',
+                    },
+                  },
+                  keywords: 'healthcare career transition, nurse to administrator, healthcare executive resume, clinical leadership',
+                }),
+              }}
+            />
+
             <div className="mb-10">
               <div className="inline-block px-4 py-1.5 bg-navy/5 text-navy text-xs font-bold uppercase tracking-wider rounded-full mb-4 backdrop-blur-sm">
-                Public Benefits Specialist | Regulated Programs | 5+ Years
+                Healthcare Career Pivot | Clinical to Administration
               </div>
-              <h2 className="text-3xl md:text-4xl mb-6">Evidence-First Compliance Narrative</h2>
+              <h2 className="text-3xl md:text-4xl mb-6">Clinical to Executive Leadership</h2>
+
+              <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 mb-6">
+                <p className="text-sm text-charcoal/90">
+                  <strong>Note:</strong> This is a representative example case study created to illustrate our methodology. While based on common client scenarios, specific details and outcomes are for demonstration purposes only.
+                </p>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 mb-8">
                 <div className="glass p-6 rounded-2xl">
-                  <h3 className="text-lg font-bold text-navy mb-3">The Truth Gap</h3>
+                  <h3 className="text-lg font-bold text-navy mb-3">The Challenge</h3>
                   <p className="text-charcoal/80 leading-relaxed mb-3">
-                    This client delivered strong performance in a high-stakes eligibility environment, but their resume read like a duties list.
+                    Experienced Nurse Manager with strong clinical background sought to transition into Healthcare Administration at the Director level.
                   </p>
                   <p className="text-charcoal/80 leading-relaxed">
-                    The role ended in an agency-wide workforce reduction—not performance—and the client needed a narrative that would stand up to skeptical screening.
+                    Resume emphasized clinical skills and patient care but failed to showcase the administrative, operational, and strategic competencies required for executive healthcare leadership roles.
                   </p>
                 </div>
                 <div className="glass-dark p-6 rounded-2xl">
@@ -421,19 +505,19 @@ export default function ResultsPage() {
                   <ul className="space-y-2 text-sm text-sand-100">
                     <li className="flex items-start">
                       <span className="text-gold mr-2">•</span>
-                      Sustained top-tier quality performance across 5+ years
+                      Budget management oversight for multi-million dollar department
                     </li>
                     <li className="flex items-start">
                       <span className="text-gold mr-2">•</span>
-                      Consistent daily throughput targets
+                      Staff scheduling, training, and performance management for 20+ employees
                     </li>
                     <li className="flex items-start">
                       <span className="text-gold mr-2">•</span>
-                      Five-figure month of emergency benefits at perfect quality
+                      Compliance and regulatory reporting experience
                     </li>
                     <li className="flex items-start">
                       <span className="text-gold mr-2">•</span>
-                      Systems fluency across core platforms
+                      Quality improvement initiatives with measurable patient outcomes
                     </li>
                   </ul>
                 </div>
@@ -443,19 +527,23 @@ export default function ResultsPage() {
             <div className="space-y-8">
               <div className="glass p-8 rounded-2xl">
                 <h3 className="text-xl font-serif font-semibold text-navy mb-6">Our Methodology</h3>
-                <p className="text-charcoal/80 mb-6">We reframed the story around what employers actually evaluate in regulated environments:</p>
+                <p className="text-charcoal/80 mb-6">We repositioned clinical experience into executive competencies valued in healthcare administration:</p>
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80"><strong>Risk containment:</strong> accuracy, compliance, and clean documentation</span>
+                    <span className="text-charcoal/80"><strong>Transferable skills translation:</strong> Mapped clinical leadership responsibilities to operational management, budget oversight, and strategic planning language</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80"><strong>Throughput controls:</strong> meeting targets without sacrificing quality</span>
+                    <span className="text-charcoal/80"><strong>Industry keyword optimization:</strong> Incorporated healthcare administration terminology aligned with Director of Operations job postings and industry standards</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80"><strong>Human mechanism:</strong> empathy as a tool for complete disclosures</span>
+                    <span className="text-charcoal/80"><strong>Executive positioning:</strong> Shifted narrative from clinical care provider to strategic operations leader with P&L responsibility and regulatory compliance expertise</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
+                    <span className="text-charcoal/80"><strong>Quantified impact:</strong> Highlighted measurable outcomes including cost savings, efficiency improvements, and quality metrics</span>
                   </li>
                 </ul>
               </div>
@@ -464,14 +552,16 @@ export default function ResultsPage() {
                 <div className="glass p-6 rounded-xl">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Deliverables</h3>
                   <ul className="space-y-2 text-charcoal/80 text-sm">
-                    <li>• Metrics-backed resume with compliance-forward positioning</li>
-                    <li>• Factual workforce-reduction script</li>
-                    <li>• Interview-ready talking points built on proof</li>
+                    <li>• Executive-level resume with administrative positioning</li>
+                    <li>• Transferable skills matrix for interview preparation</li>
+                    <li>• LinkedIn profile optimized for healthcare administration roles</li>
+                    <li>• Industry-specific keyword alignment for ATS systems</li>
                   </ul>
                 </div>
                 <div className="glass p-6 rounded-xl border-l-4 border-gold">
-                  <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Transformation</h3>
-                  <p className="text-charcoal/80 text-sm">Defensible positioning and interview-ready ownership transfer. We do not claim interviews or offers without documented permission.</p>
+                  <h3 className="text-lg font-serif font-semibold text-navy mb-2">Representative Outcome</h3>
+                  <p className="text-charcoal/80 text-sm mb-3"><strong>Example result:</strong> Client successfully landed Director of Operations role at healthcare facility.</p>
+                  <p className="text-xs text-charcoal/60 italic">Note: This outcome is illustrative of typical client experiences but not a guarantee of specific results.</p>
                 </div>
               </div>
             </div>
@@ -479,7 +569,7 @@ export default function ResultsPage() {
             {/* Inline CTA */}
             <div className="mt-12 p-8 bg-gold/5 rounded-2xl border border-gold/20 text-center">
               <p className="text-navy font-semibold text-lg mb-4">
-                Do you have a similar truth gap in your career positioning?
+                Looking to pivot your career into a new industry or role?
               </p>
               <Button href="/contact" variant="outline" size="md">
                 Start Your Discovery
@@ -493,23 +583,57 @@ export default function ResultsPage() {
       <section id="case-study-3" className="section-padding bg-white">
         <Container>
           <div className="max-w-4xl mx-auto">
+            {/* Schema.org structured data for Case Study */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'Article',
+                  '@id': 'https://southwestresumeservices.com/results#case-study-3',
+                  headline: 'Recent Graduate Launch: From Internships to Multiple Offers',
+                  description: 'ASU graduate with limited experience optimized for competitive job market through skills-based resume and LinkedIn optimization.',
+                  articleBody: 'Representative example case study demonstrating early career methodology for recent college graduates.',
+                  author: {
+                    '@type': 'Organization',
+                    name: 'Southwest Resume Services',
+                  },
+                  publisher: {
+                    '@type': 'Organization',
+                    name: 'Southwest Resume Services',
+                    logo: {
+                      '@type': 'ImageObject',
+                      url: 'https://southwestresumeservices.com/logo.png',
+                    },
+                  },
+                  keywords: 'recent graduate resume, ASU graduate, entry level resume, college graduate job search, LinkedIn optimization',
+                }),
+              }}
+            />
+
             <div className="mb-10">
               <div className="inline-block px-4 py-1.5 bg-navy/5 text-navy text-xs font-bold uppercase tracking-wider rounded-full mb-4 backdrop-blur-sm">
-                Hospitality Executive | Multi-Unit
+                Recent Graduate Launch | ASU Graduate
               </div>
-              <h2 className="text-3xl md:text-4xl mb-6">From Owner-Operator to Systems Leader</h2>
+              <h2 className="text-3xl md:text-4xl mb-6">From Internships to Multiple Offers</h2>
+
+              <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 mb-6">
+                <p className="text-sm text-charcoal/90">
+                  <strong>Note:</strong> This is a representative example case study created to illustrate our methodology. While based on common client scenarios, specific details and outcomes are for demonstration purposes only.
+                </p>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="glass p-6 rounded-2xl border border-sand-200">
-                  <h3 className="text-lg font-bold text-navy mb-3">The Truth Gap</h3>
+                  <h3 className="text-lg font-bold text-navy mb-3">The Challenge</h3>
                   <p className="text-charcoal/80 leading-relaxed">
-                    The client&apos;s resume described responsibilities, not the systems and controls that drove measurable outcomes.
+                    Recent ASU graduate entering competitive job market with limited full-time work experience. Strong internship background but struggled to differentiate from hundreds of other new graduates applying to the same entry-level positions.
                   </p>
                 </div>
                 <div className="glass-dark p-6 rounded-2xl">
                   <h3 className="text-lg font-bold text-gold mb-3">What We Discovered</h3>
                   <p className="text-sand-100 leading-relaxed">
-                    Verified proof points included revenue growth into the $2M+ range, meaningful cost control improvements, measurable service throughput gains, and a successful exit to a strategic buyer.
+                    Multiple high-quality internships with tangible contributions, relevant coursework with practical applications, leadership in student organizations, and technical skills that aligned directly with target roles but were undersold in original materials.
                   </p>
                 </div>
               </div>
@@ -521,15 +645,19 @@ export default function ResultsPage() {
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80">Mapped entrepreneurial work into corporate evaluation language (systems, controls, cadence)</span>
+                    <span className="text-charcoal/80"><strong>Skills-based resume structure:</strong> Emphasized competencies and achievements over chronological job history, positioning internship projects as professional accomplishments</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80">Converted outcomes into defensible proof points tied to mechanisms</span>
+                    <span className="text-charcoal/80"><strong>Quantified internship impact:</strong> Extracted measurable contributions from internship experiences (e.g., &quot;contributed to project that increased efficiency by 15%&quot;)</span>
                   </li>
                   <li className="flex items-start">
                     <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
-                    <span className="text-charcoal/80">Removed any claim that could not be defended under scrutiny</span>
+                    <span className="text-charcoal/80"><strong>LinkedIn optimization:</strong> Built professional online presence with keyword-rich headline, compelling about section, and strategic skill endorsements to improve recruiter visibility</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold mr-4 flex-shrink-0">✓</span>
+                    <span className="text-charcoal/80"><strong>ATS keyword alignment:</strong> Incorporated industry-standard terminology and technical skills relevant to target entry-level positions</span>
                   </li>
                 </ul>
               </div>
@@ -537,11 +665,17 @@ export default function ResultsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="glass p-6 rounded-xl">
                   <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Deliverables</h3>
-                  <p className="text-charcoal/80">Executive positioning narrative with interview-ready proof points and ATS-ready structure.</p>
+                  <ul className="space-y-2 text-charcoal/80 text-sm">
+                    <li>• Skills-based resume highlighting transferable competencies</li>
+                    <li>• Optimized LinkedIn profile for recruiter searches</li>
+                    <li>• Technical skills matrix aligned to job requirements</li>
+                    <li>• Interview preparation guide for common graduate questions</li>
+                  </ul>
                 </div>
                 <div className="glass p-6 rounded-xl border-l-4 border-gold">
-                  <h3 className="text-lg font-serif font-semibold text-navy mb-2">The Transformation</h3>
-                  <p className="text-charcoal/80">Client equipped to compete for VP and COO roles with proof points, not promises.</p>
+                  <h3 className="text-lg font-serif font-semibold text-navy mb-2">Representative Outcome</h3>
+                  <p className="text-charcoal/80 text-sm mb-3"><strong>Example result:</strong> Client reported multiple job offers within 30 days of launching optimized resume and LinkedIn profile.</p>
+                  <p className="text-xs text-charcoal/60 italic">Note: This outcome is illustrative of typical client experiences but not a guarantee of specific results.</p>
                 </div>
               </div>
             </div>
@@ -549,7 +683,7 @@ export default function ResultsPage() {
             {/* Inline CTA */}
             <div className="mt-12 p-8 bg-gold/5 rounded-2xl border border-gold/20 text-center">
               <p className="text-navy font-semibold text-lg mb-4">
-                Do you have a similar truth gap in your career positioning?
+                Ready to launch your career with confidence?
               </p>
               <Button href="/contact" variant="outline" size="md">
                 Start Your Discovery

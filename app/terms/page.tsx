@@ -5,6 +5,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Service | Southwest Resume Services',
   description: 'Terms of Service for Southwest Resume Services. Read our terms and conditions for using our career services.',
+  alternates: {
+    canonical: 'https://southwestresumes.com/terms',
+  },
 };
 
 export default function TermsPage() {

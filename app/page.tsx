@@ -180,10 +180,10 @@ export default function HomePage() {
 
       {/* 1. Hero (value prop + CTA) */}
       <Hero
-        title="Your Career, Elevated."
-        subtitle="Southwest Resume Services - Phoenix, Arizona"
-        description="Professional resume writing and career coaching serving Phoenix, Scottsdale, Mesa, and the greater Arizona area. Research-backed career documents that reveal your true professional value."
-        primaryCTA={{ text: 'Get Started', href: '/contact' }}
+        title="Your Value. Finally Articulated."
+        subtitle="Southwest Resume Services - Human-led. Research-backed. Built with you, not generated for you."
+        description="Most professionals undersell themselves—not from modesty, but proximity. Years of expertise become invisible when you're the one living it. We bring the outside perspective and research methodology. You bring the truth. Together, we build a narrative you can defend in any interview—and get you in the room to prove it."
+        primaryCTA={{ text: 'Book Your Discovery Call', href: '/contact' }}
         secondaryCTA={{ text: 'Our Process', href: '/process' }}
       />
 
@@ -474,7 +474,7 @@ export default function HomePage() {
             <h2 className="mb-8 text-white">The Client Truth Principle</h2>
             <div className="space-y-6 text-sand-100 leading-relaxed text-lg">
               <p className="font-serif text-2xl text-gold italic">
-                &quot;A resume you can&apos;t own performs like fiction when it matters most.&quot;
+                &quot;A resume you can&apos;t own performs like friction when it matters most.&quot;
               </p>
               <p>
                 This is the Client Truth Principle—the foundation of everything we create.
