@@ -30,6 +30,8 @@
 | Fix ProcessScrollSpy counter stuck at 01/10 | Claude Sonnet 4.5 | 2025-12-28 | 04:15 | ✅ Complete |
 | Fix RLS on clients table (PUBLIC PII EXPOSURE) | Claude Sonnet 4.5 | 2025-12-28 | 04:30 | ✅ Complete |
 | Fix RLS on questionnaire_access_tokens table (PUBLIC TOKEN EXPOSURE) | Claude Sonnet 4.5 | 2025-12-28 | 04:30 | ✅ Complete |
+| Fix HubSpot name corruption in bi-directional sync | Claude Sonnet 4.5 | 2025-12-28 | 04:45 | ✅ Complete |
+| Fix webhook processing dropped in serverless | Claude Sonnet 4.5 | 2025-12-28 | 04:50 | ✅ Complete |
 | Update OpenGraph image with clean logo | Claude Sonnet 4.5 | 2025-12-27 | 23:15 | ✅ Complete |
 | Add canonical URLs to Privacy page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
 | Add canonical URLs to Terms page | Claude Sonnet 4.5 | 2025-12-27 | 21:30 | ✅ Complete |
@@ -95,8 +97,8 @@
 | ~~**#1 CRITICAL:** Fix ProcessScrollSpy counter stuck at 01/10~~ | ✅ FIXED | 20 min | None | ~~Methodology page scroll counter broken~~ FIXED: Updated rootMargin to -20% 0px -60% 0px (commit 5dd668f) |
 | ~~**#2 CRITICAL:** Fix RLS on `clients` table~~ | ✅ FIXED | 30 min | None | ~~PUBLIC PII EXPOSURE~~ FIXED: Service role only policy, REVOKE anon access (commit d6db6e0) |
 | ~~**#3 CRITICAL:** Fix RLS on `questionnaire_access_tokens` table~~ | ✅ FIXED | 30 min | None | ~~PUBLIC TOKEN EXPOSURE~~ FIXED: Service role only policy, no anon access (commit d6db6e0) |
-| **#4 HIGH:** Fix HubSpot name corruption in sync-service.ts:234 | HIGH | 15 min | None | firstname/lastname updates overwrite full_name with partial data (loses last/first name) |
-| **#5 HIGH:** Fix webhook processing dropped in serverless (route.ts:123) | HIGH | 45 min | None | Async processing may be killed after response, losing HubSpot updates (needs queue) |
+| ~~**#4 HIGH:** Fix HubSpot name corruption in sync-service.ts:234~~ | ✅ FIXED | 15 min | None | ~~firstname/lastname corruption~~ FIXED: Fetch full contact, combine names properly (commit 7aad2aa) |
+| ~~**#5 HIGH:** Fix webhook processing dropped in serverless (route.ts:123)~~ | ✅ FIXED | 45 min | None | ~~Async processing killed after response~~ FIXED: Await processing before return (commit 5772d25) |
 | **#6 MEDIUM:** Remove hard-coded questionnaire ID (page.tsx:86) | MEDIUM | 20 min | None | All new clients default to 'jackie-deleon-dec-2025' questionnaire |
 | **#7 MEDIUM:** Fix migration runner (run-migrations.js:48) | MEDIUM | 30 min | None | Logs "Using direct approach" but never executes SQL statements |
 | **#8 MEDIUM:** Fix UUID extension mismatch in migrations | MEDIUM | 15 min | None | uuid-ossp vs gen_random_uuid() inconsistency can fail on clean DBs |
