@@ -46,7 +46,7 @@ const faqItems: FAQItem[] = [
   {
     question: 'What is the Client Truth Principle?',
     answer:
-      '"A resume you can\'t own performs like fiction when it matters most." This foundational principle means we don\'t just create technically accurate documents. We ensure every enhancement feels authentically true to you and that you can defend it confidently when it matters most—in an interview. Our role is straightforward: we bring outside perspective and research methodology. You bring lived experience. Together, we build a narrative you genuinely own.',
+      '"A resume you can\'t own performs like friction when it matters most." This foundational principle means we don\'t just create technically accurate documents. We ensure every enhancement feels authentically true to you and that you can defend it confidently when it matters most—in an interview. Our role is straightforward: we bring outside perspective and research methodology. You bring lived experience. Together, we build a narrative you genuinely own.',
   },
   {
     question: 'How long does the process take?',

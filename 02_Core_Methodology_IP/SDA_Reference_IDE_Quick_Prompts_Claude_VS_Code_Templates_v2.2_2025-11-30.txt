@@ -1,0 +1,359 @@
+
+SparkData IDE Quick Prompts
+One-Page Reference for Cursor / VS Code / Copilot Chat
+Version:
+ 2.2
+Last Updated:
+ December 1, 2025
+Usage:
+ Copy-paste these prompts into your IDE's AI chat panel
+Compliance:
+ AICPA QM | EU AI Act | PCAOB | Agentic AI Patterns
+
+  🚀  HOW TO START YOUR DAY (5-Step Daily Workflow)
+1. Pick tier (T0–T3) → paste Risk Tier Declaration
+2. Run Builder prompt (#1)
+3. New chat → Reviewer / Verification / lenses per tier
+4. Save outputs to the right evidence files
+5. Update DECISION_*.json and push
+
+  🎯  SHORTCUTS BY RISK TIER
+Tier
+Required Prompts / Shortcuts
+T0
+"Build this" only (review optional)
+T1
+"Build this" + "Review this" (new chat!)
+T2
+"Build this" + "Review this" + "Verify T2/T3" + at least 1 lens
+For pipelines: "Data quality" lens required
+T3
+All of the above + "Security check" + "Perf check" + "Maintain check" + "Resilience check"
++ "Compare models" + "Challenge this" (if agreement >80%)
+
+  📋  WHAT TO PASTE (AND WHAT NOT TO)
+❌  DON'T PASTE
+✅  DO PASTE
+	•	Prior chat logs
+	•	"Here's what I did" prose from Builder
+	•	Screenshots of reasoning
+	•	Summaries from other agents
+	•	Verbal claims about test results
+	•	Requirement / spec / ticket text
+	•	Actual diff or file contents
+	•	Test output from terminal
+	•	Lint / type-check results
+	•	Coverage report numbers
+⚠️ Why this matters: Reviewers who see Builder explanations will just summarize them instead of independently verifying the code. This defeats the entire purpose of multi-agent review.
+
+  ⚠️  BEFORE USING ANY PROMPT
+Step 1: Determine Risk Tier (T0/T1/T2/T3) per SOP §1.2. If unsure, choose the higher tier.
+Step 2: Paste the Risk Tier Declaration so the agent sees context:
+## Risk Tier Declaration
+**Tier:** [T0 | T1 | T2 | T3]
+**Justification:** [Why this tier]
+**Required Controls:** [List from §1.2.2]
+Step 3: Use ONLY the prompts below for T1-T3 changes. Free-form prompts are NOT allowed.
+
+  🚫  HARD RULE: FRESH CHAT SEPARATION
+⛔ If a chat has ever used Builder Mode (#1) in it, you may NOT use Reviewer (#2), Verification (#3), or any Lens prompts (#4-10) in the same chat. Start a new chat.
+This is non-negotiable. Mixing roles in the same chat defeats the entire purpose of independent verification.
+Recommended Convention: Name your chat windows with role prefixes:
+	•	[B] Feature X implementation
+	•	[R] Feature X review
+	•	[V] Feature X verification
+
+  🏢  APPROVED MODEL FAMILIES FOR T3
+For T3 (Critical) work, use at least 2 distinct model families across your agents:
+Family
+Models
+Recommended For
+Anthropic
+Claude Opus 4, Claude Sonnet 4, Claude Haiku 4
+Planning, Code Review, Security Review
+OpenAI
+GPT-5 Codex, GPT-4o, o1-pro
+Implementation, Performance Review
+Google
+Gemini 2.0 Pro, Gemini 2.0 Ultra
+Alternative perspective, Resilience Review
+Meta
+Llama 3.1 405B (if self-hosted)
+Secondary verification
+T3 Minimum Requirement: Builder and at least one Verification/Lens agent MUST use different model families.
+
+  🤖  INLINE AI (AUTOCOMPLETE) POLICY
+For T2/T3 work, any AI-generated code (including inline suggestions from Copilot, Cursor autocomplete, etc.) must still be put through:
+	•	A Builder Mode pass over the final diff, AND
+	•	The appropriate Reviewer / Verification / Lens prompts before merge
+Autocomplete is allowed, but it never bypasses the multi-agent quality gate.
+
+  🔧  1. BUILDER MODE (Implement Change + Tests)
+	•	When to use: Any time you're changing code (T0-T3)
+	•	Risk Tier: All tiers
+	•	Inputs needed: Tier declaration + Spec/ticket + selected file(s)
+Prompt:
+You are the **Builder Agent** for SparkData Analytics.
+ 
+## METADATA (fill in):
+- Model: [your model name/version]
+- Date/Time (UTC): [current timestamp]
+- Risk Tier: [T0 | T1 | T2 | T3]
+- Session ID: [unique identifier]
+ 
+## RISK TIER DECLARATION:
+[PASTE: tier declaration from above]
+ 
+## SPEC (requirement):
+[PASTE: ticket / acceptance criteria / 2-10 lines max]
+ 
+## CODE CONTEXT:
+[The IDE already shows the file or diff]
+ 
+## Your Tasks:
+1. Implement the **minimal** code changes needed to satisfy the SPEC
+2. Add or update tests to cover:
+   - Main happy paths
+   - Edge cases and invalid inputs
+   - Any non-functional requirements (perf/security/logging) if in SPEC
+3. Keep changes **small and focused** - do NOT refactor unrelated code
+ 
+## Constraints:
+- Follow existing patterns and style in this repo
+- Do NOT evaluate or "approve" your own work - a separate reviewer will audit it
+- Do NOT change public APIs unless SPEC clearly requires it
+- For T2/T3: Ensure tests are comprehensive enough to catch regressions
+ 
+## Output Format:
+ 
+### Metadata Block
+```
+Model: [name/version]
+Timestamp: [ISO-8601 UTC]
+Risk Tier: [T0-T3]
+Session ID: [ID]
+```
+ 
+### Implementation
+1. A single ```diff``` block with the proposed patch
+ 
+### Summary (max 5 bullets):
+- What changed and why
+- What tests you added/updated
+- Any assumptions you made
+- For T2/T3: Explicitly list edge cases covered by tests
+
+  🔍  2. REVIEWER MODE (Adversarial Review - Blind)
+	•	When to use: T1/T2/T3 changes for code review
+	•	Risk Tier: T1 minimum, required for T2/T3
+	•	⚠️ CRITICAL: Start a fresh chat - do NOT include Builder's explanation
+	•	Inputs needed: Tier declaration + Spec + diff + tool results (from terminal)
+Prompt:
+You are the **Adversarial Reviewer Agent** for SparkData Analytics.
+ 
+## METADATA (fill in):
+- Model: [your model name/version]
+- Date/Time (UTC): [current timestamp]
+- Risk Tier: [T0 | T1 | T2 | T3]
+- Session ID: [unique identifier]
+ 
+Your job is to independently review this code change using a skeptical, proof-driven mindset.
+ 
+## RISK TIER DECLARATION:
+[PASTE: tier declaration]
+ 
+## SPEC:
+[PASTE: requirement or key parts of plan]
+ 
+## CODE DIFF:
+[PASTE: git diff output or relevant file sections]
+ 
+## TOOL RESULTS:
+[PASTE: e.g., "tests: 152 passed; coverage 82%→85%; lint clean; mypy clean"]
+ 
+You do **NOT** see any explanation from the original author.
+ 
+## Tasks:
+ 
+### 1. Checklist Review
+For each item, mark **Pass / Fail / Unclear** and justify briefly:
+- [ ] Correctness vs SPEC
+- [ ] Edge cases & error handling
+- [ ] Test quality (coverage + meaningfulness)
+- [ ] Security / data-integrity concerns
+- [ ] Performance / complexity concerns
+- [ ] Consistency with project patterns
+- [ ] Logging / observability
+- [ ] Backwards compatibility
+ 
+### 2. Risk Score
+- Overall Risk Score: **0-10** (0=minimal, 10=extremely risky)
+- Explain in 2-5 sentences, citing SPEC, CODE, and TOOL RESULTS
+ 
+### 3. Required Changes
+- If Risk > 2: List numbered REQUIRED changes
+  - "[Priority: High/Med/Low] – [Concrete change] – [Why]"
+  - **⚠️ At least one REQUIRED change must be either:**
+    - (a) A new/updated test, OR
+    - (b) Additional logging/metrics
+    - Unless you explicitly explain why tests/logging are already sufficient
+- If Risk ≤ 2: Explain what you verified and why acceptable
+ 
+## Constraints:
+- Do NOT summarize what the code does - author knows that
+- Do NOT be polite or vague - be specific and concrete
+- Identify at least 3 issues OR explain why fewer than 3 exist
+- Do NOT restate other reviewers' findings; focus on NEW issues or deeper evidence
+ 
+## Output Format:
+ 
+### Metadata Block
+```
+Model: [name/version]
+Timestamp: [ISO-8601 UTC]
+Risk Tier: [T0-T3]
+Session ID: [ID]
+Review Type: Adversarial Review (Blind)
+```
+ 
+### Checklist
+[Pass/Fail/Unclear + justification for each]
+ 
+### Risk Score
+[0-10] + explanation
+ 
+### Required Changes
+[Numbered list with priorities]
+ 
+### Verdict
+[APPROVE / REQUEST_CHANGES / BLOCK]
+
+  📝  EXAMPLE WORKFLOWS
+These examples show the complete prompt sequence for real-world changes.
+Example 1: T2 Pipeline Change
+Scenario: Adding a new customer matching pipeline with schema changes
+Step
+Chat Window
+Action
+1
+[B] Customer Match
+Paste Risk Tier Declaration (T2) + Builder prompt + spec
+2
+[R] Customer Match
+NEW CHAT: Paste Reviewer prompt + spec + diff + test output
+3
+[V] Customer Match
+NEW CHAT: Paste Verification prompt + Data-Quality Lens
+4
+Terminal
+Save outputs → VERIFICATION_*.md, PERSPECTIVE_data-quality_*.md
+5
+Terminal
+Create DECISION_*.json with model attribution + risk scores → git push
+Example 2: T3 Security Change
+Scenario: Updating authentication logic for PII access controls
+Step
+Chat / Model
+Action
+1
+[B] Auth (Claude)
+Builder prompt with T3 declaration
+2
+[R] Auth (GPT-4o)
+NEW CHAT, DIFFERENT MODEL: Reviewer prompt
+3
+[SEC] Auth (Gemini)
+Security-First Lens prompt
+4-6
+[PERF/MAINT/RES]
+Performance, Maintainability, Resilience lens prompts (vary models)
+7
+[CMP] Auth
+Differential Model Comparison (if 2+ implementations)
+8
+[DA] Auth
+Devil's Advocate (if agreement >80% across lenses)
+9
+Human
+Final sign-off required for T3. Save all outputs + DECISION_*.json
+💡 Key Insight: Notice how T3 uses different model families (Claude → GPT → Gemini) to catch blind spots that any single model family might miss.
+
+  📋  Quick Reference Card
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                      SPARKDATA IDE QUICK REFERENCE v2.2                        ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  STEP 1: Determine Risk Tier (if unsure, choose higher)                       ║
+║  ─────────────────────────────────────────────────────────────────────────────║
+║  T0 (Low):      Docs, comments, non-prod scripts                              ║
+║  T1 (Medium):   Non-core features, UI, minor pipelines  ← DEFAULT             ║
+║  T2 (High):     Core logic, data models, auth, key pipelines                  ║
+║  T3 (Critical): Security, PII, billing, regulatory, MDRS/RAI                  ║
+║                                                                               ║
+║  STEP 2: Select Prompts by Tier                                               ║
+║  ─────────────────────────────────────────────────────────────────────────────║
+║  T0: Builder only (optional)                                                  ║
+║  T1: Builder → Adversarial Reviewer (blind, fresh chat)                       ║
+║  T2: Builder → Verification Agent (blind) + 1 Lens                            ║
+║      For pipelines: Data-Quality Lens (#10) required                          ║
+║  T3: Builder → 4-Lens Review → Devil's Advocate → Differential Comparison     ║
+║      For pipelines: Include Data-Quality Lens as 5th lens                     ║
+║                                                                               ║
+║  🔴 CRITICAL RULES                                                            ║
+║  ─────────────────────────────────────────────────────────────────────────────║
+║  🔴 NEVER use Reviewer/Verification in same chat as Builder                   ║
+║  🔴 ALWAYS start Reviewer/Verification in FRESH CHAT                          ║
+║  🔴 NEVER show Builder's explanation to Reviewer                              ║
+║  🔴 ALWAYS paste actual TOOL RESULTS (not claims)                             ║
+║  🔴 ALWAYS include METADATA block in outputs                                  ║
+║  🔴 Risk > 2 = MUST address issues before merge                               ║
+║  🔴 T3: Use DIFFERENT model families for each lens where possible             ║
+║  🔴 Agreement > 80% = Trigger Devil's Advocate                                ║
+║                                                                               ║
+║  PROMPT SHORTCUTS                                                             ║
+║  ─────────────────────────────────────────────────────────────────────────────║
+║  "Build this"        → #1 Builder Mode                                        ║
+║  "Review this"       → #2 Reviewer Mode (new chat!)                           ║
+║  "Verify T2/T3"      → #3 Verification Mode (new chat!)                       ║
+║  "Security check"    → #4 Security-First Lens                                 ║
+║  "Perf check"        → #5 Performance-First Lens                              ║
+║  "Maintain check"    → #6 Maintainability-First Lens                          ║
+║  "Resilience check"  → #7 Resilience-First Lens                               ║
+║  "Challenge this"    → #8 Devil's Advocate                                    ║
+║  "Compare models"    → #9 Differential Comparison                             ║
+║  "Data quality"      → #10 Data-Quality-First Lens (pipelines)                ║
+║                                                                               ║
+║  OUTPUT DESTINATIONS                                                          ║
+║  ─────────────────────────────────────────────────────────────────────────────║
+║  Builder output      → PROGRESS_*.md                                          ║
+║  Reviewer output     → (inline in PR or saved separately)                     ║
+║  Verification output → reports/VERIFICATION_*.md                              ║
+║  Lens outputs        → reports/PERSPECTIVE_[lens]_*.md                        ║
+║  Devil's Advocate    → reports/DEVILS_ADVOCATE_*.md                           ║
+║  Comparison output   → reports/COMPARISON_*.md                                ║
+║  Decision record     → logs/ai-decisions/DECISION_*.json                      ║
+║                                                                               ║
+║  AGREEMENT MEASUREMENT (for Devil's Advocate trigger)                         ║
+║  ─────────────────────────────────────────────────────────────────────────────║
+║  >80% overlap = "All reviewers raise essentially the same 2-3 issues"         ║
+║  Risk spread <1 = "All risk scores within 1 point of each other"              ║
+║  Either condition → Trigger Devil's Advocate review                           ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+  🚫  Free-Form Prompts Policy
+For T1-T3 changes: Free-form prompts are NOT allowed.
+All IDE-based AI usage for code must use ONLY the prompts in this document. This ensures:
+	•	Consistent quality controls
+	•	Audit trail compatibility
+	•	Compliance with AICPA/EU AI Act/PCAOB requirements
+For T0 changes: Free-form prompts are acceptable but discouraged.
+
+  🔮  FUTURE AUTOMATION NOTE
+The agreement measurement for Devil's Advocate trigger (>80% overlap AND risk spread <1) is currently manual. Future roadmap includes:
+	•	Automated PERSPECTIVE_*.md parsing to extract issues and risk scores
+	•	Similarity computation (Jaccard on issue tuples, cosine on embeddings)
+	•	Auto-trigger script that spawns Devil's Advocate when threshold met
+For now, manually compare reviewer outputs and invoke Devil's Advocate (#8) when agreement seems suspiciously high.
+
+END OF IDE QUICK PROMPTS v2.2
