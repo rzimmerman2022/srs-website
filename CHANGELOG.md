@@ -4,6 +4,127 @@ All notable changes to the SRS Website project will be documented in this file.
 
 ---
 
+## [2025-12-28] Session 4: Critical Bug Fixes + UUID Cleanup + Documentation Alignment
+
+### Critical Production Bug Fixes (9 total)
+
+| Bug # | Priority | Issue | Fix | Commit |
+|-------|----------|-------|-----|--------|
+| #1 | CRITICAL | ProcessScrollSpy counter stuck at 01/10 | Updated rootMargin to -20% 0px -60% 0px | 5dd668f |
+| #2 | CRITICAL | RLS on clients table - PUBLIC PII EXPOSURE | Service role only policy, REVOKE anon | d6db6e0 |
+| #3 | CRITICAL | RLS on questionnaire_access_tokens - PUBLIC EXPOSURE | Service role only policy | d6db6e0 |
+| #4 | HIGH | HubSpot name corruption in sync-service.ts | Fetch full contact, combine names properly | 7aad2aa |
+| #5 | HIGH | Webhook processing dropped in serverless | Await processing before response return | 5772d25 |
+| #6 | MEDIUM | Hard-coded questionnaire ID in client creation | Added dropdown selector | 6c665b4 |
+| #7 | MEDIUM | Migration runner broken (exec_sql doesn't exist) | Deleted script entirely | c018497 |
+| #8 | MEDIUM | UUID extension mismatch across schema files | Standardized on gen_random_uuid() | c018497, 012b316 |
+| #9 | LOW | Heading ID regex fragility | Improved regex with multiline support | ff9535a |
+
+### HubSpot CRM Integration Merged
+
+- Merged `feature/hubspot-integration` branch to main (b78a658)
+- Bi-directional sync between Supabase and HubSpot CRM
+- Webhook handling for real-time updates
+- Client management admin interface
+
+### Table of Contents (TOC) Fixes
+
+5 issues resolved in blog TOC component:
+- Server-side heading ID generation
+- Word count HTML entity miscounting
+- IntersectionObserver threshold optimization
+- observer.disconnect() cleanup
+- Updated Next.js 15 documentation
+
+### UUID Consistency
+
+- Standardized ALL schema files to use `gen_random_uuid()` (PostgreSQL 13+ built-in)
+- Removed `uuid-ossp` extension requirement
+- Updated: schema.sql, migrations, staging/, prototype/
+
+### Documentation Alignment
+
+- Updated documentation files to use `gen_random_uuid()` examples
+- Consolidated duplicate MASTER-TODO-LIST files
+- Updated README.md with accurate lib/ structure and environment variables
+- Fixed outdated branch references (staging → main)
+
+### Multi-Agent QA Verification
+
+- QA Agent (CoVe Protocol): 95%+ confidence on all fixes
+- Contrarian Agent: Identified and fixed 4 incomplete implementations
+- All 9 bugs verified as FIXED
+
+### Commits
+
+| Hash | Description |
+|------|-------------|
+| 425290f | docs: Align documentation with gen_random_uuid() standard |
+| 012b316 | fix: Complete UUID consistency across ALL schema files |
+| c018497 | fix: Complete UUID consistency and delete broken migration runner |
+| b3a7957 | fix: CRITICAL fixes from QA and Contrarian agent verification |
+| c0a2153 | docs: Mark all 9 critical bugs as fixed in Master TODO |
+| ff9535a | fix: Resolve remaining bugs #7, #8, and #9 |
+| 6c665b4 | fix: Remove hard-coded questionnaire ID from client creation |
+| 5772d25 | fix: Prevent webhook processing loss in serverless environment |
+| 7aad2aa | fix: Prevent HubSpot name corruption in bi-directional sync |
+| d6db6e0 | security: Fix CRITICAL RLS vulnerabilities (#2 and #3) |
+| 5dd668f | fix: Correct ProcessScrollSpy counter stuck at 01/10 |
+| b78a658 | Merge feature/hubspot-integration into main |
+| e192ca5 | fix: Resolve all 5 TOC issues for blog posts |
+
+---
+
+## [2025-12-27] Session 3: SEO Deployment + Hero Optimization + Multi-Agentic Audit
+
+### SEO Deployment to Production
+
+- Merged `staging/seo-content-drafts` to `main`
+- Deployed all location pages and blog posts to production
+- Fixed lint warnings on location pages
+
+### Homepage Hero Optimization
+
+- Research agent: Conversion psychology audit
+- Copywriting agent: Hero copy rewrite with mechanism statements
+- CoVe QA verification of proposed copy
+- Implemented final hero section update
+
+### Multi-Agentic Website Audit
+
+6 specialized agents deployed:
+- Research Agent: Gold standard metrics
+- Exploration Agent: Map all 15 website pages
+- Audit Agent: Score all pages against benchmarks
+- CoVe QA Agent: Find missed issues (15 found)
+- Contrarian Agent: Challenge methodology
+- Synthesis Agent: Create decision framework
+
+### Documentation Created
+
+13 new documents totaling 5,000+ lines:
+- WEBSITE-AUDIT-MATRIX-2025.md (1,138 lines)
+- CONTRARIAN-STRATEGIC-ANALYSIS-2025.md (967 lines)
+- gold-standard-metrics-2025.md (576 lines)
+- COVE-QA-MISSED-ISSUES-2025.md (435 lines)
+- SYNTHESIS-COVE-CONTRARIAN-2025.md (332 lines)
+- Plus 8 additional reports
+
+### Blog Typography Fix
+
+- Installed @tailwindcss/typography
+- Fixed list bullet visibility with gold markers
+- Set optimal 680px content width
+- Added BlogTableOfContents component
+- Fixed "wall of text" appearance
+
+### Bug Fixes
+
+- Fixed "fiction" → "friction" typo across 5 files
+- Fixed sitemap missing blog post
+
+---
+
 ## [2025-12-26] SEO Phase 2: Content & Local SEO Implementation
 
 ### Location Landing Pages Created
