@@ -46,7 +46,7 @@ This is a modern, high-performance marketing website designed to convert visitor
 
 ### Available Scripts
 
-- `npm run dev` - Start development server (with Turbopack)
+- `npm run dev` - Start development server
 - `npm run build` - Create production build
 - `npm start` - Start production server
 - `npm run lint` - Run ESLint
@@ -72,7 +72,14 @@ This is a modern, high-performance marketing website designed to convert visitor
 │   ├── layout/            # Header, Footer, Container
 │   ├── ui/                # Button, Input, Card primitives
 │   └── sections/          # Hero, ServiceGrid, FAQ, etc.
-├── lib/                   # Utility functions (future)
+├── lib/                   # Utility functions, integrations, services
+│   ├── auth/              # Admin authentication
+│   ├── blog/              # Blog post processing
+│   ├── hubspot/           # HubSpot CRM integration
+│   ├── questionnaire/     # Questionnaire data
+│   ├── security/          # Security utilities
+│   ├── supabase/          # Database client & migrations
+│   └── analytics.ts       # Analytics tracking
 ├── public/
 │   └── assets/            # Images, logos
 ├── IMPLEMENTATION_PLAN.md # Detailed implementation plan
@@ -119,17 +126,20 @@ CNAME:     www → cname.vercel-dns.com
 
 ### Environment Variables
 
-Currently, no environment variables are required. For future integrations:
+The following environment variables are used:
 
 ```env
-# Future: Form submissions
-NEXT_PUBLIC_FORM_ENDPOINT=
+# Required: Supabase (questionnaire persistence)
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key  # Admin operations only
 
-# Future: Analytics
-NEXT_PUBLIC_GA_ID=
+# Optional: HubSpot CRM Integration
+HUBSPOT_ACCESS_TOKEN=your-hubspot-token
+HUBSPOT_WEBHOOK_SECRET=your-webhook-secret
 
-# Future: CRM Integration (HubSpot, etc.)
-HUBSPOT_API_KEY=
+# Optional: Analytics
+NEXT_PUBLIC_GA_ID=your-ga4-measurement-id
 ```
 
 Add environment variables in:

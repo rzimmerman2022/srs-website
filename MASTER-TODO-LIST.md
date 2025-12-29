@@ -1,10 +1,11 @@
 # MASTER TODO LIST - Southwest Resume Services
 
-**Last Updated:** 2025-12-27T18:45:52-07:00
+**Last Updated:** 2025-12-28T21:23:55-07:00
 **Status:** Active
 **Purpose:** Single source of truth for all project tasks
 **Development Approach:** SDA SOP Multi-Agentic Workflow with Claude Code
 **Last Model:** claude-opus-4-5-20251101
+**Current Branch:** `main`
 
 ---
 
@@ -24,11 +25,112 @@
 | **Blog Typography (Session 2025-12-27)** | **8** | **2** | **10** |
 | **Website Audit & Strategic Analysis (Session 2025-12-27)** | **17** | **3** | **20** |
 | **Hero Copy Optimization (Session 2025-12-27)** | **4** | **0** | **4** |
-| **TOTAL** | **96** | **463+** | **559+** |
+| **Bug Fixes + UUID Cleanup (Session 2025-12-28)** | **28** | **0** | **28** |
+| **TOTAL** | **124** | **463+** | **587+** |
 
 ---
 
-## LATEST SESSION: 2025-12-27 Multi-Agentic Website Audit & Strategic Analysis
+## LATEST SESSION: 2025-12-28 Bug Fixes + HubSpot Integration + UUID Cleanup
+
+### Session Metadata
+
+| Field | Value |
+|-------|-------|
+| **Session ID** | `bugfix-uuid-cleanup-dec28` |
+| **Model** | claude-sonnet-4-5-20250929, claude-opus-4-5-20251101 |
+| **Branch** | `main` |
+| **Duration** | ~6 hours |
+| **Agents Deployed** | QA Verification, Contrarian Analysis, Implementation |
+| **QA Verification** | CoVe Protocol - ALL 9 CRITICAL BUGS FIXED |
+| **Merged** | `feature/hubspot-integration` to `main` |
+
+### Session 4: Bug Fixes + UUID Cleanup (2025-12-28)
+
+#### HubSpot Integration Merge + TOC Fixes
+
+| Task | Model | Time (PST) | Status | Commit |
+|------|-------|------------|--------|--------|
+| Merge feature/hubspot-integration to main | Claude Sonnet 4.5 | 02:45 | ✅ Complete | - |
+| Resolve .claude/settings.local.json merge conflict | Claude Sonnet 4.5 | 02:48 | ✅ Complete | - |
+| Fix TOC Issue #1: Server-side heading IDs | Claude Sonnet 4.5 | 03:00 | ✅ Complete | e192ca5 |
+| Fix TOC Issue #2: Word count HTML miscounting | Claude Sonnet 4.5 | 03:00 | ✅ Complete | e192ca5 |
+| Fix TOC Issue #3: IntersectionObserver threshold | Claude Sonnet 4.5 | 03:00 | ✅ Complete | e192ca5 |
+| Fix TOC Issue #4: observer.disconnect() cleanup | Claude Sonnet 4.5 | 03:00 | ✅ Complete | e192ca5 |
+| Fix TOC Issue #5: Update Next.js 15 documentation | Claude Sonnet 4.5 | 03:00 | ✅ Complete | e192ca5 |
+| Remove Supabase temp artifacts | Claude Sonnet 4.5 | 03:10 | ✅ Complete | - |
+| Add supabase/.temp/ to .gitignore | Claude Sonnet 4.5 | 03:10 | ✅ Complete | - |
+| Delete feature/hubspot-integration (local) | Claude Sonnet 4.5 | 03:12 | ✅ Complete | - |
+| Delete origin/gh-pages (remote) | Claude Sonnet 4.5 | 03:12 | ✅ Complete | - |
+| Deploy QA Verification Agent with CoVe | Claude Sonnet 4.5 | 03:15 | ✅ Complete | - |
+| Push all changes to origin/main | Claude Sonnet 4.5 | 03:20 | ✅ Complete | - |
+
+#### 9 Critical Production Bug Fixes (ALL COMPLETE)
+
+| Bug | Priority | Fix Description | Commit |
+|-----|----------|-----------------|--------|
+| **#1** ProcessScrollSpy counter stuck at 01/10 | CRITICAL | Updated rootMargin to `-20% 0px -60% 0px` | 5dd668f |
+| **#2** RLS on `clients` table (PUBLIC PII EXPOSURE) | CRITICAL | Service role only policy, REVOKE anon access | d6db6e0 |
+| **#3** RLS on `questionnaire_access_tokens` (PUBLIC TOKEN EXPOSURE) | CRITICAL | Service role only policy, no anon access | d6db6e0 |
+| **#4** HubSpot name corruption in sync-service.ts:234 | HIGH | Fetch full contact, combine names properly | 7aad2aa |
+| **#5** Webhook processing dropped in serverless (route.ts:123) | HIGH | Await processing before response return | 5772d25 |
+| **#6** Hard-coded questionnaire ID (page.tsx:86) | MEDIUM | Added dropdown selector for questionnaire templates | 6c665b4 |
+| **#7** Migration runner never executes SQL (run-migrations.js:48) | MEDIUM | Documented as DEPRECATED, recommend Supabase SQL Editor | ff9535a |
+| **#8** UUID extension mismatch in migrations | MEDIUM | Changed to `gen_random_uuid()` (built-in PG13+) | ff9535a |
+| **#9** Heading ID regex multiline/attributes issues (posts.ts:31) | LOW | Improved regex with 's' flag, attribute preservation | ff9535a |
+
+#### Final Consolidation Commits
+
+| Commit | Message | Date |
+|--------|---------|------|
+| c018497 | fix: Complete UUID consistency and delete broken migration runner | 2025-12-28 |
+| b3a7957 | fix: CRITICAL fixes from QA and Contrarian agent verification | 2025-12-28 |
+| c0a2153 | docs: Mark all 9 critical bugs as fixed in Master TODO | 2025-12-28 |
+
+### Session 3: SEO Deployment + Branch Merging (2025-12-27 Evening)
+
+| Task | Model | Time (PST) | Status |
+|------|-------|------------|--------|
+| Merge staging/seo-content-drafts to main | Claude Sonnet 4.5 | 21:00 | ✅ Complete |
+| Deploy SEO improvements to production | Claude Sonnet 4.5 | 21:15 | ✅ Complete |
+| Fix lint warnings (location pages) | Claude Sonnet 4.5 | 21:25 | ✅ Complete |
+| Update OpenGraph image with clean logo | Claude Sonnet 4.5 | 23:15 | ✅ Complete |
+| Add canonical URLs to Privacy page | Claude Sonnet 4.5 | 21:30 | ✅ Complete |
+| Add canonical URLs to Terms page | Claude Sonnet 4.5 | 21:30 | ✅ Complete |
+
+### Session 2: Homepage Hero Optimization & Multi-Agentic Audit (2025-12-27)
+
+| Task | Model | Time (PST) | Status |
+|------|-------|------------|--------|
+| Deploy Research Agent: Conversion psychology audit | Claude Opus 4.5 | 14:00 | ✅ Complete |
+| Deploy Copywriting Agent: Hero copy rewrite | Claude Opus 4.5 | 14:30 | ✅ Complete |
+| Deploy QA Agent with CoVe: Validate hero copy | Claude Opus 4.5 | 14:45 | ✅ Complete |
+| Implement hero copy to homepage | Claude Sonnet 4.5 | 15:00 | ✅ Complete |
+| Deploy Research Agent: Gold standard metrics | Claude Opus 4.5 | 15:15 | ✅ Complete |
+| Deploy Exploration Agent: Map all website pages | Claude Sonnet 4.5 | 15:30 | ✅ Complete |
+| Deploy Audit Agent: Score all 15 pages | Claude Opus 4.5 | 15:45 | ✅ Complete |
+| Deploy CoVe QA Agent: Find missed issues | Claude Opus 4.5 | 16:00 | ✅ Complete |
+| Deploy Contrarian Agent: Challenge methodology | Claude Opus 4.5 | 16:10 | ✅ Complete |
+| Create synthesis & decision framework | Claude Sonnet 4.5 | 16:20 | ✅ Complete |
+| Verify sitemap.xml working correctly | Claude Sonnet 4.5 | 16:25 | ✅ Complete |
+| Fix missing blog post in sitemap | Claude Sonnet 4.5 | 16:28 | ✅ Complete |
+| Deploy CoVe Countersign Agent: Session verification | Claude Opus 4.5 | 16:30 | ✅ Complete |
+
+### Session 1: Earlier Work (2025-12-27)
+
+| Task | Model | Time (PST) | Status |
+|------|-------|------------|--------|
+| Fix "fiction" to "friction" typo (5 files) | Claude Sonnet 4.5 | 13:00 | ✅ Complete |
+| Improve blog readability (line width fix) | Claude Sonnet 4.5 | 13:15 | ✅ Complete |
+| Increase blog paragraph spacing | Claude Sonnet 4.5 | 13:15 | ✅ Complete |
+| Create TableOfContents component | Claude Sonnet 4.5 | 13:30 | ✅ Complete |
+| Update blog CTAs with Client Truth Principle | Claude Sonnet 4.5 | 13:45 | ✅ Complete |
+| Create blog image sourcing guide | Claude Sonnet 4.5 | 12:00 | ✅ Complete |
+| Create GEO testing template | Claude Sonnet 4.5 | 12:15 | ✅ Complete |
+| Create Google Business Profile audit checklist | Claude Sonnet 4.5 | 12:30 | ✅ Complete |
+
+---
+
+## SESSION: 2025-12-27 Multi-Agentic Website Audit & Strategic Analysis
 
 ### Session Metadata
 
@@ -36,7 +138,7 @@
 |-------|-------|
 | **Session ID** | `contrarian-analysis-2025-12-27` |
 | **Model** | claude-opus-4-5-20251101 |
-| **Branch** | staging/seo-content-drafts |
+| **Branch** | `main` (merged from staging/seo-content-drafts) |
 | **Duration** | ~4 hours |
 | **Agents Deployed** | 6 specialized agents |
 | **QA Verification** | CoVe Protocol - 95% confidence (20/21 items verified) |
@@ -63,14 +165,6 @@
 | TYPO-03 | Fix "fiction" → "friction" in app/faq/page.tsx | ✅ DONE | opus-4.5 | 2025-12-27T14:00-07:00 |
 | TYPO-04 | Fix "fiction" → "friction" in public/llms.txt | ✅ DONE | opus-4.5 | 2025-12-27T14:00-07:00 |
 | GIT-01 | Commit all changes to staging branch | ✅ DONE | opus-4.5 | 2025-12-27T18:35-07:00 |
-
-### In-Progress Tasks
-
-| ID | Task | Status | Progress | Notes |
-|----|------|--------|----------|-------|
-| HANDOFF-01 | Create Handoff Document | 🔄 IN_PROGRESS | 80% | Creating now |
-| HANDOFF-02 | Create State Serialization JSON | 🔄 IN_PROGRESS | 0% | Next step |
-| HANDOFF-03 | Final CoVe Countersign | 🔄 IN_PROGRESS | 95% | Verification complete |
 
 ### Pending Tasks (Owner Decision Required)
 
@@ -100,7 +194,7 @@
 ### Session 2025-12-27: Blog Typography Fix (COMPLETE)
 
 **Model:** claude-opus-4-5-20251101
-**Branch:** staging/seo-content-drafts
+**Branch:** `main` (merged from staging/seo-content-drafts)
 **QA Verification:** COVE - ALL CLAIMS VERIFIED
 **Handoff:** [HANDOFF_2025-12-27_18-41-02_Opus-4.5_blog-typography.md](docs/handoffs/HANDOFF_2025-12-27_18-41-02_Opus-4.5_blog-typography.md)
 
@@ -1425,6 +1519,10 @@ See Section 2 and 3 tables for all LOW priority items.
 
 | Date | Agent ID | Changes |
 |------|----------|---------|
+| 2025-12-28 | sonnet-4.5/orch/S4/~05:10 | SESSION 4: Bug Fixes + UUID Cleanup (9 critical bugs fixed with commits c018497, b3a7957, c0a2153, ff9535a, 6c665b4, 5772d25, 7aad2aa, d6db6e0, 5dd668f) |
+| 2025-12-28 | sonnet-4.5/orch/S3/~03:00 | SESSION 3: HubSpot Integration merge + 5 TOC fixes (commit e192ca5), branch cleanup, QA verification |
+| 2025-12-27 | sonnet-4.5/orch/S2/~21:00 | SESSION 2: SEO deployment, merge staging/seo-content-drafts to main, OpenGraph updates, canonical URLs |
+| 2025-12-27 | opus-4.5/orch/S1/~16:30 | SESSION 1: Homepage Hero Optimization, Multi-Agentic Audit (6 agents), CoVe verification, Contrarian analysis |
 | 2025-12-21 | sonnet-4.5/orch/S10/~18:10 | SESSION 10: Admin interface foundation (22 files created: 12 pages, 7 components, 7 API routes; Phase 2 pending - auth, settings, real data) |
 | 2025-12-21 | opus-4.5/orch/S9/~13:30 | SESSION 9: Design consistency audit with 5 parallel agents + QA (260+ violations found: 142 text-sm, 20+ contrast, 50+ H3 sizing, 30+ margins) |
 | 2025-12-21 | opus-4.5/orch/S9/~12:00 | Deployed staging code to production root, fixed ESLint errors, committed and pushed to main |
@@ -1549,3 +1647,4 @@ See **[SDA-AGENTIC-WORKFLOW-SOP.md](./SDA-AGENTIC-WORKFLOW-SOP.md)** for complet
 **Document Owner:** Ryan Zimmerman
 **Maintained By:** AI Agents (Claude)
 **Review Frequency:** Each session
+**Last Consolidated:** 2025-12-28T21:23:55-07:00 (merged docs/MASTER-TODO-LIST.md into root)
