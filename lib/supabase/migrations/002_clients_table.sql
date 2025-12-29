@@ -3,8 +3,8 @@
 -- Date: 2025-12-23
 -- Purpose: Fortune 500-level client management system
 
--- Enable UUID extension (required for uuid generation)
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- UUID generation uses built-in gen_random_uuid() (PostgreSQL 13+)
+-- No extension needed
 
 -- ============================================================================
 -- CLIENTS TABLE
