@@ -1,12 +1,12 @@
 -- Supabase Schema for Questionnaire Data Persistence
 -- Run this in your Supabase SQL Editor to create the required tables
 
--- Enable UUID extension if not already enabled
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- UUID generation uses built-in gen_random_uuid() (PostgreSQL 13+)
+-- No extension needed
 
 -- Main table for storing questionnaire responses
 CREATE TABLE IF NOT EXISTS questionnaire_responses (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   client_id TEXT NOT NULL,
   questionnaire_id TEXT NOT NULL,
   answers JSONB DEFAULT '{}',
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS questionnaire_responses (
 
 -- History table for tracking all changes (for audit/recovery)
 CREATE TABLE IF NOT EXISTS response_history (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   response_id UUID NOT NULL REFERENCES questionnaire_responses(id) ON DELETE CASCADE,
   snapshot JSONB NOT NULL,
   created_at TIMESTAMPTZ DEFAULT NOW()
