@@ -362,7 +362,7 @@ Log all admin actions to a dedicated audit table:
 
 ```sql
 CREATE TABLE public.audit_log (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),  -- PostgreSQL 13+ built-in
   user_id UUID REFERENCES auth.users(id),
   user_email TEXT NOT NULL,
   action TEXT NOT NULL, -- 'create', 'update', 'delete', 'login', etc.
@@ -519,7 +519,7 @@ export async function loginAction(email: string, password: string) {
 **Option 2: Supabase database (Simpler, works for low-medium traffic)**
 ```sql
 CREATE TABLE public.rate_limits (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),  -- PostgreSQL 13+ built-in
   identifier TEXT NOT NULL, -- email, IP, or token
   action TEXT NOT NULL, -- 'login', 'refresh', etc.
   attempts INTEGER DEFAULT 0,

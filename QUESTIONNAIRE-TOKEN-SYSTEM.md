@@ -66,7 +66,7 @@ Implemented a cryptographically secure token-based system with the following fea
 
 ```sql
 CREATE TABLE questionnaire_access_tokens (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),  -- PostgreSQL 13+ built-in
   client_id TEXT NOT NULL,
   questionnaire_id TEXT NOT NULL,
   token TEXT NOT NULL UNIQUE,

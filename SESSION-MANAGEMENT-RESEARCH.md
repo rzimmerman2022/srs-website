@@ -725,7 +725,7 @@ cookieStore.set('refresh-token', refreshToken, {
 
 ```sql
 CREATE TABLE user_sessions (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),  -- PostgreSQL 13+ built-in
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   refresh_token TEXT UNIQUE NOT NULL,
   device_name TEXT,
