@@ -619,7 +619,7 @@ export function requirePermission(role: Role, permission: Permission) {
 ```sql
 -- Create invitations table
 CREATE TABLE IF NOT EXISTS public.admin_invitations (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),  -- PostgreSQL 13+ built-in
   email TEXT NOT NULL UNIQUE,
   role TEXT NOT NULL CHECK (role IN ('admin', 'editor', 'viewer')),
   invited_by UUID NOT NULL REFERENCES auth.users(id),
