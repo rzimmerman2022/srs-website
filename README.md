@@ -140,6 +140,9 @@ HUBSPOT_WEBHOOK_SECRET=your-webhook-secret
 
 # Optional: Analytics
 NEXT_PUBLIC_GA_ID=your-ga4-measurement-id
+
+# Optional: Contact Form (Formspree)
+NEXT_PUBLIC_FORMSPREE_URL=https://formspree.io/f/your-form-id  # Has fallback if not set
 ```
 
 Add environment variables in:
@@ -230,7 +233,7 @@ See [SEO-GEO-LOCAL-SOP.md](./SEO-GEO-LOCAL-SOP.md) for complete SEO guidelines i
 | Citations/NAP | 3.0/10 | Critical Gap |
 | Backlinks | 2.5/10 | Critical Gap |
 
-**Key Finding:** Excellent technical foundation but zero discoverability for commercial keywords. See [SEO Audit Report](./docs/audits/) for full analysis and 90-day action plan.
+**Key Finding:** Excellent technical foundation but zero discoverability for commercial keywords. See [SEO Audit Report](./docs/audits/SEO-GEO-METRICS-MATRIX_claude-opus-4-5-20251101_2025-12-26T14-30-00_CRITICAL-GAPS-IDENTIFIED.md) for full analysis and 90-day action plan.
 
 **Priority Actions:**
 1. Build citation network (Yelp, BBB, chambers)
