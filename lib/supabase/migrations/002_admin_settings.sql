@@ -38,17 +38,19 @@ CREATE INDEX IF NOT EXISTS idx_admin_settings_key
 -- Enable Row Level Security
 ALTER TABLE admin_settings ENABLE ROW LEVEL SECURITY;
 
--- Policy: Allow read for authenticated users, write for admin only
--- For now, allow all operations (can be restricted later with proper auth)
-CREATE POLICY "Allow all operations on admin_settings"
+-- SECURITY: Admin-only access via service role key
+-- No public (anon) access allowed - settings contain sensitive data (SMTP creds, security config)
+-- CRITICAL: Only service_role can access
+CREATE POLICY "Service role only access to admin_settings"
   ON admin_settings
   FOR ALL
+  TO service_role
   USING (true)
   WITH CHECK (true);
 
--- Grant permissions to anon role
-GRANT ALL ON admin_settings TO anon;
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon;
+-- No permissions for anon role (security fix: prevent public exposure of SMTP creds)
+-- All admin operations must use service role key
+REVOKE ALL ON admin_settings FROM anon;
 
 -- Insert default settings
 INSERT INTO admin_settings (setting_key, setting_value, category, description)
