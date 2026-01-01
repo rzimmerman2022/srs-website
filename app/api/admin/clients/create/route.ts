@@ -84,7 +84,7 @@ const createClientSchema = z.object({
     .string()
     .min(1, 'Questionnaire ID is required')
     .max(100, 'Questionnaire ID must be less than 100 characters')
-    .default('jackie-deleon-dec-2025'),
+    .default('elite-discovery'),
 
   notes: z
     .string()
@@ -132,11 +132,13 @@ function generateSecureToken(): string {
 }
 
 /**
- * Get Supabase client
+ * Get Supabase client with service role key
+ * SECURITY: Admin operations require service_role to bypass RLS
  */
 function getSupabaseClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  // Use service role key for admin operations (bypasses RLS)
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
     return null;

@@ -4,12 +4,15 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { QuestionnaireContainer } from '@/components/questionnaire';
 import ErrorBoundary from '@/components/questionnaire/ErrorBoundary';
-import { jackieDeleonQuestionnaire } from '@/lib/questionnaire';
+import { jackieDeleonQuestionnaire, eliteDiscoveryQuestionnaire } from '@/lib/questionnaire';
 import Container from '@/components/layout/Container';
 import Link from 'next/link';
 
 // In production, you'd fetch this from a database/API
 const questionnaires: Record<string, typeof jackieDeleonQuestionnaire> = {
+  // Generic templates
+  'elite-discovery': eliteDiscoveryQuestionnaire,
+  // Client-specific (legacy)
   'jdeleon': jackieDeleonQuestionnaire,
   'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
 };

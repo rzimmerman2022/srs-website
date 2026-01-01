@@ -40,7 +40,7 @@ export default function CreateClientPage() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [packageType, setPackageType] = useState<'discovery' | 'elite' | 'executive'>('elite');
-  const [questionnaireId, setQuestionnaireId] = useState<string>('jackie-deleon-dec-2025');
+  const [questionnaireId, setQuestionnaireId] = useState<string>('elite-discovery');
   const [notes, setNotes] = useState('');
 
   // UI state
@@ -109,7 +109,7 @@ export default function CreateClientPage() {
     setEmail('');
     setPhone('');
     setPackageType('elite');
-    setQuestionnaireId('jackie-deleon-dec-2025');
+    setQuestionnaireId('elite-discovery');
     setNotes('');
     setCreatedClient(null);
     setError(null);
@@ -374,8 +374,12 @@ export default function CreateClientPage() {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-colors bg-white"
                 required
               >
-                <option value="jackie-deleon-dec-2025">Jackie DeLeon (Default)</option>
-                <option value="jdeleon">Jackie DeLeon (Short ID)</option>
+                <optgroup label="Standard Templates">
+                  <option value="elite-discovery">Elite Protocol Discovery (Recommended)</option>
+                </optgroup>
+                <optgroup label="Client-Specific (Legacy)">
+                  <option value="jackie-deleon-dec-2025">Jackie DeLeon - Behavioral Health</option>
+                </optgroup>
               </select>
               <p className="text-xs text-charcoal-500 mt-2">
                 Select which questionnaire template this client will complete

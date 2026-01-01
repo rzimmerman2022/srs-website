@@ -24,7 +24,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci...
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGci...  # Bypasses RLS for admin operations
 
 # CLI Automation (for AI models)
-SUPABASE_ACCESS_TOKEN=REDACTED_SUPABASE_TOKEN
+SUPABASE_ACCESS_TOKEN=<get from Supabase Account Settings - Access Tokens>
 SUPABASE_PROJECT_REF=aougseszcvzgxwniossn
 ```
 
@@ -41,8 +41,8 @@ SUPABASE_PROJECT_REF=aougseszcvzgxwniossn
 ### Option 1: Supabase CLI (Preferred)
 
 ```bash
-# Set the access token
-export SUPABASE_ACCESS_TOKEN=REDACTED_SUPABASE_TOKEN
+# Set the access token (get from .env.local or Supabase Account Settings)
+export SUPABASE_ACCESS_TOKEN=<your-access-token-from-env-local>
 
 # Link the project (first time only)
 supabase link --project-ref aougseszcvzgxwniossn
@@ -57,8 +57,8 @@ supabase db push
 # Connection string format
 psql "postgresql://postgres.[project-ref]:[password]@aws-0-us-west-1.pooler.supabase.com:6543/postgres"
 
-# For this project:
-psql "postgresql://postgres.aougseszcvzgxwniossn:REDACTED_DB_PASSWORD@aws-0-us-west-1.pooler.supabase.com:6543/postgres"
+# For this project (get password from Supabase Dashboard → Settings → Database):
+psql "postgresql://postgres.aougseszcvzgxwniossn:<database-password>@aws-0-us-west-1.pooler.supabase.com:6543/postgres"
 ```
 
 **Note**: Direct psql requires IPv4 add-on ($4/mo) on Supabase free tier. Use CLI method instead.
