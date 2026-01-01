@@ -4,6 +4,60 @@ All notable changes to the SRS Website project will be documented in this file.
 
 ---
 
+## [2026-01-01] Session 6: Security Fixes + Generic Questionnaire Template
+
+### Executive Summary
+
+Completed critical RLS security fixes identified by user audit and created a generic questionnaire template system that works for any industry. Fixed admin APIs to use service_role key for proper RLS interaction.
+
+### Security Fixes
+
+| Issue | Status | Commit |
+|-------|--------|--------|
+| RLS in `supabase/migrations/` path | FIXED | 9d1a4f8 |
+| RLS in `admin_settings` (SMTP creds) | FIXED | b41b4c9 |
+| Admin APIs using wrong key | FIXED | This session |
+
+### Generic Questionnaire Template
+
+Created `lib/questionnaire/elite-discovery.ts` - a 400+ line industry-agnostic template with 9 modules:
+
+1. Guardrails & Target Role (salary, remote, target title)
+2. Current Role & Experience
+3. Skills & Tools (ATS keywords)
+4. Metrics & Achievements
+5. Education & Credentials
+6. Employment Timeline
+7. STAR Achievement Stories (optional)
+8. Work Preferences (optional)
+9. Additional Context (optional)
+
+### API Changes
+
+All admin routes updated to use `SUPABASE_SERVICE_ROLE_KEY`:
+- `/api/admin/clients/create`
+- `/api/admin/clients/[clientId]`
+- `/api/admin/questionnaires`
+- `/api/admin/questionnaires/[id]`
+- `/api/admin/settings`
+- `/api/admin/stats`
+
+### Files Changed
+
+| Category | Files |
+|----------|-------|
+| Security | `supabase/migrations/20251223_create_clients_table.sql`, `lib/supabase/migrations/002_admin_settings.sql` |
+| Questionnaire | `lib/questionnaire/elite-discovery.ts` (NEW), `lib/questionnaire/index.ts`, plus 6 registry files |
+| API Routes | 7 admin API routes updated |
+| UI | `app/admin/clients/new/page.tsx`, `app/admin/questionnaires/new/page.tsx` (NEW redirect) |
+
+### Handoff
+
+- State: `state/session_2026-01-01_23-30-00_opus-4.5_security-questionnaire.json`
+- Handoff: `docs/handoffs/HANDOFF_2026-01-01_23-30-00_opus-4.5_security-questionnaire.md`
+
+---
+
 ## [2026-01-01] Session 5: Lead Capture System Configuration - Critical Infrastructure
 
 ### Executive Summary

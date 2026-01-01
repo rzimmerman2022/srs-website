@@ -1,0 +1,148 @@
+{
+  "session_metadata": {
+    "timestamp": "2026-01-01T23:30:00-07:00",
+    "duration_hours": 2.5,
+    "model": "claude-opus-4-5-20251101",
+    "operator": "Ryan Zimmerman",
+    "session_id": "security-questionnaire"
+  },
+  "cognitive_context": {
+    "problem_understanding": "Continued from previous session. User's audit revealed RLS security fix was only in one migration path. Also needed generic questionnaire template to replace client-specific JD questionnaire.",
+    "attempted_solutions": [
+      {
+        "approach": "Fix RLS in supabase/migrations path",
+        "outcome": "SUCCESS - Updated 20251223_create_clients_table.sql with service_role policy"
+      },
+      {
+        "approach": "Fix RLS in admin_settings table",
+        "outcome": "SUCCESS - SMTP credentials no longer publicly exposed"
+      },
+      {
+        "approach": "Create generic Elite Discovery questionnaire template",
+        "outcome": "SUCCESS - 400+ line industry-agnostic template created"
+      },
+      {
+        "approach": "Update all admin API routes to use service_role key",
+        "outcome": "SUCCESS - 7 routes updated, client creation now works"
+      }
+    ],
+    "key_insights": [
+      "Admin APIs were using anon key, causing RLS violations after security fixes",
+      "All admin operations must use SUPABASE_SERVICE_ROLE_KEY to bypass RLS",
+      "Questionnaire system was hardcoded for one client - needed generic template"
+    ],
+    "dead_ends": [],
+    "assumptions": [
+      "SUPABASE_SERVICE_ROLE_KEY is configured in .env.local",
+      "Production Supabase has matching RLS policies applied"
+    ],
+    "uncertainties": [
+      "Whether production database has the latest RLS migrations applied",
+      "Whether staging/prototype directories should be archived or deleted"
+    ]
+  },
+  "code_state": {
+    "modified_files": {
+      "supabase/migrations/20251223_create_clients_table.sql": "Fixed RLS to service_role only",
+      "lib/supabase/migrations/002_admin_settings.sql": "Fixed RLS to service_role only",
+      "lib/questionnaire/elite-discovery.ts": "NEW - Generic questionnaire template",
+      "lib/questionnaire/index.ts": "Added export for elite-discovery",
+      "app/api/admin/clients/create/route.ts": "Use service_role key",
+      "app/api/admin/clients/route.ts": "Use service_role key",
+      "app/api/admin/clients/[clientId]/route.ts": "Use service_role key + questionnaire registry",
+      "app/api/admin/questionnaires/route.ts": "Use service_role key + questionnaire registry",
+      "app/api/admin/questionnaires/[id]/route.ts": "Use service_role key",
+      "app/api/admin/settings/route.ts": "Use service_role key",
+      "app/api/admin/stats/route.ts": "Use service_role key",
+      "app/admin/clients/new/page.tsx": "Updated dropdown with generic template",
+      "app/admin/questionnaires/new/page.tsx": "NEW - Redirect to /admin/clients/new",
+      "app/discovery/[clientId]/page.tsx": "Added elite-discovery to registry",
+      "app/q/[token]/page.tsx": "Added elite-discovery to registry",
+      "app/admin/questionnaires/[id]/page.tsx": "Added questionnaire registry",
+      "app/admin/questionnaires/[id]/responses/page.tsx": "Added questionnaire registry",
+      "app/admin/questionnaires/[id]/responses/[responseId]/page.tsx": "Added questionnaire registry"
+    },
+    "unstaged_changes": [".claude/settings.local.json"],
+    "experimental_branches": [],
+    "breaking_changes": [
+      "Admin APIs now require SUPABASE_SERVICE_ROLE_KEY environment variable"
+    ],
+    "technical_debt_added": []
+  },
+  "environmental_context": {
+    "tool_versions": {
+      "node": "20.x",
+      "npm": "10.x",
+      "next": "15.5.9"
+    },
+    "active_services": ["Supabase", "Vercel"],
+    "environment_variables": [
+      "NEXT_PUBLIC_SUPABASE_URL",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      "SUPABASE_SERVICE_ROLE_KEY"
+    ],
+    "external_dependencies": ["Supabase PostgreSQL", "Vercel hosting"]
+  },
+  "decision_log": [
+    {
+      "timestamp": "2026-01-01T21:00:00-07:00",
+      "decision": "Fix RLS in both migration paths",
+      "rationale": "User audit revealed supabase/migrations/ path still had insecure policy",
+      "alternatives": ["Only fix one path"],
+      "confidence": 1.0,
+      "reversibility": "easy"
+    },
+    {
+      "timestamp": "2026-01-01T21:30:00-07:00",
+      "decision": "Fix admin_settings RLS vulnerability",
+      "rationale": "Table contained SMTP credentials with GRANT ALL TO anon",
+      "alternatives": ["Leave as-is"],
+      "confidence": 1.0,
+      "reversibility": "easy"
+    },
+    {
+      "timestamp": "2026-01-01T22:00:00-07:00",
+      "decision": "Create generic Elite Discovery questionnaire template",
+      "rationale": "User needed reusable template not tied to specific client",
+      "alternatives": ["Modify existing JD questionnaire"],
+      "confidence": 0.9,
+      "reversibility": "easy"
+    },
+    {
+      "timestamp": "2026-01-01T23:00:00-07:00",
+      "decision": "Update all admin APIs to use service_role key",
+      "rationale": "RLS policies block anon key access to protected tables",
+      "alternatives": ["Relax RLS policies"],
+      "confidence": 1.0,
+      "reversibility": "moderate"
+    }
+  ],
+  "continuation_plan": {
+    "immediate_tasks": [
+      "Verify production deployment works",
+      "Test client creation flow end-to-end",
+      "Apply RLS migrations to production Supabase"
+    ],
+    "investigation_needed": [
+      "Check if production DB has latest migrations",
+      "Verify SUPABASE_SERVICE_ROLE_KEY in Vercel env vars"
+    ],
+    "blocked_items": [],
+    "time_estimates": {
+      "production_verification": "0.5 hours",
+      "end_to_end_testing": "1 hour"
+    }
+  },
+  "security_status": {
+    "rls_fixes_applied": {
+      "clients_table": "FIXED - both migration paths",
+      "questionnaire_access_tokens": "FIXED - via 003_fix_rls_security.sql",
+      "admin_settings": "FIXED - this session"
+    },
+    "tables_with_anon_access": [
+      "questionnaire_responses (intentional - clients save progress)",
+      "response_history (intentional - audit trail)"
+    ],
+    "verification_command": "grep -r 'GRANT ALL.*TO anon' --include='*.sql' . | grep -v questionnaire | grep -v response_history"
+  }
+}
