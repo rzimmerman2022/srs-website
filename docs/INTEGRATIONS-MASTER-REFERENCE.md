@@ -277,8 +277,72 @@ Complete 1:1 mapping of where all APIs, tokens, and configuration details are do
 
 ---
 
-**IMPORTANT FOR AI MODELS:**
+## CRITICAL SECURITY INSTRUCTIONS FOR AI MODELS
+
+### What You CAN Include in Commits, Handoffs, and Documentation
+
+| Safe to Include | Example |
+|-----------------|---------|
+| Public IDs | `G-BZDVNW58WQ`, `243166647`, `xaqnnbpp`, `aougseszcvzgxwniossn` |
+| Environment variable names | `HUBSPOT_PRIVATE_APP_TOKEN` |
+| Placeholders | `<from .env.local>`, `<get from dashboard>` |
+| File paths | `lib/hubspot/config.ts` |
+| Dashboard URLs | `https://app.hubspot.com` |
+
+### What You MUST NEVER Include in Commits, Handoffs, or Pushed Files
+
+| NEVER Include | What to Write Instead |
+|---------------|----------------------|
+| API tokens | `REDACTED` or `<from .env.local>` |
+| Private keys | `REDACTED` or `<stored in .env.local>` |
+| Passwords | `REDACTED` or `<database-password>` |
+| Secrets | `REDACTED` or `<from HubSpot Auth tab>` |
+| Full JWT tokens | `eyJ...` (truncated) |
+
+### Example: WRONG vs RIGHT
+
+**WRONG (exposes credentials):**
+```bash
+SUPABASE_ACCESS_TOKEN=sbp_abc123realtoken456xyz
+HUBSPOT_CLIENT_SECRET=actual-secret-value-here
+```
+
+**RIGHT (safe to commit):**
+```bash
+SUPABASE_ACCESS_TOKEN=<get from Supabase Account Settings - Access Tokens>
+HUBSPOT_CLIENT_SECRET=<from HubSpot Private App Auth tab>
+```
+
+### Where Actual Credentials Live
+
+| Location | Contents | Git Status |
+|----------|----------|------------|
+| `.env.local` | ALL actual credentials | **GITIGNORED** (never pushed) |
+| Vercel Dashboard | Production env vars | Not in repo |
+| This document | Placeholders only | Safe to push |
+
+### Before Every Commit, Verify:
+
+```bash
+# Check for exposed tokens (should return nothing)
+git diff --cached | grep -E "(sbp_|pat-na|eyJ[A-Za-z0-9])" || echo "CLEAN"
+
+# Check for passwords (should return nothing)
+git diff --cached | grep -iE "password.*=" | grep -v "REDACTED\|<.*>" || echo "CLEAN"
+```
+
+### If You Accidentally Expose Credentials:
+
+1. **DO NOT PUSH** - if not yet pushed, amend the commit
+2. **If already pushed** - use `git filter-repo` to clean history (see HANDOFF_2026-01-01_16-06-47)
+3. **Rotate the credential** - exposed secrets should be regenerated
+4. **Update .env.local** - with new credential values
+
+---
+
+**STANDARD AI MODEL INSTRUCTIONS:**
 - Always check this document first for integration credentials
 - Never change integration IDs without updating this document
 - Always test after making changes
 - Document any changes in the History section
+- Use `REDACTED` for any sensitive values in handoffs/commits
