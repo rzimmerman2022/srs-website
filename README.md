@@ -149,6 +149,34 @@ Add environment variables in:
 - **Local:** Create `.env.local` file (never commit this!)
 - **Vercel:** Project Settings → Environment Variables
 
+**For complete environment variable documentation:** See [docs/ENVIRONMENT-VARIABLES.md](./docs/ENVIRONMENT-VARIABLES.md)
+
+## Integrations
+
+The website uses several third-party integrations for analytics, CRM, and form handling.
+
+### Quick Reference
+
+| Service | Purpose | Configuration |
+|---------|---------|---------------|
+| **Google Analytics 4** | Traffic & event tracking | `G-BZDVNW58WQ` |
+| **HubSpot CRM** | Lead sync & client management | Portal `243166647` |
+| **Formspree** | Contact form submissions | Form `xaqnnbpp` |
+| **Supabase** | Database & questionnaire storage | Project `aougseszcvzgxwniossn` |
+
+### Integration Documentation
+
+| Document | Purpose |
+|----------|---------|
+| [docs/INTEGRATIONS-MASTER-REFERENCE.md](./docs/INTEGRATIONS-MASTER-REFERENCE.md) | Single source of truth for all integrations |
+| [docs/ENVIRONMENT-VARIABLES.md](./docs/ENVIRONMENT-VARIABLES.md) | Complete environment variable reference |
+| [docs/HUBSPOT-INTEGRATION.md](./docs/HUBSPOT-INTEGRATION.md) | HubSpot bi-directional sync setup |
+| [docs/SUPABASE-AI-AUTOMATION.md](./docs/SUPABASE-AI-AUTOMATION.md) | Supabase database management |
+
+### Recent Integration Changes
+
+**2026-01-01:** Fixed lead capture system - see [HANDOFF_2026-01-01_lead-capture-configuration.md](./docs/handoffs/HANDOFF_2026-01-01_lead-capture-configuration.md) for details.
+
 ## Brand Guidelines
 
 ### Colors

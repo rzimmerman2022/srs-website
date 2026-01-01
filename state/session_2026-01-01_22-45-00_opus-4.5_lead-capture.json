@@ -1,0 +1,153 @@
+{
+  "session_metadata": {
+    "timestamp": "2026-01-01T22:45:00Z",
+    "duration_hours": 4,
+    "model": "claude-opus-4-5-20251101",
+    "operator": "Ryan Zimmerman",
+    "session_id": "lead-capture-config"
+  },
+  "cognitive_context": {
+    "problem_understanding": "Southwest Resume Services website was receiving ZERO leads due to misconfigured integrations: Google Analytics not connected, HubSpot CRM disabled, Formspree contact form sending to wrong email, and CSP blocking form submissions",
+    "attempted_solutions": [
+      "Diagnosed missing GA4 measurement ID - Added G-BZDVNW58WQ",
+      "Found HubSpot disabled - Enabled with Portal ID 243166647",
+      "Discovered orphan Formspree form xgvglrbr - Created new form xaqnnbpp",
+      "Updated email destination from sparkdatalab.ai to info@southwestresumes.com",
+      "Fixed CSP blocking formspree.io in connect-src directive"
+    ],
+    "key_insights": [
+      "Formspree forms created without account login become orphan forms with no dashboard access",
+      "CSP headers in next.config.ts control which external services the frontend can connect to",
+      "Documentation exposed real Supabase tokens - security vulnerability"
+    ],
+    "dead_ends": [
+      "Initial confusion about which Formspree account owned the orphan form",
+      "HubSpot Legacy Private Apps vs new OAuth apps - needed to use Legacy"
+    ],
+    "assumptions": [
+      "Vercel environment variables are correctly configured",
+      "HubSpot private app token has not expired",
+      "Supabase RLS policies are correctly configured"
+    ],
+    "uncertainties": [
+      "Whether all HubSpot webhook events are being received properly",
+      "Whether Google Analytics is receiving all form submission events"
+    ]
+  },
+  "code_state": {
+    "modified_files": {
+      "next.config.ts": "Added formspree.io to CSP connect-src directive",
+      "components/sections/ContactForm.tsx": "Updated Formspree ID to xaqnnbpp",
+      "docs/SUPABASE-AI-AUTOMATION.md": "Removed exposed Supabase token and password",
+      "docs/handoffs/HANDOFF_2025-12-27_18-45-52_Opus-4.5_contrarian-analysis.md": "Removed exposed Supabase token",
+      "README.md": "Added Integrations section with documentation links",
+      "CHANGELOG.md": "Added Session 5 entry with all changes",
+      "docs/ENVIRONMENT-VARIABLES.md": "Complete rewrite with credential references",
+      "docs/INTEGRATIONS-MASTER-REFERENCE.md": "New master reference with documentation map"
+    },
+    "unstaged_changes": [],
+    "experimental_branches": [],
+    "breaking_changes": [],
+    "technical_debt_added": []
+  },
+  "environmental_context": {
+    "tool_versions": {
+      "node": "18.x",
+      "next": "15.x",
+      "typescript": "5.x"
+    },
+    "active_services": [
+      "Vercel (hosting)",
+      "Supabase (database)",
+      "Formspree (contact form)",
+      "HubSpot (CRM)",
+      "Google Analytics 4"
+    ],
+    "environment_variables": [
+      "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+      "NEXT_PUBLIC_FORMSPREE_URL",
+      "HUBSPOT_ENABLED",
+      "HUBSPOT_PRIVATE_APP_TOKEN",
+      "HUBSPOT_CLIENT_SECRET",
+      "HUBSPOT_PORTAL_ID",
+      "HUBSPOT_WEBHOOKS_ENABLED",
+      "HUBSPOT_BIDIRECTIONAL_SYNC",
+      "HUBSPOT_CREATE_DEALS",
+      "NEXT_PUBLIC_SUPABASE_URL",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      "SUPABASE_SERVICE_ROLE_KEY"
+    ],
+    "external_dependencies": [
+      "formspree.io API",
+      "HubSpot API",
+      "Google Analytics API",
+      "Supabase API"
+    ]
+  },
+  "decision_log": [
+    {
+      "timestamp": "2026-01-01T18:00:00Z",
+      "decision": "Create new Formspree form instead of recovering orphan form",
+      "rationale": "No account access to orphan form xgvglrbr, cleaner to start fresh",
+      "alternatives": ["Try to recover orphan form via support"],
+      "confidence": 0.95,
+      "reversibility": "easy"
+    },
+    {
+      "timestamp": "2026-01-01T20:00:00Z",
+      "decision": "Remove all exposed credentials from documentation",
+      "rationale": "Security best practice - credentials should only be in .env.local",
+      "alternatives": ["Leave as-is with warning comments"],
+      "confidence": 1.0,
+      "reversibility": "easy"
+    },
+    {
+      "timestamp": "2026-01-01T22:30:00Z",
+      "decision": "Add formspree.io to CSP connect-src",
+      "rationale": "CSP was blocking form submissions to Formspree API",
+      "alternatives": ["Remove CSP entirely", "Use different form service"],
+      "confidence": 1.0,
+      "reversibility": "easy"
+    }
+  ],
+  "continuation_plan": {
+    "immediate_tasks": [
+      "Deploy to production via git push",
+      "Test contact form on live site",
+      "Verify Formspree submissions arrive at info@southwestresumes.com"
+    ],
+    "investigation_needed": [
+      "Monitor HubSpot sync to ensure contacts are created",
+      "Verify Google Analytics is tracking form submissions"
+    ],
+    "blocked_items": [],
+    "time_estimates": {
+      "deploy_and_verify": "15 minutes",
+      "full_integration_testing": "1 hour"
+    }
+  },
+  "integrations_configured": {
+    "google_analytics": {
+      "measurement_id": "G-BZDVNW58WQ",
+      "status": "configured",
+      "dashboard": "https://analytics.google.com"
+    },
+    "hubspot": {
+      "portal_id": "243166647",
+      "app_name": "SRS Integration",
+      "status": "enabled",
+      "dashboard": "https://app.hubspot.com"
+    },
+    "formspree": {
+      "form_id": "xaqnnbpp",
+      "email_destination": "info@southwestresumes.com",
+      "status": "verified",
+      "dashboard": "https://formspree.io/forms/xaqnnbpp"
+    },
+    "supabase": {
+      "project_ref": "aougseszcvzgxwniossn",
+      "status": "configured",
+      "dashboard": "https://supabase.com/dashboard"
+    }
+  }
+}

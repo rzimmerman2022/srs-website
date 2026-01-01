@@ -71,7 +71,10 @@ export default function ContactForm() {
 
     try {
       // W-CQ-06: Use environment variable for Formspree URL with fallback
-      const formspreeUrl = process.env.NEXT_PUBLIC_FORMSPREE_URL || 'https://formspree.io/f/xgvglrbr';
+      // CRITICAL: Form ID xaqnnbpp = "Southwest Resume Services Contact" form
+      // Account: ryan.zimmerman@sparkdatalab.ai on formspree.io
+      // Created: 2026-01-01 - DO NOT CHANGE without updating docs/ENVIRONMENT-VARIABLES.md
+      const formspreeUrl = process.env.NEXT_PUBLIC_FORMSPREE_URL || 'https://formspree.io/f/xaqnnbpp';
 
       const response = await fetch(formspreeUrl, {
         method: 'POST',

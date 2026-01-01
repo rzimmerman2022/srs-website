@@ -10,10 +10,19 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
 import { jackieDeleonQuestionnaire } from '@/lib/questionnaire/jackie-deleon';
+import { eliteDiscoveryQuestionnaire } from '@/lib/questionnaire/elite-discovery';
+import type { Questionnaire } from '@/lib/questionnaire/types';
 import type { QuestionnaireResponse } from '@/lib/supabase/types';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import ResponseTimeline from '@/components/admin/ResponseTimeline';
+
+// Questionnaire registry
+const QUESTIONNAIRES: Record<string, Questionnaire> = {
+  'elite-discovery': eliteDiscoveryQuestionnaire,
+  'jdeleon': jackieDeleonQuestionnaire,
+  'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
+};
 
 export default function ResponseDetailPage() {
   const params = useParams();
@@ -25,7 +34,7 @@ export default function ResponseDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const questionnaire = jackieDeleonQuestionnaire;
+  const questionnaire = QUESTIONNAIRES[questionnaireId] || eliteDiscoveryQuestionnaire;
 
   useEffect(() => {
     async function fetchResponse() {

@@ -171,7 +171,9 @@
       "Bash(npx next:*)",
       "Bash(node scripts/run-migrations.js:*)",
       "Bash(npm install)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(curl -s -X POST \"https://formspree.io/f/xaqnnbpp\" )",
+      "Bash(curl -s -X POST \"https://formspree.io/f/xaqnnbpp\" -H \"Accept: application/json\" -d \"firstName=Test&lastName=User&email=test@test.com&message=Test submission\" -w \"\\\\nHTTP_CODE:%{http_code}\")"
     ],
     "deny": [],
     "ask": []

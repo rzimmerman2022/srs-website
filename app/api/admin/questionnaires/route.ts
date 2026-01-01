@@ -4,11 +4,15 @@ import { z } from 'zod';
 import { logRateLimitExceeded } from '@/lib/security/audit-log';
 import { getAdminUser } from '@/lib/auth/admin-auth';
 import { jackieDeleonQuestionnaire } from '@/lib/questionnaire/jackie-deleon';
+import { eliteDiscoveryQuestionnaire } from '@/lib/questionnaire/elite-discovery';
 import type { Questionnaire } from '@/lib/questionnaire/types';
 
 // Questionnaire definitions registry
 // In future, this could be fetched from database
 const QUESTIONNAIRES: Record<string, Questionnaire> = {
+  // Generic templates (for new clients)
+  'elite-discovery': eliteDiscoveryQuestionnaire,
+  // Client-specific questionnaires (legacy)
   'jdeleon': jackieDeleonQuestionnaire,
   'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
 };
@@ -93,7 +97,7 @@ const getSafeErrorMessage = (error: unknown, context?: string): string => {
 // ============================================================================
 const getSupabaseClient = () => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
     return null;

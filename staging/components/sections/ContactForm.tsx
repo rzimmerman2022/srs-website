@@ -71,7 +71,8 @@ export default function ContactForm() {
 
     try {
       // W-CQ-06: Use environment variable for Formspree URL with fallback
-      const formspreeUrl = process.env.NEXT_PUBLIC_FORMSPREE_URL || 'https://formspree.io/f/xgvglrbr';
+      // UPDATED 2026-01-01: New form ID xaqnnbpp (old xgvglrbr was orphan)
+      const formspreeUrl = process.env.NEXT_PUBLIC_FORMSPREE_URL || 'https://formspree.io/f/xaqnnbpp';
 
       const response = await fetch(formspreeUrl, {
         method: 'POST',

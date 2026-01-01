@@ -4,6 +4,87 @@ All notable changes to the SRS Website project will be documented in this file.
 
 ---
 
+## [2026-01-01] Session 5: Lead Capture System Configuration - Critical Infrastructure
+
+### Executive Summary
+
+Resolved Southwest Resume Services receiving **ZERO LEADS** from website by configuring three critical integrations that were disabled or misconfigured.
+
+### Google Analytics 4
+
+| Item | Status |
+|------|--------|
+| Measurement ID | `G-BZDVNW58WQ` |
+| Tracking | Active |
+| Form Event Tracking | Enabled |
+
+### HubSpot CRM Integration
+
+| Item | Value |
+|------|-------|
+| Portal ID | `243166647` |
+| App Name | SRS Integration (Legacy Private App) |
+| Bi-directional Sync | Enabled |
+| Webhooks | Enabled |
+| Deal Creation | Enabled |
+
+### Formspree Contact Form Fix
+
+| Item | Before | After |
+|------|--------|-------|
+| Form ID | `xgvglrbr` (ORPHAN) | `xaqnnbpp` |
+| Email Destination | `ryan.zimmerman@sparkdatalab.ai` | `info@southwestresumes.com` |
+| Account Status | Unmanaged | Under `ryan.zimmerman@sparkdatalab.ai` |
+
+**VERIFIED 2026-01-01:** Test email confirmed arriving at `info@southwestresumes.com`
+
+### Environment Variables Added to Vercel
+
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` = `G-BZDVNW58WQ`
+- `NEXT_PUBLIC_FORMSPREE_URL` = `https://formspree.io/f/xaqnnbpp`
+- `HUBSPOT_ENABLED` = `true`
+- `HUBSPOT_PRIVATE_APP_TOKEN` = configured
+- `HUBSPOT_CLIENT_SECRET` = configured
+- `HUBSPOT_PORTAL_ID` = `243166647`
+- `HUBSPOT_WEBHOOKS_ENABLED` = `true`
+- `HUBSPOT_BIDIRECTIONAL_SYNC` = `true`
+- `HUBSPOT_CREATE_DEALS` = `true`
+
+### Security Fixes
+
+- Removed exposed Supabase access token from `docs/SUPABASE-AI-AUTOMATION.md`
+- Removed exposed database password from documentation
+- Removed exposed token from `docs/handoffs/HANDOFF_2025-12-27_*.md`
+- **Fixed CSP blocking contact form:** Added `https://formspree.io` to `connect-src` in `next.config.ts`
+
+### Documentation Created/Updated
+
+| Document | Purpose |
+|----------|---------|
+| `docs/ENVIRONMENT-VARIABLES.md` | Complete environment variable reference |
+| `docs/INTEGRATIONS-MASTER-REFERENCE.md` | Single source of truth for all integrations |
+| `docs/handoffs/HANDOFF_2026-01-01_lead-capture-configuration.md` | Session handoff with full details |
+| `README.md` | Added Integrations section with documentation links |
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `.env.local` | Added GA, HubSpot, and Formspree variables |
+| `components/sections/ContactForm.tsx` | Updated Formspree ID to `xaqnnbpp` |
+| `staging/components/sections/ContactForm.tsx` | Updated Formspree ID |
+| `staging/.env.example` | Updated Formspree ID |
+| `docs/SUPABASE-AI-AUTOMATION.md` | Removed exposed credentials |
+| `README.md` | Added Integrations section |
+
+### Multi-Agent QA Verification
+
+- SDA SOP Agent: Full documentation audit
+- QA COVE Agent: Credential exposure identified and fixed
+- Contrarian Agent: Security vulnerabilities flagged and resolved
+
+---
+
 ## [2025-12-28] Session 4: Critical Bug Fixes + UUID Cleanup + Documentation Alignment
 
 ### Critical Production Bug Fixes (9 total)

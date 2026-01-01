@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { QuestionnaireContainer } from '@/components/questionnaire';
 import ErrorBoundary from '@/components/questionnaire/ErrorBoundary';
-import { jackieDeleonQuestionnaire } from '@/lib/questionnaire';
+import { jackieDeleonQuestionnaire, eliteDiscoveryQuestionnaire } from '@/lib/questionnaire';
 import { verifyQuestionnaireToken } from '@/lib/auth/questionnaire-auth';
 import Container from '@/components/layout/Container';
 import Link from 'next/link';
@@ -27,9 +27,14 @@ import Link from 'next/link';
  * 4. If invalid: show error page
  */
 
-// In production, fetch questionnaires from database/API
+// Questionnaire registry - maps questionnaire IDs to their definitions
 const questionnaires: Record<string, typeof jackieDeleonQuestionnaire> = {
-  'discovery-basic': jackieDeleonQuestionnaire,
+  // Generic templates
+  'elite-discovery': eliteDiscoveryQuestionnaire,
+  'discovery-basic': eliteDiscoveryQuestionnaire, // Alias for backwards compatibility
+  // Client-specific (legacy)
+  'jdeleon': jackieDeleonQuestionnaire,
+  'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
 };
 
 export default function QuestionnaireTokenPage() {

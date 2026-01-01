@@ -3,10 +3,12 @@ import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { getAdminUser } from '@/lib/auth/admin-auth';
 import { jackieDeleonQuestionnaire } from '@/lib/questionnaire/jackie-deleon';
+import { eliteDiscoveryQuestionnaire } from '@/lib/questionnaire/elite-discovery';
 import type { Questionnaire } from '@/lib/questionnaire/types';
 
 // Questionnaire definitions registry
 const QUESTIONNAIRES: Record<string, Questionnaire> = {
+  'elite-discovery': eliteDiscoveryQuestionnaire,
   'jdeleon': jackieDeleonQuestionnaire,
   'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
 };
@@ -90,7 +92,7 @@ const getSafeErrorMessage = (error: unknown, context?: string): string => {
 // ============================================================================
 const getSupabaseClient = () => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
     return null;

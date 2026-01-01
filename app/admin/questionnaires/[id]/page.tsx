@@ -8,9 +8,17 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 import type { QuestionnaireResponse } from '@/lib/supabase/types';
 import { jackieDeleonQuestionnaire } from '@/lib/questionnaire/jackie-deleon';
+import { eliteDiscoveryQuestionnaire } from '@/lib/questionnaire/elite-discovery';
 import type { Questionnaire } from '@/lib/questionnaire/types';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+
+// Questionnaire registry
+const QUESTIONNAIRES: Record<string, Questionnaire> = {
+  'elite-discovery': eliteDiscoveryQuestionnaire,
+  'jdeleon': jackieDeleonQuestionnaire,
+  'jackie-deleon-dec-2025': jackieDeleonQuestionnaire,
+};
 
 interface PageProps {
   params: Promise<{
@@ -19,11 +27,10 @@ interface PageProps {
 }
 
 async function getQuestionnaireData(id: string) {
-  // For now, we only support the Jackie DeLeon questionnaire
-  // In production, this would fetch from a database
-  const questionnaire: Questionnaire = jackieDeleonQuestionnaire;
+  // Look up questionnaire from registry
+  const questionnaire = QUESTIONNAIRES[id];
 
-  if (questionnaire.id !== id) {
+  if (!questionnaire) {
     return null;
   }
 
