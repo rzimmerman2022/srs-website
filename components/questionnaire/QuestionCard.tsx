@@ -351,7 +351,7 @@ function QuestionCard({
       {/* Skip options - "I Don't Know" / "N/A" - Available for ALL questions */}
       <div className="mt-4 sm:mt-6 pt-4 border-t border-sand-200">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <span className="text-xs sm:text-sm text-gray-500">Can't answer?</span>
+            <span className="text-xs sm:text-sm text-gray-500">Can&apos;t answer?</span>
             <button
               type="button"
               onClick={() => onChange("I don't know")}
@@ -363,7 +363,7 @@ function QuestionCard({
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               )}
             >
-              I don't know
+              I don&apos;t know
             </button>
             <button
               type="button"
