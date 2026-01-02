@@ -107,10 +107,10 @@ export default function DiscoveryPage() {
                 Your responses have been saved. We will begin the next phase of your career transformation.
               </p>
               <Link
-                href="/contact"
+                href="/"
                 className="inline-block px-8 py-3 bg-gradient-to-r from-gold to-gold/80 text-[#0a1628] font-medium rounded-xl hover:from-gold/90 hover:to-gold/70 transition-colors min-h-[44px]"
               >
-                Return to Contact
+                Return Home
               </Link>
             </div>
           </Container>

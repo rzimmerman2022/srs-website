@@ -85,6 +85,7 @@ export default function QuestionnaireContainer({
   const [combo, setCombo] = useState(0); // Combo counter for consecutive answers
   const [lastAnswerTime, setLastAnswerTime] = useState<number | null>(null);
   const [showEncouragement, setShowEncouragement] = useState<string | null>(null);
+  const [isCompleted, setIsCompleted] = useState(false);
   const comboTimeWindow = 15000; // 15 seconds to maintain combo
 
   // Initialize from sync state when it loads
@@ -114,6 +115,7 @@ export default function QuestionnaireContainer({
       setStreak(syncState.points || 0);
       setCombo(syncState.combo || 0);
       setShownMilestones(syncState.shownMilestones || []);
+      setIsCompleted(syncState.completed || false);
       if (Object.keys(syncState.answers || {}).length > 0) {
         setShowIntro(false);
       }
@@ -133,10 +135,10 @@ export default function QuestionnaireContainer({
       streak: streak,
       combo,
       shownMilestones,
-      completed: false,
+      completed: isCompleted,
     });
     setLastSaved(new Date());
-  }, [responses, currentQuestionIndex, currentModuleIndex, streak, combo, shownMilestones, isDataLoaded, updateSyncState]);
+  }, [responses, currentQuestionIndex, currentModuleIndex, streak, combo, shownMilestones, isCompleted, isDataLoaded, updateSyncState]);
 
   // Derived state
   const currentModule = questionnaire.modules[currentModuleIndex];
@@ -312,6 +314,31 @@ export default function QuestionnaireContainer({
     return isValidAnswer(responses[currentQuestion.id]);
   }, [currentQuestion, responses]);
 
+  const finalizeSubmission = useCallback(() => {
+    setIsCompleted(true);
+    if (updateSyncState) {
+      updateSyncState({
+        answers: responses as Record<string, string | string[]>,
+        currentQuestionIndex,
+        currentModuleIndex,
+        points: streak,
+        streak,
+        combo,
+        shownMilestones,
+        completed: true,
+      });
+    }
+    forceSync().catch((err) => {
+      console.warn('Failed to sync submitted state:', err);
+    });
+    onComplete?.(responses);
+  }, [combo, currentModuleIndex, currentQuestionIndex, forceSync, onComplete, responses, shownMilestones, streak, updateSyncState]);
+
+  const handleSubmit = useCallback(() => {
+    setShowSubmitConfirm(false);
+    finalizeSubmission();
+  }, [finalizeSubmission]);
+
   // Module completion check - available for future use
   // const isCurrentModuleComplete = useMemo(() => {
   //   if (!currentModule) return false;
@@ -342,12 +369,12 @@ export default function QuestionnaireContainer({
       if (!completedModules.includes(currentModule.id)) {
         setCompletedModules(prev => [...prev, currentModule.id]);
       }
-      onComplete?.(responses);
+      finalizeSubmission();
     }
 
     // Scroll to top when navigating to next question
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-  }, [currentModule, currentModuleIndex, currentQuestionIndex, questionnaire.modules.length, completedModules, responses, onComplete, isCurrentQuestionAnswered, prefersReducedMotion]);
+  }, [currentModule, currentModuleIndex, currentQuestionIndex, questionnaire.modules.length, completedModules, finalizeSubmission, isCurrentQuestionAnswered, prefersReducedMotion]);
 
   const goToPreviousQuestion = useCallback(() => {
     if (currentQuestionIndex > 0) {
@@ -454,6 +481,7 @@ export default function QuestionnaireContainer({
     setCombo(0);
     setShownMilestones([]);
     setLastSaved(null);
+    setIsCompleted(false);
     awardedQuestions.current.clear();
 
     // Reset sync state (this will also clear server-side data)
@@ -471,6 +499,7 @@ export default function QuestionnaireContainer({
     }
 
     setShowResetConfirm(false);
+    setShowSubmitConfirm(false);
     setIsMobileMenuOpen(false);
 
     // Force immediate sync to server to prevent data resurrection on reload
@@ -482,6 +511,7 @@ export default function QuestionnaireContainer({
     // Scroll to top
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   }, [questionnaire.id, clientId, questionnaire.clientId, updateSyncState, forceSync, prefersReducedMotion]);
+
 
   // Close mobile menu when navigating
   useEffect(() => {
@@ -1137,12 +1167,7 @@ export default function QuestionnaireContainer({
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setShowSubmitConfirm(false);
-                    // Force final sync then complete
-                    forceSync();
-                    onComplete?.(responses);
-                  }}
+                  onClick={handleSubmit}
                   className="flex-1 px-6 py-3 text-navy bg-gold hover:bg-gold/90 rounded-xl font-medium transition-colors shadow-sm"
                 >
                   Submit Now

@@ -391,6 +391,8 @@ export function useQuestionnaireSync({
       if (!prev) return prev;
 
       const newState = { ...prev, ...updates };
+      // Keep ref in sync so forceSync can use the latest state immediately.
+      stateRef.current = newState;
 
       // Debounced save to localStorage (Q-PERF-02: prevents blocking UI)
       saveToLocalStorage(newState);
@@ -408,10 +410,11 @@ export function useQuestionnaireSync({
       clearTimeout(syncTimeoutRef.current);
     }
 
-    if (state) {
-      await syncToServer(state);
+    const currentState = stateRef.current;
+    if (currentState) {
+      await syncToServer(currentState);
     }
-  }, [state, syncToServer]);
+  }, [syncToServer]);
 
   // Cleanup
   useEffect(() => {
