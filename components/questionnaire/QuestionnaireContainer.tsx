@@ -123,21 +123,65 @@ export default function QuestionnaireContainer({
     }
   }, [syncState, isDataLoaded]);
 
-  // Sync state changes to server (debounced)
+  // Ref to hold latest state for debounced sync (avoids stale closures)
+  const syncStateRef = useRef({
+    responses,
+    currentQuestionIndex,
+    currentModuleIndex,
+    streak,
+    combo,
+    shownMilestones,
+    isCompleted,
+  });
+
+  // Keep ref updated with latest values
+  useEffect(() => {
+    syncStateRef.current = {
+      responses,
+      currentQuestionIndex,
+      currentModuleIndex,
+      streak,
+      combo,
+      shownMilestones,
+      isCompleted,
+    };
+  }, [responses, currentQuestionIndex, currentModuleIndex, streak, combo, shownMilestones, isCompleted]);
+
+  // Debounced sync timer ref
+  const syncTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Sync state changes to server (debounced at 300ms to reduce per-keystroke churn)
+  // Gamification remains instant - only the server/localStorage sync is debounced
   useEffect(() => {
     if (!isDataLoaded || !updateSyncState) return;
 
-    updateSyncState({
-      answers: responses as Record<string, string | string[]>,
-      currentQuestionIndex,
-      currentModuleIndex,
-      points: streak,
-      streak: streak,
-      combo,
-      shownMilestones,
-      completed: isCompleted,
-    });
-    setLastSaved(new Date());
+    // Clear any pending sync
+    if (syncTimerRef.current) {
+      clearTimeout(syncTimerRef.current);
+    }
+
+    // Debounce the sync by 300ms
+    syncTimerRef.current = setTimeout(() => {
+      const state = syncStateRef.current;
+      updateSyncState({
+        answers: state.responses as Record<string, string | string[]>,
+        currentQuestionIndex: state.currentQuestionIndex,
+        currentModuleIndex: state.currentModuleIndex,
+        points: state.streak,
+        streak: state.streak,
+        combo: state.combo,
+        shownMilestones: state.shownMilestones,
+        completed: state.isCompleted,
+      });
+      setLastSaved(new Date());
+    }, 300);
+
+    // Cleanup on unmount
+    return () => {
+      if (syncTimerRef.current) {
+        clearTimeout(syncTimerRef.current);
+      }
+    };
   }, [responses, currentQuestionIndex, currentModuleIndex, streak, combo, shownMilestones, isCompleted, isDataLoaded, updateSyncState]);
 
   // Derived state
