@@ -105,11 +105,8 @@ export async function generateQuestionnaireToken(
 /**
  * Verifies a questionnaire access token and returns associated data
  *
- * This function:
- * 1. Validates the token exists
- * 2. Checks if token is expired
- * 3. Checks if token is revoked
- * 4. Updates access tracking (timestamp, count)
+ * This function calls the secure API endpoint which uses service role key
+ * to bypass RLS and prevent token enumeration attacks.
  *
  * @param token - The token to verify
  * @returns Object containing client_id, questionnaire_id, and token data, or null if invalid
@@ -122,60 +119,49 @@ export async function verifyQuestionnaireToken(
   tokenData: QuestionnaireAccessToken;
 } | null> {
   try {
-    const supabase = getSupabase();
+    // Call the secure API endpoint (uses service role key on server)
+    const response = await fetch('/api/questionnaire/verify-token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token }),
+    });
 
-    // Fetch token from database
-    const { data, error } = await (supabase
-      .from('questionnaire_access_tokens') as any)
-      .select('*')
-      .eq('token', token)
-      .single();
-
-    if (error || !data) {
-      console.error('Token not found:', error?.message || 'No data returned');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Token verification failed:', errorData.error || response.statusText);
+      }
       return null;
     }
 
-    const tokenData = data as QuestionnaireAccessToken;
+    const data = await response.json();
 
-    // Check if token is revoked
-    if (tokenData.revoked) {
-      console.error('Token has been revoked');
+    if (!data.success || !data.clientId || !data.questionnaireId) {
       return null;
     }
 
-    // Check if token is expired
-    const now = new Date();
-    const expiresAt = new Date(tokenData.expires_at);
-    if (now > expiresAt) {
-      console.error('Token has expired');
-      return null;
-    }
-
-    // Update access tracking
-    type TokenUpdate = Database['public']['Tables']['questionnaire_access_tokens']['Update'];
-    const updateData: TokenUpdate = {
-      accessed_at: now.toISOString(),
-      access_count: tokenData.access_count + 1,
-    };
-
-    const { error: updateError } = await (supabase
-      .from('questionnaire_access_tokens') as any)
-      .update(updateData)
-      .eq('token', token);
-
-    if (updateError) {
-      console.error('Error updating token access tracking:', updateError?.message || 'Unknown error');
-      // Don't fail verification just because tracking update failed
-    }
-
+    // Return minimal token data (API doesn't expose full token record for security)
     return {
-      clientId: tokenData.client_id,
-      questionnaireId: tokenData.questionnaire_id,
-      tokenData,
+      clientId: data.clientId,
+      questionnaireId: data.questionnaireId,
+      tokenData: {
+        id: '',
+        client_id: data.clientId,
+        questionnaire_id: data.questionnaireId,
+        token: token,
+        created_at: '',
+        expires_at: '',
+        accessed_at: null,
+        access_count: 0,
+        revoked: false,
+      },
     };
-  } catch {
-    console.error('Supabase is not configured. Cannot verify token.');
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error verifying token:', error);
+    }
     return null;
   }
 }

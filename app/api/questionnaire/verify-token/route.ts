@@ -6,10 +6,10 @@ import { createClient } from '@supabase/supabase-js';
 const MAX_TOKEN_ATTEMPTS = 10;
 const TOKEN_WINDOW_MS = 60 * 1000; // 1 minute
 
-// Supabase client
+// Supabase client with SERVICE ROLE key (bypasses RLS for token verification)
 const getSupabaseClient = () => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
     return null;
@@ -82,15 +82,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Look up token in database
-    // This is a placeholder - implement actual token lookup
-    // In production, you would:
-    // 1. Query the database for the token
-    // 2. Check if token is valid and not expired
-    // 3. Return the associated client_id and questionnaire_id
+    // Look up token in database (correct table name)
     const { data: tokenData, error: dbError } = await supabase
-      .from('questionnaire_tokens')
-      .select('client_id, questionnaire_id, expires_at')
+      .from('questionnaire_access_tokens')
+      .select('client_id, questionnaire_id, expires_at, revoked, access_count')
       .eq('token', token)
       .single();
 
@@ -98,6 +93,24 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'Invalid or expired token',
+          attemptsRemaining: rateLimit.remaining,
+        },
+        {
+          status: 401,
+          headers: {
+            'X-RateLimit-Limit': String(MAX_TOKEN_ATTEMPTS),
+            'X-RateLimit-Remaining': String(rateLimit.remaining),
+            'X-RateLimit-Reset': String(Math.floor(rateLimit.resetTime / 1000)),
+          },
+        }
+      );
+    }
+
+    // Check if token is revoked
+    if (tokenData.revoked) {
+      return NextResponse.json(
+        {
+          error: 'Token has been revoked',
           attemptsRemaining: rateLimit.remaining,
         },
         {
@@ -128,6 +141,18 @@ export async function POST(request: NextRequest) {
         }
       );
     }
+
+    // Update access tracking (fire and forget - don't block response)
+    supabase
+      .from('questionnaire_access_tokens')
+      .update({
+        accessed_at: new Date().toISOString(),
+        access_count: (tokenData.access_count || 0) + 1,
+      })
+      .eq('token', token)
+      .then(() => {
+        // Access tracking updated silently
+      });
 
     // Successful verification
     return NextResponse.json(
