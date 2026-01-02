@@ -472,9 +472,15 @@ export default function QuestionnaireContainer({
     setShowResetConfirm(false);
     setIsMobileMenuOpen(false);
 
+    // Force immediate sync to server to prevent data resurrection on reload
+    // This ensures empty state is persisted even if user closes tab immediately
+    forceSync().catch((err) => {
+      console.warn('Failed to sync reset state:', err);
+    });
+
     // Scroll to top
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-  }, [questionnaire.id, clientId, questionnaire.clientId, updateSyncState, prefersReducedMotion]);
+  }, [questionnaire.id, clientId, questionnaire.clientId, updateSyncState, forceSync, prefersReducedMotion]);
 
   // Close mobile menu when navigating
   useEffect(() => {
@@ -941,10 +947,10 @@ export default function QuestionnaireContainer({
       )}
 
       {/* Floating save status bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-sand-200 shadow-lg z-40 py-2 px-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-sand-200 shadow-lg z-30 py-2 px-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          {/* Save status */}
-          <div className="flex items-center gap-3">
+          {/* Save status - aria-live for screen reader announcements */}
+          <div className="flex items-center gap-3" role="status" aria-live="polite" aria-atomic="true">
             {isSyncing ? (
               <div className="flex items-center gap-2">
                 <div className={cn("w-3 h-3 bg-blue-500 rounded-full", !prefersReducedMotion && "animate-pulse")} />

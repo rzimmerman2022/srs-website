@@ -56,6 +56,10 @@ function TimelineItem({
         return option ? option.label : String(a);
 
       case 'checkbox':
+        // Handle skip values first
+        if (a === "I don't know" || a === "N/A") {
+          return String(a);
+        }
         if (Array.isArray(a) && a.length > 0) {
           return a
             .map((value) => {

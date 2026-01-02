@@ -348,9 +348,8 @@ function QuestionCard({
         </div>
       )}
 
-      {/* Skip options - "I Don't Know" / "N/A" - Only for non-critical, non-required questions */}
-      {!question.critical && !question.required && (
-        <div className="mt-4 sm:mt-6 pt-4 border-t border-sand-200">
+      {/* Skip options - "I Don't Know" / "N/A" - Available for ALL questions */}
+      <div className="mt-4 sm:mt-6 pt-4 border-t border-sand-200">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <span className="text-xs sm:text-sm text-gray-500">Can't answer?</span>
             <button
@@ -381,7 +380,6 @@ function QuestionCard({
             </button>
           </div>
         </div>
-      )}
     </div>
   );
 }
