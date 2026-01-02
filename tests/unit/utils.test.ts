@@ -136,8 +136,9 @@ describe('isValidAnswer', () => {
     expect(isValidAnswer(false)).toBe(true);
   });
 
-  it('returns true for whitespace-only string', () => {
-    // Note: whitespace is technically valid - caller should trim if needed
-    expect(isValidAnswer('   ')).toBe(true);
+  it('returns false for whitespace-only string', () => {
+    // FIX (QA-2026-01-02): Whitespace-only strings are now trimmed and considered invalid
+    // This prevents users from "completing" required fields with just spaces
+    expect(isValidAnswer('   ')).toBe(false);
   });
 });

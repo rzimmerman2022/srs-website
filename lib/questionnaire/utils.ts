@@ -48,10 +48,20 @@ export function sanitizeValue(value: unknown): unknown {
 }
 
 /**
- * Checks if a value is a valid answer (not empty, null, or undefined)
+ * Checks if a value is a valid answer (not empty, null, undefined, or whitespace-only)
+ *
+ * FIX: Added whitespace trimming (QA-2026-01-02)
+ * Previously, "   " (spaces only) would count as a valid answer,
+ * allowing users to "complete" required fields with just whitespace.
  */
 export function isValidAnswer(value: unknown): boolean {
   if (value === undefined || value === null || value === '') return false;
+
+  // String values: trim whitespace before checking if empty
+  if (typeof value === 'string') {
+    return value.trim().length > 0;
+  }
+
   if (Array.isArray(value) && value.length === 0) return false;
   if (typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === 0) return false;
   return true;

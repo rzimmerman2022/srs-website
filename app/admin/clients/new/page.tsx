@@ -298,7 +298,7 @@ export default function CreateClientPage() {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
-                placeholder="e.g., Jacqueline DeLeon"
+                placeholder="e.g., John Doe"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-colors"
               />
             </div>
@@ -314,7 +314,7 @@ export default function CreateClientPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="e.g., jackie@example.com"
+                placeholder="e.g., john.doe@example.com"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition-colors"
               />
             </div>

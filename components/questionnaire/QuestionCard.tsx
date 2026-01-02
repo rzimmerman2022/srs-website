@@ -347,6 +347,41 @@ function QuestionCard({
           <p className="text-xs sm:text-sm text-blue-700">{question.helpText}</p>
         </div>
       )}
+
+      {/* Skip options - "I Don't Know" / "N/A" - Only for non-critical, non-required questions */}
+      {!question.critical && !question.required && (
+        <div className="mt-4 sm:mt-6 pt-4 border-t border-sand-200">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <span className="text-xs sm:text-sm text-gray-500">Can't answer?</span>
+            <button
+              type="button"
+              onClick={() => onChange("I don't know")}
+              aria-label="Mark this question as 'I don't know'"
+              className={cn(
+                "px-3 py-2 text-xs sm:text-sm rounded-lg font-medium transition-all min-h-[44px]",
+                value === "I don't know"
+                  ? "bg-navy text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              )}
+            >
+              I don't know
+            </button>
+            <button
+              type="button"
+              onClick={() => onChange("N/A")}
+              aria-label="Mark this question as 'Not applicable'"
+              className={cn(
+                "px-3 py-2 text-xs sm:text-sm rounded-lg font-medium transition-all min-h-[44px]",
+                value === "N/A"
+                  ? "bg-navy text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              )}
+            >
+              Not applicable
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

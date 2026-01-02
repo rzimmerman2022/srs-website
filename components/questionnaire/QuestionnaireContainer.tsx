@@ -60,6 +60,7 @@ export default function QuestionnaireContainer({
     isSyncing,
     lastSyncedAt,
     updateState: updateSyncState,
+    forceSync,
   } = useQuestionnaireSync({
     clientId: clientId || questionnaire.clientId || 'anonymous',
     questionnaireId: questionnaire.id,
@@ -429,6 +430,52 @@ export default function QuestionnaireContainer({
   // Mobile menu state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Reset confirmation state
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+
+  // Reset questionnaire handler
+  const handleReset = useCallback(() => {
+    // Clear localStorage for this questionnaire
+    const localStorageKey = `questionnaire_${questionnaire.id}_${clientId || questionnaire.clientId || 'anonymous'}`;
+    try {
+      localStorage.removeItem(localStorageKey);
+    } catch (e) {
+      console.warn('Failed to clear localStorage:', e);
+    }
+
+    // Reset all state
+    setResponses({});
+    setCurrentModuleIndex(0);
+    setCurrentQuestionIndex(0);
+    setCompletedModules([]);
+    setShowIntro(true);
+    setStreak(0);
+    setCombo(0);
+    setShownMilestones([]);
+    setLastSaved(null);
+    awardedQuestions.current.clear();
+
+    // Reset sync state (this will also clear server-side data)
+    if (updateSyncState) {
+      updateSyncState({
+        answers: {},
+        currentQuestionIndex: 0,
+        currentModuleIndex: 0,
+        points: 0,
+        streak: 0,
+        combo: 0,
+        shownMilestones: [],
+        completed: false,
+      });
+    }
+
+    setShowResetConfirm(false);
+    setIsMobileMenuOpen(false);
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  }, [questionnaire.id, clientId, questionnaire.clientId, updateSyncState, prefersReducedMotion]);
+
   // Close mobile menu when navigating
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -729,13 +776,27 @@ export default function QuestionnaireContainer({
                   setIsMobileMenuOpen(false);
                 }}
               />
+
+              {/* Reset button */}
+              <div className="mt-6 pt-6 border-t border-sand-200">
+                <button
+                  type="button"
+                  onClick={() => setShowResetConfirm(true)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 text-red-600 hover:bg-red-50 rounded-xl font-medium transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Start Over
+                </button>
+              </div>
             </div>
           </div>
         </>
       )}
 
-      {/* Main content */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
+      {/* Main content - pb-20 for floating save bar clearance */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {/* Sidebar - Module nav (desktop only) */}
           <div className="hidden lg:block lg:col-span-1">
@@ -746,6 +807,20 @@ export default function QuestionnaireContainer({
                 completedModules={completedModules}
                 onModuleSelect={handleModuleSelect}
               />
+
+              {/* Reset button */}
+              <div className="mt-6 pt-6 border-t border-sand-200">
+                <button
+                  type="button"
+                  onClick={() => setShowResetConfirm(true)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-xl text-sm font-medium transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Start Over
+                </button>
+              </div>
             </div>
           </div>
 
@@ -838,10 +913,6 @@ export default function QuestionnaireContainer({
               </div>
             </div>
 
-            {/* Keyboard hint - hidden on mobile */}
-            <p className="hidden sm:block text-center text-sm text-gray-600 mt-6">
-              Press <kbd className="px-2 py-1 bg-sand-100 rounded text-gray-700 font-mono text-xs">Enter</kbd> to continue
-            </p>
           </div>
         </div>
       </div>
@@ -861,12 +932,136 @@ export default function QuestionnaireContainer({
 
       {/* Encouragement toast */}
       {showEncouragement && (
-        <div className={cn("fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 px-4 max-w-md w-full", !prefersReducedMotion && "animate-slide-up")}>
+        <div className={cn("fixed bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-50 px-4 max-w-md w-full", !prefersReducedMotion && "animate-slide-up")}>
           <div className="bg-navy text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-2xl flex items-center gap-2 sm:gap-3 border border-gold/20">
             <span className="text-xl sm:text-2xl flex-shrink-0">💬</span>
             <span className="font-medium text-sm sm:text-base">{showEncouragement}</span>
           </div>
         </div>
+      )}
+
+      {/* Floating save status bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-sand-200 shadow-lg z-40 py-2 px-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          {/* Save status */}
+          <div className="flex items-center gap-3">
+            {isSyncing ? (
+              <div className="flex items-center gap-2">
+                <div className={cn("w-3 h-3 bg-blue-500 rounded-full", !prefersReducedMotion && "animate-pulse")} />
+                <span className="text-sm text-blue-600 font-medium">Saving...</span>
+              </div>
+            ) : !isOnline ? (
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-amber-500 rounded-full" />
+                <span className="text-sm text-amber-600 font-medium">Offline - saved locally</span>
+              </div>
+            ) : lastSyncedAt ? (
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-sm text-green-600 font-medium">
+                  Saved <span className="hidden sm:inline">at {lastSyncedAt.toLocaleTimeString()}</span>
+                </span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-gray-400 rounded-full" />
+                <span className="text-sm text-gray-500">Auto-save enabled</span>
+              </div>
+            )}
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Manual Save button */}
+            <button
+              type="button"
+              onClick={() => forceSync()}
+              disabled={isSyncing}
+              aria-label="Save progress now"
+              title="Save Now"
+              className={cn(
+                "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors min-h-[44px]",
+                isSyncing
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-navy/10 text-navy hover:bg-navy/20"
+              )}
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              <span className="hidden sm:inline">Save Now</span>
+            </button>
+
+            {/* Reset button */}
+            <button
+              type="button"
+              onClick={() => setShowResetConfirm(true)}
+              aria-label="Start over and clear all answers"
+              title="Start Over"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors min-h-[44px]"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span className="hidden sm:inline">Start Over</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Reset confirmation modal */}
+      {showResetConfirm && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-navy/60 backdrop-blur-sm z-50"
+            onClick={() => setShowResetConfirm(false)}
+            aria-hidden="true"
+          />
+
+          {/* Modal */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="reset-modal-title"
+            >
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+                <h3 id="reset-modal-title" className="text-xl font-bold text-navy mb-2">
+                  Start Over?
+                </h3>
+                <p className="text-gray-600">
+                  This will clear all your answers and reset your progress to the beginning. This action cannot be undone.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowResetConfirm(false)}
+                  className="flex-1 px-6 py-3 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="flex-1 px-6 py-3 text-white bg-red-600 hover:bg-red-700 rounded-xl font-medium transition-colors"
+                >
+                  Yes, Start Over
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
